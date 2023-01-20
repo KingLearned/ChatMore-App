@@ -97,7 +97,12 @@ close{
     cursor: pointer;
     padding: 10px 20px;
     margin: 15px;
-    border: transparent;
+    border: 1px solid white;
+}
+.login_page form button:hover, .signup form button:hover{
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
 }
 .pro-media{
     display: flex;

@@ -7,8 +7,8 @@ function DoAll(){
                 $('dpx').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
                 $('dp').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
             }else{
-                $('dpx').html(`<img src="./Public/ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
-                $('dp').html(`<img src="./Public/ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
+                $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
+                $('dp').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
             }
 
             if(data.USER[0].about !== ''){ 
@@ -25,7 +25,7 @@ function DoAll(){
                 let FriendImg = `./Public/images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
                     if(data.CRT == data.SORT[p].username && data.SORT[p].user_img !== ''){
-                        FriendImg =  `./Public/ChatMore/Users/${data.CRT}/${data.SORT[p].user_img}`
+                        FriendImg =  `../ChatMore/Users/${data.CRT}/${data.SORT[p].user_img}`
                     }
                 }
                 document.querySelector('chatlog img').src = FriendImg
