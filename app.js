@@ -24,8 +24,8 @@ const { Server } = require("socket.io");
 const io = new Server(server); 
 dotenv.config()
 // // ###################### Serving Static Files ###########################
-app.use(express.static(PATH.join(__dirname, '../ChatMore-App')))
 app.use(express.static(PATH.join(__dirname, './Public')))
+// app.use(express.static(PATH.join(__dirname, '/Public')))
 app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
 
@@ -47,36 +47,6 @@ app.use(session({
   }
 }))
 
-
-// app.get('/', (req, res) => {
-//   const File = `
-//   <form method="POST" enctype="multipart/form-data">
-//   <input type="file" name="User_Img">
-//   <input type="submit" value="SUBMIT">
-//   </form>
-//   `
-//   res.send(File)
-
-// })
-
-// app.post('/', (req, res) => {
-//   const Storage = MULTER.diskStorage({
-//     destination: `./Public`,
-//     filename(req, file, cb){
-//       cb(null, file.originalname)
-//     }
-//   })
-
-//   const upload = MULTER({
-//     storage: Storage
-//   }).single('User_Img')
-
-//   upload(req,res, (err) => {
-//     console.log(req.file.originalname)
-    
-//   })
-// })
-
 app.get('/Log-User-Out', (req, res) =>{
   // destroy session && Clear cookies
   req.session.destroy((err) => {
@@ -91,8 +61,8 @@ app.get('/Log-User-Out', (req, res) =>{
 })
 
 app.get('/', (req, res) => {
-  const {LOGIN} = req.session
-  // const LOGIN = 'rose'
+  // const {LOGIN} = req.session
+  const LOGIN = 'rose'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -103,8 +73,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  const {LOGIN} = req.session
-  // const LOGIN = 'rose'
+  // const {LOGIN} = req.session
+  const LOGIN = 'rose'
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 

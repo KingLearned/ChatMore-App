@@ -13,8 +13,8 @@ $.ajax({
             $('dpx').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
             $('dp').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
         }else{
-            $('dpx').html(`<img src="./Public/ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
-            $('dp').html(`<img src="./Public/ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
+            $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
+            $('dp').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
         }
 
         // IF YOU HAVE NO FRIENDS
@@ -39,7 +39,7 @@ $.ajax({
                         }
                     }
 
-                    var UserImg = `<img src="./Public/ChatMore/Users/${data.FRD[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
+                    var UserImg = `<img src="../ChatMore/Users/${data.FRD[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
                     if(data.SORT[n].user_img == ''){
                         UserImg = `<img src="./Public/images/avatar.png" alt="avatar.png">`
                     }
@@ -98,7 +98,8 @@ $.ajax({
                 let FriendImg = `./Public/images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
                     if(data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== ''){
-                        FriendImg =  `./Public/ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
+                        FriendImg =  `../ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
+                        // FriendImg =  `./Public/ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
                     }
                 }
                 document.querySelector('chatlog img').src = FriendImg
@@ -257,7 +258,7 @@ $.ajax({
             for (let i = 0; i < Addthem.length; i++) {
                 for (let n = 0; n < data.SORT.length; n++) {
                     if(data.SORT[n].username == Addthem[i]){
-                        var UserImg = `<img src="./Public/ChatMore/Users/${Addthem[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
+                        var UserImg = `<img src="../ChatMore/Users/${Addthem[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
                         if(data.SORT[n].user_img == ''){
                             UserImg = `<img src="./Public/images/avatar.png" alt="avatar.png">`
                         }

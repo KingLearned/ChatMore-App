@@ -547,9 +547,9 @@ groupchats button{
     border-radius: 5px;
     cursor: pointer;
 }
-/* groupchats article:nth-child(odd){
-    background-color: greenyellow;
-} */
+groupchats article:nth-child(odd){
+    background-color: rgb(196, 30, 196);
+}
 groupchats article logname{
     font: 500 10px roboto;
     color: white;
