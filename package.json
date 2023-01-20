@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app",
-    "dev": "nodemon app",
-    "make": "electron-forge make",
-    "package": "electron-forge package"
+    "dev": "nodemon app"
   },
   "keywords": [],
   "author": "Learneds",
@@ -17,7 +15,6 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
-    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.18.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
@@ -32,49 +29,5 @@
     "speakeasy": "^2.0.0",
     "twilio": "^3.80.1",
     "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.66",
-    "@electron-forge/maker-deb": "^6.0.0-beta.66",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.66",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
-    "@electron-forge/maker-zip": "^6.0.0-beta.66",
-    "electron": "^20.1.4"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "icon": "./Public/images/Retro.ico"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "Retro",
-            "setupIcon": "./Public/images/Retro.ico"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {
-            "options": {
-              "icon": "./Public/images/Retro.ico"
-          }
-          }
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {
-            "icon": "./Public/images/Icon-App-20x20@3x.ico"
-          }
-        }
-      ]
-    }
   }
 }
