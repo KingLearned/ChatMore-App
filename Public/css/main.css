@@ -1,0 +1,614 @@
+@font-face {
+    font-family: 'bebas-neue';
+    src: url('../fonts/BebasNeue.ttf');
+}
+@font-face {
+    font-family: 'bw-mitga';
+    src: url('../fonts/BwMitga-Black.ttf');
+}
+@font-face {
+    font-family: 'free-ship';
+    src: url('../fonts/freeshipping.ttf');
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+body{
+    height: auto;
+    width: auto;
+    font-family: bw-mitga;
+    scroll-behavior: smooth;
+    background-color: rgb(226, 43, 195);
+}
+.container{
+    position: relative;
+    margin: 10px auto;
+    padding: 10px;
+    height: 100%;
+    width: 650px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px black;
+    background-color: white;
+    position: relative;
+}
+.login_page, .signup{
+    display: none;
+}
+close{
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    border-radius: 10px 0 10px 0;
+    background-color: red;
+    cursor: pointer;
+}
+.login_page form, .signup form{
+    display: flex; /*modify to flex*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 0, 128, 0.8);
+}
+.login_page form input, .signup form input{
+    font-family: roboto;
+    padding: 10px;
+    width: 50%;
+    color:white;
+    outline: none;
+    border: transparent;
+    border-bottom: 1px solid white;
+    margin: 5px 0;
+    background-color: transparent;
+}
+.login_page form input::placeholder, .signup form input::placeholder{
+    color: white;
+}
+.signup form input:focus, .login_page form input:focus{
+    border-bottom: 1px solid palevioletred;
+}
+.login_page form h5{
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    margin: 0 0 10px 0;
+}
+.login_page form h5:hover{
+    color: red;
+}
+.login_page form button, .signup form button{
+    font: 900 15px restrict;
+    border-radius: 25px;
+    background-color: white;
+    color: purple;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 15px;
+    border: transparent;
+}
+.pro-media{
+    display: flex;
+    justify-content: end;
+}
+.pro-media img{
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navbar .logo img{
+    width: 180px;
+    height: 70px;
+}
+.navbar .select{
+    text-align: right;
+    width: 100%;
+}
+.navbar .select a{
+    font: 700 14px restrict;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, rgb(202, 30, 202) 30%, rgb(245, 111, 245));
+    margin: 0 25px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+.main-section{
+    height: 67vh;
+    background-image: url('../images/bg2.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.main-section h1{
+    color: rgb(192, 46, 192);
+    font-size: 3vw;
+    text-shadow: 1px 1px 4px black;
+}
+.main-section button{
+    font: 900 18px restrict;
+    letter-spacing: 2px;
+    padding: 10px 25px;
+    margin: 5px;
+    border-radius: 25px;
+    border: transparent;
+    background-color: purple;
+    color: white;
+
+}
+.main-section button:hover{
+    background-color: rgb(207, 38, 207);
+    cursor: pointer;
+}
+.footer{
+    position: relative;
+    display: flex;
+    background-color: black;
+    padding: 28px 0;
+    border-radius: 0 0 10px 10px ;
+}
+.footer .sub-nav{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+.footer .sub-nav a{
+    color: white;
+    margin: 1vw;
+}
+.footer .copyright{
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+.footer .sub-nav a:hover{
+    color: purple;
+}
+
+/* #################### CHAT APP SECTION ########################## */
+/* #################### CHAT APP SECTION ########################## */
+.app{
+    position: relative;
+    height: auto;
+    background-image: url('../images/2.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+.user_profile{
+    display: none;
+    flex-direction: column;
+    background-image: url('../images/2.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 15px 0;
+}
+userimage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    padding: 15px;
+    background-color: rgba(221, 160, 221, 0.664);
+    width: 300px;
+    border-radius: 10px;
+}
+.user_profile div form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+userimage form label{
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.589);
+    color: white;
+    padding: 10px;
+    height: 40px;
+    border-radius: 15px;
+}
+userimage form .fa-pen{
+    position: absolute;
+    top: 110px;
+}
+userimage form .fa-upload{
+    display: none;
+}
+userimage form label:hover{
+    background-color: gray; 
+}
+userimage yourname{
+    font: 900 25px roboto;
+    color: white;
+    text-shadow: 1px 1px 4px black;
+    border-bottom: 3px solid purple;
+    padding: 0 0 5px 0;
+}
+.user_profile img{
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    justify-self: center;
+}
+.user_profile h3{
+    cursor: default;
+}
+.user_profile form{
+    display: flex;
+    margin: 10px 0;
+}
+.user_profile form input{
+    margin:  0 0 0 10px;
+    width: 200px;
+}
+.user_profile form h3{
+    font: 900 20px roboto;
+}
+.user_profile form textarea{
+    width: 50vw;
+    height: 100px;
+    margin: 0 0 0 10px;
+    padding: 10px;
+    border: 1px solid plum;
+    background-color: rgba(221, 160, 221, 0.603);
+    font-family: inherit;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+
+}
+.user_profile form [type=submit]{
+    align-self: flex-end;
+}
+.appcontainer{
+    width: 100%;
+    height: auto;
+    /* display: none; */
+}
+.chats_head{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    padding: 10px 0;
+}
+dp{
+    cursor: pointer;
+}
+.profile{
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+.profile img{
+    width: 50px;
+    height: 50px;
+    border-radius: 365px;
+    margin: 0 10px;
+}
+.profile yourname{
+    font: 900 20px roboto;
+}
+.chats_head h1{
+    transition: all;
+    font: 600 30px restrict;
+    cursor: pointer;
+    color: white;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 355px;
+    background-image: linear-gradient(to right, rgb(202, 30, 202) 30%, rgb(245, 111, 245));
+}
+.chats_head h1:hover{
+    color: black;
+}
+.friends, groups{
+    height: 53vh;
+}
+.friends div{
+    background-color: rgba(238, 155, 182, 0.637);
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+}
+.friends div img{
+    width: 50px;
+    height: 50px;
+    border: 3px solid plum;
+    border-radius: 365px;
+}
+display{
+    margin: 0 0 0 10px;
+}
+chatname,yourname{
+    font: 900 15px roboto;
+    text-transform: capitalize;
+}
+talk{
+    font: 500 11px roboto;
+}
+chatlog{
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.603);
+    border-radius: 10px;
+    padding: 0 0 5px 0;
+}
+.user_profile button{
+    position: sticky;
+    top: 10px;
+    width: 35px;
+    height: 35px;
+    border: transparent;
+    font-size: large;
+    background-color: red;
+    border-radius: 10px;
+    cursor: pointer;
+}
+chatlog chat_top button{
+    position: absolute;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    border: transparent;
+    font-size: large;
+    border-radius: 10px;
+    cursor: pointer;
+}
+chatlog chat_top{
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    align-items: center;
+}
+chatlog chat_top img{
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    margin: 0 5px 0 0;
+}
+chatlog chat_top{
+    background-color: purple;
+    border-radius: 5px;
+    height: 50px;
+}
+chatlog h1{
+    font-size: 15px;
+    color: white;
+}
+chatlog article logname{
+    font: 500 9px roboto;
+    color: rgb(47, 2, 77);
+}
+logs{
+    display: flex;
+    flex-direction: column;
+}
+chatlog article{
+    display: flex;
+    cursor: default;
+    flex-direction: column;
+    background-color: plum;
+    padding: 10px;
+    border-radius: 10px;
+    width: 50vh;
+    margin: 5px 0;
+}
+chatlog article log{
+    font: 900 15px roboto;
+}
+chatlog article log{
+    font: 900 15px roboto;
+}
+.edit:hover make{
+    height: 35px;
+    transition: 1s;
+}
+make{
+    font-size: 18px;
+    overflow: hidden;
+    height: 0;
+}
+edit, del{
+    background-color: lightgreen;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 5px 2px;
+}
+del{
+    background-color: red;
+}
+sending{
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+chatlog form input{
+    height: 40px;
+    font: 900 15px roboto;
+    padding: 0 10px;
+    border: 1px solid plum;
+    border-radius: 5px;
+    outline: none;
+    width: 78%;
+}
+chatlog form input[type=submit]{
+    background-color: purple;
+    cursor: pointer;
+    width: 20%;
+}
+form input{
+    height: 40px;
+    font: 900 15px roboto;
+    padding: 0 10px;
+    border: 1px solid plum;
+    border-radius: 5px;
+    outline: none;
+    width: 78%;
+}
+form input[type=submit]{
+    background-color: purple;
+    cursor: pointer;
+    color: white;
+    width: 20%;
+}
+
+
+/******************************* GROUP SECTIONS HANDLERS ************************/
+/******************************* GROUP SECTIONS HANDLERS ************************/
+groups{
+    display: none;
+}
+groups div{
+    background-color: rgba(221, 155, 238, 0.637);
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+}
+groups div img{
+    width: 50px;
+    height: 50px;
+    border: 3px solid plum;
+    border-radius: 365px;
+}
+groupchats{
+    display: none;
+    flex-direction: column;
+}
+grouplogs{
+    display: flex;
+    flex-direction: column;
+}
+groupchats article{
+    display: flex;
+    cursor: default;
+    flex-direction: column;
+    background-color: plum;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+    margin: 5px 0;
+}
+groupchats group_top{
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    background-color: purple;
+    width: 100%;
+}
+groupchats group_top h2{
+    color: white;
+    border-radius: 15px;
+    /* width:max-content; */
+    width:100%;
+    text-align: center;
+    text-shadow: 1px 1px 4px purple;
+}
+groupchats button{
+    position: absolute;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border: transparent;
+    font-size: large;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* groupchats article:nth-child(odd){
+    background-color: greenyellow;
+} */
+groupchats article logname{
+    font: 500 10px roboto;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 5px;
+    width: max-content;
+    background-color: purple;
+}
+groupchats article log{
+    font: 900 15px roboto;
+}
+groupchats form{
+    padding: 0 0 10px 0;
+}
+.activeme{
+    background-color: lightpink !important;
+    align-self: flex-end;
+}
+.activeme logname{
+    color: plum;
+    background-color: black;
+}
+
+/******************************* COMMUNITY SECTIONS HANDLERS ************************/
+/******************************* COMMUNITY SECTIONS HANDLERS ************************/
+community{
+    display: none;
+    height: 53vh;
+}
+community div{
+    background-color: rgba(238, 11, 11, 0.637);
+    border-radius: 15px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+}
+community div img{
+    width: 50px;
+    height: 50px;
+    border: 3px solid plum;
+    border-radius: 365px;
+}
+about{
+    display: block;
+    font: 500 15px roboto;
+    width: 60vw;
+}
+about b{
+    font-weight: 900;
+    color: white;
+}
+add{
+    position: absolute;
+    cursor: pointer;
+    right: 25px;
+    font-size: 25px;
+}
+add:hover{
+    color: white;
+}

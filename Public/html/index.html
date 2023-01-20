@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <title>Socket.IO chat</title>
+</head>
+<body>
+  <style>
+    .dis{
+      cursor: pointer;
+    }
+    .dis div{
+      display: flex;
+    }
+  </style>
+    <div class="dis"></div>
+    <form method="POST">
+      <input type="text" name="Name" required>
+      <input type="text" name="Msg" required>
+      <button>Send</button>
+    </form>
+    <form method="POST">
+      <input type="text" name="edit" class="edit" placeholder="id tag" required>
+      <input type="text" name="msgedit" class="msgedit" placeholder="edit" required>
+      <button>Send</button>
+    </form>
+    <form method="POST" class="delform" hidden>
+      <input type="text" name="deletmsg" class="deletmsg" placeholder="Delete Message by Id" required>
+    </form>
+    <script>
+      $.ajax({
+        method: "POST",
+        success: (data) => {
+          for (let i = 0; i < data.msg.length; i++) {
+            document.querySelector('.dis').innerHTML += `<div><h3 class="Id${data.msg[i].Id}">${data.msg[i].Name}: ${data.msg[i].Msg}</h3><button class="Del${data.msg[i].Id}">X</button></div>`
+            $(`.Id${data.msg[i].Id}`).on('click', () => {
+              document.querySelector('.edit').value = `${data.msg[i].Id}`
+            })
+          }
+          for (let i = 0; i < data.msg.length; i++) {
+            $(`.Id${data.msg[i].Id}`).on('click', () => {
+              document.querySelector('.edit').value = `${data.msg[i].Id}`
+              document.querySelector('.msgedit').value = `${data.msg[i].Msg}`
+            })
+            $(`.Del${data.msg[i].Id}`).on('click', () => {
+              document.querySelector('.deletmsg').value = `${data.msg[i].Id}`
+              document.querySelector('.delform').submit()
+            })
+          }
+
+        },
+        error: (err) => {
+            console.log(err)
+        }
+      })
+    </script>
+    <!-- <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+    </style>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off"><button>Send</button>
+    </form>
+<script src="../../node_modules/socket.io/client-dist/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    var form = document.getElementById('form');
+    var input = document.getElementById('input');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+        socket.emit('chat message', input.value);
+        input.value = '';
+        }
+    });
+
+    socket.on('chat message', function(msg) {
+    var item = document.createElement('li');
+    item.textContent = msg;
+    messages.appendChild(item);
+    window.scrollTo(0, document.body.scrollHeight);
+    });
+</script> -->
+</body>
+</html>
