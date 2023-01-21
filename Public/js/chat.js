@@ -260,7 +260,7 @@ $.ajax({
                     if(data.SORT[n].username == Addthem[i]){
                         var UserImg = `<img src="../ChatMore/Users/${Addthem[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
                         if(data.SORT[n].user_img == ''){
-                            UserImg = `<img src="./Public/images/avatar.png" alt="avatar.png">`
+                            UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
                         }
                         Disp.innerHTML +=`
                         <div>
