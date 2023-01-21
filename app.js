@@ -352,13 +352,16 @@ app.post('/', (req, res) => {
         }else if(Sig_Pwd == Sig_CPwd){
           
           const About = `Hello, I'm using ChatMore App`
-          const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`) VALUES(?,?,?,?)'
-          MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About], (err, result) => {
+          const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`, `user_img`, `friends`, `chats`) VALUES(?,?,?,?,?,?,?)'
+          MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
-              if(err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`){
+              // console.log(err)
+              if(err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'`){
                 res.json({ErrMsg: 'Username Already Exist!'})
-              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'telephone'`){
+                // console.log('Username Already Exist')
+              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`){
                 res.json({ErrMsg: 'Number Already Exist!'})
+                // console.log('Number Already Exist')
               }
             }else{
               res.json({Successful: 'Registered Succefully!'})
