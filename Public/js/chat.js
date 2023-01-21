@@ -10,8 +10,8 @@ $.ajax({
         }
         $('tel').html(data.USER[0].telephone)
         if(data.USER[0].user_img == ''){
-            $('dpx').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
-            $('dp').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
+            $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`)
+            $('dp').html(`<img src="../images/avatar.png" alt="avatar.png">`)
         }else{
             $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
             $('dp').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)

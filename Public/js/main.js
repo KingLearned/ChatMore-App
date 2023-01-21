@@ -43,13 +43,15 @@ $('.SignUpForm').on('submit', (e) => {
                 Sig_CPwd: $('.cpwd').val()
             },
             success: (data) => {
-                if(data.SUCCESS){
+                if(data.Successful){
                     window.location.href = '/'
                 }
-                $('sig').html(data.msg)
-                setTimeout(() => {
-                    $('sig').html('')
-                }, 3000)
+                if(data.ErrMsg){
+                    $('sig').html(data.ErrMsg)
+                    setTimeout(() => {
+                        $('sig').html('')
+                    }, 3000)
+                }
             },
             error: (err) => {
                 console.log(err)

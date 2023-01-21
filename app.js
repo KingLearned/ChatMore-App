@@ -348,19 +348,20 @@ app.post('/', (req, res) => {
       if(Sig_Name == valid){
 
         if(Sig_Pwd !== Sig_CPwd){
-          res.json({msg: 'Password Mismatched!'})
+          res.json({ErrMsg: 'Password Mismatched!'})
         }else if(Sig_Pwd == Sig_CPwd){
+          
           const About = `Hello, I'm using ChatMore App`
           const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`) VALUES(?,?,?,?)'
           MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About], (err, result) => {
             if(err){
               if(err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`){
-                res.json({msg: 'Username Already Exist!'})
+                res.json({ErrMsg: 'Username Already Exist!'})
               }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'telephone'`){
-                res.json({msg: 'Number Already Exist!'})  
+                res.json({ErrMsg: 'Number Already Exist!'})
               }
             }else{
-              res.json({SUCCESS: 'Registered Succefully!'})
+              res.json({Successful: 'Registered Succefully!'})
             }
           })
         }
