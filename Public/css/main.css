@@ -23,7 +23,7 @@ body{
     width: auto;
     font-family: bw-mitga;
     scroll-behavior: smooth;
-    background-color: rgb(226, 43, 195);
+    background-color: rgba(226, 37, 194, 0.219);
 }
 .container{
     position: relative;

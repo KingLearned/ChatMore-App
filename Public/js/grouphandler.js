@@ -17,7 +17,8 @@ $.ajax({
         }
         const GrpHv = $('grouplist div').length > 4 ? 
         document.querySelector('groups').style.height = 'auto' : 
-        document.querySelector('groups').style.height = '53vh'
+        document.querySelector('groups').style.height = '100%'
+        // document.querySelector('groups').style.height = '53vh'
          
         let MsgL //Get Concurrent Elements
         let ActualNum // Get Elements to Check EventListener
@@ -74,10 +75,11 @@ $.ajax({
             function Hview(){
                 MsgL = $('grouplogs article').length
                 window.location.href='#..'
+                $('.GrpMsg').focus()
+                // document.querySelector('groups').style.height = 'auto' 
                 const Hig = $('grouplogs article').length >= 3 ? 
                 document.querySelector('groups').style.height = 'auto' : 
-                document.querySelector('groups').style.height = '53vh'
-                $('.GrpMsg').focus()
+                document.querySelector('groups').style.height = '70vh'
             }
             
             //Closing Of Group Button Function
@@ -88,9 +90,9 @@ $.ajax({
                 document.querySelector('grouplist').style.display = 'block'
                 document.querySelector('groupchats').style.display = 'none'
 
-                const GrpHv = $('grouplist div').length > 4 ? 
-                document.querySelector('groups').style.height = 'auto' : 
-                document.querySelector('groups').style.height = '53vh'
+                // const GrpHv = $('grouplist div').length > 4 ? 
+                // document.querySelector('groups').style.height = 'auto' : 
+                // document.querySelector('groups').style.height = '53vh'
             })
 
     }

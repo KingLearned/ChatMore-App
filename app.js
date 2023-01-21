@@ -61,8 +61,8 @@ app.get('/Log-User-Out', (req, res) =>{
 })
 
 app.get('/', (req, res) => {
-  const {LOGIN} = req.session
-  // const LOGIN = 'rose'
+  // const {LOGIN} = req.session
+  const LOGIN = 'rose'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -73,8 +73,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  const {LOGIN} = req.session
-  // const LOGIN = 'rose'
+  // const {LOGIN} = req.session
+  const LOGIN = 'rose'
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 
