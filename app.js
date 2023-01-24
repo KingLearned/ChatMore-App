@@ -61,8 +61,8 @@ app.get('/Log-User-Out', (req, res) =>{
 })
 
 app.get('/', (req, res) => {
-  const {LOGIN} = req.session
-  // const LOGIN = 'rose'
+  // const {LOGIN} = req.session
+  const LOGIN = 'reformer'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -73,8 +73,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  const {LOGIN} = req.session
-  // const LOGIN = 'rose'
+  // const {LOGIN} = req.session
+  const LOGIN = 'reformer'
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 
@@ -231,10 +231,11 @@ app.post('/', (req, res) => {
           })
         }else if(UpdatePWD){
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
-          const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
-          MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
-            res.redirect('/')
-          })
+        console.log(UpdatePWD)
+          // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
+          // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
+          //   res.redirect('/')
+          // })
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/
@@ -356,10 +357,12 @@ app.post('/', (req, res) => {
           MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
               // console.log(err)
-              if(err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'`){
+              // `Duplicate entry '${Sig_Name}' for key 'users.username'`
+              // `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`
+              if(err.sqlMessage == (`Duplicate entry '${Sig_Name}' for key 'PRIMARY'`)){
                 res.json({ErrMsg: 'Username Already Exist!'})
                 // console.log('Username Already Exist')
-              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`){
+              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'telephone'`){
                 res.json({ErrMsg: 'Number Already Exist!'})
                 // console.log('Number Already Exist')
               }
@@ -375,7 +378,6 @@ app.post('/', (req, res) => {
   } 
 
 })
-
 // let ID = 1670316762324
 // const Groups = ['Entertainment', 'Religion', 'Science', 'Gossip', 'Education', 'Music', 'Wed Masters', 'Programming']
 // for (let i = 0; i < Groups.length; i++) {

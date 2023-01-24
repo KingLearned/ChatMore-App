@@ -1,11 +1,11 @@
-function DoAll(){
+function DoAlls(){
     $.ajax({
         method: "POST",
         success: (data) => {
             $('.Msg').val('')
             if(data.USER[0].user_img == ''){
-                $('dpx').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
-                $('dp').html(`<img src="./Public/images/avatar.png" alt="avatar.png">`)
+                $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`)
+                $('dp').html(`<img src="../images/avatar.png" alt="avatar.png">`)
             }else{
                 $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
                 $('dp').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
@@ -17,19 +17,23 @@ function DoAll(){
                 $('.aboutme').val(`Hello, I'm using ChatMore App`)
             }
             $('tel').html(data.USER[0].telephone)
+
             if(data.CRT){
                 $('yourname').html(data.PN)
                 document.querySelector('chatlog').style.display = 'flex'
                 document.querySelector('friendlist').style.display = 'none'
 
-                let FriendImg = `./Public/images/avatar.png`
+                let FriendImg = `../images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
                     if(data.CRT == data.SORT[p].username && data.SORT[p].user_img !== ''){
                         FriendImg =  `../ChatMore/Users/${data.CRT}/${data.SORT[p].user_img}`
                     }
+                    if(data.CRT == data.SORT[p].username){
+                        $('about').html(data.SORT[p].about) //For about the user friends
+                    }
                 }
                 document.querySelector('chatlog img').src = FriendImg
-                $('chatlog h1').html(`<span style='text-transform:capitalize;'>${data.CRT}</span>`)//Chat Header
+                $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.CRT}</span>`)//Chat Header
                 $('.repto').val(data.CRT) //Message Tag Name
                 $('.locator').val(data.CRT)
                 
@@ -51,7 +55,7 @@ function DoAll(){
                         var shift = ''
                         var edit = ''
                         if(ChatLogs[n].replyto !== data.PN){
-                            shift = 'class="edit" style="align-self:flex-end;background-color:pink;"'
+                            shift = 'class="edit" style="align-self:flex-end;background-color:pink; border-radius:100px 100px 0 100px"'
                             edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
                         }
                         var id = ChatLogs[n].from
@@ -112,7 +116,7 @@ function DoAll(){
                 window.location.href='#...'
                 const Height = $('.friends article').length >= 4 ? 
                 document.querySelector('.friends').style.height = 'auto' : 
-                document.querySelector('.friends').style.height = '53vh'
+                document.querySelector('.friends').style.height = '85vh'
                 // if($('.friends article').length >= 4){document.querySelector('.friends').style.height = 'auto'}
             }
         },

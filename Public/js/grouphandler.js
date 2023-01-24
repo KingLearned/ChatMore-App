@@ -28,6 +28,7 @@ $.ajax({
             $(`.ChatIn${data.GRP[i].groupid}`).on('click', () => {
                 document.querySelector('groupchats').style.display = 'flex'
                 document.querySelector('grouplist').style.display = 'none'
+                $('.top_menu').hide()
 
                 $('groupchats h2').html(data.GRP[i].groupname) // Display Group Name
                 $('.GrpID').val(data.GRP[i].groupid) //Assign Input The Group ID
@@ -77,9 +78,9 @@ $.ajax({
                 window.location.href='#..'
                 $('.GrpMsg').focus()
                 // document.querySelector('groups').style.height = 'auto' 
-                const Hig = $('grouplogs article').length >= 3 ? 
-                document.querySelector('groups').style.height = 'auto' : 
-                document.querySelector('groups').style.height = '70vh'
+                const Hig = $('grouplogs article').length >= 6 ? 
+                document.querySelector('groups').style.height = '100%' : 
+                document.querySelector('groups').style.height = '85vh'
             }
             
             //Closing Of Group Button Function
@@ -89,6 +90,7 @@ $.ajax({
 
                 document.querySelector('grouplist').style.display = 'block'
                 document.querySelector('groupchats').style.display = 'none'
+                $('.top_menu').show()
 
                 // const GrpHv = $('grouplist div').length > 4 ? 
                 // document.querySelector('groups').style.height = 'auto' : 

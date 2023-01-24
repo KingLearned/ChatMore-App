@@ -16,49 +16,35 @@ const Home = `
     <div class="login_page">
         <form method="POST" class="LoginForm">
             <close>X</close>
-            <input type="text" class="username" placeholder="USERNAME" required>
-            <input type="password" class="pwd" placeholder="PASSWORD" required>
+            <input type="text" class="username" placeholder="username" required>
+            <input type="password" class="pwd" placeholder="password" required>
             <button>Login</button>
             <h5>Or<br>Forgot Password?</h5>
-            <log style="color:rgb(255, 0, 157); height: 15px;"></log>
+            <log style="color:white; height: 15px;"></log>
         </form>
     </div>
     <div class="signup">
         <form method="POST" class="SignUpForm">
             <close>X</close>
             <input type="text" class="sigusername" placeholder="enter a username" required>
-            <input type="text" class="tele" placeholder="enter phone" required>
+            <input type="tel" class="tele" placeholder="enter phone number" required>
             <input type="password" class="sigpwd" placeholder="enter password" required>
             <input type="password" class="cpwd" placeholder="comfirm password" required>
             <button>Signup</button>
-            <sig style="color:rgb(255, 0, 157); height: 15px;"></sig>
+            <sig style="color:white; height: 15px;"></sig>
         </form>
     </div>
-    <div class="pro-media">
-        <img src="../images/facebook.png" alt="">
-        <img src="../images/twitter.png" alt="">
-        <img src="../images/instagram.png" alt="">
-    </div>
-    <div class="navbar">
-        <div class="logo">
-            <img src="../images/ChatMore_Logo.png" alt="Logo">
-        </div>
-        <div class="select">
-            <a href="">About</a>
-        </div>
-    </div>
+    <!-- <div class="navbar">
+    </div> -->
     <div class="main-section">
-        <h1>WELCOME TO CHATMORE <br>CHAT BETTER</h1>
-        <button class="login_btn">Login</button>
-        <button class="signup_btn">Signup</button>
+        <img src="../images/Icon.png" alt="">
+        <h1>ChatMore</h1>
+        <button class="signup_btn">Sign up</button>
+        <button class="login_btn">Log in</button>
     </div>
     <div class="footer">
-        <div class="sub-nav">
-            <a href="">Terms & Conditions</a>
-            <a href="">Privacy Policy</a>
-        </div>
         <div class="copyright">
-            ©Copyright 2022, ChatMore
+            ©ChatMore 2022 - ${(new Date).getFullYear()} || Developed by LDC
         </div>
     </div>
 </div>

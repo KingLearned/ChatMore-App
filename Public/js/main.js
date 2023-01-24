@@ -3,6 +3,7 @@ const Login = document.querySelector('.login_page')
 const Signup = document.querySelector('.signup')
 $('.login_btn').on('click', () => {
     Login.style.display = 'flex'
+    
 })
 $('.signup_btn').on('click', () => {
     Signup.style.display = 'flex'
@@ -11,6 +12,12 @@ $('close').on('click', () => {
     Login.style.display = 'none'
     Signup.style.display = 'none'
     $('input').val('')
+})
+$('.tele').on('keypress', () => {
+    $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
+})
+$('.tele').on('keyup', () => {
+    $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
 })
 
 $('.LoginForm').on('submit', (e) => {

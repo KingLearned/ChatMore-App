@@ -1,18 +1,7 @@
-@media screen and (max-width:900px) {
-    .footer .sub-nav{
-        position: static;
-        display: grid;
-        grid-template-columns: auto auto auto;
-        gap: 5px 20px;
-    }
-}
 @media screen and (max-width:650px) {
     .container{
         margin: 15px;
-        padding: 10px;
-        height: 100%;
         width: 95%;
-        overflow: auto;
     }
     .pro-media{
         display: flex;
@@ -32,16 +21,25 @@
         margin: 0 5px;
     }
     .main-section{
-        height: 63vh;
+        height: 90vh;
     }
     .main-section h1{
         font-size: 30px;
     }
+    chatlog chat_top{
+        position: sticky !important;
+        top: 0 !important;
+    }
+    chatlog form input{
+        width: 88%;
+    }
+    chatlog form label{
+        position: absolute;
+        right: 10px;
+    }
     .footer{
         flex-direction: column;
         align-items: center;
-        height: 16vh;
-
     }
     .footer .sub-nav{
         position: static;
@@ -68,5 +66,8 @@
     }
     .chats_head h1{
         font-size: 3.5vw;
+    }
+    community display{
+        width: 70%;
     }
 }

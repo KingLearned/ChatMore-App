@@ -22,7 +22,7 @@ $.ajax({
             document.querySelector('friendlist').innerHTML =`
             <div style="display:block;">
                 <h3 style="text-align: center;">NO FRIENDS YET!</h3>
-                <h5 style="text-align: center;">Add friends from community</h5>
+                <h5 style="text-align: center;">Add friends from the community</h5>
             </div>
             `
         }
@@ -41,7 +41,7 @@ $.ajax({
 
                     var UserImg = `<img src="../ChatMore/Users/${data.FRD[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
                     if(data.SORT[n].user_img == ''){
-                        UserImg = `<img src="./Public/images/avatar.png" alt="avatar.png">`
+                        UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
                     }
                     
                     document.querySelector('friendlist').innerHTML +=`
@@ -62,13 +62,14 @@ $.ajax({
         $('chatlog button').on('click', () => {
             document.querySelector('chatlog').style.display = 'none'
             document.querySelector('friendlist').style.display = 'block'
+            $('.top_menu').show()
+            // $.getScript("../js/chat.js")
             // document.querySelector('.friends').style.height = '53vh'
-            $.getScript("../js/chat.js")
 
             if($('.friends div').length > 4){
                 document.querySelector('.friends').style.height = 'auto'
             }else{
-                document.querySelector('.friends').style.height = '53vh'
+                document.querySelector('.friends').style.height = '75vh'
             }
             $('.EditId').val('')
             $('.locator').val('')
@@ -80,91 +81,151 @@ $.ajax({
             document.querySelector('.user_profile').style.display = 'none'
             document.querySelector('.app').style.display = 'block'
         })
+        $('.ChngPwd').on('submit', (e) => {
+            e.preventDefault()
+            $.ajax({
+                method:"POST",
+                data:{
+                    UpdatePWD : $('.updatepwd').val()
+                }
+            })
+        })
         $('dp').on('click', () => {
             document.querySelector('.user_profile').style.display = 'flex'
+            document.querySelector('.user_profile').style.height = '80vh'
             document.querySelector('.app').style.display = 'none'
         })
         /**************************************************************************** */
         
         /************************* FOR SERVING OF THE CHAT LOG *************************/
         /************************* FOR SERVING OF THE CHAT LOG *************************/
-
+        
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
                 
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
+                $('.top_menu').hide()
 
-                let FriendImg = `./Public/images/avatar.png`
+                let FriendImg = `../images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
                     if(data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== ''){
                         FriendImg =  `../ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
-                        // FriendImg =  `./Public/ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
+                    }
+                    if(data.FRD[i] == data.SORT[p].username){
+                        $('about').html(data.SORT[p].about) //For about the user friends
                     }
                 }
                 document.querySelector('chatlog img').src = FriendImg
-                $('chatlog h1').html(`<span style='text-transform:capitalize;'>${data.FRD[i]}</span>`)//Chat Header
-                $('.GrpID').val('')
-                
-                const ChatLogs = []
-                for (let m = 0; m < data.CHATS.length; m++) {
-                    if(data.CHATS[m].replyto == data.FRD[i] && data.CHATS[m].from == data.PN){
-                        ChatLogs.push(data.CHATS[m]) //Sent To Guest
-                    }
-                    if(data.CHATS[m].from == data.FRD[i] && data.CHATS[m].replyto == data.PN){
-                        ChatLogs.push(data.CHATS[m]) //Sent From Guest
-                    }
-                }
+                $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
+                $('.GrpID').val('')//Chat Header
 
-
-                document.querySelector('logs').innerHTML = ''
-                const Show = document.querySelector('logs')
-                for (let n = 0; n < ChatLogs.length; n++) {
-                    var shift = ''
-                    var edit = ''
-                    if(ChatLogs[n].replyto !== data.PN){
-                        shift = 'class="edit" style="align-self:flex-end;background-color:pink;"'
-                        edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
-                    }
-
-                    //Differentiating Between You and Other Users
-                    const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
-
-                    Show.innerHTML += ` 
-                        <article ${shift}>
-                        <logname>@${id}</logname>
-                        <log>${ChatLogs[n].Msg}</log>
-                        ${edit}
-                        </article>
-                        `
-                }
-                //Going Straight To Input Field and Focusing it
-                setTimeout(() => {
-                    window.location.href='#...'
-                    $('.Msg').focus()
-                }, 50);
-                    
-                /********************* FOR SENDING MESSAGES    ************************/
-                /********************* FOR SENDING MESSAGES    ************************/
-                $('.repto').val(data.FRD[i]) //Message Tag Name
-                $('.locator').val(data.FRD[i])
-                $(`.SendForm`).on('submit', (e) => {
-                    e.preventDefault()
+                $('logs').html('')
+                function DoAll(){
                     $.ajax({
-                        method: "POST",
-                        data: {
-                            Locate: $('.locator').val(),
-                            MsgTo: $('.repto').val(),
-                            ChatMsg: $('.Msg').val(),
-                        },
+                        method:"POST",
                         success: (data) => {
-                            // $.getScript("../js/grouphandler.js")
-                            DoAll()
-                            // const Refresh = MsgL > ActualNum ? $.getScript("../js/grouphandler.js") : ''
+
+                    const ChatLogs = []
+                    for (let m = 0; m < data.CHATS.length; m++) {
+                        if(data.CHATS[m].replyto == data.FRD[i] && data.CHATS[m].from == data.PN){
+                            ChatLogs.push(data.CHATS[m]) //Sent To Guest
+                        }
+                        if(data.CHATS[m].from == data.FRD[i] && data.CHATS[m].replyto == data.PN){
+                            ChatLogs.push(data.CHATS[m]) //Sent From Guest
+                        }
+                    }
+
+                    document.querySelector('logs').innerHTML = ''
+                    const Show = document.querySelector('logs')
+                    for (let n = 0; n < ChatLogs.length; n++) {
+                        var shift = ''
+                        var edit = ''
+                        if(ChatLogs[n].replyto !== data.PN){
+                            shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: pink; border-radius:100px 100px 0 100px"`
+                            edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
+                        }
+
+                        //Differentiating Between You and Other Users
+                        const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
+
+                        Show.innerHTML += ` 
+                            <article ${shift}>
+                            <logname>@${id}</logname>
+                            <log>${ChatLogs[n].Msg}</log>
+                            ${edit}
+                            </article>
+                            `
+                    }
+
+                    const Height = $('.friends article').length >= 4 ? 
+                    document.querySelector('.friends').style.height = 'auto' : 
+                    document.querySelector('.friends').style.height = '85vh'
+                    window.location.href='#...'
+
+                    $('.repto').val(data.FRD[i]) //Message Tag Name
+                    $('.locator').val(data.FRD[i])
+                    $(`.SendForm`).on('submit', (e) => {
+                        e.preventDefault()
+                        $.ajax({
+                            method: "POST",
+                            data: {
+                                Locate: $('.locator').val(),
+                                MsgTo: $('.repto').val(),
+                                ChatMsg: $('.Msg').val(),
+                            },
+                            success: (data) => {
+                                DoAll()
+                            }
+                        })
+                        
+                    });
+
+                    //DELETING OF MESSAGE
+                    for (let e = 0; e < ChatLogs.length; e++) {
+                        $(`.del${ChatLogs[e].Id}`).on('click', () => {
+                            // $('.DelId').val(ChatLogs[e].Id)
+                            $.ajax({
+                                method: "POST",
+                                data: {
+                                    Locate: $('.locator').val(),
+                                    DelMsg: ChatLogs[e].Id
+                                },
+                                success: (data) => {
+                                    // DoAll()
+                                    $(`.ChatID${ChatLogs[e].Id}`).hide('')
+                                }
+                            })
+                        })
+                    }
+
                         }
                     })
+                }DoAll()
+                //Going Straight To Input Field and Focusing it
+                // setTimeout(() => {
+                //     window.location.href='#...'
+                //     $('.Msg').focus()
+                // }, 50);
                     
-                });
+                /********************* FOR SENDING MESSAGES    ************************/
+                /********************* FOR SENDING MESSAGES    ************************/
+                // $('.repto').val(data.FRD[i]) //Message Tag Name
+                // $('.locator').val(data.FRD[i])
+                // $(`.SendForm`).on('submit', (e) => {
+                //     e.preventDefault()
+                //     $.ajax({
+                //         method: "POST",
+                //         data: {
+                //             Locate: $('.locator').val(),
+                //             MsgTo: $('.repto').val(),
+                //             ChatMsg: $('.Msg').val(),
+                //         },
+                //         success: (data) => {
+                //         }
+                //     })
+                    
+                // });
 
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
@@ -194,33 +255,31 @@ $.ajax({
 
                 /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
                 /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
-                for (let e = 0; e < ChatLogs.length; e++) {
-                    $(`.del${ChatLogs[e].Id}`).on('click', () => {
-                        // $('.DelId').val(ChatLogs[e].Id)
-                        $.ajax({
-                            method: "POST",
-                            data: {
-                                Locate: $('.locator').val(),
-                                DelMsg: ChatLogs[e].Id
-                            },
-                            success: (data) => {
-                                DoAll()
-                            }
-                        })
-                    })
-                }
+                // for (let e = 0; e < ChatLogs.length; e++) {
+                //     $(`.del${ChatLogs[e].Id}`).on('click', () => {
+                //         // $('.DelId').val(ChatLogs[e].Id)
+                //         $.ajax({
+                //             method: "POST",
+                //             data: {
+                //                 Locate: $('.locator').val(),
+                //                 DelMsg: ChatLogs[e].Id
+                //             },
+                //             success: (data) => {
+                //                 // DoAll()
+                //             }
+                //         })
+                //     })
+                // }
 
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
                 /********************* HEIGHT VIEW FUNCTION    ************************/
-                setTimeout(() => {
-                    
-                }, 50);
+                
                 // window.location.href='#...'
                 // $('.Msg').focus()
-                const Height = $('.friends article').length >= 4 ? 
-                document.querySelector('.friends').style.height = 'auto' : 
-                document.querySelector('.friends').style.height = '53vh'
+                // const Height = $('.friends article').length >= 4 ? 
+                // document.querySelector('.friends').style.height = 'auto' : 
+                // document.querySelector('.friends').style.height = '85vh'
             })
         }
         
@@ -299,9 +358,6 @@ $.ajax({
         if($('community div').length > 4){
             document.querySelector('community').style.height = 'auto'
         }
-    },
-    error: (err) => {
-        console.log(err)
     }
 })
 function Submit(){

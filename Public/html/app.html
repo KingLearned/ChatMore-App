@@ -8,15 +8,10 @@
     <link rel="stylesheet" href="../css/mediaquery.css">
     <link rel="stylesheet" href="../css/fontawesome-free-5.13.0-web/css/all.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <title>Document</title>
+    <title>ChatMore App</title>
 </head>
 <body>
 <div class="container">
-    <div class="pro-media">
-        <img src="../images/facebook.png" alt="">
-        <img src="../images/twitter.png" alt="">
-        <img src="../images/instagram.png" alt="">
-    </div>
     <div class="navbar">
         <div class="logo">
             <img src="../images/ChatMore_Logo.png" alt="logo">
@@ -27,8 +22,8 @@
     </div>
     <!-- ################################# USER PROFILE EDIT ############################ -->
     <div class="user_profile">
-        <button class="ClxPrf">X</button>
         <userimage>
+            <button class="ClxPrf fa fa-arrow-left"></button>
             <div>
                 <form method="POST" enctype="multipart/form-data">
                     <dpx><span style="font-weight: 100;">loading...</span></dpx>
@@ -43,24 +38,28 @@
         </userimage>
         <maincontent>
             <form method="POST">
-                <h3>About:</h3><textarea name="about" class="aboutme">Loading...</textarea><input type="submit" value="POST">
+                <textarea name="about" class="aboutme">Loading...</textarea>
+                <input type="submit" value="UPDATE">
             </form>
             <h3>Number: <tel></tel></h3>
-            <form method="POST">
-                <h3>Update Password:</h3><input type="text" name="updatepwd" placeholder="Change Password">
+            <form method="POST" class="ChngPwd">
+                <input type="text" name="updatepwd" class="updatepwd" placeholder="Change Password" required>
+                <input type="submit" value="CHANGE">
             </form>
         </maincontent>
     </div>
     <!-- ################################################################## -->
     <div class="app">
-        <div class="profile">
-            <dp title="Edit Profile"></dp>
-            <yourname><span style="font-weight: 100;">loading...</span></yourname>
-        </div>
-        <div class="chats_head">
-            <h1 class="chat"><i class="fa fa-comments"></i> Chats</h1>
-            <h1 class="group"><i class="fa fa-users"></i> Groups</h1>
-            <h1 class="community"><i class="fa fa-university"></i> Community</h1>
+        <div class="top_menu">
+            <div class="profile">
+                <dp title="Edit Profile"></dp>
+                <yourname><span style="font-weight: 100;">loading...</span></yourname>
+            </div>
+            <div class="chats_head">
+                <h1 class="chat"><i class="fa fa-comments"></i> Chats</h1>
+                <h1 class="group"><i class="fa fa-users"></i> Groups</h1>
+                <h1 class="community"><i class="fa fa-university"></i> Community</h1>
+            </div>
         </div>
         <div class="appcontainer">
             <!-- ------------------------ FRIENDS SECTION ------------------------ -->
@@ -76,21 +75,18 @@
                     </div> -->
                 </friendlist>
                 <chatlog>
-                    <chat_top>
-                        <img src="../ChatMore/Users/deguru/py.jpg" alt="">
-                        <h1>Frank</h1>
-                        <button>X</button>
+                    <chat_top style="position: sticky; top:0;">
+                        <img src="" alt="">
+                        <h1>Loading...</h1>
+                        <about>Loading...</about>
+                        <button class="fa fa-arrow-left"></button>
                     </chat_top>
                     <logs style="margin-bottom: 50px;">
-                        <!-- <article class="edit" onclick="window.location.href='#lk'">
+                        <!-- <article>
                             <logname>@Franky Man</logname>
                             <log>Whats up man</log>
-                            <make>
-                                <edit class="fa fa-pen" title="Edit Message"></edit>
-                                <del class="fa fa-window-close" title="Delete Message"></del>
-                            </make>
                         </article>
-                        <article>
+                        <article style="align-self:flex-end;background-color: pink; border-radius: 100px 100px 0 100px;">
                             <logname>you</logname>
                             <log>I'm fine man</log>
                         </article> -->
@@ -99,29 +95,19 @@
                         <form method="POST" id="..." class="SendForm">
                             <input type="text" name="locator" class="locator" required hidden>
                             <input type="text" name="repto" class="repto" required hidden>
-                            <input type="text" name="Msg" class="Msg" placeholder="Enter a Message" required>
-                            <input type="submit" id="submit" value="SEND">
+                            <input type="text" name="Msg" class="Msg" placeholder="Type new message.." required>
+                            <input type="submit" id="submit" hidden>
+                            <label for="submit" class="fa fa-paper-plane"></label>
                         </form>
                         <form method="POST" class="EdForm" hidden>
                             <input type="text" name="locator" class="locator" hidden>
                             <input type="text" name="EditId" class="EditId" placeholder="Edit ID" hidden>
                             <input type="text" name="EdMsg" class="EdMsg" placeholder="Edit Msg">
-                            <input type="submit" id="submit" value="SEND">
+                            <input type="submit" id="submit" hidden>
+                            <label for="submit" class="fa fa-paper-plane"></label>
                         </form>
                     </sending>
                 </chatlog>
-                <script>
-                    // $('.SendForm').on('submit', () => {
-                    //         window.location.href='#..'
-                    //         const Show = document.querySelector('logs')
-                    //         Show.innerHTML +=`
-                    //         <article class="activeme">
-                    //             <logname>@you</logname>
-                    //             <log>${$('.GrpMsg').val()}</log>
-                    //         </article>
-                    //         `
-                    //     })
-                </script>
             </div>
             <!-- ------------------------ GROUP SECTION ------------------------ -->
             <!-- ------------------------ GROUP SECTION ------------------------ -->
@@ -144,7 +130,7 @@
                 </grouplist>
                 <groupchats>
                     <group_top>
-                        <button>X</button>
+                        <button class="fa fa-arrow-left"></button>
                         <h2>World Tech Gaints</h2>
                     </group_top>
                     <grouplogs>
@@ -157,14 +143,16 @@
                             <log>I'm fine man, it has been too long since we mat</log>
                         </article> -->
                     </grouplogs>
-                    <form method="POST" id=".." class="GrpChatForm">
-                        <input type="text" name="GrpID" class="GrpID" required placeholder="Group ID" hidden>
-                        <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Enter a Message" required>
-                        <input type="submit" value="SEND">
-                    </form>
+                    <sending>
+                        <form method="POST" id=".." class="GrpChatForm">
+                            <input type="text" name="GrpID" class="GrpID" required placeholder="Group ID" hidden>
+                            <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Type new message.." required>
+                            <input type="submit" id="submit" hidden>
+                            <label for="submit" class="fa fa-paper-plane"></label>
+                        </form>
+                    </sending>
                     <script>
                         $('.GrpChatForm').on('submit', () => {
-                            window.location.href='#..'
                             const Log = document.querySelector('grouplogs')
                             Log.innerHTML +=`
                             <article class="activeme">
@@ -172,6 +160,7 @@
                                 <log>${$('.GrpMsg').val()}</log>
                             </article>
                             `
+                            window.location.href='#..'
                         })
                     </script>
                 </groupchats>
@@ -192,12 +181,8 @@
         </div>
     </div>
     <div class="footer">
-        <div class="sub-nav">
-            <a href="">Terms & Conditions</a>
-            <a href="">Privacy Policy</a>
-        </div>
         <div class="copyright">
-            ©Copyright 2022, ChatMore
+            <script>$('.copyright').html(`©ChatMore 2022 - ${(new Date).getFullYear()} || Developed by LDC`)</script>
         </div>
     </div>
 </div>
