@@ -85,11 +85,10 @@ app.post('/', (req, res) => {
 
   /************  CHAT COLLECTION   ***********/
   const {AddFriend} = req.body
-
-  const {Locate} = req.body
   
   const {MsgTo} = req.body
   const {ChatMsg} = req.body
+  const {ElementTag} = req.body
 
   const {EditId} = req.body
   const {EditMsg} = req.body
@@ -165,7 +164,7 @@ app.post('/', (req, res) => {
           })
         }else if(ChatMsg && MsgTo){
           /*************** SENDING OT USERS CHAT *****************/
-          req.session.CHECKER = Locate
+          console.log(ChatMsg,MsgTo)
           const Id = new Date().getTime()
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, Checker) => {
@@ -173,10 +172,11 @@ app.post('/', (req, res) => {
             if(Checker[0].chats == ''){
               Chats = `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${ChatMsg}"}`
             }
-            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {
-              res.redirect('/')
-            })
+            // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+            // MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {
+            // })
+
+            res.json({SndMsg:{Id:Id, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN}})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
@@ -200,7 +200,8 @@ app.post('/', (req, res) => {
           })
         }else if(DelMsg){
           /*************** DELETING OT USERS CHAT *****************/
-          req.session.CHECKER = Locate
+          console.log(DelMsg)
+          res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag}})
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
             var Del = JSON.parse(`[${result[0].chats}]`)
@@ -218,10 +219,10 @@ app.post('/', (req, res) => {
             Del = JSON.stringify(Del)
             Del = Del.split('[').join('')
             Del = Del.split(']').join('')
-            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            MYSQL.query(query1, [Del,LOGIN],(err, result) => {
-              res.redirect('/')
-            })
+            // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+            // MYSQL.query(query1, [Del,LOGIN],(err, result) => {
+            //   res.redirect('/')
+            // })
           })
         }else if(UserAbout){
         /********************************* UPDATING OF USERS ABOUT  ********************************/
@@ -313,9 +314,8 @@ app.post('/', (req, res) => {
                     const GRPLogs = (JSON.parse(`[${Col.split('}{').join('},{')}]`))
 
                     const {CRTGID} = req.session //Current Group ID
-                    const {CHECKER} = req.session //Chat Current Location
 
-                    res.json({PN: LOGIN, CRT:CHECKER, 
+                    res.json({PN: LOGIN,
                       USER:ForFriends, SORT:MainResult, CHATS:ChatLog, FRD:Friends,
                       GRP:Group, GRPLog:GRPLogs, CRTGID:CRTGID,
                     })
@@ -356,7 +356,6 @@ app.post('/', (req, res) => {
           const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`, `user_img`, `friends`, `chats`) VALUES(?,?,?,?,?,?,?)'
           MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
-              // console.log(err)
               // `Duplicate entry '${Sig_Name}' for key 'users.username'`
               // `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`
               if(err.sqlMessage == (`Duplicate entry '${Sig_Name}' for key 'user.username'`)){
@@ -378,15 +377,27 @@ app.post('/', (req, res) => {
   } 
 
 })
-// let ID = 1670316762324
-// const Groups = ['Entertainment', 'Religion', 'Science', 'Gossip', 'Education', 'Music', 'Wed Masters', 'Programming']
-// for (let i = 0; i < Groups.length; i++) {
-//   ID = ID + (5*i)
-//   const query = 'INSERT INTO `chatmoregroups` (`groupid`, `groupname`) VALUES(?,?)'
-//   MYSQL.query(query, [`ID${ID}`,Groups[i]], (err, result) => {
-    
-//   })
+
+// let Gen = ((('MaryReformer').toLocaleLowerCase()).split('')).sort()
+// let name = ''
+// for (let i = 0; i < Gen.length; i++) {
+//   name += Gen[i]
 // }
+// console.log(name)
+// app.get('/', (req, res) => {
+//   res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
+// })
+
+io.on('connection', (socket) => {
+  if('connection'){
+    console.log('Yes')
+  }
+  socket.on('chat message', Msg => {
+    io.emit('chat message', Msg)
+    // console.log(Msg)
+  })
+
+})
 
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

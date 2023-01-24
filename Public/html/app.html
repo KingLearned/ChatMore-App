@@ -78,6 +78,7 @@
                     <chat_top style="position: sticky; top:0;">
                         <img src="" alt="">
                         <h1>Loading...</h1>
+                        <h6 hidden></h6>
                         <about>Loading...</about>
                         <button class="fa fa-arrow-left"></button>
                     </chat_top>
@@ -93,14 +94,13 @@
                     </logs>
                     <sending>
                         <form method="POST" id="..." class="SendForm">
-                            <input type="text" name="locator" class="locator" required hidden>
                             <input type="text" name="repto" class="repto" required hidden>
+                            <input type="text" name="EleDiv" class="EleDiv" required hidden>
                             <input type="text" name="Msg" class="Msg" placeholder="Type new message.." required>
                             <input type="submit" id="submit" hidden>
                             <label for="submit" class="fa fa-paper-plane"></label>
                         </form>
                         <form method="POST" class="EdForm" hidden>
-                            <input type="text" name="locator" class="locator" hidden>
                             <input type="text" name="EditId" class="EditId" placeholder="Edit ID" hidden>
                             <input type="text" name="EdMsg" class="EdMsg" placeholder="Edit Msg">
                             <input type="submit" id="submit" hidden>
@@ -186,8 +186,9 @@
         </div>
     </div>
 </div>
+<script src="../js/socket.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" src="../js/&5423442locate.js"></script>
 <script type="text/javascript" src="../js/chat.js"></script>
 <script type="text/javascript" src="../js/grouphandler.js"></script>
 </body>
