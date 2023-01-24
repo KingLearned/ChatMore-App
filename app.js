@@ -359,10 +359,10 @@ app.post('/', (req, res) => {
               // console.log(err)
               // `Duplicate entry '${Sig_Name}' for key 'users.username'`
               // `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`
-              if(err.sqlMessage == (`Duplicate entry '${Sig_Name}' for key 'PRIMARY'`)){
+              if(err.sqlMessage == (`Duplicate entry '${Sig_Name}' for key 'user.username'`)){
                 res.json({ErrMsg: 'Username Already Exist!'})
                 // console.log('Username Already Exist')
-              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'telephone'`){
+              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`){
                 res.json({ErrMsg: 'Number Already Exist!'})
                 // console.log('Number Already Exist')
               }
