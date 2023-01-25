@@ -6,7 +6,6 @@ const SQL = require('mysql')
 //     password: 'Learned 1945',
 //     database: 'chatmoreapp'
 // })
-console.log('Yes')
 const MYSQL = SQL.createConnection({
     host: "db4free.net",
     user: "learnedsconcept",

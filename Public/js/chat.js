@@ -337,9 +337,11 @@ socket.on('chat message', function(Msg) {
 
     console.log(Msg.EleDiv)
     if(Msg.Id !== 'Del'){
+        let Id = Msg.MsgTo
         let shift = ''
         let edit = ''
         if(Msg.from !== $('chat_top h6').html()){
+            Id = 'you'
             shift = `class="edit ChatID${Msg.Id}" 
             style="align-self:flex-end; background-color: pink; border-radius:100px 100px 0 100px"`
             edit = `
@@ -351,7 +353,7 @@ socket.on('chat message', function(Msg) {
         
         Show.innerHTML += ` 
             <article ${shift}>
-                <logname>@you</logname>
+                <logname>@${Id}</logname>
                 <log>${Msg.Msg}</log>
                 ${edit}
             </article>

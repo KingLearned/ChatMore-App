@@ -176,7 +176,7 @@ app.post('/', (req, res) => {
             // MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {
             // })
 
-            res.json({SndMsg:{Id:Id, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN}})
+            res.json({SndMsg:{Id:Id, MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN}})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
