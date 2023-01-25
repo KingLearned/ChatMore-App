@@ -137,11 +137,8 @@ $.ajax({
                 }
 
                 let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
-                console.log(GenEle)
                 let Ele = ''
-                for (let i = 0; i < GenEle.length; i++) {
-                    Ele += GenEle[i]
-                }
+                for (let i = 0; i < GenEle.length; i++) {Ele += GenEle[i]}
 
                 document.querySelector('logs').innerHTML = `<${Ele}></${Ele}>`
                 const Show = document.querySelector(`logs ${Ele}`)
@@ -159,7 +156,7 @@ $.ajax({
                     const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
 
                     Show.innerHTML += ` 
-                        <article ${shift}>
+                        <article ${shift} id="ChatID${ChatLogs[n].Id}">
                         <logname>@${id}</logname>
                         <log>${ChatLogs[n].Msg}</log>
                         ${edit}
@@ -175,7 +172,6 @@ $.ajax({
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
                 for (let e = 0; e < ChatLogs.length; e++) {
                     $(`.edit${ChatLogs[e].Id}`).on('click', () => {
-                        $('.locator').val(data.FRD[i])
                         $('.EditId').val(ChatLogs[e].Id)
                         $('.EdMsg').val(ChatLogs[e].Msg)
                         $('.SendForm').hide()
@@ -185,37 +181,35 @@ $.ajax({
                         $(`.EdForm`).on('submit', (e) => {
                             e.preventDefault()
                             $.ajax({
-                                method: "POST",
-                                data: {Locate: $('.locator').val(),EditId: $('.EditId').val(),EditMsg: $('.EdMsg').val()},
-                                success: (data) => {
+                                method:"POST",
+                                data:{
+                                    ElementTag: $('.EleDiv').val(),
+                                    EditId: $('.EditId').val(),
+                                    EditMsg:$('.EdMsg').val()
+                                },
+                                success:(data) => {
+                                    socket.emit('chat message', data.SndMsg)
                                     $('.EdForm').hide()
                                     $('.SendForm').show()
                                 }
-                            }) 
+                            })
                         })
                     })
                 }
 
                 /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
-
-                    // if($(`${data.FRD[i]} article`).length ++){
-                        // console.log($(`${data.FRD[i]} article`).length)
-                        // $(`.SendForm`).on('submit', ()=> {
-                        //     console.log($(`${data.FRD[i]} article`).length)
-                        // })
-                    // }set
                 for (let e = 0; e < ChatLogs.length; e++) {
                     $(`.del${ChatLogs[e].Id}`).on('click', () => {
-                        // $('.DelId').val(ChatLogs[e].Id)
-                        // console.log(ChatLogs[e].Id)
-                        // $.ajax({
-                        //     method: "POST",
-                        //     data: {
-                        //         DelMsg: ChatLogs[e].Id
-                        //     },
-                        //     success: (data) => {
-                        //     }
-                        // })
+                        $.ajax({
+                            method:"POST",
+                            data:{
+                                ElementTag: $('.EleDiv').val(),
+                                DelMsg: ChatLogs[e].Id
+                            },
+                            success:(data) => {
+                                socket.emit('chat message', data.SndMsg)
+                            }
+                        })
                     })
                 }
 
@@ -305,109 +299,6 @@ $.ajax({
             document.querySelector('community').style.height = 'auto'
         }
     }
-})
-const socket = io()
-$(`.SendForm`).on('submit', (e) => {
-    e.preventDefault()
-    $.ajax({
-        method:"POST",
-        data:{
-            MsgTo: $('.repto').val(),
-            ElementTag: $('.EleDiv').val(),
-            ChatMsg: $('.Msg').val(),
-        },
-        success:(data) => {
-            // console.log(data.SndMsg)
-            socket.emit('chat message', data.SndMsg)
-            $('.Msg').val('')
-        }
-    })
-    // socket.emit('chat message', $('.Msg').val())
-})
-
-
-
-socket.on('chat message', function(Msg) {
-    // const Show = document.querySelector(`logs`)
-    const Show = document.querySelector(`${Msg.EleDiv}`)
-    Show.style.display = 'flex';
-    Show.style.flexDirection = 'column'
-
-    console.log($('chat_top h6').html())
-
-    console.log(Msg.EleDiv)
-    if(Msg.Id !== 'Del'){
-        let Id = Msg.MsgTo
-        let shift = ''
-        let edit = ''
-        if(Msg.from !== $('chat_top h6').html()){
-            Id = 'you'
-            shift = `class="edit ChatID${Msg.Id}" 
-            style="align-self:flex-end; background-color: pink; border-radius:100px 100px 0 100px"`
-            edit = `
-                <make>
-                    <edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit>
-                    <del class="fa fa-window-close del${Msg.Id}" title="Delete Message"></del>
-                </make>`
-        }
-        
-        Show.innerHTML += ` 
-            <article ${shift}>
-                <logname>@${Id}</logname>
-                <log>${Msg.Msg}</log>
-                ${edit}
-            </article>
-            `
-    }else if(Msg.Id == 'Del'){
-        socket.on('chat message', document.querySelector(`${Msg.EleDiv} .ChatID${Msg.Msg}`).innerHTML = Msg.Msg)
-        // document.querySelector(`${Msg.EleDiv} .ChatID${Msg.Msg}`).innerHTML = Msg.Msg
-        // document.querySelector(`${Msg.EleDiv} .ChatID${Msg.Msg}`).style.display = 'none'
-        // document.querySelector(`${Msg.EleDiv} .ChatID${Msg.Msg}`).remove()
-        // console.log($('.friends article').length)
-
-        const Height = $('.friends article').length >= 4 ? 
-        document.querySelector('.friends').style.height = 'auto' : 
-        document.querySelector('.friends').style.height = '85vh'
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-        const ArtLng = document.querySelectorAll(`${Msg.EleDiv} article make del`)
-        const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
-
-        for (let i = 0; i < ArtLng.length; i++) {
-            let DelBtn = document.querySelector(`.${ArtLng[i].classList[2]}`)
-            let DelID = Number(ArtLng[i].classList[2].replace(/[^0-9]/g, ""))
-            DelBtn.addEventListener('click', () => {
-                // socket.emit('chat message', {Id:'Del', Msg:DelID, EleDiv:Msg.EleDiv})
-
-
-                $.ajax({
-                    method:"POST",
-                    data:{
-                        ElementTag: $('.EleDiv').val(),
-                        DelMsg: DelID,
-                    },
-                    success:(data) => {
-                        socket.emit('chat message', data.SndMsg)
-                    }
-                })
-                // socket.emit('chat message', {Id:45, Msg:'Hello World', EleDiv:Msg.EleDiv})
-                // socket.on('chat message', function(Msg){
-                //     console.log(Msg)
-                // })
-                // console.log(DelID,Art[i].innerHTML)
-                // $.ajax({
-                //     method: "POST",
-                //     data: {
-                //         DelMsg: DelID
-                //     }
-                // })
-            })
-        }
-    
-    const Height = $('.friends article').length >= 4 ? 
-    document.querySelector('.friends').style.height = 'auto' : 
-    document.querySelector('.friends').style.height = '85vh'
-    window.scrollTo(0, document.body.scrollHeight);
 })
 
 function Submit(){

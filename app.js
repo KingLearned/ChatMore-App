@@ -173,14 +173,11 @@ app.post('/', (req, res) => {
               Chats = `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${ChatMsg}"}`
             }
             // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            // MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {
-            // })
-
+            // MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
             res.json({SndMsg:{Id:Id, MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN}})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
-          req.session.CHECKER = Locate
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
             var ChatEdit = JSON.parse(`[${result[0].chats}]`)
@@ -192,15 +189,12 @@ app.post('/', (req, res) => {
             ChatEdit = JSON.stringify(ChatEdit)
             ChatEdit = ChatEdit.split('[').join('')
             ChatEdit = ChatEdit.split(']').join('')
-            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {
-              res.redirect('/')
-              
-            })
+            // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+            // MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
           })
+          res.json({SndMsg:{Id:'Edit', MsgId:EditId, Msg:EditMsg, EleDiv:ElementTag}})
         }else if(DelMsg){
           /*************** DELETING OT USERS CHAT *****************/
-          console.log(DelMsg)
           res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag}})
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
@@ -219,10 +213,8 @@ app.post('/', (req, res) => {
             Del = JSON.stringify(Del)
             Del = Del.split('[').join('')
             Del = Del.split(']').join('')
-            // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            // MYSQL.query(query1, [Del,LOGIN],(err, result) => {
-            //   res.redirect('/')
-            // })
+            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+            MYSQL.query(query1, [Del,LOGIN],(err, result) => {})
           })
         }else if(UserAbout){
         /********************************* UPDATING OF USERS ABOUT  ********************************/

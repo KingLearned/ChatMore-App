@@ -102,6 +102,7 @@
                         </form>
                         <form method="POST" class="EdForm" hidden>
                             <input type="text" name="EditId" class="EditId" placeholder="Edit ID" hidden>
+                            <input type="text" name="EleDiv" class="EleDiv" required hidden>
                             <input type="text" name="EdMsg" class="EdMsg" placeholder="Edit Msg">
                             <input type="submit" id="submit" hidden>
                             <label for="submit" class="fa fa-paper-plane"></label>
@@ -186,10 +187,10 @@
         </div>
     </div>
 </div>
-<script src="../js/socket.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/chat.js"></script>
 <script type="text/javascript" src="../js/grouphandler.js"></script>
+<script src="../js/socket.js"></script>
 </body>
 </html>
