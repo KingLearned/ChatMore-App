@@ -44,7 +44,7 @@ const Home = `
     </div>
     <div class="footer">
         <div class="copyright">
-            ©ChatMore 2022 - ${(new Date).getFullYear()} || Developed by LDC
+            ChatMore 2022 - ${(new Date).getFullYear()} || Developed by LDC
         </div>
     </div>
 </div>
