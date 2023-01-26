@@ -16,7 +16,6 @@ $(`.SendForm`).on('submit', (e) => {
 })
 
 
-
 socket.on('chat message', function(Msg) {
     const Show = document.querySelector(`${Msg.EleDiv}`)
     Show.style.display = 'flex';
@@ -41,6 +40,7 @@ socket.on('chat message', function(Msg) {
             <article ${shift} id="ChatID${Msg.Id}">
                 <logname>@${Id}</logname>
                 <log>${Msg.Msg}</log>
+                <time>${Msg.time}</time>
                 ${edit}
             </article>
             `

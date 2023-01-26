@@ -159,6 +159,7 @@ $.ajax({
                         <article ${shift} id="ChatID${ChatLogs[n].Id}">
                         <logname>@${id}</logname>
                         <log>${ChatLogs[n].Msg}</log>
+                        <time>${ChatLogs[n].time}</time>
                         ${edit}
                         </article>
                         `

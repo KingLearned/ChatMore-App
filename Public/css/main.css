@@ -481,8 +481,10 @@ chatlog article{
 chatlog article log{
     font: 900 15px roboto;
 }
-chatlog article log{
-    font: 900 15px roboto;
+chatlog article time{
+    font: 600 10px roboto; 
+    text-align: right;
+    margin: 0 10px 0 0;
 }
 .edit:hover make{
     height: 35px;

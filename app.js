@@ -59,6 +59,8 @@ app.get('/Log-User-Out', (req, res) =>{
       }
   })
 })
+const Emoji = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '😒', '😜','☕', '🏃']
+const EmojiId =   ['<!cool','<!vex','<!smile','<!love','<!lol','<!laf','<!hrt','<!brhrt','<!nag','<!tong','<!tea','<!run']
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
@@ -164,17 +166,25 @@ app.post('/', (req, res) => {
           })
         }else if(ChatMsg && MsgTo){
           /*************** SENDING OT USERS CHAT *****************/
-          console.log(ChatMsg,MsgTo)
           const Id = new Date().getTime()
+          const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
+          const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+          let LogMsg =  ChatMsg
+          for (let i = 0; i < LogMsg.length; i++) {
+            for (let n = 0; n < Emoji.length; n++) {
+              LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n])
+            }
+            // con = con.split(EmojiId[i]).join(Emoji[i])
+          }
+          console.log(LogMsg)
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, Checker) => {
-            var Chats = `,{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${ChatMsg}"}`
-            if(Checker[0].chats == ''){
-              Chats = `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${ChatMsg}"}`
-            }
-            // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            // MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
-            res.json({SndMsg:{Id:Id, MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN}})
+            const Chats = Checker[0].chats == '' ? `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`:
+            `,{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`
+
+            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+            MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
+            res.json({SndMsg:{Id:Id, MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
@@ -189,8 +199,8 @@ app.post('/', (req, res) => {
             ChatEdit = JSON.stringify(ChatEdit)
             ChatEdit = ChatEdit.split('[').join('')
             ChatEdit = ChatEdit.split(']').join('')
-            // const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            // MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
+            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+            MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
           })
           res.json({SndMsg:{Id:'Edit', MsgId:EditId, Msg:EditMsg, EleDiv:ElementTag}})
         }else if(DelMsg){
@@ -256,7 +266,6 @@ app.post('/', (req, res) => {
 
 
         }else if(Revole){
-          // console.log(Revole)
           /*************** UPDATING MODULE FOR CHAT FRIENDS *****************/
           const query1 = "SELECT * FROM `users`"
           MYSQL.query(query1, (err, RunUpdate) => {
@@ -295,7 +304,11 @@ app.post('/', (req, res) => {
                     ChatLog += MainResult[i].chats
                   }
                   ChatLog = (JSON.parse(`[${ChatLog.split('}{').join('},{')}]`)).sort((a, b) => a.Id - b.Id)
-
+                  for (let m = 0; m < ChatLog.length; m++) {
+                    for (let n = 0; n < Emoji.length; n++) {
+                      ChatLog[m].Msg = ChatLog[m].Msg.split(EmojiId[n]).join(Emoji[n])
+                    }
+                  }
                   //GETTING CHATS OF SENT TO THE DIFFERENT GROUPS
                   const query = "SELECT * FROM `chatmoregroups`"
                   MYSQL.query(query, (err, Group) => {
@@ -370,19 +383,9 @@ app.post('/', (req, res) => {
 
 })
 
-// let Gen = ((('MaryReformer').toLocaleLowerCase()).split('')).sort()
-// let name = ''
-// for (let i = 0; i < Gen.length; i++) {
-//   name += Gen[i]
-// }
-// console.log(name)
-// app.get('/', (req, res) => {
-//   res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
-// })
-
 io.on('connection', (socket) => {
   if('connection'){
-    console.log('Yes')
+    // console.log('Yes')
   }
   socket.on('chat message', Msg => {
     io.emit('chat message', Msg)
