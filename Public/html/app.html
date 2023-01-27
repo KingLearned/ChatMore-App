@@ -82,7 +82,7 @@
                         <about>Loading...</about>
                         <button class="fa fa-arrow-left"></button>
                     </chat_top>
-                    <logs style="margin-bottom: 50px;">
+                    <!-- <logs style="margin-bottom: 50px;">
                         <article>
                             <logname>@Franky Man</logname>
                             <log>Whats up man</log>
@@ -92,7 +92,7 @@
                             <logname>you</logname>
                             <log>I'm fine man</log>
                             <time>01:12</time>
-                        </article>
+                        </article> -->
                     </logs>
                     <sending>
                         <emojis hidden>
@@ -149,7 +149,7 @@
                 <groupchats>
                     <group_top>
                         <button class="fa fa-arrow-left"></button>
-                        <h2>World Tech Gaints</h2>
+                        <h2>Loading...</h2>
                     </group_top>
                     <grouplogs>
                         <!-- <article>
@@ -162,25 +162,29 @@
                         </article> -->
                     </grouplogs>
                     <sending>
+                        <emojis hidden>
+                            <emo>😎</emo>
+                            <emo>😡</emo>
+                            <emo>😊</emo>
+                            <emo>😍</emo>
+                            <emo>😅</emo>
+                            <emo>😁</emo>
+                            <emo>💓</emo>
+                            <emo>💔</emo>
+                            <emo>😒</emo>
+                            <emo>😜</emo>
+                            <emo>☕</emo>
+                            <emo>🏃</emo>
+                        </emojis>
+                        <smile class="fa fa-smile"></smile>
                         <form method="POST" id=".." class="GrpChatForm">
+                            <input type="text" name="EleDiv" class="EleDiv" required hidden>
                             <input type="text" name="GrpID" class="GrpID" required placeholder="Group ID" hidden>
                             <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Type new message.." required>
-                            <input type="submit" id="submit" hidden>
-                            <label for="submit" class="fa fa-paper-plane"></label>
+                            <input type="submit" id="grpmit" hidden>
+                            <label for="grpmit" class="fa fa-paper-plane"></label>
                         </form>
                     </sending>
-                    <script>
-                        $('.GrpChatForm').on('submit', () => {
-                            const Log = document.querySelector('grouplogs')
-                            Log.innerHTML +=`
-                            <article class="activeme">
-                                <logname>@you</logname>
-                                <log>${$('.GrpMsg').val()}</log>
-                            </article>
-                            `
-                            window.location.href='#..'
-                        })
-                    </script>
                 </groupchats>
             </groups>
 

@@ -77,7 +77,7 @@ app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
   // const LOGIN = 'reformer'
-  
+
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 
@@ -105,11 +105,7 @@ app.post('/', (req, res) => {
    /************  GROUP COLLECTION   ***********/
   const {GrpMsg} = req.body
   const {GrpID} = req.body
-  const {CRTGID} = req.session //Current Group ID
-  // const {GCRT} = req.session //Current Group Name
-  // req.session.GCRT = gcrt
-  // const {gcrt} = req.body
-  // const {GCRT} = req.session
+
   let Revole = 'GrpID'
 
   
@@ -245,14 +241,12 @@ app.post('/', (req, res) => {
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/
-          // console.log(GrpID)
-          req.session.CRTGID = GrpID
-          // Revole = 'ID'
-          // console.log(GrpID, GrpMsg)
-          const Id = new Date().getTime()
+          // console.log(GrpID,GrpMsg,ElementTag)
 
-          const {CRTGID} = req.session
-          
+          const Id = new Date().getTime()
+          const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
+          const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+
           const query = "SELECT * FROM `chatmoregroups` WHERE `groupid`=?"
           MYSQL.query(query, GrpID, (err, Main) => {
             var Chats = `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpMsg}"}`
@@ -260,11 +254,9 @@ app.post('/', (req, res) => {
               Chats = `{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpMsg}"}`
             }
 
-            const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
-            MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {
-              res.json({Resd:'/'})
-            })
-
+            // const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
+            // MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
+            res.json({SndMsg:{Id:'Grp', MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
           })
 
 

@@ -14,13 +14,30 @@ $(`.SendForm`).on('submit', (e) => {
         }
     })
 })
+//Send Form for Group Section
+$(`.GrpChatForm`).on('submit', (e) => {
+    e.preventDefault()
+    $.ajax({
+        method:"POST",
+        data:{
+            ElementTag: $('.EleDiv').val(),
+            GrpID: $('.GrpID').val(),
+            GrpMsg: $('.GrpMsg').val()
+        },
+        success:(data) => {
+            socket.emit('chat message', data.SndMsg)
+            $('.GrpMsg').val('')
+            $('.GrpMsg').focus()
+        }
+    })
+})
 
 socket.on('chat message', function(Msg) {
     const Show = document.querySelector(`${Msg.EleDiv}`)
     Show.style.display = 'flex';
     Show.style.flexDirection = 'column'
 
-    if(Msg.Id !== 'Del' && Msg.Id !== 'Edit'){
+    if(Msg.Id !== 'Del' && Msg.Id !== 'Edit' && Msg.Id !== 'Grp'){
         let Id = Msg.from
         let shift = ''
         let edit = ''
@@ -49,13 +66,30 @@ socket.on('chat message', function(Msg) {
 
     }else if(Msg.Id == 'Edit'){
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg)
+    }else if((Msg.Id == 'Grp')){
+
+        const Log = document.querySelector(`${Msg.EleDiv}`)
+        let Id = Msg.from
+        let shift = ''
+        if(Msg.from == $('yourname').html()){
+            Id = 'you'
+            shift = 'activeme'
+        }
+        Log.innerHTML +=`
+        <article class="${shift}">
+            <logname>@${Id}</logname>
+            <log>${Msg.Msg}</log>
+            <time>${Msg.time}</time>
+        </article>
+        `
+        HeightSet()
     }
 
     
         const ArtLng = document.querySelectorAll(`${Msg.EleDiv} article make del`)
         const EdLng = document.querySelectorAll(`${Msg.EleDiv} article make edit`)
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
-        
+        /****************    FOR CHATS IN FRIENDS PART ***************/
         for (let i = 0; i < ArtLng.length; i++) {
             let DelBtn = document.querySelector(`.${ArtLng[i].classList[2]}`)
             let EdBtn = document.querySelector(`.${EdLng[i].classList[2]}`)
@@ -105,10 +139,15 @@ socket.on('chat message', function(Msg) {
                 })
             })
         }
+
     function HeightSet(){
         const Height = $('.friends article').length >= 4 ? 
         document.querySelector('.friends').style.height = 'auto' : 
         document.querySelector('.friends').style.height = '85vh'
         window.scrollTo(0, document.body.scrollHeight);
+
+        const Hig = $('grouplogs article').length >= 5 ? 
+        document.querySelector('groups').style.height = '100%' : 
+        document.querySelector('groups').style.height = '85vh'
     }HeightSet()
 })

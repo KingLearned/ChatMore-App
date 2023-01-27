@@ -74,8 +74,13 @@ const Grp = document.querySelector('.group')
 const GrpDis = document.querySelector('groups')
 const Comm = document.querySelector('.community')
 const CommDis = document.querySelector('community')
-Cht.style.color = 'black'
-
+// Cht.style.color = 'black'
+Grp.style.color = 'black'
+    Cht.style.color = ''
+    Comm.style.color = ''
+    GrpDis.style.display = 'block'
+    ChtDis.style.display = 'none'
+    CommDis.style.display = 'none'
 Cht.addEventListener('click', () => {
     Cht.style.color = 'black'
     Grp.style.color = ''

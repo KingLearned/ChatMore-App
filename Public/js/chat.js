@@ -322,6 +322,8 @@ for (let i = 0; i < Emo.length; i++) {
         $('.EdMsg').focus()
         $('.Msg').val($('.Msg').val()+Emo[i].innerHTML)
         $('.Msg').focus()
+        $('.GrpMsg').val($('.GrpMsg').val()+Emo[i].innerHTML)
+        $('.GrpMsg').focus()
     }) 
 }
 let SmileCount = 0
