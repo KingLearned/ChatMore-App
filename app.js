@@ -75,9 +75,10 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  // const {LOGIN} = req.session
+  const {LOGIN} = req.session
   // const LOGIN = 'reformer'
-  // const {Log_Name} = req.body
+  
+  const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 
   const {Sig_Name} = req.body
