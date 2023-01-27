@@ -63,8 +63,8 @@ const Emoji = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '�
 const EmojiId =   ['<!cool','<!vex','<!smile','<!love','<!lol','<!laf','<!hrt','<!brhrt','<!nag','<!tong','<!tea','<!run']
 
 app.get('/', (req, res) => {
-  const {LOGIN} = req.session
-  // const LOGIN = 'reformer'
+  // const {LOGIN} = req.session
+  const LOGIN = 'reformer'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -75,8 +75,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  const {LOGIN} = req.session
-  // const LOGIN = 'reformer'
+  // const {LOGIN} = req.session
+  const LOGIN = 'reformer'
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 
@@ -174,9 +174,7 @@ app.post('/', (req, res) => {
             for (let n = 0; n < Emoji.length; n++) {
               LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n])
             }
-            // con = con.split(EmojiId[i]).join(Emoji[i])
           }
-          console.log(LogMsg)
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, Checker) => {
             const Chats = Checker[0].chats == '' ? `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`:
@@ -199,6 +197,10 @@ app.post('/', (req, res) => {
             ChatEdit = JSON.stringify(ChatEdit)
             ChatEdit = ChatEdit.split('[').join('')
             ChatEdit = ChatEdit.split(']').join('')
+            for (let n = 0; n < Emoji.length; n++) {
+              ChatEdit = ChatEdit.split(Emoji[n]).join(EmojiId[n])
+            }
+
             const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
             MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
           })

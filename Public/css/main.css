@@ -481,6 +481,7 @@ chatlog article{
 chatlog article log{
     font: 900 15px roboto;
 }
+
 chatlog article time{
     font: 600 10px roboto; 
     text-align: right;
@@ -518,9 +519,31 @@ chatlog form, groupchats form{
     margin: 0 5px;
     overflow: hidden;
 }
+chatlog smile{
+    position: absolute;
+    left: 10px;
+    bottom: 7px;
+    color: purple;
+    font-size: 25px;
+    cursor: pointer;
+}
+chatlog emojis{
+    position: absolute;
+    bottom: 45px;
+    left: 10px;
+    background-color: white;
+    box-shadow: 1px 1px 4px grey;
+    border-radius: 15px;
+    padding: 5px;
+}
+chatlog emojis emo{
+    cursor: pointer;
+    margin: 0 5px;
+}
 chatlog form input, groupchats form input{
     font: 900 15px roboto;
     padding: 10px 15px;
+    margin-left: 18px;
     border: 1px solid transparent;
     outline: none;
     width: 90%;

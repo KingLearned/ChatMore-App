@@ -314,3 +314,17 @@ function Submit(){
     //     }
     // }
 }
+
+const Emo = document.querySelectorAll('emo')
+for (let i = 0; i < Emo.length; i++) {
+    Emo[i].addEventListener('click',() => {
+        $('.EdMsg').val($('.EdMsg').val()+Emo[i].innerHTML)
+        $('.EdMsg').focus()
+        $('.Msg').val($('.Msg').val()+Emo[i].innerHTML)
+        $('.Msg').focus()
+    }) 
+}
+let SmileCount = 0
+$('smile').on('click', () => {
+    const Emoji = SmileCount == 0 ? ($('emojis').show(),SmileCount=1) : ($('emojis').hide(),SmileCount=0)
+})

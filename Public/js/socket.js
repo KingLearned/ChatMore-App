@@ -88,6 +88,7 @@ socket.on('chat message', function(Msg) {
                             $('.SendForm').show()
                         }
                     })
+                    $('.Msg').val('')
                 })
             })
 
@@ -112,3 +113,6 @@ socket.on('chat message', function(Msg) {
         window.scrollTo(0, document.body.scrollHeight);
     }HeightSet()
 })
+// document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
+// document.querySelector('friendlist').style.display = 'none'//Hide Friends List
+// document.querySelector('.friends').style.height = '65vh'
