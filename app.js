@@ -63,8 +63,8 @@ const Emoji = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '�
 const EmojiId =   ['<!cool','<!vex','<!smile','<!love','<!lol','<!laf','<!hrt','<!brhrt','<!nag','<!tong','<!tea','<!run']
 
 app.get('/', (req, res) => {
-  // const {LOGIN} = req.session
-  const LOGIN = 'reformer'
+  const {LOGIN} = req.session
+  // const LOGIN = 'reformer'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -76,8 +76,8 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   
   // const {LOGIN} = req.session
-  const LOGIN = 'reformer'
-  const {Log_Name} = req.body
+  // const LOGIN = 'reformer'
+  // const {Log_Name} = req.body
   const {Log_Pwd} = req.body
 
   const {Sig_Name} = req.body
