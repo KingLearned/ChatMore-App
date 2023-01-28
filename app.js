@@ -65,11 +65,10 @@ const EmojiId =   ['<!cool','<!vex','<!smile','<!love','<!lol','<!laf','<!hrt','
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
-  // const LOGIN = 'mary'
+  // const LOGIN = 'franky'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
-    // res.send(ChatApp)
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
   }
 })
@@ -77,7 +76,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
-  // const LOGIN = 'mary'
+  // const LOGIN = 'franky'
 
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
@@ -107,11 +106,6 @@ app.post('/', (req, res) => {
   const {GrpID} = req.body
 
   let Revole = 'GrpID'
-
-  
-  
-  
-  
   
   if(LOGIN){
     const Storage = MULTER.diskStorage({
@@ -256,7 +250,7 @@ app.post('/', (req, res) => {
 
             const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
             MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
-            res.json({SndMsg:{Id:'Grp', MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
+            res.json({SndMsg:{Id:'Grp', InId:Id, MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
           })
 
         }else if(Revole){
@@ -379,6 +373,7 @@ app.post('/', (req, res) => {
   } 
 
 })
+
 
 io.on('connection', (socket) => {
   if('connection'){

@@ -556,7 +556,7 @@ chatlog form label, groupchats form label{
 }
 chatdate{
     background-color: white;
-    box-shadow: 1px 1px 4px gainsboro;
+    box-shadow: 1px 1px 4px gray;
     width: max-content;
     padding: 10px;
     margin: 5px 0;
@@ -595,7 +595,9 @@ grouplogs{
     padding: 0 10px;
     margin-bottom: 55px;
 }
-
+groupchats form input{
+    width: 85%;
+}
 groupchats group_top{
     position: sticky;
     top: 0;

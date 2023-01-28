@@ -82,7 +82,20 @@ socket.on('chat message', function(Msg) {
 
     }else if((Msg.Id == 'Grp')){
 
-        const Log = document.querySelector(`${Msg.EleDiv}`)
+        const Log = document.querySelector(`${Msg.EleDiv}`)//Dynamic getElement
+
+        const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
+        if(Art.length !== 0){
+            const LastArt = Number(Art[Art.length-1].id)
+            // if(Number((Msg.InId/(1000*60*60*24)).toFixed(1)) > Number((LastArt/(1000*60*60*24)).toFixed(1))){
+            if((new Date(Msg.InId)).getDate() > (new Date(LastArt)).getDate()){
+                const D = new Date(Msg.InId)
+                const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
+                Log.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
+            }
+        }
+
+
         let Id = Msg.from
         let shift = ''
         if(Msg.from == $('yourname').html()){
@@ -90,7 +103,7 @@ socket.on('chat message', function(Msg) {
             shift = 'activeme'
         }
         Log.innerHTML +=`
-        <article class="${shift}">
+        <article class="${shift}" id="${Msg.InId}">
             <logname>@${Id}</logname>
             <log>${Msg.Msg}</log>
             <time>${Msg.time}</time>
