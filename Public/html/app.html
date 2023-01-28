@@ -82,8 +82,8 @@
                         <about>Loading...</about>
                         <button class="fa fa-arrow-left"></button>
                     </chat_top>
-                    <!-- <logs style="margin-bottom: 50px;">
-                        <article>
+                    <logs style="margin-bottom: 50px;">
+                        <!-- <article>
                             <logname>@Franky Man</logname>
                             <log>Whats up man</log>
                             <time>01:12</time>
@@ -111,16 +111,16 @@
                         </emojis>
                         <smile class="fa fa-smile"></smile>
                         <form method="POST" id="..." class="SendForm">
-                            <input type="text" name="repto" class="repto" required hidden>
-                            <input type="text" name="EleDiv" class="EleDiv" required hidden>
-                            <input type="text" name="Msg" class="Msg" placeholder="Type new message.." required>
+                            <input type="text" name="repto" class="repto" required placeholder="reply to" hidden>
+                            <input type="text" name="EleDiv" class="EleDiv" required placeholder="DivId" hidden>
+                            <input type="text" name="Msg" class="Msg" placeholder="Type new message.." required autocomplete="on">
                             <input type="submit" id="submit" hidden>
                             <label for="submit" class="fa fa-paper-plane"></label>
                         </form>
                         <form method="POST" class="EdForm" hidden>
                             <input type="text" name="EditId" class="EditId" placeholder="Edit ID" hidden>
                             <input type="text" name="EleDiv" class="EleDiv" required hidden>
-                            <input type="text" name="EdMsg" class="EdMsg" placeholder="Edit Msg">
+                            <input type="text" name="EdMsg" class="EdMsg" placeholder="Edit Msg" autocomplete="off">
                             <input type="submit" id="sub" hidden>
                             <label for="sub" class="fa fa-paper-plane"></label>
                         </form>
@@ -180,7 +180,7 @@
                         <form method="POST" id=".." class="GrpChatForm">
                             <input type="text" name="EleDiv" class="EleDiv" required hidden>
                             <input type="text" name="GrpID" class="GrpID" required placeholder="Group ID" hidden>
-                            <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Type new message.." required>
+                            <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Type new message.." required autocomplete="off">
                             <input type="submit" id="grpmit" hidden>
                             <label for="grpmit" class="fa fa-paper-plane"></label>
                         </form>

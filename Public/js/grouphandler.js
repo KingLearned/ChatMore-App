@@ -53,6 +53,7 @@ $.ajax({
                                 <article class="${active}">
                                     <logname>@${Person}</logname>
                                     <log>${data.GRPLog[n].Msg}</log>
+                                    <time>${data.GRPLog[n].time}</time>
                                 </article>
                                 `
                             }
@@ -74,7 +75,7 @@ $.ajax({
             
             //Closing Of Group Button Function
             $('groupchats button').on('click', () => {
-
+                window.scrollTo(0, document.body.scrollTop)
                 document.querySelector('grouplist').style.display = 'block'
                 document.querySelector('groupchats').style.display = 'none'
                 $('.top_menu').show()

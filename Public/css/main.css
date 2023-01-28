@@ -474,7 +474,7 @@ chatlog article{
     flex-direction: column;
     background-color: gainsboro;
     padding: 10px;
-    border-radius: 0 100px 100px 100px;
+    border-radius: 0 20px 20px 20px;
     width: 50vh;
     margin: 5px 0;
 }
@@ -554,7 +554,16 @@ chatlog form label, groupchats form label{
     font-size: 20px;
     padding: 10px;
 }
-
+chatdate{
+    background-color: white;
+    box-shadow: 1px 1px 4px gainsboro;
+    width: max-content;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 15px;
+    font: 400 15px roboto;
+    align-self: center;
+}
 
 /******************************* GROUP SECTIONS HANDLERS ************************/
 /******************************* GROUP SECTIONS HANDLERS ************************/

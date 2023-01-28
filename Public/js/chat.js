@@ -61,6 +61,7 @@ $.ajax({
         /*************** FOR REMOVING OF CHAT LOG ******************/
         /*************** FOR REMOVING OF CHAT LOG ******************/
         $('chatlog button').on('click', () => {
+            window.scrollTo(0, document.body.scrollTop)
             document.querySelector('chatlog').style.display = 'none'
             document.querySelector('friendlist').style.display = 'block'
             $('.top_menu').show()
@@ -121,54 +122,58 @@ $.ajax({
                     document.querySelector('chatlog img').src = FriendImg
                     $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
                     $('chatlog h6').html(data.FRD[i])//Chat Header
-                    $('.GrpID').val('')//Chat Header
-                    // $('logs').html('')
-                
+                    
 
                     
-                const ChatLogs = []
-                for (let m = 0; m < data.CHATS.length; m++) {
-                    if(data.CHATS[m].replyto == data.FRD[i] && data.CHATS[m].from == data.PN){
-                        ChatLogs.push(data.CHATS[m]) //Sent To Guest
+                    const ChatLogs = []
+                    for (let m = 0; m < data.CHATS.length; m++) {
+                        if(data.CHATS[m].replyto == data.FRD[i] && data.CHATS[m].from == data.PN){
+                            ChatLogs.push(data.CHATS[m]) //Sent To Guest
+                        }
+                        if(data.CHATS[m].from == data.FRD[i] && data.CHATS[m].replyto == data.PN){
+                            ChatLogs.push(data.CHATS[m]) //Sent From Guest
+                        }
                     }
-                    if(data.CHATS[m].from == data.FRD[i] && data.CHATS[m].replyto == data.PN){
-                        ChatLogs.push(data.CHATS[m]) //Sent From Guest
-                    }
-                }
 
                 let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
                 let Ele = ''
                 for (let i = 0; i < GenEle.length; i++) {Ele += GenEle[i]}
-
+                
+                $('.repto').val(data.FRD[i]) //Reply To User Friend
+                $('.EleDiv').val(Ele)//User Display Element Div
+                
                 document.querySelector('logs').innerHTML = `<${Ele}></${Ele}>`
                 const Show = document.querySelector(`logs ${Ele}`)
+
                 Show.style.display = 'flex';
                 Show.style.flexDirection = 'column'
-                for (let n = 0; n < ChatLogs.length; n++) {
-                    var shift = ''
-                    var edit = ''
-                    if(ChatLogs[n].replyto !== data.PN){
-                        shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: pink; border-radius:100px 100px 0 100px"`
-                        edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
+                    for (let n = 0; n < ChatLogs.length; n++) {
+                        var shift = ''
+                        var edit = ''
+                        if(ChatLogs[n].replyto !== data.PN){
+                            shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: pink; border-radius:20px 20px 0 20px"`
+                            edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
+                        }
+                        
+                        //Differentiating Between You and Other Users
+                        const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
+
+                        Show.innerHTML += ` 
+                            <article ${shift} id="ChatID${ChatLogs[n].Id}">
+                            <logname>@${id}</logname>
+                            <log>${ChatLogs[n].Msg}</log>
+                            <time>${ChatLogs[n].time}</time>
+                            ${edit}
+                            </article>
+                            `
+                        if(n < ChatLogs.length-1){
+                            if(Number((ChatLogs[n+1].Id/(1000*60*60*24)).toFixed(1)) > Number((ChatLogs[n].Id/(1000*60*60*24)).toFixed(1))){
+                                const D = new Date(ChatLogs[n+1].Id)
+                                const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
+                                Show.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
+                            }
+                        }
                     }
-
-                    //Differentiating Between You and Other Users
-                    const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
-
-                    Show.innerHTML += ` 
-                        <article ${shift} id="ChatID${ChatLogs[n].Id}">
-                        <logname>@${id}</logname>
-                        <log>${ChatLogs[n].Msg}</log>
-                        <time>${ChatLogs[n].time}</time>
-                        ${edit}
-                        </article>
-                        `
-                }
-                 
-                /********************* FOR SENDING MESSAGES    ************************/
-                /********************* FOR SENDING MESSAGES    ************************/
-                $('.repto').val(data.FRD[i]) //Message Tag Name
-                $('.EleDiv').val(Ele)
                 
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
                 for (let e = 0; e < ChatLogs.length; e++) {
@@ -192,6 +197,7 @@ $.ajax({
                                     socket.emit('chat message', data.SndMsg)
                                     $('.EdForm').hide()
                                     $('.SendForm').show()
+                                    $('.Msg').val(''),$('.GrpMsg').val('')
                                 }
                             })
                         })
@@ -215,7 +221,6 @@ $.ajax({
                 }
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
-                // window.location.href='#...'
                     $('.Msg').focus()
                     const Height = $('.friends article').length >= 4 ? 
                     document.querySelector('.friends').style.height = 'auto' : 
@@ -231,62 +236,62 @@ $.ajax({
         /************************* COMMUNITY SECTION HANDLER ***************************/
         const Disp = document.querySelector('community')
         Disp.innerHTML = ''
-            const Addthem = []
-            for (let i = 0; i < data.SORT.length; i++) {
-                if((data.SORT[i].username).toUpperCase() !== (data.PN).toUpperCase()){
-                    Addthem.push(data.SORT[i].username)
-                }
-
-                const Friends = data.FRD
-                for (let i = 0; i < Addthem.length; i++) {
-                    for (let n = 0; n < Friends.length; n++) {
-                        if((Friends[n] == Addthem[i])){
-                        function Rem(comm,Add){
-                            var index = comm.indexOf(Add)
-                            if(index > -1){
-                            comm.splice(index,1)
-                            }
-                            return comm
-                        }Rem(Addthem,Addthem[i])
-                        }
-                        
-                    }
-                }
+        const Addthem = []
+        for (let i = 0; i < data.SORT.length; i++) {
+            if((data.SORT[i].username).toUpperCase() !== (data.PN).toUpperCase()){
+                Addthem.push(data.SORT[i].username)
             }
 
-            /******************************* ADDING OF FRIENDS DISPLAY FUNCTION ************************/
+            const Friends = data.FRD
             for (let i = 0; i < Addthem.length; i++) {
-                for (let n = 0; n < data.SORT.length; n++) {
-                    if(data.SORT[n].username == Addthem[i]){
-                        var UserImg = `<img src="../ChatMore/Users/${Addthem[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
-                        if(data.SORT[n].user_img == ''){
-                            UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
+                for (let n = 0; n < Friends.length; n++) {
+                    if((Friends[n] == Addthem[i])){
+                    function Rem(comm,Add){
+                        var index = comm.indexOf(Add)
+                        if(index > -1){
+                        comm.splice(index,1)
                         }
-                        Disp.innerHTML +=`
-                        <div>
-                            ${UserImg}
-                            <display>
-                                <chatname>${Addthem[i]}</chatname><br>
-                                <about><b>About:</b> ${data.SORT[n].about}</about>
-                            </display>
-                            <add class='fa fa-user-plus ${Addthem[i]}' title="add ${Addthem[i]} to your chats"></add>
-                        </div>`
+                        return comm
+                    }Rem(Addthem,Addthem[i])
                     }
-                }    
+                    
+                }
             }
-            for (let i = 0; i < data.SORT.length; i++) {
-                $(`.${data.SORT[i].username}`).on('click', () => {
-                    $.ajax({
-                        method:"POST",
-                        data : {
-                            AddFriend : data.SORT[i].username
-                        },
-                        success : (data) => {
-                            window.location = '/'
-                        }
-                    })
+        }
+
+        /******************************* ADDING OF FRIENDS DISPLAY FUNCTION ************************/
+        for (let i = 0; i < Addthem.length; i++) {
+            for (let n = 0; n < data.SORT.length; n++) {
+                if(data.SORT[n].username == Addthem[i]){
+                    var UserImg = `<img src="../ChatMore/Users/${Addthem[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
+                    if(data.SORT[n].user_img == ''){
+                        UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
+                    }
+                    Disp.innerHTML +=`
+                    <div>
+                        ${UserImg}
+                        <display>
+                            <chatname>${Addthem[i]}</chatname><br>
+                            <about><b>About:</b> ${data.SORT[n].about}</about>
+                        </display>
+                        <add class='fa fa-user-plus ${Addthem[i]}' title="add ${Addthem[i]} to your chats"></add>
+                    </div>`
+                }
+            }    
+        }
+        for (let i = 0; i < data.SORT.length; i++) {
+            $(`.${data.SORT[i].username}`).on('click', () => {
+                $.ajax({
+                    method:"POST",
+                    data : {
+                        AddFriend : data.SORT[i].username
+                    },
+                    success : (data) => {
+                        window.location = '/'
+                    }
                 })
-            }
+            })
+        }
         /************************************************************************************ */
 
         /********************** VIEW LENGTH HANDLE ***********************/

@@ -1,4 +1,5 @@
 const socket = io()
+
 $(`.SendForm`).on('submit', (e) => {
     e.preventDefault()
     $.ajax({
@@ -10,11 +11,12 @@ $(`.SendForm`).on('submit', (e) => {
         },
         success:(data) => {
             socket.emit('chat message', data.SndMsg)
-            $('.Msg').val('')
+            $('.Msg').val(''),$('.GrpMsg').val('')
         }
     })
 })
-//Send Form for Group Section
+
+/**************     Send Form for Group Section     ********************/
 $(`.GrpChatForm`).on('submit', (e) => {
     e.preventDefault()
     $.ajax({
@@ -26,7 +28,7 @@ $(`.GrpChatForm`).on('submit', (e) => {
         },
         success:(data) => {
             socket.emit('chat message', data.SndMsg)
-            $('.GrpMsg').val('')
+            $('.GrpMsg').val(''),$('.Msg').val('')
             $('.GrpMsg').focus()
         }
     })
@@ -37,21 +39,31 @@ socket.on('chat message', function(Msg) {
     Show.style.display = 'flex';
     Show.style.flexDirection = 'column'
 
-    if(Msg.Id !== 'Del' && Msg.Id !== 'Edit' && Msg.Id !== 'Grp'){
+    if(Msg.chat == 'Frd'){
         let Id = Msg.from
         let shift = ''
         let edit = ''
         if(Msg.from !== $('chat_top h6').html()){
             Id = 'you'
             shift = `class="edit" 
-            style="align-self:flex-end; background-color: pink; border-radius:100px 100px 0 100px"`
+            style="align-self:flex-end; background-color: pink; border-radius:20px 20px 0 20px"`
             edit = `
                 <make>
                     <edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit>
                     <del class="fa fa-window-close del${Msg.Id}" title="Delete Message"></del>
                 </make>`
         }
-        
+
+        const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
+        if(Art.length !== 0){
+            const LastArt = Number(Art[Art.length-1].id.replace(/[^0-9]/g, ""))
+            if(Number((Msg.Id/(1000*60*60*24)).toFixed(1)) > Number((LastArt/(1000*60*60*24)).toFixed(1))){
+                const D = new Date(Msg.Id)
+                const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
+                Show.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
+            }
+        }
+
         Show.innerHTML += ` 
             <article ${shift} id="ChatID${Msg.Id}">
                 <logname>@${Id}</logname>
@@ -60,12 +72,14 @@ socket.on('chat message', function(Msg) {
                 ${edit}
             </article>
             `
-    }else if(Msg.Id == 'Del'){
+
+    }else if(Msg.Id == 'Del' && Msg.Id !== 'Grp'){
         document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
         HeightSet()
 
-    }else if(Msg.Id == 'Edit'){
+    }else if(Msg.Id == 'Edit' && Msg.Id !== 'Grp'){
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg)
+
     }else if((Msg.Id == 'Grp')){
 
         const Log = document.querySelector(`${Msg.EleDiv}`)
@@ -119,6 +133,7 @@ socket.on('chat message', function(Msg) {
                             socket.emit('chat message', data.SndMsg)
                             $('.EdForm').hide()
                             $('.SendForm').show()
+                            $('.GrpMsg').val(''),$('.Msg').val('')
                         }
                     })
                     $('.Msg').val('')

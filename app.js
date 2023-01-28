@@ -1,5 +1,4 @@
 //INITIALIZING OUR SERVERs
-
 const express = require('express')
 const app = express()
 const FS = require('fs')
@@ -22,6 +21,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server); 
+
 dotenv.config()
 // // ###################### Serving Static Files ###########################
 app.use(express.static(PATH.join(__dirname, './Public')))
@@ -32,6 +32,7 @@ app.use(bodyparser.json())
 const MYSQL = require('./MODULES/Conn')
 const HomePage = require('./MODULES/Home')
 const ChatApp = require('./MODULES/ChatApp')
+const { stringify } = require('querystring')
 
 const expDate = 1000 * 60 * 60 * 24 * 7 //It will Last for Days
 app.use(session({
@@ -64,7 +65,7 @@ const EmojiId =   ['<!cool','<!vex','<!smile','<!love','<!lol','<!laf','<!hrt','
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
-  // const LOGIN = 'reformer'
+  // const LOGIN = 'mary'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -76,7 +77,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
-  // const LOGIN = 'reformer'
+  // const LOGIN = 'mary'
 
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
@@ -99,7 +100,6 @@ app.post('/', (req, res) => {
   const {DelMsg} = req.body
 
   const UserAbout = req.body.about
-  // const {UserAbout} = req.body.updatepwd
   const {UpdatePWD} = req.body
 
    /************  GROUP COLLECTION   ***********/
@@ -166,12 +166,12 @@ app.post('/', (req, res) => {
           const Id = new Date().getTime()
           const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
           const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+
           let LogMsg =  ChatMsg
-          for (let i = 0; i < LogMsg.length; i++) {
-            for (let n = 0; n < Emoji.length; n++) {
-              LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n])
-            }
+          for (let n = 0; n < Emoji.length; n++) {
+            LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
           }
+
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, Checker) => {
             const Chats = Checker[0].chats == '' ? `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`:
@@ -179,7 +179,7 @@ app.post('/', (req, res) => {
 
             const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
             MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
-            res.json({SndMsg:{Id:Id, MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
+            res.json({SndMsg:{Id:Id, chat:'Frd', MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
@@ -233,15 +233,13 @@ app.post('/', (req, res) => {
           })
         }else if(UpdatePWD){
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
-        console.log(UpdatePWD)
-          // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
-          // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
-          //   res.redirect('/')
-          // })
+          const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
+          MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
+            res.redirect('/')
+          })
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/
-          // console.log(GrpID,GrpMsg,ElementTag)
 
           const Id = new Date().getTime()
           const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
@@ -249,16 +247,17 @@ app.post('/', (req, res) => {
 
           const query = "SELECT * FROM `chatmoregroups` WHERE `groupid`=?"
           MYSQL.query(query, GrpID, (err, Main) => {
-            var Chats = `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpMsg}"}`
-            if(Main[0].chatlogs == ''){
-              Chats = `{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpMsg}"}`
+            let GrpLog =  GrpMsg
+            for (let n = 0; n < Emoji.length; n++) {
+              GrpLog = GrpLog.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
             }
+            const Chats = Main[0].chatlogs == '' ? `{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`:
+                  `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`
 
-            // const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
-            // MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
+            const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
+            MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
             res.json({SndMsg:{Id:'Grp', MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
           })
-
 
         }else if(Revole){
           /*************** UPDATING MODULE FOR CHAT FRIENDS *****************/
@@ -294,7 +293,8 @@ app.post('/', (req, res) => {
                   if(ForFriends[0].friends){
                     Friends = ForFriends[0].friends.split(',')
                   }
-                  var ChatLog = ``
+
+                  let ChatLog = ''
                   for (let i = 0; i < MainResult.length; i++) {
                     ChatLog += MainResult[i].chats
                   }
@@ -307,20 +307,24 @@ app.post('/', (req, res) => {
                   //GETTING CHATS OF SENT TO THE DIFFERENT GROUPS
                   const query = "SELECT * FROM `chatmoregroups`"
                   MYSQL.query(query, (err, Group) => {
-                      var Col = ''
-                      for (let i = 0; i < Group.length; i++) {
-                        Col += Group[i].chatlogs
-                      }
-                    const GRPLogs = (JSON.parse(`[${Col.split('}{').join('},{')}]`))
+                    var Col = ''
+                    for (let i = 0; i < Group.length; i++) {
+                      Col += Group[i].chatlogs
+                    }
 
-                    const {CRTGID} = req.session //Current Group ID
+                    const GRPLogs = (JSON.parse(`[${Col.split('}{').join('},{')}]`))
+                    for (let m = 0; m < GRPLogs.length; m++) {
+                      for (let n = 0; n < Emoji.length; n++) {
+                        GRPLogs[m].Msg = GRPLogs[m].Msg.split(EmojiId[n]).join(Emoji[n])
+                      }
+                    }
 
                     res.json({PN: LOGIN,
                       USER:ForFriends, SORT:MainResult, CHATS:ChatLog, FRD:Friends,
-                      GRP:Group, GRPLog:GRPLogs, CRTGID:CRTGID,
+                      GRP:Group, GRPLog:GRPLogs
                     })
-                    // res.json({PN: LOGIN, CRT:CHECKER, GCRT:GCRT, GNCRT:GNCRT, GRP:Group, GRPLog:GRPLogs, USER:ForFriends, SORT:MainResult, CHATS:ChatLog, FRD: Friends})
                   })
+                  /***********    Ended Here  *********/
                 })
               })  
             },500)
@@ -356,15 +360,13 @@ app.post('/', (req, res) => {
           const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`, `user_img`, `friends`, `chats`) VALUES(?,?,?,?,?,?,?)'
           MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
-              // `Duplicate entry '${Sig_Name}' for key 'users.username'`
-              // `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`
-              if(err.sqlMessage == (`Duplicate entry '${Sig_Name}' for key 'user.username'`)){
-                res.json({ErrMsg: 'Username Already Exist!'})
-                // console.log('Username Already Exist')
-              }else if(err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'`){
-                res.json({ErrMsg: 'Number Already Exist!'})
-                // console.log('Number Already Exist')
-              }
+
+              const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'user.username` ? `Duplicate entry '${Sig_Name}' for key 'user.username` : `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
+              const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'user.telephone` ? `Duplicate entry '${Sig_Tele}' for key 'user.username` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
+
+              const Error = err.sqlMessage == ErrName ? res.json({ErrMsg: 'Username Already Exist!'}) :
+              err.sqlMessage == ErrTele ? res.json({ErrMsg: 'Number Already Exist!'}) : ''
+              
             }else{
               res.json({Successful: 'Registered Succefully!'})
             }
@@ -380,11 +382,10 @@ app.post('/', (req, res) => {
 
 io.on('connection', (socket) => {
   if('connection'){
-    // console.log('Yes')
+    // console.log('connection')
   }
   socket.on('chat message', Msg => {
     io.emit('chat message', Msg)
-    // console.log(Msg)
   })
 
 })
