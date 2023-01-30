@@ -57,7 +57,8 @@ socket.on('chat message', function(Msg) {
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id.replace(/[^0-9]/g, ""))
-            if(Number((Msg.Id/(1000*60*60*24)).toFixed(1)) > Number((LastArt/(1000*60*60*24)).toFixed(1))){
+            // if(Number((Msg.Id/(1000*60*60*24)).toFixed(1)) > Number((LastArt/(1000*60*60*24)).toFixed(1))){
+            if((new Date(Msg.Id)).getDate() > (new Date(LastArt)).getDate()){
                 const D = new Date(Msg.Id)
                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                 Show.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
@@ -67,18 +68,19 @@ socket.on('chat message', function(Msg) {
         Show.innerHTML += ` 
             <article ${shift} id="ChatID${Msg.Id}">
                 <logname>@${Id}</logname>
-                <log>${Msg.Msg}</log>
+                <log>${Msg.Msg.split('<').join('&lt;')}</log>
                 <time>${Msg.time}</time>
                 ${edit}
             </article>
             `
+            HeightSet()
 
     }else if(Msg.Id == 'Del' && Msg.Id !== 'Grp'){
         document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
         HeightSet()
 
     }else if(Msg.Id == 'Edit' && Msg.Id !== 'Grp'){
-        $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg)
+        $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg.split('<').join('&lt;'))
 
     }else if((Msg.Id == 'Grp')){
 
@@ -105,7 +107,7 @@ socket.on('chat message', function(Msg) {
         Log.innerHTML +=`
         <article class="${shift}" id="${Msg.InId}">
             <logname>@${Id}</logname>
-            <log>${Msg.Msg}</log>
+            <log>${Msg.Msg.split('<').join('&lt;')}</log>
             <time>${Msg.time}</time>
         </article>
         `
@@ -127,7 +129,7 @@ socket.on('chat message', function(Msg) {
             EdBtn.addEventListener('click', () => {
                 $('.EditId').val(DoID); 
                 $('.EleDiv').val(Msg.EleDiv); 
-                $('.EdMsg').val(Edmsg.innerHTML)
+                $('.EdMsg').val(Edmsg.innerHTML.split('&lt;').join('<'))
 
                 $('.SendForm').hide()
                 $('.EdForm').show()

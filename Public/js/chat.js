@@ -69,7 +69,7 @@ $.ajax({
             if($('.friends div').length > 4){
                 document.querySelector('.friends').style.height = 'auto'
             }else{
-                document.querySelector('.friends').style.height = '75vh'
+                document.querySelector('.friends').style.height = '53vh'
             }
             $('.EditId').val('')
             $('.locator').val('')
@@ -167,7 +167,8 @@ $.ajax({
                             </article>
                             `
                         if(n < ChatLogs.length-1){
-                            if(Number((ChatLogs[n+1].Id/(1000*60*60*24)).toFixed(1)) > Number((ChatLogs[n].Id/(1000*60*60*24)).toFixed(1))){
+                            // if(Number((ChatLogs[n+1].Id/(1000*60*60*24)).toFixed(1)) > Number((ChatLogs[n].Id/(1000*60*60*24)).toFixed(1))){
+                            if((new Date(ChatLogs[n+1].Id)).getDate() > (new Date(ChatLogs[n].Id)).getDate()){
                                 const D = new Date(ChatLogs[n+1].Id)
                                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                                 Show.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
@@ -179,7 +180,7 @@ $.ajax({
                 for (let e = 0; e < ChatLogs.length; e++) {
                     $(`.edit${ChatLogs[e].Id}`).on('click', () => {
                         $('.EditId').val(ChatLogs[e].Id)
-                        $('.EdMsg').val(ChatLogs[e].Msg)
+                        $('.EdMsg').val(ChatLogs[e].Msg.split('&lt;').join('<'))
                         $('.SendForm').hide()
                         $('.EdForm').show()
                         $('.EdMsg').focus()
@@ -221,6 +222,10 @@ $.ajax({
                 }
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
+                    const Scroll = $('.friends article').length >= 4 ? 
+                    document.querySelector('sending').style.position = 'sticky' :
+                    document.querySelector('sending').style.position = 'absolute'
+
                     $('.Msg').focus()
                     const Height = $('.friends article').length >= 4 ? 
                     document.querySelector('.friends').style.height = 'auto' : 
@@ -272,7 +277,7 @@ $.ajax({
                         ${UserImg}
                         <display>
                             <chatname>${Addthem[i]}</chatname><br>
-                            <about><b>About:</b> ${data.SORT[n].about}</about>
+                            <userabout><b style="color:white">About:</b><br> ${data.SORT[n].about}</userabout>
                         </display>
                         <add class='fa fa-user-plus ${Addthem[i]}' title="add ${Addthem[i]} to your chats"></add>
                     </div>`

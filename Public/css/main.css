@@ -14,15 +14,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: 0.5s;
+    /* transition: 0.5s; */
     text-decoration: none;
-    scroll-behavior: smooth;
 }
 body{
     height: auto;
     width: auto;
     font-family: bw-mitga;
-    scroll-behavior: smooth;
     /* background-color: rgba(226, 37, 194, 0.219); */
 }
 .container{
@@ -91,6 +89,7 @@ close{
 }
 .login_page form button, .signup form button{
     font: 900 15px restrict;
+    transition: 0.5s;
     border-radius: 25px;
     background-color: white;
     color: purple;
@@ -119,8 +118,9 @@ close{
     align-items: center;
 }
 .navbar .logo img{
-    width: 180px;
+    width: 130px;
     height: 70px;
+    margin: 10px;
 }
 .navbar .select{
     text-align: right;
@@ -132,8 +132,8 @@ close{
     background-image: linear-gradient(to right, rgb(202, 30, 202) 30%, rgb(245, 111, 245));
     margin: 0 25px;
     color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
+    padding: 10px;
+    border-radius: 10px;
 }
 .main-section{
     height: 90vh;
@@ -160,6 +160,7 @@ close{
     /* text-shadow: 1px 1px 4px black; */
 }
 .main-section button{
+    transition: 0.5s;
     font: 900 18px restrict;
     letter-spacing: 2px;
     padding: 10px 0;
@@ -454,10 +455,10 @@ chatlog h1{
     font-size: 15px;
     margin: 0 0 10px 0;
 }
-chatlog about{
+chatlog about, userabout{
     width: 300px;
     text-align: center;
-    font: 500 18px roboto;
+    font: 300 15px roboto;
 }
 chatlog article logname{
     font: 500 9px roboto;
@@ -508,22 +509,20 @@ del{
 }
 sending{
     position: absolute;
-    bottom: 5px;
+    background-color: darkgrey;
+    padding: 5px 0;
+    bottom: 0;
     width: 100%;
 }
-
-chatlog form, groupchats form{
-    background-color: white;
-    box-shadow: 1px 1px 4px grey;
-    border-radius: 20px;
-    margin: 0 5px;
-    overflow: hidden;
+.GrpSend{
+    position: absolute;  
+    bottom: 0;
 }
 smile{
     position: absolute;
-    left: 10px;
-    bottom: 7px;
-    color: purple;
+    left: 5px;
+    bottom: 13px;
+    color: white;
     font-size: 25px;
     cursor: pointer;
 }
@@ -532,7 +531,7 @@ emojis{
     bottom: 45px;
     left: 10px;
     background-color: white;
-    box-shadow: 1px 1px 4px grey;
+    box-shadow: 1px 1px 4px rgb(24, 24, 24);
     border-radius: 15px;
     padding: 5px;
 }
@@ -540,17 +539,26 @@ emojis emo{
     cursor: pointer;
     margin: 0 5px;
 }
+chatlog form, groupchats form{
+    background-color: white;
+    border-radius: 10px;
+    margin: 0 35px;
+    overflow: hidden;
+}
 chatlog form input, groupchats form input{
     font: 900 15px roboto;
-    padding: 10px 15px;
-    margin-left: 18px;
+    padding: 10px;
     border: 1px solid transparent;
     outline: none;
-    width: 80%;
+    text-align: start;
+    width: 100% !important;
 }
 chatlog form label, groupchats form label{
+    position: absolute;
+    right: -5px !important;
+    bottom: 0px;
     cursor: pointer;
-    color: purple;
+    color: white;
     font-size: 20px;
     padding: 10px;
 }
@@ -595,9 +603,6 @@ grouplogs{
     padding: 0 10px;
     margin-bottom: 55px;
 }
-groupchats form input{
-    width: 85%;
-}
 groupchats group_top{
     position: sticky;
     top: 0;
@@ -629,7 +634,7 @@ groupchats article{
     display: flex;
     cursor: default;
     flex-direction: column;
-    background-color: plum;
+    background-color: darkgrey;
     padding: 10px;
     border-radius: 10px;
     width: 60%;
@@ -641,13 +646,13 @@ groupchats article logname{
     padding: 2px 4px;
     border-radius: 5px;
     width: max-content;
-    background-color: purple;
+    background-color: gray;
 }
 groupchats article log{
     font: 900 15px roboto;
 }
 .activeme{
-    background-color: lightpink !important;
+    background-color: plum !important;
     align-self: flex-end;
 }
 .activeme logname{

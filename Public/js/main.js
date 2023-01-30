@@ -78,6 +78,10 @@ const Comm = document.querySelector('.community')
 const CommDis = document.querySelector('community')
 Cht.style.color = 'black'
 
+// document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
+// document.querySelector('friendlist').style.display = 'none'//Hide Friend
+// document.querySelector('.friends').style.height = 'auto'
+
 Cht.addEventListener('click', () => {
     Cht.style.color = 'black'
     Grp.style.color = ''
@@ -85,8 +89,16 @@ Cht.addEventListener('click', () => {
     ChtDis.style.display = 'block'
     GrpDis.style.display = 'none'
     CommDis.style.display = 'none'
+    if($('.friends div').length > 4){
+        document.querySelector('.friends').style.height = 'auto'
+    }else{
+        document.querySelector('.friends').style.height = '53vh'
+    }
 })
 Grp.addEventListener('click', () => {
+    if($('groups div').length > 4){
+        document.querySelector('groups').style.height = 'auto'
+    }
     Grp.style.color = 'black'
     Cht.style.color = ''
     Comm.style.color = ''

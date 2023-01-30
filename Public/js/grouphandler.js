@@ -76,6 +76,10 @@ $.ajax({
             //View Height Main Function
             function Hview(){
                 $('.GrpMsg').focus()
+                const Scroll = $('grouplogs article').length >= 4 ? 
+                document.querySelector('.GrpSend').style.position = 'sticky' :
+                document.querySelector('.GrpSend').style.position = 'absolute'
+
                 const Hig = $('grouplogs article').length >= 6 ? 
                 document.querySelector('groups').style.height = '100%' : 
                 document.querySelector('groups').style.height = '85vh'

@@ -92,6 +92,11 @@
                             <logname>you</logname>
                             <log>I'm fine man</log>
                             <time>01:12</time>
+                        </article>
+                        <article>
+                            <logname>@Franky Man</logname>
+                            <log>Whats up man</log>
+                            <time>01:12</time>
                         </article> -->
                     </logs>
                     <sending>
@@ -113,16 +118,20 @@
                         <form method="POST" id="..." class="SendForm">
                             <input type="text" name="repto" class="repto" required placeholder="reply to" hidden>
                             <input type="text" name="EleDiv" class="EleDiv" required placeholder="DivId" hidden>
-                            <input type="text" name="Msg" class="Msg" placeholder="Type new message.." required autocomplete="on">
+                            <input type="text" name="Msg" class="Msg" placeholder="Type new message.." required autocomplete="off">
                             <input type="submit" id="submit" hidden>
-                            <label for="submit" class="fa fa-paper-plane"></label>
+                            <label for="submit">
+                                <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24" xml:space="preserve"><path fill="currentColor" d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>
+                            </label>
                         </form>
                         <form method="POST" class="EdForm" hidden>
                             <input type="text" name="EditId" class="EditId" placeholder="Edit ID" hidden>
                             <input type="text" name="EleDiv" class="EleDiv" required hidden>
                             <input type="text" name="EdMsg" class="EdMsg" placeholder="Edit Msg" autocomplete="off">
                             <input type="submit" id="sub" hidden>
-                            <label for="sub" class="fa fa-paper-plane"></label>
+                            <label for="sub">
+                                <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24" xml:space="preserve"><path fill="currentColor" d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>
+                            </label>
                         </form>
                     </sending>
                 </chatlog>
@@ -161,7 +170,7 @@
                             <log>I'm fine man, it has been too long since we mat</log>
                         </article> -->
                     </grouplogs>
-                    <sending>
+                    <sending class="GrpSend">
                         <emojis hidden>
                             <emo>😎</emo>
                             <emo>😡</emo>
@@ -180,9 +189,11 @@
                         <form method="POST" id=".." class="GrpChatForm">
                             <input type="text" name="EleDiv" class="EleDiv" required hidden>
                             <input type="text" name="GrpID" class="GrpID" required placeholder="Group ID" hidden>
-                            <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Type new message.." required autocomplete="on">
+                            <input type="text" name="GrpMsg" class="GrpMsg" placeholder="Type new message.." required autocomplete="off">
                             <input type="submit" id="grpmit" hidden>
-                            <label for="grpmit" class="fa fa-paper-plane"></label>
+                            <label for="grpmit">
+                                <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24" xml:space="preserve"><path fill="currentColor" d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>
+                            </label>
                         </form>
                     </sending>
                 </groupchats>
@@ -208,10 +219,10 @@
         </div>
     </div>
 </div>
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" src="../js/chat.js"></script>
-<script type="text/javascript" src="../js/grouphandler.js"></script>
-<script src="../js/socket.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/chat.js"></script>
+    <script type="text/javascript" src="../js/grouphandler.js"></script>
+    <script src="../js/socket.js"></script>
 </body>
 </html>

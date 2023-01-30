@@ -60,12 +60,12 @@ app.get('/Log-User-Out', (req, res) =>{
       }
   })
 })
-const Emoji = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '😒', '😜','☕', '🏃']
-const EmojiId =   ['<!cool','<!vex','<!smile','<!love','<!lol','<!laf','<!hrt','<!brhrt','<!nag','<!tong','<!tea','<!run']
+const Emoji = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '😒', '😜','☕', '🏃',]
+const EmojiId =   ['emo!!cool','emo!!vex','emo!!smile','emo!!love','emo!!lol','emo!!laf','emo!!hrt','emo!!brhrt','emo!!nag','emo!!tong','emo!!tea','emo!!run']
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
-  // const LOGIN = 'franky'
+  // const LOGIN = 'ahmed'
   if(LOGIN == undefined){
     res.send(HomePage)
   }else{
@@ -76,7 +76,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
-  // const LOGIN = 'franky'
+  // const LOGIN = 'ahmed'
 
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
@@ -165,7 +165,7 @@ app.post('/', (req, res) => {
           for (let n = 0; n < Emoji.length; n++) {
             LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
           }
-
+          LogMsg = LogMsg.split('<').join('&lt;')
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, Checker) => {
             const Chats = Checker[0].chats == '' ? `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`:
@@ -173,7 +173,8 @@ app.post('/', (req, res) => {
 
             const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
             MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
-            res.json({SndMsg:{Id:Id, chat:'Frd', MsgTo:MsgTo, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
+
+            res.json({SndMsg:{Id:Id, chat:'Frd', MsgTo:LogMsg, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
@@ -191,7 +192,7 @@ app.post('/', (req, res) => {
             for (let n = 0; n < Emoji.length; n++) {
               ChatEdit = ChatEdit.split(Emoji[n]).join(EmojiId[n])
             }
-
+            ChatEdit = ChatEdit.split('<').join('&lt;')
             const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
             MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
           })
@@ -245,6 +246,8 @@ app.post('/', (req, res) => {
             for (let n = 0; n < Emoji.length; n++) {
               GrpLog = GrpLog.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
             }
+            GrpLog = GrpLog.split('<').join('&lt;')
+
             const Chats = Main[0].chatlogs == '' ? `{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`:
                   `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`
 
@@ -355,8 +358,10 @@ app.post('/', (req, res) => {
           MYSQL.query(query, [Sig_Name.toLocaleLowerCase(),Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
 
-              const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'user.username` ? `Duplicate entry '${Sig_Name}' for key 'user.username` : `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
-              const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'user.telephone` ? `Duplicate entry '${Sig_Tele}' for key 'user.username` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
+              const ErrName = `Duplicate entry '${Sig_Name}' for key 'user.username`
+              const ErrTele = `Duplicate entry '${Sig_Tele}' for key 'user.telephone`
+              // const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'user.username` ? `Duplicate entry '${Sig_Name}' for key 'user.username` : `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
+              // const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'user.telephone` ? `Duplicate entry '${Sig_Tele}' for key 'user.username` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
 
               const Error = err.sqlMessage == ErrName ? res.json({ErrMsg: 'Username Already Exist!'}) :
               err.sqlMessage == ErrTele ? res.json({ErrMsg: 'Number Already Exist!'}) : ''
@@ -373,7 +378,6 @@ app.post('/', (req, res) => {
   } 
 
 })
-
 
 io.on('connection', (socket) => {
   if('connection'){
