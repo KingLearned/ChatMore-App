@@ -17,6 +17,22 @@
     /* transition: 0.5s; */
     text-decoration: none;
 }
+
+::-webkit-scrollbar {
+    width: 15px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}  
+::-webkit-scrollbar-thumb {
+    background: rgb(179, 178, 178);
+    border-radius: 10px;
+
+}
+::-webkit-scrollbar-thumb:hover {   
+    background: rgb(136, 134, 134); 
+}
 body{
     height: auto;
     width: auto;
@@ -564,7 +580,7 @@ chatlog form label, groupchats form label{
 }
 chatdate{
     background-color: white;
-    box-shadow: 1px 1px 4px gray;
+    box-shadow: 1px 1px 4px inset gainsboro;
     width: max-content;
     padding: 10px;
     margin: 5px 0;

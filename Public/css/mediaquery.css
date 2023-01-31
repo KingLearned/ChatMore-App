@@ -1,7 +1,6 @@
 @media screen and (max-width:650px) {
     .container{
-        margin: 15px;
-        width: 95%;
+        width: 98%;
     }
     .pro-media{
         display: flex;

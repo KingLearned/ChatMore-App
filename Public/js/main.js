@@ -46,7 +46,7 @@ $('.SignUpForm').on('submit', (e) => {
         $.ajax({
             method: "POST",
             data: {
-                Sig_Name: $('.sigusername').val(),
+                Sig_Name: $('.sigusername').val().toLocaleLowerCase(),
                 Sig_Tele: $('.tele').val(),
                 Sig_Pwd: $('.sigpwd').val(),
                 Sig_CPwd: $('.cpwd').val()
