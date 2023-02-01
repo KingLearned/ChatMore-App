@@ -167,8 +167,8 @@ $.ajax({
                             </article>
                             `
                         if(n < ChatLogs.length-1){
-                            // if(Number((ChatLogs[n+1].Id/(1000*60*60*24)).toFixed(1)) > Number((ChatLogs[n].Id/(1000*60*60*24)).toFixed(1))){
-                            if((new Date(ChatLogs[n+1].Id)).getDate() > (new Date(ChatLogs[n].Id)).getDate()){
+                            if(Number((ChatLogs[n+1].Id/(1000*60*60*24)).toFixed(1)) > Number((ChatLogs[n].Id/(1000*60*60*24)).toFixed(1))){
+                            // if((new Date(ChatLogs[n+1].Id)).getDate() > (new Date(ChatLogs[n].Id)).getDate()){
                                 const D = new Date(ChatLogs[n+1].Id)
                                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                                 Show.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
