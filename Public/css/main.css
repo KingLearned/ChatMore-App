@@ -420,9 +420,6 @@ dp{
     border: 3px solid plum;
     border-radius: 365px;
 }
-display{
-    margin: 0 0 0 10px;
-}
 chatname,yourname{
     font: 900 15px roboto;
     text-transform: capitalize;
@@ -457,7 +454,7 @@ chatlog chat_top{
     align-items: center;
     padding: 5px;
     background-color: white;
-    border-bottom: 1px solid plum;
+    border-bottom: 1px solid gainsboro;
     border-radius: 0 0 50px 50px;
     height: 200px;
 }
@@ -471,7 +468,10 @@ chatlog h1{
     font-size: 15px;
     margin: 0 0 10px 0;
 }
-chatlog about, userabout{
+display{
+    margin: 0 0 0 10px;
+}
+chatlog about{
     width: 300px;
     text-align: center;
     font: 300 15px roboto;
@@ -579,6 +579,8 @@ chatlog form label, groupchats form label{
     padding: 10px;
 }
 chatdate{
+    /* position: sticky;
+    top: 200px; */
     background-color: white;
     box-shadow: 1px 1px 4px inset gainsboro;
     width: max-content;
@@ -687,9 +689,14 @@ community{
     display: none;
     height: 53vh;
 }
+community display{
+    margin: 0 0 0 10px;
+    width: 365px;
+}
 community div{
-    background-color: rgba(238, 11, 11, 0.637);
-    border-radius: 15px;
+    /* background-color: rgba(238, 11, 11, 0.637); */
+    border-bottom: 1px solid plum;
+    border-radius: 5px;
     cursor: default;
     display: flex;
     align-items: center;
@@ -702,14 +709,12 @@ community div img{
     border: 3px solid plum;
     border-radius: 365px;
 }
-community about{
-    display: block;
-    font: 500 15px roboto;
-    width: auto;
+community chatname{
+    letter-spacing: 1px;
 }
-about b{
-    font-weight: 900;
-    color: white;
+community userabout{
+    font: 400 15px roboto;
+    font-style: italic;
 }
 add{
     position: absolute;
@@ -718,5 +723,5 @@ add{
     font-size: 25px;
 }
 add:hover{
-    color: white;
+    color: gray;
 }

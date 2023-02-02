@@ -65,8 +65,7 @@ const EmojiId =   ['emo!!cool','emo!!vex','emo!!smile','emo!!love','emo!!lol','e
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
-  // const LOGIN = 'ahmed'
-  if(LOGIN == undefined){
+  if(LOGIN == null){
     res.send(HomePage)
   }else{
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
@@ -76,7 +75,6 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
-  // const LOGIN = 'ahmed'
 
   const {Log_Name} = req.body
   const {Log_Pwd} = req.body
@@ -157,27 +155,6 @@ app.post('/', (req, res) => {
             const query = "UPDATE `users` SET `friends`=? WHERE `username`=?"
             const Add = MainResult[0].friends == '' ? `${LOGIN}` : MainResult[0].friends+`,${LOGIN}`
             MYSQL.query(query, [Add,AddFriend], (err, SubResult) => {})
-          })
-        }else if(ImgUp){
-          console.log(ImgUp)
-
-          const Uploaded = MULTER.diskStorage({
-            destination: `./Public/upload`,
-            filename(req, file, cb){
-              cb(null, file.originalname)
-            }
-          })
-          
-          const uploadImg = MULTER({
-            storage: Uploaded
-          }).single('imgUpload')
-          
-          uploadImg(req,res, (err) => {
-          
-            if(req.file){
-              console.log(req.file.originalname)
-              // res.redirect('/')
-            }
           })
 
         }else if(ChatMsg && MsgTo){
@@ -404,6 +381,7 @@ app.post('/', (req, res) => {
   } 
 
 })
+
 
 io.on('connection', (socket) => {
   if('connection'){

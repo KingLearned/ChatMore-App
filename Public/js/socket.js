@@ -57,11 +57,12 @@ socket.on('chat message', function(Msg) {
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id.replace(/[^0-9]/g, ""))
-            if(Number((Msg.Id/(1000*60*60*24)).toFixed(1)) > Number((LastArt/(1000*60*60*24)).toFixed(1))){
+            if(Number(Math.ceil(Msg.Id/(1000*60*60*24))) > Number(Math.ceil(LastArt/(1000*60*60*24)))){
             // if((new Date(Msg.Id)).getDate() > (new Date(LastArt)).getDate()){
                 const D = new Date(Msg.Id)
                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                Show.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
+                const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
+                Show.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
             }
         }
 
@@ -89,11 +90,12 @@ socket.on('chat message', function(Msg) {
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id)
-            if(Number((Msg.InId/(1000*60*60*24)).toFixed(1)) > Number((LastArt/(1000*60*60*24)).toFixed(1))){
+            if(Number(Math.ceil(Msg.InId/(1000*60*60*24))) > Number(Math.ceil(LastArt/(1000*60*60*24)))){
             // if((new Date(Msg.InId)).getDate() > (new Date(LastArt)).getDate()){
                 const D = new Date(Msg.InId)
                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                Log.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
+                const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
+                Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
             }
         }
 

@@ -58,11 +58,12 @@ $.ajax({
                                 `
                                 const D = new Date(data.GRPLog[n].Id)
                                 if(n < data.GRPLog.length-1){
-                                    if(Number((data.GRPLog[n+1].Id/(1000*60*60*24)).toFixed(1)) > Number((data.GRPLog[n].Id/(1000*60*60*24)).toFixed(1))){
-                                    // if((new Date(data.GRPLog[n+1].Id)).getDate() > (new Date(data.GRPLog[n].Id)).getDate()){
+                                    if(Number(Math.ceil(data.GRPLog[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(data.GRPLog[n].Id/(1000*60*60*24)))){
+                                    // if((new Date(data.GRPLog[n+1].Id)).getDate() > (new Date(data.GRPLog[n].Id)).getDate() && (new Date(data.GRPLog[n+1].Id)).getMonth() > (new Date(data.GRPLog[n].Id)).getMonth()){
                                         const D = new Date(data.GRPLog[n+1].Id)
                                         const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                                        Log.innerHTML += `<chatdate>${Mon}/${D.getDate()}/${D.getFullYear()}</chatdate>`
+                                        const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
+                                        Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
                                     }
                                 }
                             }

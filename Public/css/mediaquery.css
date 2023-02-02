@@ -29,6 +29,10 @@
         position: sticky !important;
         top: 0 !important;
     }
+    chatlog article{
+        width: 70%;
+        margin: 5px 0;
+    }
     chatlog form input{
         width: 88%;
     }

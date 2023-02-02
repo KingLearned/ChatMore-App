@@ -76,12 +76,8 @@ const Grp = document.querySelector('.group')
 const GrpDis = document.querySelector('groups')
 const Comm = document.querySelector('.community')
 const CommDis = document.querySelector('community')
+
 Cht.style.color = 'black'
-
-// document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
-// document.querySelector('friendlist').style.display = 'none'//Hide Friend
-// document.querySelector('.friends').style.height = 'auto'
-
 Cht.addEventListener('click', () => {
     Cht.style.color = 'black'
     Grp.style.color = ''
@@ -114,4 +110,3 @@ Comm.addEventListener('click', () => {
     GrpDis.style.display = 'none'
     ChtDis.style.display = 'none'
 })
-
