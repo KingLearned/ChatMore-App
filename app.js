@@ -9,7 +9,7 @@ const MULTER = require('multer')
 const PORT = process.env.PORT || 1000
 const dotenv = require('dotenv')
 const socket = require('socket.io')
-
+const FS = require('fs')
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -55,7 +55,7 @@ const EmojiId =   ['emo!!cool','emo!!vex','emo!!smile','emo!!love','emo!!lol','e
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
-  if(LOGIN == null){
+  if(LOGIN == undefined){
     res.send(HomePage)
   }else{
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
