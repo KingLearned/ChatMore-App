@@ -4,7 +4,7 @@ A Web Chat Application, Designed with full functionalities (socket.io).
 
 ## App Features:
 -   (user => friends || user => groups || adding of other users)
--   Clean UI
+-   Simple and Clean UI
 -   Easy Navigation
 -   Works Offline with MySQL Database
 -   Sending, editing and deleting of any message 
