@@ -4,14 +4,14 @@ A Web Chat Application, Designed with full functionalities (socket.io).
 
 ## App Features:
 -   (user => friends || user => groups || adding of other users)
--   Clean UI
+-   Simple and Clean UI
 -   Easy Navigation
 -   Works Offline with MySQL Database
 -   Sending, editing and deleting of any message 
 
 ## Task and How To Use The App
 You can visit the App Online @(https://chatmoreapp.onrender.com)
--   Create an a user if you have none || Login after creating a user
+-   Create a user if you have none || Login after creating a user
 -   Add Friends from "community"
 -   Start conversiation with friends or chat with friends in a group
 
