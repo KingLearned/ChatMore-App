@@ -312,14 +312,6 @@ $.ajax({
 function Submit(){
     $('.CImg').html($('#userimage').val())
     document.querySelector('.fa-upload').style.display = 'block'
-    // $('.SubImg').submit()
-    // if(FileCheck.files){
-    //     const Size = (FileCheck.files.item(0).size/1000).toFixed(0)
-    //     if(Size < 4000){
-    //         if(FileCheck.files.item(0).type === ('image/jpeg'||'image/png')){
-    //         }
-    //     }
-    // }
 }
 
 const Emo = document.querySelectorAll('emo')
