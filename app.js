@@ -32,7 +32,6 @@ app.use(bodyparser.json())
 const MYSQL = require('./MODULES/Conn')
 const HomePage = require('./MODULES/Home')
 const ChatApp = require('./MODULES/ChatApp')
-const { stringify } = require('querystring')
 
 const expDate = 1000 * 60 * 60 * 24 * 7 //It will Last for Days
 app.use(session({
