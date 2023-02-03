@@ -1,6 +1,6 @@
 # ChatMore-App
-
 A Web Chat Application, Designed with full functionalities (socket.io). 
+<img scr="./AppScreenShot.JPG" alt="App-Preview" width="300px" height="300px">
 
 ## App Features:
 -   (user => friends || user => groups || adding of other users)

@@ -1,7 +1,12 @@
+// const userChats = [] 
+const MainChats = []    //for storing user => user chats
 $.ajax({
     method: "POST",
     success: (data) => {
         $('yourname').html(data.PN)
+        for (let m = 0; m < data.CHATS.length; m++) {
+            MainChats.push(data.CHATS[m])
+        }
 
         document.querySelector('friendlist').innerHTML = ''
         if(data.USER[0].about !== ''){ 
@@ -101,82 +106,79 @@ $.ajax({
         /************************* FOR SERVING OF THE CHAT LOG *************************/
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
+                setTimeout(() => {
+                    window.scrollTo(0, document.body.scrollHeight);
+                },)
+                document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
+                document.querySelector('friendlist').style.display = 'none'//Hide Friends List
+                $('.top_menu').hide()
+
+                let FriendImg = `../images/avatar.png`
+                for (let p = 0; p < data.SORT.length; p++) {
+                    if(data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== ''){
+                        FriendImg =  `../ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
+                    }
+                    if(data.FRD[i] == data.SORT[p].username){
+                        $('about').html(data.SORT[p].about) //For about the user friends
+                    }
+                }
+                document.querySelector('chatlog img').src = FriendImg
+                $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
+                $('chatlog h6').html(data.FRD[i])//Chat Header
                 
-                $.ajax({
-                    method:"POST",
-                    success:(data) => {
 
-                    document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
-                    document.querySelector('friendlist').style.display = 'none'//Hide Friends List
-                    $('.top_menu').hide()
-
-                    let FriendImg = `../images/avatar.png`
-                    for (let p = 0; p < data.SORT.length; p++) {
-                        if(data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== ''){
-                            FriendImg =  `../ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
-                        }
-                        if(data.FRD[i] == data.SORT[p].username){
-                            $('about').html(data.SORT[p].about) //For about the user friends
-                        }
+                
+                const ChatLogs = []
+                for (let m = 0; m < MainChats.length; m++) {
+                    if(MainChats[m].replyto == data.FRD[i] && MainChats[m].from == data.PN){
+                        ChatLogs.push(MainChats[m]) //Sent To Guest
                     }
-                    document.querySelector('chatlog img').src = FriendImg
-                    $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
-                    $('chatlog h6').html(data.FRD[i])//Chat Header
-                    
-
-                    
-                    const ChatLogs = []
-                    for (let m = 0; m < data.CHATS.length; m++) {
-                        if(data.CHATS[m].replyto == data.FRD[i] && data.CHATS[m].from == data.PN){
-                            ChatLogs.push(data.CHATS[m]) //Sent To Guest
-                        }
-                        if(data.CHATS[m].from == data.FRD[i] && data.CHATS[m].replyto == data.PN){
-                            ChatLogs.push(data.CHATS[m]) //Sent From Guest
-                        }
+                    if(MainChats[m].from == data.FRD[i] && MainChats[m].replyto == data.PN){
+                        ChatLogs.push(MainChats[m]) //Sent From Guest
                     }
-
+                }
+                
                 let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
                 let Ele = ''
                 for (let i = 0; i < GenEle.length; i++) {Ele += GenEle[i]}
                 
                 $('.repto').val(data.FRD[i]) //Reply To User Friend
                 $('.EleDiv').val(Ele)//User Display Element Div
-                
                 document.querySelector('logs').innerHTML = `<${Ele}></${Ele}>`
                 const Show = document.querySelector(`logs ${Ele}`)
-
                 Show.style.display = 'flex';
                 Show.style.flexDirection = 'column'
-                    for (let n = 0; n < ChatLogs.length; n++) {
-                        var shift = ''
-                        var edit = ''
-                        if(ChatLogs[n].replyto !== data.PN){
-                            shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: pink; border-radius:20px 20px 0 20px"`
-                            edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
-                        }
-                        
-                        //Differentiating Between You and Other Users
-                        const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
 
-                        Show.innerHTML += ` 
-                            <article ${shift} id="ChatID${ChatLogs[n].Id}">
-                            <logname>@${id}</logname>
-                            <log>${ChatLogs[n].Msg}</log>
-                            <time>${ChatLogs[n].time}</time>
-                            ${edit}
-                            </article>
-                            `
-                        if(n < ChatLogs.length-1){
-                            if(Number(Math.ceil(ChatLogs[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(ChatLogs[n].Id/(1000*60*60*24)))){
-                            // if((new Date(ChatLogs[n+1].Id)).getDate() > (new Date(ChatLogs[n].Id)).getDate()){
-                                const D = new Date(ChatLogs[n+1].Id)
-                                const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                                const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
-                                Show.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
-                            }
+                for (let n = 0; n < ChatLogs.length; n++) {
+                    var shift = ''
+                    var edit = ''
+                    if(ChatLogs[n].replyto !== data.PN){
+                        shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: pink; border-radius:20px 20px 0 20px"`
+                        edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
+                    }
+                    
+                    //Differentiating Between You and Other Users
+                    const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
+
+                    Show.innerHTML += ` 
+                        <article ${shift} id="ChatID${ChatLogs[n].Id}">
+                        <logname>@${id}</logname>
+                        <log>${ChatLogs[n].Msg}</log>
+                        <time>${ChatLogs[n].time}</time>
+                        ${edit}
+                        </article>
+                        `
+                    if(n < ChatLogs.length-1){
+                        if(Number(Math.ceil(ChatLogs[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(ChatLogs[n].Id/(1000*60*60*24)))){
+                        // if((new Date(ChatLogs[n+1].Id)).getDate() > (new Date(ChatLogs[n].Id)).getDate()){
+                            const D = new Date(ChatLogs[n+1].Id)
+                            const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
+                            const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
+                            Show.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
                         }
                     }
-                
+                }
+
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
                 for (let e = 0; e < ChatLogs.length; e++) {
                     $(`.edit${ChatLogs[e].Id}`).on('click', () => {
@@ -209,31 +211,25 @@ $.ajax({
                 /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
                 for (let e = 0; e < ChatLogs.length; e++) {
                     $(`.del${ChatLogs[e].Id}`).on('click', () => {
-                        $.ajax({
-                            method:"POST",
-                            data:{
-                                ElementTag: $('.EleDiv').val(),
-                                DelMsg: ChatLogs[e].Id
-                            },
-                            success:(data) => {
-                                socket.emit('chat message', data.SndMsg)
-                            }
-                        })
+                        for (let n = 0; n < MainChats.length; n++) {
+                            if(MainChats[n].Id == ChatLogs[e].Id){
+                                DeleteMsg(ChatLogs[e].Id)
+                            } 
+                        }
                     })
                 }
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
-                    const Scroll = $('.friends article').length >= 4 ? 
-                    document.querySelector('sending').style.position = 'sticky' :
-                    document.querySelector('sending').style.position = 'absolute'
+                const Scroll = $('.friends article').length >= 4 ? 
+                document.querySelector('sending').style.position = 'sticky' :
+                document.querySelector('sending').style.position = 'absolute';
+                
+                window.scrollTo(0, document.body.scrollHeight);
+                $('.Msg').focus();
 
-                    $('.Msg').focus()
-                    const Height = $('.friends article').length >= 4 ? 
-                    document.querySelector('.friends').style.height = 'auto' : 
-                    document.querySelector('.friends').style.height = '85vh'
-                    window.scrollTo(0, document.body.scrollHeight);
-                    }
-                })
+                const Height = $('.friends article').length >= 4 ? 
+                document.querySelector('.friends').style.height = 'auto' : 
+                document.querySelector('.friends').style.height = '85vh';
             })
         }
 

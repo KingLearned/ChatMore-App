@@ -1,19 +1,12 @@
 //INITIALIZING OUR SERVERs
 const express = require('express')
 const app = express()
-const FS = require('fs')
 const PATH = require('path')
-const bodyparser = require('body-parser') // FOR CAPTURING OF INPUT FROM FRONT END
-const CORS = require('cors')
-const JOI = require('joi') // FOR VALIDATION OF LOGIN || FORMS
-const MD5 = require('md5')
+const bodyparser = require('body-parser')
 const session = require('express-session')
 const UUID = require('uuid')
 const MULTER = require('multer')
-const PORT = process.env.PORT || 1000 // FOR HOSTING OF SERVER
-const authenticated = require('speakeasy')
-const MAILER = require('nodemailer')
-const TWILIO = require('twilio')
+const PORT = process.env.PORT || 1000
 const dotenv = require('dotenv')
 const socket = require('socket.io')
 
@@ -25,7 +18,6 @@ const io = new Server(server);
 dotenv.config()
 // // ###################### Serving Static Files ###########################
 app.use(express.static(PATH.join(__dirname, './Public')))
-// app.use(express.static(PATH.join(__dirname, '/Public')))
 app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
 
@@ -53,7 +45,6 @@ app.get('/Log-User-Out', (req, res) =>{
       if(err){
           return res.redirect('/')
       }else{
-          console.log('User Logged Out Successfully')
           res.clearCookie("ChatMore-Session-App")
           return res.redirect('/')
       }
@@ -92,8 +83,6 @@ app.post('/', (req, res) => {
 
   const {EditId} = req.body
   const {EditMsg} = req.body
-  // const ImgUp = req.body.imageUpload
-  const {ImgUp} = req.body
 
   const {DelMsg} = req.body
 
@@ -174,8 +163,9 @@ app.post('/', (req, res) => {
 
             const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
             MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
-
-            res.json({SndMsg:{Id:Id, chat:'Frd', MsgTo:LogMsg, Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
+            
+            const ExpChat = {replyto:MsgTo, from:LOGIN, Id:Id, Msg:ChatMsg, time:H+':'+M}
+            res.json({SndMsg:{Id:Id, chat:'Frd', /*MsgTo:LogMsg,*/ Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}, expUserChats:ExpChat})
           })
         }else if(EditId,EditMsg){
           /*************** EDITING OT USERS CHAT *****************/
@@ -200,7 +190,7 @@ app.post('/', (req, res) => {
           res.json({SndMsg:{Id:'Edit', MsgId:EditId, Msg:EditMsg, EleDiv:ElementTag}})
         }else if(DelMsg){
           /*************** DELETING OT USERS CHAT *****************/
-          res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag}})
+          res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag},DelID:{DelMsg}})
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
             var Del = JSON.parse(`[${result[0].chats}]`)
@@ -254,7 +244,7 @@ app.post('/', (req, res) => {
 
             const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
             MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
-            res.json({SndMsg:{Id:'Grp', InId:Id, MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}})
+            res.json({SndMsg:{Id:'Grp', InId:Id, MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`},Exp:LOGIN})
           })
 
         }else if(Revole){
@@ -381,13 +371,12 @@ app.post('/', (req, res) => {
 
 })
 
-
 io.on('connection', (socket) => {
   if('connection'){
     // console.log('connection')
   }
-  socket.on('chat message', Msg => {
-    io.emit('chat message', Msg)
+  socket.on('chat message', (Msg,Exp) => {
+    io.emit('chat message', Msg,Exp)
   })
 
 })

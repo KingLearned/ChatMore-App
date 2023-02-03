@@ -19,11 +19,11 @@
 }
 
 ::-webkit-scrollbar {
-    width: 15px;
+    width: 5px;
     background-color: transparent;
 }
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
+    border-radius: 5px;
 }  
 ::-webkit-scrollbar-thumb {
     background: rgb(179, 178, 178);
@@ -495,8 +495,8 @@ chatlog article{
     width: 50vh;
     margin: 5px 0;
 }
-chatlog article log{
-    font: 900 15px roboto;
+log{
+    font: 700 13px roboto;
 }
 
 time{
@@ -665,9 +665,6 @@ groupchats article logname{
     border-radius: 5px;
     width: max-content;
     background-color: gray;
-}
-groupchats article log{
-    font: 900 15px roboto;
 }
 .activeme{
     background-color: plum !important;
