@@ -10,7 +10,7 @@ A Web Chat Application, Designed with full functionalities (socket.io).
 -   Sending, editing and deleting of any message 
 
 ## Task and How To Use The App
-You can visit the App Online @<a href="wwww.chatmoreapp.onrender.com">wwww.chatmoreapp.onrender.com</a>
+You can visit the App Online @<a href="www.chatmoreapp.onrender.com" target="_blanck">www.chatmoreapp.onrender.com</a>
 -   Create a user if you have none || Login after creating a user
 -   Add Friends from "community"
 -   Start conversiation with friends or chat with friends in a group
