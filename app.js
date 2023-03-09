@@ -6,7 +6,7 @@ const bodyparser = require('body-parser')
 const session = require('express-session')
 const UUID = require('uuid')
 const MULTER = require('multer')
-const PORT = process.env.PORT || 1000
+const PORT = process.env.PORT || 2000
 const dotenv = require('dotenv')
 const socket = require('socket.io')
 const FS = require('fs')
@@ -24,6 +24,8 @@ app.use(bodyparser.json())
 const MYSQL = require('./MODULES/Conn')
 const HomePage = require('./MODULES/Home')
 const ChatApp = require('./MODULES/ChatApp')
+const { SendMsgAPI } = require('./AppModules/sendmsg')
+const { Emoji, EmojiId } = require('./AppModules/Emojis')
 
 const expDate = 1000 * 60 * 60 * 24 * 7 //It will Last for Days
 app.use(session({
@@ -50,8 +52,6 @@ app.get('/Log-User-Out', (req, res) =>{
       }
   })
 })
-const Emoji = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '😒', '😜','☕', '🏃',]
-const EmojiId =   ['emo!!cool','emo!!vex','emo!!smile','emo!!love','emo!!lol','emo!!laf','emo!!hrt','emo!!brhrt','emo!!nag','emo!!tong','emo!!tea','emo!!run']
 
 app.get('/', (req, res) => {
   const {LOGIN} = req.session
@@ -66,37 +66,27 @@ app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
 
-  const {Log_Name} = req.body
-  const {Log_Pwd} = req.body
+  const {Log_Name, Log_Pwd } = req.body //Login inputs
 
-  const {Sig_Name} = req.body
-  const {Sig_Tele} = req.body
-  const {Sig_Pwd} = req.body
-  const {Sig_CPwd} = req.body
+  const { Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd } = req.body //Sign up inputs
 
   /************  CHAT COLLECTION   ***********/
   const {AddFriend} = req.body
   
-  const {MsgTo} = req.body
-  const {ChatMsg} = req.body
-  const {ElementTag} = req.body
-
-  const {EditId} = req.body
-  const {EditMsg} = req.body
-
+  const { MsgTo, ChatMsg, ElementTag } = req.body
+  const { EditId, EditMsg } = req.body
   const {DelMsg} = req.body
 
   const UserAbout = req.body.about
   const {UpdatePWD} = req.body
 
    /************  GROUP COLLECTION   ***********/
-  const {GrpMsg} = req.body
-  const {GrpID} = req.body
+  const { GrpMsg, GrpID } = req.body
 
   let Revole = 'GrpID'
   
   if(LOGIN){
-  
+
     const Storage = MULTER.diskStorage({
       destination: `./Public/ChatMore/Users/${LOGIN}`,
       filename(req, file, cb){
@@ -146,36 +136,17 @@ app.post('/', (req, res) => {
           })
 
         }else if(ChatMsg && MsgTo){
-          /*************** SENDING OT USERS CHAT *****************/
-          const Id = new Date().getTime()
-          const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
-          const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+        /*************** SENDING OT USERS CHAT *****************/
+          const ExpMsg = new SendMsgAPI(LOGIN,ChatMsg,MsgTo,ElementTag) 
+          res.json(ExpMsg.MainMsg())
 
-          let LogMsg =  ChatMsg
-          for (let n = 0; n < Emoji.length; n++) {
-            LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
-          }
-          LogMsg = LogMsg.split('<').join('&lt;')
-          const query1 = "SELECT * FROM `users` WHERE `username`=?"
-          MYSQL.query(query1, [LOGIN],(err, Checker) => {
-            const Chats = Checker[0].chats == '' ? `{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`:
-            `,{"replyto":"${MsgTo}", "from":"${LOGIN}", "Id":${Id}, "Msg":"${LogMsg}", "time":"${H}:${M}"}`
-
-            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            MYSQL.query(query1, [Checker[0].chats+Chats,LOGIN],(err, result) => {})
-            
-            const ExpChat = {replyto:MsgTo, from:LOGIN, Id:Id, Msg:ChatMsg, time:H+':'+M}
-            res.json({SndMsg:{Id:Id, chat:'Frd', /*MsgTo:LogMsg,*/ Msg:ChatMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`}, expUserChats:ExpChat})
-          })
         }else if(EditId,EditMsg){
-          /*************** EDITING OT USERS CHAT *****************/
+        /*************** EDITING OT USERS CHAT *****************/
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
-            var ChatEdit = JSON.parse(`[${result[0].chats}]`)
+            let ChatEdit = JSON.parse(`[${result[0].chats}]`)
             for (let i = 0; i < ChatEdit.length; i++) {
-              if(ChatEdit[i].Id == EditId){
-                ChatEdit[i].Msg = EditMsg
-              }
+              if(ChatEdit[i].Id == EditId){ ChatEdit[i].Msg = EditMsg }
             }
             ChatEdit = JSON.stringify(ChatEdit)
             ChatEdit = ChatEdit.split('[').join('')
@@ -188,12 +159,13 @@ app.post('/', (req, res) => {
             MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
           })
           res.json({SndMsg:{Id:'Edit', MsgId:EditId, Msg:EditMsg, EleDiv:ElementTag}})
+
         }else if(DelMsg){
-          /*************** DELETING OT USERS CHAT *****************/
+        /*************** DELETING OT USERS CHAT *****************/
           res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag},DelID:{DelMsg}})
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
-            var Del = JSON.parse(`[${result[0].chats}]`)
+            let Del = JSON.parse(`[${result[0].chats}]`)
             for (let n = 0; n < Del.length; n++) {
               if((Del[n].Id == DelMsg)){
                 function Rem(comm,Add){
@@ -372,9 +344,7 @@ app.post('/', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-  if('connection'){
-    // console.log('connection')
-  }
+  
   socket.on('chat message', (Msg,Exp) => {
     io.emit('chat message', Msg,Exp)
   })
