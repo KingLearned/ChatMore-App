@@ -1,14 +1,17 @@
 const MYSQL = require("../MODULES/Conn");
 const { Emoji, EmojiId } = require("./Emojis");
 
-const Id = new Date().getTime()
-const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
-const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+
+
 
 class SendMsgAPI {
     constructor(LOGIN, ChatMsg, MsgTo, ElementTag){ this.LOGIN = LOGIN, this.ChatMsg = ChatMsg, this.MsgTo = MsgTo, this.ElementTag = ElementTag }
 
     ExP2P(){
+        const Id = new Date().getTime()
+        const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
+        const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+
         let LogMsg =  this.ChatMsg
         for (let n = 0; n < Emoji.length; n++) { LogMsg = LogMsg.split(Emoji[n]).join(EmojiId[n]) }// Reading The Message to encode the Emojis
         
@@ -26,6 +29,10 @@ class SendMsgAPI {
 
     MainMsg(){
         this.ExP2P()
+        const Id = new Date().getTime()
+        const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
+        const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+        
         const ExpChat = {replyto:this.MsgTo, from:this.LOGIN, Id:Id, Msg:this.ChatMsg, time:H+':'+M}
         return {SndMsg:{Id:Id, chat:'Frd', Msg:this.ChatMsg, EleDiv:this.ElementTag,  from:this.LOGIN, time:`${H}:${M}`}, expUserChats:ExpChat}
     }

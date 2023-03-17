@@ -15,9 +15,9 @@ $.ajax({
                 </div>
                 `
         }
-        const GrpHv = $('grouplist div').length > 4 ? 
+        const GrpHv = $('grouplist div').length > 6 ? 
         document.querySelector('groups').style.height = 'auto' : 
-        document.querySelector('groups').style.height = '100%'
+        document.querySelector('groups').style.height = '88vh'
          
         const GrpLog = $('grouplogs')//Group Logs Display
         for (let i = 0; i < data.GRP.length; i++) {
@@ -83,7 +83,7 @@ $.ajax({
 
                 const Hig = $('grouplogs article').length >= 6 ? 
                 document.querySelector('groups').style.height = '100%' : 
-                document.querySelector('groups').style.height = '85vh'
+                document.querySelector('groups').style.height = '100vh'
                 window.scrollTo(0, document.body.scrollHeight)
             }
             
@@ -94,9 +94,9 @@ $.ajax({
                 document.querySelector('groupchats').style.display = 'none'
                 $('.top_menu').show()
 
-                const GrpHv = $('grouplist div').length > 4 ? 
+                const GrpHv = $('grouplist div').length > 6 ? 
                 document.querySelector('groups').style.height = 'auto' : 
-                document.querySelector('groups').style.height = '53vh'
+                document.querySelector('groups').style.height = '100vh'
             })
 
     }

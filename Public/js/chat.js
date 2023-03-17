@@ -74,18 +74,27 @@ $.ajax({
             if($('.friends div').length > 4){
                 document.querySelector('.friends').style.height = 'auto'
             }else{
-                document.querySelector('.friends').style.height = '53vh'
+                document.querySelector('.friends').style.height = '100vh'
             }
             $('.EditId').val('')
             $('.locator').val('')
             $('.Msg').val('')
+            ChatLogs.length = 0
         })
 
-        //FOR VIEWING OF PROFILE
+        //FOR CLOSING OF USER'S PROFILE
         $('.user_profile .ClxPrf').on('click', () => {
             document.querySelector('.user_profile').style.display = 'none'
             document.querySelector('.app').style.display = 'block'
         })
+
+        //FOR VIEWING OF USER'S PROFILE
+        $('.viewProfile').on('click', () => {
+            document.querySelector('.user_profile').style.display = 'flex'
+            document.querySelector('.user_profile').style.height = '100vh'
+            document.querySelector('.app').style.display = 'none'
+        })
+
         $('.ChngPwd').on('submit', (e) => {
             e.preventDefault()
             $.ajax({
@@ -95,20 +104,17 @@ $.ajax({
                 }
             })
         })
-        $('dp').on('click', () => {
-            document.querySelector('.user_profile').style.display = 'flex'
-            document.querySelector('.user_profile').style.height = '80vh'
-            document.querySelector('.app').style.display = 'none'
-        })
+        
         /**************************************************************************** */
         
         /************************* FOR SERVING OF THE CHAT LOG *************************/
         /************************* FOR SERVING OF THE CHAT LOG *************************/
+        const ChatLogs = []
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
-                setTimeout(() => {
-                    window.scrollTo(0, document.body.scrollHeight);
-                },)
+                // setTimeout(() => {
+                //     window.scrollTo(0, document.body.scrollHeight);
+                // },)
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
                 $('.top_menu').hide()
@@ -128,7 +134,7 @@ $.ajax({
                 
 
                 
-                const ChatLogs = []
+                // const ChatLogs = []
                 for (let m = 0; m < MainChats.length; m++) {
                     if(MainChats[m].replyto == data.FRD[i] && MainChats[m].from == data.PN){
                         ChatLogs.push(MainChats[m]) //Sent To Guest
@@ -153,7 +159,7 @@ $.ajax({
                     var shift = ''
                     var edit = ''
                     if(ChatLogs[n].replyto !== data.PN){
-                        shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: pink; border-radius:20px 20px 0 20px"`
+                        shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: rgb(228, 225, 225); border-radius:20px 20px 0 20px"`
                         edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
                     }
                     
@@ -178,6 +184,14 @@ $.ajax({
                         }
                     }
                 }
+
+                /********************* HEIGHT VIEW FUNCTION    ************************/
+                const  typeMsg = document.querySelector('sending')
+                const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 6 ? 
+                (typeMsg.style.position = 'sticky' , window.scrollTo(0, document.body.scrollHeight) , document.querySelector('.friends').style.height = 'auto') :
+                (typeMsg.style.position = 'absolute', document.querySelector('.friends').style.height = '100vh');
+                
+                $('.Msg').focus() //Focusing of Type new Message
 
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
                 for (let e = 0; e < ChatLogs.length; e++) {
@@ -209,30 +223,15 @@ $.ajax({
                 }
 
                 /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
-                for (let e = 0; e < ChatLogs.length; e++) {
-                    $(`.del${ChatLogs[e].Id}`).on('click', () => {
-                        for (let n = 0; n < MainChats.length; n++) {
-                            if(MainChats[n].Id == ChatLogs[e].Id){
-                                DeleteMsg(ChatLogs[e].Id)
-                            } 
-                        }
+                ChatLogs.forEach(eachMsg => {
+                    $(`.del${eachMsg.Id}`).on('click', () => {
+                        DeleteMsg(eachMsg.Id)
                     })
-                }
+                })
 
-                /********************* HEIGHT VIEW FUNCTION    ************************/
-                const Scroll = $('.friends article').length >= 4 ? 
-                document.querySelector('sending').style.position = 'sticky' :
-                document.querySelector('sending').style.position = 'absolute';
                 
-                window.scrollTo(0, document.body.scrollHeight);
-                $('.Msg').focus();
-
-                const Height = $('.friends article').length >= 4 ? 
-                document.querySelector('.friends').style.height = 'auto' : 
-                document.querySelector('.friends').style.height = '85vh';
             })
         }
-
 
         /************************* COMMUNITY SECTION HANDLER ***************************/
         /************************* COMMUNITY SECTION HANDLER ***************************/
@@ -297,7 +296,7 @@ $.ajax({
         /************************************************************************************ */
 
         /********************** VIEW LENGTH HANDLE ***********************/
-        if($('.friends div').length > 4){
+        if($('.friends div').length > 6){
             document.querySelector('.friends').style.height = 'auto'
         }
         if($('groups div').length > 4){
@@ -307,25 +306,4 @@ $.ajax({
             document.querySelector('community').style.height = 'auto'
         }
     }
-})
-
-function Submit(){
-    $('.CImg').html($('#userimage').val())
-    document.querySelector('.fa-upload').style.display = 'block'
-}
-
-const Emo = document.querySelectorAll('emo')
-for (let i = 0; i < Emo.length; i++) {
-    Emo[i].addEventListener('click',() => {
-        $('.EdMsg').val($('.EdMsg').val()+Emo[i].innerHTML)
-        $('.EdMsg').focus()
-        $('.Msg').val($('.Msg').val()+Emo[i].innerHTML)
-        $('.Msg').focus()
-        $('.GrpMsg').val($('.GrpMsg').val()+Emo[i].innerHTML)
-        $('.GrpMsg').focus()
-    }) 
-}
-let SmileCount = 0
-$('smile').on('click', () => {
-    const Emoji = SmileCount == 0 ? ($('emojis').show(),SmileCount=1) : ($('emojis').hide(),SmileCount=0)
 })

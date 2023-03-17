@@ -11,37 +11,34 @@
     <title>ChatMore App</title>
 </head>
 <body>
-<div class="container">
-    <div class="navbar">
-        <div class="logo">
-            <img src="../images/ChatMore_Logo.png" alt="logo">
-        </div>
-        <div class="select">
-            <a href="/Log-User-Out">Logout</a>
-        </div>
-    </div>
+<div class="appcontainer">
     <!-- ################################# USER PROFILE EDIT ############################ -->
     <div class="user_profile">
+        <div>
+            <button class="ClxPrf fa fa-arrow-left"><span style="font-family: roboto; margin-left: 15px;">Settings</span></button>
+            <button class="logOutBtn" onclick="window.location = '/Log-User-Out'">Logout</button>
+        </div>
         <userimage>
-            <button class="ClxPrf fa fa-arrow-left"></button>
-            <div>
                 <form method="POST" enctype="multipart/form-data">
-                    <dpx><span style="font-weight: 100;">loading...</span></dpx>
+                    <dpx><img src="../images/avatar.png" alt="avatar.png"></dpx>
                     <input type="file" name="User_Img" id="userimage" onchange="Submit()" hidden accept="image/*">
                     <input type="submit" id="upload" hidden>
-                    <h6 class="CImg"></h6>
                     <label for="userimage" class="fa fa-pen" title="Change Image"></label>
                     <label for="upload" class="fa fa-upload" title="Submit Picture"></label>
                 </form>
-            </div>
-            <yourname>Nelson</yourname>
+                <yourname>Nelson</yourname>
+                <h6 class="CImg"></h6>
         </userimage>
         <maincontent>
             <form method="POST">
                 <textarea name="about" class="aboutme">Loading...</textarea>
                 <input type="submit" value="UPDATE">
             </form>
-            <h3>Number: <tel></tel></h3>
+        </maincontent>
+        <maincontent>
+            <h3><b>Number:</b> <tel>000000</tel></h3>
+        </maincontent>
+        <maincontent>
             <form method="POST" class="ChngPwd">
                 <input type="text" name="updatepwd" class="updatepwd" placeholder="Change Password" required>
                 <input type="submit" value="CHANGE">
@@ -51,35 +48,35 @@
     <!-- ################################################################## -->
     <div class="app">
         <div class="top_menu">
-            <div class="profile">
-                <dp title="Edit Profile"></dp>
-                <yourname><span style="font-weight: 100;">loading...</span></yourname>
-            </div>
             <div class="chats_head">
                 <h1 class="chat"><i class="fa fa-comments"></i> Chats</h1>
                 <h1 class="group"><i class="fa fa-users"></i> Groups</h1>
-                <h1 class="community"><i class="fa fa-university"></i> Community</h1>
+                <h1 class="community"><i class="fa fa-user-friends"></i> Add Friends</h1>
+                <h1 class="community viewProfile"><i class="fa fa-bars"></i></h1>
             </div>
         </div>
-        <div class="appcontainer">
+        <div class="">
             <!-- ------------------------ FRIENDS SECTION ------------------------ -->
-            <!-- ------------------------ FRIENDS SECTION ------------------------ -->
-            <div class="friends">
+            <div class="friends viewHeight">
+                <!-- ------------------------ FRIENDS VIEW DIV------------------------  -->
                 <friendlist>
                     <!-- <div>
-                        <img src="../images/FeizYEoWIAMytmR.jpg" alt="">
+                        <img src="../images/avatar.png" alt="">
                         <display>
                             <chatname>Besty 😍</chatname><br>
                             <talk>Hey how are you doing 047</talk>
                         </display>
                     </div> -->
                 </friendlist>
+                <!-- ------------------------ CHATLOGS VIEW DIV ------------------------  -->
                 <chatlog>
                     <chat_top style="position: sticky; top:0;">
-                        <img src="" alt="">
-                        <h1>Loading...</h1>
-                        <h6 hidden></h6>
-                        <about>Loading...</about>
+                        <img src="../images/avatar.png" alt="">
+                        <chatside>
+                            <h1>Loading...</h1>
+                            <about>Loading...</about>
+                            <h6 hidden></h6>
+                        </chatside>
                         <button class="fa fa-arrow-left"></button>
                     </chat_top>
                     <logs style="margin-bottom: 50px;">
@@ -95,20 +92,7 @@
                         </article> -->
                     </logs>
                     <sending>
-                        <emojis hidden>
-                            <emo>😎</emo>
-                            <emo>😡</emo>
-                            <emo>😊</emo>
-                            <emo>😍</emo>
-                            <emo>😅</emo>
-                            <emo>😁</emo>
-                            <emo>💓</emo>
-                            <emo>💔</emo>
-                            <emo>😒</emo>
-                            <emo>😜</emo>
-                            <emo>☕</emo>
-                            <emo>🏃</emo>
-                        </emojis>
+                        <emojis hidden></emojis>
                         <smile class="fa fa-smile"></smile>
                         <form method="POST" id="..." class="SendForm">
                             <input type="text" name="repto" class="repto" required placeholder="reply to" hidden>
@@ -131,21 +115,14 @@
                     </sending>
                 </chatlog>
             </div>
+
             <!-- ------------------------ GROUP SECTION ------------------------ -->
-            <!-- ------------------------ GROUP SECTION ------------------------ -->
-            <groups>
+            <groups class="viewHeight">
                 <grouplist>
                     <!-- <div>
-                        <img src="../images/Retro.ico" alt="">
+                        <img src="../images/group.jpg" alt="">
                         <display>
                             <groupname>World Tech Gaints</groupname><br>
-                            <chatname>Besty 😍:</chatname><talk> Hey how are you doing 047</talk>
-                        </display>
-                    </div>
-                    <div>
-                        <img src="../images/Retro.ico" alt="">
-                        <display>
-                            <groupname>All Sports Preview</groupname><br>
                             <chatname>Besty 😍:</chatname><talk> Hey how are you doing 047</talk>
                         </display>
                     </div> -->
@@ -153,33 +130,20 @@
                 <groupchats>
                     <group_top>
                         <button class="fa fa-arrow-left"></button>
-                        <h2>Loading...</h2>
+                        <h2>Sports</h2>
                     </group_top>
                     <grouplogs>
-                        <!-- <article>
+                        <article>
                             <logname>@grace</logname>
                             <log>I'm fine man, it has been too long since we mat</log>
                         </article>
                         <article class="activeme">
                             <logname>@grace</logname>
                             <log>I'm fine man, it has been too long since we mat</log>
-                        </article> -->
+                        </article>
                     </grouplogs>
                     <sending class="GrpSend">
-                        <emojis hidden>
-                            <emo>😎</emo>
-                            <emo>😡</emo>
-                            <emo>😊</emo>
-                            <emo>😍</emo>
-                            <emo>😅</emo>
-                            <emo>😁</emo>
-                            <emo>💓</emo>
-                            <emo>💔</emo>
-                            <emo>😒</emo>
-                            <emo>😜</emo>
-                            <emo>☕</emo>
-                            <emo>🏃</emo>
-                        </emojis>
+                        <emojis hidden></emojis>
                         <smile class="fa fa-smile"></smile>
                         <form method="POST" id=".." class="GrpChatForm">
                             <input type="text" name="EleDiv" class="EleDiv" required hidden>
@@ -195,22 +159,16 @@
             </groups>
 
             <!-- ------------------------ COMMUNITY SECTION ------------------------ -->
-            <!-- ------------------------ COMMUNITY SECTION ------------------------ -->
-            <community>
-                <!-- <div>
-                    <img src="../images/Retro.ico" alt="">
+            <community class="viewHeight">
+                <div>
+                    <img src="" alt="">
                     <display>
                         <chatname>Besty</chatname><br>
                         <userabout>Minding your business is what I like</userabout>
                     </display>
                     <add class="fa fa-user-check"></add>
-                </div> -->
+                </div>
             </community>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="copyright">
-            <script>$('.copyright').html(`ChatMore 2022 - ${(new Date).getFullYear()} || Developed by LDC`)</script>
         </div>
     </div>
 </div>

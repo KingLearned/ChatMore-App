@@ -54,11 +54,13 @@ app.get('/Log-User-Out', (req, res) =>{
 })
 
 app.get('/', (req, res) => {
+
   const {LOGIN} = req.session
-  if(LOGIN == undefined){
-    res.send(HomePage)
-  }else{
+  
+  if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
+  }else{
+    res.send(HomePage)
   }
 })
 
@@ -162,7 +164,7 @@ app.post('/', (req, res) => {
 
         }else if(DelMsg){
         /*************** DELETING OT USERS CHAT *****************/
-          res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag},DelID:{DelMsg}})
+          res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag}, DelID:{DelMsg}})
           const query1 = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query1, [LOGIN],(err, result) => {
             let Del = JSON.parse(`[${result[0].chats}]`)
@@ -183,6 +185,7 @@ app.post('/', (req, res) => {
             const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
             MYSQL.query(query1, [Del,LOGIN],(err, result) => {})
           })
+
         }else if(UserAbout){
         /********************************* UPDATING OF USERS ABOUT  ********************************/
           const query = "UPDATE `users` SET `about`=? WHERE `username`=?"
@@ -289,8 +292,6 @@ app.post('/', (req, res) => {
                   })
                 })  
               },500)
-
-          
         }
       }
 
@@ -316,6 +317,8 @@ app.post('/', (req, res) => {
 
         if(Sig_Pwd !== Sig_CPwd){
           res.json({ErrMsg: 'Password Mismatched!'})
+        }else if(Sig_Tele.length < 11){
+          res.json({ErrMsg: 'Incomplete Phone Number!'})
         }else if(Sig_Pwd == Sig_CPwd){
           
           const About = `Hello, I'm using ChatMore App`
@@ -335,7 +338,7 @@ app.post('/', (req, res) => {
           })
         }
       }else{
-        res.json({msg: 'use characters [Aa-Zz & 0-9] only!'})
+        res.json({ErrMsg: 'use characters [Aa-Zz & 0-9] only!'})
       }
     }
 

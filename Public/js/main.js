@@ -2,14 +2,18 @@
 const Login = document.querySelector('.login_page')
 const Signup = document.querySelector('.signup')
 $('.login_btn').on('click', () => {
+    Signup.style.display = 'none'
     Login.style.display = 'flex'
     $('.username').focus()
     
 })
+
 $('.signup_btn').on('click', () => {
+    Login.style.display = 'none'
     Signup.style.display = 'flex'
     $('.sigusername').focus()
 })
+
 $('close').on('click', () => {
     Login.style.display = 'none'
     Signup.style.display = 'none'
@@ -22,6 +26,7 @@ $('.tele').on('keyup', () => {
     $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
 })
 
+// ##########################   LOGIN    #############################
 $('.LoginForm').on('submit', (e) => {
     e.preventDefault()
         $.ajax({
@@ -31,8 +36,8 @@ $('.LoginForm').on('submit', (e) => {
                 Log_Pwd: $('.pwd').val()
             },
             success: (data) => {
-                const Auth = data.Approved ? window.location.href = '/' : $('log').html(data.msg)
-                setTimeout(() => { $('log').html('') }, 3000)
+                const Auth = data.Approved ? window.location.href = '/' : $('sig').html(data.msg)
+                setTimeout(() => { $('sig').html('') }, 3000)
             },
             error: (err) => {
                 console.log(err)
@@ -67,46 +72,51 @@ $('.SignUpForm').on('submit', (e) => {
             }
         })
 })
-// ###################################################
 
-// ##################### CHATS HEADER BUTTON ##########################
-const Cht = document.querySelector('.chat')
-const ChtDis = document.querySelector('.friends')
-const Grp = document.querySelector('.group')
-const GrpDis = document.querySelector('groups')
-const Comm = document.querySelector('.community')
-const CommDis = document.querySelector('community')
+const NavBar = [document.querySelector('.chat'), document.querySelector('.group'), document.querySelector('.community')]
+const NavDisplay = [document.querySelector('.friends'), document.querySelector('groups'), document.querySelector('community')]
+const HeightEle = ['.friends', 'groups', 'community']
+NavBar[0].style.color = 'black'
+NavBar.forEach(eachNav => {
+   eachNav.addEventListener('click', () => {
+        for (let i = 0; i < NavBar.length; i++) {
+            const Navigator = eachNav == NavBar[i] ? 
+            (eachNav.style.color = 'black', NavDisplay[NavBar.indexOf(eachNav)].style.display = 'block' ) : 
+            (NavBar[i].style.color = '', NavDisplay[i].style.display = 'none')
 
-Cht.style.color = 'black'
-Cht.addEventListener('click', () => {
-    Cht.style.color = 'black'
-    Grp.style.color = ''
-    Comm.style.color = ''
-    ChtDis.style.display = 'block'
-    GrpDis.style.display = 'none'
-    CommDis.style.display = 'none'
-    if($('.friends div').length > 4){
-        document.querySelector('.friends').style.height = 'auto'
-    }else{
-        document.querySelector('.friends').style.height = '53vh'
-    }
+            const viewHeight = $(`${HeightEle[NavBar.indexOf(eachNav)]} div`).length > 6 ? 
+            NavDisplay[NavBar.indexOf(eachNav)].style.height = 'auto' :
+            NavDisplay[NavBar.indexOf(eachNav)].style.height = '88vh'
+        }  
+    })
 })
-Grp.addEventListener('click', () => {
-    if($('groups div').length > 4){
-        document.querySelector('groups').style.height = 'auto'
+
+//CHANGING OF USER PROFILE IMAGE
+function Submit(){
+    $('.CImg').html($('#userimage').val())
+    document.querySelector('.fa-upload').style.display = 'block'
+    document.querySelector('.fa-pen').style.display = 'none'
+}
+
+//APP EMOJIS FUNCTIONALITIES
+const Smiles = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '😒', '😜','☕', '🏃',]
+let SmileCount = 0
+$('smile').on('click', () => {
+    $('emojis').html('')
+    for (let i = 0; i < Smiles.length; i++) {
+        $('emojis').html($('emojis').html() + `<emo>${Smiles[i]}</emo>`)
     }
-    Grp.style.color = 'black'
-    Cht.style.color = ''
-    Comm.style.color = ''
-    GrpDis.style.display = 'block'
-    ChtDis.style.display = 'none'
-    CommDis.style.display = 'none'
-})
-Comm.addEventListener('click', () => {
-    Comm.style.color = 'black'
-    Grp.style.color = ''
-    Cht.style.color = ''
-    CommDis.style.display = 'block'
-    GrpDis.style.display = 'none'
-    ChtDis.style.display = 'none'
+    const Emoji = SmileCount == 0 ? ($('emojis').show(),SmileCount=1) : ($('emojis').hide(),SmileCount=0)
+
+    const Emo = document.querySelectorAll('emo')
+    for (let i = 0; i < Emo.length; i++) {
+        Emo[i].addEventListener('click',() => {
+            $('.EdMsg').val($('.EdMsg').val()+Emo[i].innerHTML)
+            $('.EdMsg').focus()
+            $('.Msg').val($('.Msg').val()+Emo[i].innerHTML)
+            $('.Msg').focus()
+            $('.GrpMsg').val($('.GrpMsg').val()+Emo[i].innerHTML)
+            $('.GrpMsg').focus()
+        }) 
+    }
 })

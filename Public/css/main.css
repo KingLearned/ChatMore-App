@@ -42,12 +42,10 @@ body{
 .container{
     position: relative;
     margin: 10px auto;
-    /* padding: 10px; */
-    height: 100%;
     width: 500px;
     border-radius: 10px;
-    box-shadow: 1px 1px 10px purple;
-    /* background-color: rgba(226, 37, 194, 0.219); */
+    box-shadow: 1px 1px 10px gainsboro;
+    /* background-image: url('../images/bg-home.jpeg'); */
 }
 .login_page, .signup{
     display: none;
@@ -55,44 +53,46 @@ body{
 close{
     color: purple;
     position: absolute;
+    font-size: larger;
     top: 0;
-    right: 0;
+    left: 0;
     padding: 5px 10px;
     border-radius: 10px 0 10px 0;
     background-color: white;
     cursor: pointer;
 }
 .login_page form, .signup form{
-    display: flex; /*modify to flex*/
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 15px;
-    position: absolute;
     width: 70%;
-    height: 60%;
+    height: 80%;
+    display: flex; /*modify to flex*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(207, 38, 207, 0.8);
-    /* background-color: rgba(128, 0, 128, 0.8); */
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.194);
+    overflow: hidden;
 }
 .login_page form input, .signup form input{
     font-family: roboto;
-    padding: 10px;
-    width: 50%;
-    color:white;
+    padding: 15px;
+    width: 80%;
+    color:rgb(207, 38, 207);
     outline: none;
-    border: transparent;
-    border-bottom: 1px solid white;
+    border: 1px solid rgb(207, 38, 207);
+    border-radius: 50px;
     margin: 5px 0;
     background-color: transparent;
 }
 .login_page form input::placeholder, .signup form input::placeholder{
-    color: white;
+    color: rgba(207, 38, 207, 0.5);
 }
 .signup form input:focus, .login_page form input:focus{
-    border-bottom: 1px solid black;
+    box-shadow: 0 0 10px rgba(207, 38, 207, 0.8);
 }
 .login_page form h5{
     text-align: center;
@@ -104,78 +104,57 @@ close{
     color: red;
 }
 .login_page form button, .signup form button{
-    font: 900 15px restrict;
+    font: 900 15px roboto;
     transition: 0.5s;
     border-radius: 25px;
-    background-color: white;
-    color: purple;
+    background-color: rgb(207, 38, 207);
+    color: white;
+    width: 50%;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 15px 20px;
     margin: 15px;
-    border: 1px solid white;
+    border: transparent;
+    box-shadow: 0 0 10px rgba(207, 38, 207, 0.67);
 }
 .login_page form button:hover, .signup form button:hover{
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
-}
-.pro-media{
-    display: flex;
-    justify-content: end;
-}
-.pro-media img{
-    width: 30px;
-    height: 30px;
-    margin: 0 5px;
-}
-.navbar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.navbar .logo img{
-    width: 130px;
-    height: 70px;
-    margin: 10px;
-}
-.navbar .select{
-    text-align: right;
-    width: 100%;
-}
-.navbar .select a{
-    font: 700 14px restrict;
-    letter-spacing: 2px;
-    background-image: linear-gradient(to right, rgb(202, 30, 202) 30%, rgb(245, 111, 245));
-    margin: 0 25px;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
+    background-color: rgb(121, 13, 121)
 }
 .main-section{
-    height: 90vh;
-    background-size: cover;
+    height: 60vh;
+    max-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signinarea{
+    padding-top: 25px;
+    background-color: white;
+    height: 35vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 0 4px gainsboro;
     text-align: center;
-    background-repeat: no-repeat;
 }
 .main-section img{
-    width: 100px;
-    height: 100px;
-    /* border: 2px solid purple; */
+    width: 150px;
+    height: 150px;
     border-radius: 20px;
-    /* padding: 10px; */
-    margin: -50px 0 0 0;
 }
 .main-section h1{
     color: rgb(192, 46, 192);
     font-size: 25px;
-    margin:  0 0 100px 0;
-    /* text-shadow: 1px 1px 4px black; */
+    /* margin:  0 0 100px 0; */
 }
-.main-section button{
+.signinarea h6{
+    margin: 10px 0;
+    color: gray;
+    font-family: roboto;
+}
+.signinarea button{
     transition: 0.5s;
     font: 900 18px restrict;
     letter-spacing: 2px;
@@ -185,47 +164,28 @@ close{
     border-radius: 25px;
     border: 1px solid transparent;
     background-color: rgb(207, 38, 207);
+    box-shadow: 0 0 10px rgba(207, 38, 207, 0.501);
     color: white;
 }
-.main-section button:nth-child(4){
+.signinarea button:nth-child(4){
     background-color: transparent;
     color: rgb(207, 38, 207);
 }
-.main-section button:hover{
+.signinarea button:hover{
     background-color: transparent;
     border: 1px solid rgb(207, 38, 207);
     color: rgb(207, 38, 207);
     cursor: pointer;
 }
-.main-section button:nth-child(4):hover{
+.signinarea button:nth-child(4):hover{
     border: 1px solid rgb(207, 38, 207);
 }
 .footer{
-    position: relative;
-    display: flex;
-    background-color: black;
-    padding: 28px 0;
+    padding: 10px 0;
+    font-family: roboto;
     border-radius: 0 0 10px 10px ;
-}
-.footer .sub-nav{
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 20px;
-}
-.footer .sub-nav a{
-    color: white;
-    margin: 1vw;
-}
-.footer .copyright{
-    position: absolute;
-    color: white;
-    top: 0;
-    left: 0;
-    padding: 20px;
-}
-.footer .sub-nav a:hover{
-    color: purple;
+    text-align: center;
+    background-color: white;
 }
 
 /* #################### CHAT APP SECTION ########################## */
@@ -234,6 +194,20 @@ close{
     position: relative;
     height: auto;
     background-color: white;
+    border-radius: 15px;
+}
+/* APP CONTAINER */
+/* APP CONTAINER */
+.appcontainer{
+    position: relative;
+    margin: 10px auto;
+    width: 500px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px gainsboro;
+    padding: 10px;
+    /* background-color: rebeccapurple; */
+    /* overflow: hidden; */
 }
 .top_menu{
     position: sticky;
@@ -243,40 +217,49 @@ close{
     background-color: white;
     border-radius: 0 0 15px 15px;
 }
+
+
+/* ##########################   USER PROFILE SETTING    ##########################  */
 .user_profile{
     display: none;
     flex-direction: column;
-    padding: 15px 0;
+    /* padding: 15px 0; */
 }
 .user_profile button{
-    position: absolute;
-    left: 10px;
-    width: 35px;
-    height: 35px;
     border: transparent;
     font-size: large;
     background-color: transparent;
-    border-radius: 10px;
+    text-align: left;
+    max-width: fit-content;
+    padding: 10px;
     cursor: pointer;
 }
-userimage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-self: center;
-    justify-self: center;
-    padding: 15px;
-    background-color: rgba(221, 160, 221, 0.664);
-    width: 100%;
-    border-radius: 0 0 100px 100px;
+.user_profile .logOutBtn{
+    position: absolute;
+    right: 10px;
+    font: bold larger roboto;
+    box-shadow: 1px 1px 10px gainsboro;
+    border-radius: 15px;
 }
-.user_profile div form{
+
+userimage{
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin: 10px 0;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gainsboro;
 }
+
+userimage form img{
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    justify-self: center;
+    margin-right: 10px;
+}
+
 userimage form label{
     cursor: pointer;
     background-color: rgba(128, 128, 128, 0.589);
@@ -285,55 +268,58 @@ userimage form label{
     height: 40px;
     border-radius: 15px;
 }
-userimage yourname{
-    font: 900 25px roboto;
-    color: white;
-    text-shadow: 1px 1px 4px black;
-    border-bottom: 3px solid purple;
-    padding: 0 0 5px 0;
-}
-.user_profile img{
-    width: 100px;
-    height: 100px;
-    border-radius: 20px;
-    justify-self: center;
-}
-userimage form .fa-pen{
+userimage form .fa-pen, userimage form .fa-upload{
     position: absolute;
-    top: 60px;
+    left: 25px;
+    bottom: 10px;
 }
-userimage form .fa-upload{
+userimage form .fa-upload {
     display: none;
+}
+userimage .CImg{
+    position: absolute;
+    left: 25px;
+    bottom: 0;
+    margin-top: 10px;
 }
 userimage form label:hover{
     background-color: gray; 
 }
+
+userimage yourname{
+    font: 900 25px roboto;
+    padding: 0 0 5px 0;
+}
+
+.user_profile maincontent{
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px gainsboro;
+}
+
 .user_profile h3{
     cursor: default;
 }
-.user_profile form{
+.user_profile maincontent form{
     display: flex;
-    margin: 10px 0;
+    flex-direction: column;
 }
-.user_profile form input{
+.user_profile maincontent form input{
     margin:  0 0 0 10px;
     width: 200px;
 }
-.user_profile form h3{
-    font: 900 20px roboto;
+.user_profile maincontent h3{
+    font: 300 20px roboto;
 }
-.user_profile maincontent, .user_profile maincontent form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 .user_profile form textarea{
-    width: 300px;
-    height: 70px;
+    width: 50%;
+    height: 150px;
     margin: 0 0 0 10px;
     padding: 10px;
-    border: 1px solid transparent;
-    border-bottom: 1px solid plum;
+    border: 1px solid black;
+    border-radius: 15px;
     text-align: center;
     font-family: inherit;
     outline: none;
@@ -344,8 +330,8 @@ userimage form label:hover{
 .user_profile maincontent form [type=submit]{
     width: max-content;
     padding: 5px 10px;
-    margin: 10px 0;
-    background-color: plum;
+    margin: 10px ;
+    background-color: rgb(245, 111, 245, 0.3);
     border: 1px solid transparent;
     border-radius: 5px;
     font: 500 15px roboto;
@@ -356,14 +342,11 @@ userimage form label:hover{
     margin: 10px 0;
     font: 500 15px roboto;
     border: 1px solid black;
+    border-radius: 5px;
     outline: none;
     
 }
-.appcontainer{
-    width: 100%;
-    height: auto;
-    /* display: none; */
-}
+
 .chats_head{
     display: flex;
     justify-content: center;
@@ -391,33 +374,32 @@ dp{
 }
 .chats_head h1{
     transition: all;
-    font: 600 25px restrict;
+    font: 600 18px restrict;
     cursor: pointer;
     color: white;
     padding: 10px 15px;
     margin: 0 5px;
     border-radius: 355px;
-    background-image: linear-gradient(to right, rgb(202, 30, 202) 30%, rgb(245, 111, 245));
+    background-color: rgb(245, 111, 245);
 }
 .chats_head h1:hover{
     color: black;
 }
 .friends, groups{
-    height: 53vh;
+    height: 88vh;
 }
 .friends div{
-    background-color: rgba(238, 155, 182, 0.637);
+    box-shadow: 0 0 5px gainsboro;
     border-radius: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 5px;
+    margin: 8px 0;
 }
 .friends div img{
     width: 50px;
     height: 50px;
-    border: 3px solid plum;
     border-radius: 365px;
 }
 chatname,yourname{
@@ -437,7 +419,7 @@ chatlog{
 }
 chatlog chat_top button{
     position: absolute;
-    left: 10px;
+    left: 0;
     width: 35px;
     height: 35px;
     border: transparent;
@@ -450,23 +432,23 @@ chatlog chat_top{
     position: sticky;
     top: 0;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
-    padding: 5px;
+    padding: 5px 5px 5px 25px;
     background-color: white;
     border-bottom: 1px solid gainsboro;
-    border-radius: 0 0 50px 50px;
-    height: 200px;
+    border-radius: 0 0 15px 15px;
+    /* height: 200px; */
 }
 chatlog chat_top img{
     border-radius: 100px;
-    width: 100px;
-    height: 100px;
-    margin: 0 5px 0 0;
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
 }
 chatlog h1{
     font-size: 15px;
-    margin: 0 0 10px 0;
+    /* margin: 0 0 10px 0; */
 }
 display{
     margin: 0 0 0 10px;
@@ -489,7 +471,8 @@ chatlog article{
     display: flex;
     cursor: default;
     flex-direction: column;
-    background-color: gainsboro;
+    background-color: white;
+    box-shadow: 0 0 5px rgb(229, 229, 249);
     padding: 10px;
     border-radius: 0 20px 20px 20px;
     width: 50vh;
@@ -525,7 +508,8 @@ del{
 }
 sending{
     position: absolute;
-    background-color: darkgrey;
+    background-color: rgb(228, 225, 225);
+    border-radius: 15px;
     padding: 5px 0;
     bottom: 0;
     width: 100%;
@@ -544,11 +528,11 @@ smile{
 }
 emojis{
     position: absolute;
-    bottom: 45px;
-    left: 10px;
+    bottom: 55px;
+    left: 5px;
     background-color: white;
-    box-shadow: 1px 1px 4px rgb(24, 24, 24);
-    border-radius: 15px;
+    box-shadow: 1px 1px 4px gainsboro;
+    border-radius: 10px;
     padding: 5px;
 }
 emojis emo{
@@ -579,10 +563,7 @@ chatlog form label, groupchats form label{
     padding: 10px;
 }
 chatdate{
-    /* position: sticky;
-    top: 200px; */
-    background-color: white;
-    box-shadow: 1px 1px 4px inset gainsboro;
+    background-color: rgb(228, 225, 225);
     width: max-content;
     padding: 10px;
     margin: 5px 0;
@@ -597,18 +578,17 @@ groups{
     display: none;
 }
 groups div{
-    background-color: rgba(221, 155, 238, 0.637);
+    box-shadow: 0 0 5px gainsboro;
     border-radius: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 5px;
+    margin: 10px 0;
 }
 groups div img{
     width: 50px;
     height: 50px;
-    border: 3px solid plum;
     border-radius: 365px;
 }
 groupchats{
@@ -624,27 +604,25 @@ grouplogs{
 groupchats group_top{
     position: sticky;
     top: 0;
+    margin-top: 5px;
+    display: flex;
     padding: 10px 0;
     background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px gainsboro;
     width: 100%;
-    border-bottom: 1px solid plum;
-    border-radius: 0 0 30px 30px;
 }
 groupchats group_top h2{
     border-radius: 15px;
-    /* width:max-content; */
     width:100%;
-    text-align: center;
-    /* text-shadow: 1px 1px 4px purple; */
+
 }
 groupchats button{
-    position: absolute;
-    left: 10px;
     width: 30px;
     height: 30px;
     border: transparent;
+    margin-right: 10px;
     font-size: large;
-    border-radius: 5px;
     cursor: pointer;
     background-color: transparent;
 }
@@ -652,9 +630,9 @@ groupchats article{
     display: flex;
     cursor: default;
     flex-direction: column;
-    background-color: darkgrey;
+    box-shadow: 0 0 5px gainsboro;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 60%;
     margin: 5px 0;
 }
@@ -667,11 +645,11 @@ groupchats article logname{
     background-color: gray;
 }
 .activeme{
-    background-color: plum !important;
+    background-color: rgb(228, 225, 225) !important;
     align-self: flex-end;
 }
 .activeme logname{
-    color: plum;
+    color: white;
     background-color: black;
 }
 /* groupchats form{

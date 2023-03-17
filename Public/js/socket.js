@@ -13,6 +13,7 @@ function DeleteMsg(DelID){
         }
     })
 }
+
 function DelMsgWithID(MainArr,DelIndex){
     if(MainArr,DelIndex){
         let index = MainArr.indexOf(DelIndex)
@@ -73,9 +74,9 @@ socket.on('chat message', function(Msg,Exp) {
         let edit = ''
         if(Msg.from !== $('chat_top h6').html()){
             Id = 'you'
-            shift = `class="edit" 
-            style="align-self:flex-end; background-color: pink; border-radius:20px 20px 0 20px"`
-            edit = `
+            shift = `class="edit" style="align-self:flex-end; background-color: rgb(228, 225, 225); border-radius:20px 20px 0 20px"`
+            edit = 
+                `
                 <make>
                     <edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit>
                     <del class="fa fa-window-close del${Msg.Id}" title="Delete Message"></del>
@@ -86,7 +87,6 @@ socket.on('chat message', function(Msg,Exp) {
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id.replace(/[^0-9]/g, ""))
             if(Number(Math.ceil(Msg.Id/(1000*60*60*24))) > Number(Math.ceil(LastArt/(1000*60*60*24)))){
-            // if((new Date(Msg.Id)).getDate() > (new Date(LastArt)).getDate()){
                 const D = new Date(Msg.Id)
                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                 const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
@@ -112,6 +112,7 @@ socket.on('chat message', function(Msg,Exp) {
         const Height = $('.friends article').length >= 4 ? 
         (document.querySelector('.friends').style.height = 'auto',document.querySelector('sending').style.position = 'sticky') : 
         (document.querySelector('.friends').style.height = '85vh',document.querySelector('sending').style.position = 'absolute')
+        HeightSet()
 
     }else if(Msg.Id == 'Edit'){
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg.split('<').join('&lt;'))
@@ -125,7 +126,6 @@ socket.on('chat message', function(Msg,Exp) {
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id)
             if(Number(Math.ceil(Msg.InId/(1000*60*60*24))) > Number(Math.ceil(LastArt/(1000*60*60*24)))){
-            // if((new Date(Msg.InId)).getDate() > (new Date(LastArt)).getDate()){
                 const D = new Date(Msg.InId)
                 const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                 const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
@@ -140,7 +140,8 @@ socket.on('chat message', function(Msg,Exp) {
             Id = 'you'
             shift = 'activeme'
         }
-        Log.innerHTML +=`
+        Log.innerHTML +=
+        `
         <article class="${shift}" id="${Msg.InId}">
             <logname>@${Id}</logname>
             <log>${Msg.Msg.split('<').join('&lt;')}</log>
@@ -200,13 +201,14 @@ socket.on('chat message', function(Msg,Exp) {
         }
             
     function HeightSet(){
-        const Height = $('.friends article').length >= 4 ? 
+        const Height = $('.friends article').length + $('.friends chatdate').length > 6 ? 
         document.querySelector('.friends').style.height = 'auto' : 
-        document.querySelector('.friends').style.height = '85vh'
+        document.querySelector('.friends').style.height = '100vh';
+
         window.scrollTo(0, document.body.scrollHeight);
 
-        const Hig = $('grouplogs article').length >= 5 ? 
+        const Hig = $('grouplogs article').length >= 6 ? 
         document.querySelector('groups').style.height = '100%' : 
-        document.querySelector('groups').style.height = '85vh'
+        document.querySelector('groups').style.height = '100vh';
     }
 })

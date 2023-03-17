@@ -71,10 +71,14 @@
     }
     .login_page form, .signup form{
         width: 70%;
-        height: 50%;
+        height: 70vh;
+    }
+    .appcontainer{
+        width: 99.9%;
+        margin: 0;
     }
     .chats_head h1{
-        font-size: 3.5vw;
+        font-size: 18px;
     }
     community display{
         width: 70%;
