@@ -8,6 +8,14 @@
         margin: 0;
         /* overflow-x: hidden; */
     }
+    .appcontainer{
+        width: 99.9%;
+        padding: 0;
+        margin: 0;
+    }
+    .user_profile{
+     padding: 10px;   
+    }
     .pro-media{
         display: flex;
         justify-content: end;
@@ -36,7 +44,7 @@
         top: 0 !important;
     }
     chatlog article{
-        width: 70%;
+        width: 50vw;
         margin: 5px 0;
     }
     chatlog form input{
@@ -73,12 +81,9 @@
         width: 70%;
         height: 70vh;
     }
-    .appcontainer{
-        width: 99.9%;
-        margin: 0;
-    }
+    
     .chats_head h1{
-        font-size: 18px;
+        font-size: 15px;
     }
     community display{
         width: 70%;

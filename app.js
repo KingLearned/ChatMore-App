@@ -56,6 +56,7 @@ app.get('/Log-User-Out', (req, res) =>{
 app.get('/', (req, res) => {
 
   const {LOGIN} = req.session
+  // const LOGIN = 'mary'
   
   if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
@@ -67,6 +68,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   
   const {LOGIN} = req.session
+  // const LOGIN = 'mary'
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
 

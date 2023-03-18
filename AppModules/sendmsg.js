@@ -34,7 +34,7 @@ class SendMsgAPI {
         const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
         
         const ExpChat = {replyto:this.MsgTo, from:this.LOGIN, Id:Id, Msg:this.ChatMsg, time:H+':'+M}
-        return {SndMsg:{Id:Id, chat:'Frd', Msg:this.ChatMsg, EleDiv:this.ElementTag,  from:this.LOGIN, time:`${H}:${M}`}, expUserChats:ExpChat}
+        return {SndMsg:{Id:Id, replyto:this.MsgTo, chat:'Frd', Msg:this.ChatMsg, EleDiv:this.ElementTag,  from:this.LOGIN, time:`${H}:${M}`}, expUserChats:ExpChat}
     }
 }
 

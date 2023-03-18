@@ -32,36 +32,47 @@ $.ajax({
             </div>
             `
         }
+
+        //FOR GETTING OF THE LAST MESSAGE A IN CHAT
+        const friendsChat = []
+        const userFriends = []; data.FRD.forEach(Frd => { friendsChat.push([]); userFriends.push([Frd,data.PN]) })
+        for (let i = 0; i < userFriends.length; i++) {
+            for (let n = 0; n < data.CHATS.length; n++) {
+
+                if(userFriends[i].some(Ele => Ele == data.CHATS[n].replyto) && userFriends[i].some(Ele => Ele == data.CHATS[n].from)){
+                    friendsChat[userFriends.indexOf(userFriends[i])].push(data.CHATS[n])
+                }
+            }
+        }
+        //FOR SHOWING OF USER'S FRIENDS
         for (let i = 0; i < data.FRD.length; i++) {
-            const LastLogs = []
+            let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
+            let Ele = ''; for (let l = 0; l < GenEle.length; l++) {Ele += GenEle[l]} //Generate Unique DOM for displaying last log Dynamically
+
             for (let n = 0; n < data.SORT.length; n++) {
                 if(data.SORT[n].username == data.FRD[i]){
-                    for (let m = 0; m < data.CHATS.length; m++) {
-                        if(data.CHATS[m].replyto == data.FRD[i] && data.CHATS[m].from == data.PN){
-                            LastLogs.push(data.CHATS[m]) //Sent To Guest
-                        }
-                        if(data.CHATS[m].from == data.FRD[i] && data.CHATS[m].replyto == data.PN){
-                            LastLogs.push(data.CHATS[m]) //Sent From Guest
-                        }
-                    }
-
-                    var UserImg = `<img src="../ChatMore/Users/${data.FRD[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
+                    
+                    let UserImg = `<img src="../ChatMore/Users/${data.FRD[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
                     if(data.SORT[n].user_img == ''){
                         UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
                     }
-                    
+                    let LastMsg = friendsChat[i].length > 0 ? friendsChat[i][friendsChat[i].length-1].Msg : ''
+
                     document.querySelector('friendlist').innerHTML +=`
                     <div class="chat_${data.FRD[i]}">
                         ${UserImg}
                         <display>
                             <chatname>${data.FRD[i]}</chatname><br>
-                            <talk><b>Last Msg:</b> ...</talk>
+                            <talk class="last-log${Ele}">${LastMsg}</talk>
                         </display>
                     </div>
                     `
                 }
-            }    
+            }   
         }
+
+
+        // console.log(LastLogs) 
 
         /*************** FOR REMOVING OF CHAT LOG ******************/
         /*************** FOR REMOVING OF CHAT LOG ******************/
@@ -112,9 +123,7 @@ $.ajax({
         const ChatLogs = []
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
-                // setTimeout(() => {
-                //     window.scrollTo(0, document.body.scrollHeight);
-                // },)
+
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
                 $('.top_menu').hide()
@@ -131,8 +140,6 @@ $.ajax({
                 document.querySelector('chatlog img').src = FriendImg
                 $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
                 $('chatlog h6').html(data.FRD[i])//Chat Header
-                
-
                 
                 // const ChatLogs = []
                 for (let m = 0; m < MainChats.length; m++) {
@@ -168,7 +175,6 @@ $.ajax({
 
                     Show.innerHTML += ` 
                         <article ${shift} id="ChatID${ChatLogs[n].Id}">
-                        <logname>@${id}</logname>
                         <log>${ChatLogs[n].Msg}</log>
                         <time>${ChatLogs[n].time}</time>
                         ${edit}
@@ -187,7 +193,7 @@ $.ajax({
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
                 const  typeMsg = document.querySelector('sending')
-                const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 6 ? 
+                const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
                 (typeMsg.style.position = 'sticky' , window.scrollTo(0, document.body.scrollHeight) , document.querySelector('.friends').style.height = 'auto') :
                 (typeMsg.style.position = 'absolute', document.querySelector('.friends').style.height = '100vh');
                 

@@ -44,7 +44,7 @@ body{
     margin: 10px auto;
     width: 500px;
     border-radius: 10px;
-    box-shadow: 1px 1px 10px gainsboro;
+    box-shadow: 1px 1px 10px gray;
     /* background-image: url('../images/bg-home.jpeg'); */
 }
 .login_page, .signup{
@@ -136,7 +136,7 @@ close{
     align-items: center;
     justify-content: center;
     border-radius: 15px 15px 0 0;
-    box-shadow: 0 0 4px gainsboro;
+    box-shadow: 0 0 8px gray;
     text-align: center;
 }
 .main-section img{
@@ -164,7 +164,7 @@ close{
     border-radius: 25px;
     border: 1px solid transparent;
     background-color: rgb(207, 38, 207);
-    box-shadow: 0 0 10px rgba(207, 38, 207, 0.501);
+    box-shadow: 0 0 15px rgba(207, 38, 207);;
     color: white;
 }
 .signinarea button:nth-child(4){
@@ -178,7 +178,7 @@ close{
     cursor: pointer;
 }
 .signinarea button:nth-child(4):hover{
-    border: 1px solid rgb(207, 38, 207);
+    color: rgb(248, 49, 248);
 }
 .footer{
     padding: 10px 0;
@@ -213,9 +213,9 @@ close{
     position: sticky;
     top: 0;
     z-index: 99;
-    border-bottom: 1px solid plum;
+    box-shadow: 0 0 5px black;
     background-color: white;
-    border-radius: 0 0 15px 15px;
+    border-radius: 3px;
 }
 
 
@@ -238,7 +238,7 @@ close{
     position: absolute;
     right: 10px;
     font: bold larger roboto;
-    box-shadow: 1px 1px 10px gainsboro;
+    box-shadow: 1px 1px 5px gray;
     border-radius: 15px;
 }
 
@@ -246,10 +246,10 @@ userimage{
     position: relative;
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 10px gainsboro;
+    box-shadow: 0 0 5px gray;
 }
 
 userimage form img{
@@ -295,7 +295,7 @@ userimage yourname{
     margin: 15px 0;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 5px gainsboro;
+    box-shadow: 0 0 5px gray;
 }
 
 .user_profile h3{
@@ -378,7 +378,7 @@ dp{
     cursor: pointer;
     color: white;
     padding: 10px 15px;
-    margin: 0 5px;
+    margin: 5px;
     border-radius: 355px;
     background-color: rgb(245, 111, 245);
 }
@@ -389,13 +389,13 @@ dp{
     height: 88vh;
 }
 .friends div{
-    box-shadow: 0 0 5px gainsboro;
+    box-shadow: 0 0 5px gray;
     border-radius: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 8px 0;
+    margin: 12px 0;
 }
 .friends div img{
     width: 50px;
@@ -407,7 +407,8 @@ chatname,yourname{
     text-transform: capitalize;
 }
 talk{
-    font: 500 11px roboto;
+    font: 300 15px roboto;
+    color: gray;
 }
 chatlog{
     display: none;
@@ -472,10 +473,10 @@ chatlog article{
     cursor: default;
     flex-direction: column;
     background-color: white;
-    box-shadow: 0 0 5px rgb(229, 229, 249);
+    box-shadow: 0 0 5px gray;
     padding: 10px;
     border-radius: 0 20px 20px 20px;
-    width: 50vh;
+    width: 50%;
     margin: 5px 0;
 }
 log{
@@ -578,13 +579,13 @@ groups{
     display: none;
 }
 groups div{
-    box-shadow: 0 0 5px gainsboro;
+    box-shadow: 0 0 5px gray;
     border-radius: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 10px 0;
+    margin: 12px 0;
 }
 groups div img{
     width: 50px;
@@ -604,12 +605,11 @@ grouplogs{
 groupchats group_top{
     position: sticky;
     top: 0;
-    margin-top: 5px;
     display: flex;
-    padding: 10px 0;
+    padding: 15px 0;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 1px 5px gainsboro;
+    box-shadow: 0 1px 5px gray;
     width: 100%;
 }
 groupchats group_top h2{
@@ -630,7 +630,7 @@ groupchats article{
     display: flex;
     cursor: default;
     flex-direction: column;
-    box-shadow: 0 0 5px gainsboro;
+    box-shadow: 0 0 5px gray;
     padding: 10px;
     border-radius: 15px;
     width: 60%;
@@ -652,11 +652,6 @@ groupchats article logname{
     color: white;
     background-color: black;
 }
-/* groupchats form{
-    position: absolute;
-    bottom: 5px;
-    width: 98%;
-} */
 
 /******************************* COMMUNITY SECTIONS HANDLERS ************************/
 /******************************* COMMUNITY SECTIONS HANDLERS ************************/
@@ -669,14 +664,13 @@ community display{
     width: 365px;
 }
 community div{
-    /* background-color: rgba(238, 11, 11, 0.637); */
-    border-bottom: 1px solid plum;
-    border-radius: 5px;
+    box-shadow: 0 0 5px gray;
+    border-radius: 15px;
     cursor: default;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 5px;
+    margin: 15px 0;
 }
 community div img{
     width: 50px;
