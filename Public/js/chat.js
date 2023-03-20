@@ -82,10 +82,10 @@ $.ajax({
             document.querySelector('friendlist').style.display = 'block'
             $('.top_menu').show()
 
-            if($('.friends div').length > 4){
+            if($('.friends div').length >= 7){
                 document.querySelector('.friends').style.height = 'auto'
             }else{
-                document.querySelector('.friends').style.height = '100vh'
+                document.querySelector('.friends').style.height = '88vh'
             }
             $('.EditId').val('')
             $('.locator').val('')
