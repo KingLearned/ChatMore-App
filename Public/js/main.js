@@ -120,3 +120,7 @@ $('smile').on('click', () => {
         }) 
     }
 })
+
+document.querySelector('.user_profile').style.display = 'flex'
+document.querySelector('.user_profile').style.height = '100vh'
+document.querySelector('.app').style.display = 'none'

@@ -245,6 +245,7 @@ close{
 userimage{
     position: relative;
     display: flex;
+    height: 95px;
     align-items: center;
     margin-top: 20px;
     padding: 10px;
