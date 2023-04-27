@@ -75,9 +75,9 @@ app.post('/', (req, res) => {
   /************  CHAT COLLECTION   ***********/
   const {AddFriend} = req.body
   
-  const { MsgTo, ChatMsg, ElementTag } = req.body
-  const { EditId, EditMsg } = req.body
-  const {DelMsg} = req.body
+  const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg } = req.body
+  const {  } = req.body
+  const {} = req.body
 
   const UserAbout = req.body.about
   const {UpdatePWD} = req.body
