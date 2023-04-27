@@ -75,7 +75,7 @@ app.post('/', (req, res) => {
   /************  CHAT COLLECTION   ***********/
   const {AddFriend} = req.body
   
-  const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg, DelMsg } = req.body
+  const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg, DelMsg } = req.body //destructuring of the variables coming from the req.body
 
   const UserAbout = req.body.about
   const {UpdatePWD} = req.body
@@ -85,7 +85,7 @@ app.post('/', (req, res) => {
 
   let Revole = 'GrpID'
   
-  if(LOGIN){
+  if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
 
     const Storage = MULTER.diskStorage({
       destination: `./Public/ChatMore/Users/${LOGIN}`,
