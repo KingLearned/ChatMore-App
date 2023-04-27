@@ -76,8 +76,6 @@ app.post('/', (req, res) => {
   const {AddFriend} = req.body
   
   const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg, DelMsg } = req.body
-  const {  } = req.body
-  const {} = req.body
 
   const UserAbout = req.body.about
   const {UpdatePWD} = req.body
