@@ -23,12 +23,15 @@ $.ajax({
 
         //FOR GETTING OF THE LAST MESSAGE A IN CHAT
         const friendsChat = []
-        const userFriends = []; data.FRD.forEach(Frd => { friendsChat.push([]); userFriends.push([Frd,data.PN]) })
-        for (let i = 0; i < userFriends.length; i++) {
-            for (let n = 0; n < data.CHATS.length; n++) {
-
-                if(userFriends[i].some(Ele => Ele == data.CHATS[n].replyto) && userFriends[i].some(Ele => Ele == data.CHATS[n].from)){
-                    friendsChat[userFriends.indexOf(userFriends[i])].push(data.CHATS[n])
+        const userFriends = []
+        if(data.FRD.length > 0){ //Checking to know if the user has friends
+            data.FRD.forEach(Frd => { friendsChat.push([]); userFriends.push([Frd,data.PN]) })
+            for (let i = 0; i < userFriends.length; i++) {
+                for (let n = 0; n < data.CHATS.length; n++) {
+    
+                    if(userFriends[i].some(Ele => Ele == data.CHATS[n].replyto) && userFriends[i].some(Ele => Ele == data.CHATS[n].from)){
+                        friendsChat[userFriends.indexOf(userFriends[i])].push(data.CHATS[n])
+                    }
                 }
             }
         }
