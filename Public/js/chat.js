@@ -32,6 +32,7 @@ $.ajax({
                 }
             }
         }
+        
         //FOR SHOWING OF USER'S FRIENDS
         for (let i = 0; i < data.FRD.length; i++) {
             let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
