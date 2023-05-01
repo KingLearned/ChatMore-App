@@ -7,15 +7,10 @@ $.ajax({
         document.querySelector('friendlist').innerHTML = ''
 
         const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
+        const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
         $('tel').html(data.USER[0].telephone)
+
         
-        if(data.USER[0].user_img == ''){
-            $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`)
-            $('dp').html(`<img src="../images/avatar.png" alt="avatar.png">`)
-        }else{
-            $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
-            $('dp').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
-        }
 
         // IF YOU HAVE NO FRIENDS
         if(data.FRD.length < 1){
