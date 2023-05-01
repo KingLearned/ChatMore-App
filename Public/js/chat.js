@@ -1,4 +1,3 @@
-// const userChats = [] 
 const MainChats = []    //for storing user => user chats
 $.ajax({
     method: "POST",
