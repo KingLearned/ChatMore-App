@@ -32,7 +32,7 @@ $.ajax({
                 }
             }
         }
-        
+
         //FOR SHOWING OF USER'S FRIENDS
         for (let i = 0; i < data.FRD.length; i++) {
             let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
@@ -76,6 +76,7 @@ $.ajax({
             }else{
                 document.querySelector('.friends').style.height = '88vh'
             }
+
             $('.EditId').val('')
             $('.locator').val('')
             $('.Msg').val('')
@@ -291,14 +292,14 @@ $.ajax({
         /************************************************************************************ */
 
         /********************** VIEW LENGTH HANDLE ***********************/
-        if($('.friends div').length > 6){
-            document.querySelector('.friends').style.height = 'auto'
-        }
-        if($('groups div').length > 4){
-            document.querySelector('groups').style.height = 'auto'
-        }
-        if($('community div').length > 4){
-            document.querySelector('community').style.height = 'auto'
-        }
+        // if($('.friends div').length > 6){
+        //     document.querySelector('.friends').style.height = 'auto'
+        // }
+        // if($('groups div').length > 4){
+        //     document.querySelector('groups').style.height = 'auto'
+        // }
+        // if($('community div').length > 4){
+        //     document.querySelector('community').style.height = 'auto'
+        // }
     }
 })
