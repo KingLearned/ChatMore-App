@@ -352,12 +352,6 @@ io.on('connection', (socket) => {
 
 })
 
-const num = 12
-
-if(num < 11 || num > 11){
-  console.log('Invalid')
-}
-
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 })
