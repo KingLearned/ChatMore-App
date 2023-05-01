@@ -3,17 +3,12 @@ $.ajax({
     method: "POST",
     success: (data) => {
         $('yourname').html(data.PN)
-        for (let m = 0; m < data.CHATS.length; m++) {
-            MainChats.push(data.CHATS[m])
-        }
-
+        for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
         document.querySelector('friendlist').innerHTML = ''
-        if(data.USER[0].about !== ''){ 
-            $('.aboutme').val(data.USER[0].about)
-        }else{
-            $('.aboutme').val(`Hello, I'm using ChatMore App`)
-        }
+
+        const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
         $('tel').html(data.USER[0].telephone)
+        
         if(data.USER[0].user_img == ''){
             $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`)
             $('dp').html(`<img src="../images/avatar.png" alt="avatar.png">`)
