@@ -10,15 +10,14 @@ $.ajax({
         const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
         $('tel').html(data.USER[0].telephone)
 
-        
-
-        // IF YOU HAVE NO FRIENDS
+        // WHEN FRIENDS LIST IS EMPTY
         if(data.FRD.length < 1){
-            document.querySelector('friendlist').innerHTML =`
-            <div style="display:block;">
-                <h3 style="text-align: center;">NO FRIENDS YET!</h3>
-                <h5 style="text-align: center;">Add friends from the community</h5>
-            </div>
+            document.querySelector('friendlist').innerHTML =
+            `
+                <div style="display:block;">
+                    <h3 style="text-align: center;">NO FRIENDS YET!</h3>
+                    <h5 style="text-align: center;">Add friends from the community</h5>
+                </div>
             `
         }
 
