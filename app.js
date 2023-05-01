@@ -317,7 +317,7 @@ app.post('/', (req, res) => {
 
         if(Sig_Pwd !== Sig_CPwd){
           res.json({ErrMsg: 'Password Mismatched!'})
-        }else if(Sig_Tele.length < 11 && Sig_Tele.length > 11){
+        }else if(Sig_Tele.length < 11 && Sig_Tele.length >! 11){
           res.json({ErrMsg: 'Invalid Phone Number!'})
         }else if(Sig_Pwd == Sig_CPwd){
           

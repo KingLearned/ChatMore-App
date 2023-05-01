@@ -54,7 +54,7 @@ close{
     color: purple;
     position: absolute;
     font-size: larger;
-    top: 0;
+    top: 10px;
     left: 0;
     padding: 5px 10px;
     border-radius: 10px 0 10px 0;
