@@ -31,4 +31,4 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
       }
 }
 
-// module.exports = { SendMsgAPI }
+module.exports = { signUpAPI }
