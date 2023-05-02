@@ -21,23 +21,24 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
           MYSQL.query(query, [Sig_Name,Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
               
-              const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` ?
-               `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` : 
-               `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
-              const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
+            //   const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` ?
+            //    `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` : 
+            //    `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
+            //   const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
 
             //   console.log(err.sqlMessage)
-              return err.sqlMessage == ErrName ? ({ErrMsg: 'Username Already Exist!'}) :
-              err.sqlMessage == ErrTele ? {ErrMsg: 'Number Already Exist!'} : '';
+            //   return err.sqlMessage == ErrName ? ({ErrMsg: 'Username Already Exist!'}) :
+            //   err.sqlMessage == ErrTele ? {ErrMsg: 'Number Already Exist!'} : '';
             // let Error = ''
-            // if(err.sqlMessage == ErrName){
-            //     console.log(1)
-            //     return {ErrMsg: 'Username Already Exist!'}
-            // }else if(err.sqlMessage == ErrTele){
-            //     console.log(2)
-            //     return {ErrMsg: 'Number Already Exist!'}
+            if(err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`){
+                // console.log(1)
+                // console.log('name')
+                return ({ErrMsg: 'Username Already Exist!'})
+            }else{
+                console.log(2)
+                return {ErrMsg: 'Number Already Exist!'}
 
-            // }
+            }
               
             //   return {ErrMsg: 'Number Already Exist!'}
 
