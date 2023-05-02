@@ -339,7 +339,8 @@ app.post('/', (req, res) => {
       // }else{
       //   res.json({ErrMsg: 'use characters [Aa-Zz & 0-9] only!'})
       // }
-      signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd)
+      // signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd)
+      console.log(signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd))
 
     }
 
