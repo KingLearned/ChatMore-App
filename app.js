@@ -341,7 +341,10 @@ app.post('/', (req, res) => {
       // }
       // signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd)
       // res.json(signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd))
-      console.log(signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd))
+      // console.log(signUpAPI(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd))
+      const regUser = new signUpAPI(Sig_Name,Sig_Tele,Sig_Pwd,Sig_CPwd) 
+      console.log(regUser.Feedback())
+      // res.json(regUser.Feedback())
 
     }
 
