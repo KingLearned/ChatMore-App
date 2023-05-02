@@ -29,7 +29,8 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
           })
         }
       }else{
-        res.json({ErrMsg: 'use characters [Aa-Zz & 0-9] only!'})
+        // res.json({ErrMsg: 'use characters [Aa-Zz & 0-9] only!'})
+        console.log('use characters [Aa-Zz & 0-9] only!')
       }
 }
 
