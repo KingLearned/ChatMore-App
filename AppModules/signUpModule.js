@@ -19,7 +19,7 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
               const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
 
               const Error = err.sqlMessage == ErrName ? console.log('Username Already Exist!')/*res.json({ErrMsg: 'Username Already Exist!'})*/ :
-              err.sqlMessage == ErrTele ? res.json({ErrMsg: 'Number Already Exist!'}) : ''
+              err.sqlMessage == ErrTele ? console.log('Username Already Exist!')/*res.json({ErrMsg: 'Number Already Exist!'})/* : ''
               
             }else{
               res.json({Successful: 'Registered Succefully!'})
