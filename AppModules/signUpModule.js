@@ -1,12 +1,14 @@
 const MYSQL = require("../MODULES/Conn");
 
-const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd, req,res) => {
+const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
     const valid = Sig_Name.replace(/[^a-zA-Z^0-9]/g, "")
       if(Sig_Name == valid){
 
         if(Sig_Pwd !== Sig_CPwd){
+
           res.json({ErrMsg: 'Password Mismatched!'})
          return console.log('Password Mismatched!')
+
         }else if(Sig_Tele.length < 11 || Sig_Tele.length > 11){
         //   res.json({ErrMsg: 'Invalid Phone Number!'})
          return console.log('Invalid Phone Number!')
