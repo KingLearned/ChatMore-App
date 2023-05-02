@@ -5,7 +5,8 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
       if(Sig_Name == valid){
 
         if(Sig_Pwd !== Sig_CPwd){
-          res.json({ErrMsg: 'Password Mismatched!'})
+        //   res.json({ErrMsg: 'Password Mismatched!'})
+          console.log('Password Mismatched!')
         }else if(Sig_Tele.length < 11 || Sig_Tele.length > 11){
           res.json({ErrMsg: 'Invalid Phone Number!'})
         }else if(Sig_Pwd == Sig_CPwd){
