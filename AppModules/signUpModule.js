@@ -12,7 +12,8 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
 
         }else if(Sig_Tele.length < 11 || Sig_Tele.length > 11){
         //   res.json({ErrMsg: 'Invalid Phone Number!'})
-         return console.log('Invalid Phone Number!')
+            return {ErrMsg: 'Invalid Phone Number!'}
+            
         }else if(Sig_Pwd == Sig_CPwd){
           
           const About = `Hello, I'm using ChatMore App`
