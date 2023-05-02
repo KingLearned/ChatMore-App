@@ -6,10 +6,10 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
 
         if(Sig_Pwd !== Sig_CPwd){
         //   res.json({ErrMsg: 'Password Mismatched!'})
-          console.log('Password Mismatched!')
+         return console.log('Password Mismatched!')
         }else if(Sig_Tele.length < 11 || Sig_Tele.length > 11){
         //   res.json({ErrMsg: 'Invalid Phone Number!'})
-          console.log('Invalid Phone Number!')
+         return console.log('Invalid Phone Number!')
         }else if(Sig_Pwd == Sig_CPwd){
           
           const About = `Hello, I'm using ChatMore App`
