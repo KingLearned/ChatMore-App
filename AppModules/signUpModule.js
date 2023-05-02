@@ -27,8 +27,8 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
               const Error = err.sqlMessage == ErrName ? {ErrMsg: 'Username Already Exist!'} :
               err.sqlMessage == ErrTele ? {ErrMsg: 'Number Already Exist!'} : ''
               
-              return Error
-              
+              return console.log(Error)
+
             }else{
               res.json({Successful: 'Registered Succefully!'})
             }
