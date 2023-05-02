@@ -21,10 +21,13 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
           MYSQL.query(query, [Sig_Name,Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
               
-              const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` ? `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` : `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
+              const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` ?
+               `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` : 
+               `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
               const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
 
-              return Error = err.sqlMessage == ErrName ? {ErrMsg: 'Username Already Exist!'} :
+            //   console.log(err.sqlMessage)
+              return err.sqlMessage == ErrName ? ({ErrMsg: 'Username Already Exist!'}) :
               err.sqlMessage == ErrTele ? {ErrMsg: 'Number Already Exist!'} : '';
             // let Error = ''
             // if(err.sqlMessage == ErrName){
@@ -36,7 +39,7 @@ const signUpAPI = (Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) => {
 
             // }
               
-              return {ErrMsg: 'Number Already Exist!'}
+            //   return {ErrMsg: 'Number Already Exist!'}
 
             }else{
               res.json({Successful: 'Registered Succefully!'})
