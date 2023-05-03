@@ -37,13 +37,15 @@ const Home = `<!DOCTYPE html>
         <h1>ChatMore</h1>
     </div>
     <div class="signinarea">
-        <h5>Enjoy the new experience of <br>chating with global friends</h5>
-        <h6>Connect with people around the world</h6>
-        <button class="signup_btn">Get Started</button>
-        <button class="login_btn">Sign in</button>
-    </div>
-    <div class="footer">
-        <img src="../images/powered.png" alt="" width="40%">
+        <div class="top">
+            <h5>Enjoy the new experience of <br>chating with global friends</h5>
+            <h6>Connect with people around the world</h6>
+            <button class="signup_btn">Get Started</button>
+            <button class="login_btn">Sign in</button>
+        </div>
+        <div class="footer">
+            <img src="../images/powered.png" alt="" width="40%">
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="../js/main.js"></script>
