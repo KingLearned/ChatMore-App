@@ -2,8 +2,8 @@
 const Login = document.querySelector('.login_page')
 const Signup = document.querySelector('.signup')
 $('.login_btn').on('click', () => {
-    Signup.style.display = 'none'
     Login.style.display = 'flex'
+    Signup.style.display = 'none'
     $('.username').focus()
     
 })
