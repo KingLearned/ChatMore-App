@@ -215,9 +215,6 @@ close{
     border-radius: 10px;
     box-shadow: 1px 1px 10px gainsboro;
 }
-.appcontent{
-    padding: 0 10px;
-}
 .top_menu{
     position: sticky;
     top: 0;
@@ -520,7 +517,7 @@ del{
 sending{
     position: absolute;
     background-color: rgb(228, 225, 225);
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 5px 0;
     bottom: 0;
     width: 100%;

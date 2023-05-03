@@ -73,6 +73,10 @@ $('.SignUpForm').on('submit', (e) => {
         })
 })
 
+
+document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
+document.querySelector('friendlist').style.display = 'none'//Hide Friends List
+
 const NavBar = [document.querySelector('.chat'), document.querySelector('.group'), document.querySelector('.community')]
 const NavDisplay = [document.querySelector('.friends'), document.querySelector('groups'), document.querySelector('community')]
 const HeightEle = ['.friends', 'groups', 'community']
