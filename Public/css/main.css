@@ -214,9 +214,12 @@ close{
     height: auto;
     border-radius: 10px;
     box-shadow: 1px 1px 10px gainsboro;
-    padding: 10px;
+    /* padding: 10px; */
     /* background-color: rebeccapurple; */
     /* overflow: hidden; */
+}
+.appcontent{
+    padding: 0 10px;
 }
 .top_menu{
     position: sticky;
@@ -224,7 +227,7 @@ close{
     z-index: 99;
     box-shadow: 0 0 5px black;
     background-color: white;
-    border-radius: 3px;
+    /* border-radius: 15px; */
 }
 
 
