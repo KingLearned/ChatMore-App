@@ -14,24 +14,27 @@ class signUpAPI {
           return({ErrMsg: 'Invalid Phone Number!'})
         //   res.json({ErrMsg: 'Invalid Phone Number!'})
         }else if(this.Sig_Pwd == this.Sig_CPwd){
-          
+
           const About = `Hello, I'm using ChatMore App`
           const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`, `user_img`, `friends`, `chats`) VALUES(?,?,?,?,?,?,?)'
-          MYSQL.query(query, [this.Sig_Name,this.Sig_Tele,this.Sig_Pwd,About,'','',''], (err, result) => {
+          const Doall = MYSQL.query(query, [this.Sig_Name,this.Sig_Tele,this.Sig_Pwd,About,'','',''], (err, result) => {
             if(err){
               
               const ErrName = err.sqlMessage == `Duplicate entry '${this.Sig_Name}' for key 'users.PRIMARY'` ? `Duplicate entry '${this.Sig_Name}' for key 'users.PRIMARY'` : `Duplicate entry '${this.Sig_Name}' for key 'PRIMARY'`
               const ErrTele = err.sqlMessage == `Duplicate entry '${this.Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${this.Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${this.Sig_Tele}' for key 'telephone'`
 
-              return 'Yes'
+              
             //   return err.sqlMessage == ErrName ? {ErrMsg: 'Username Already Exist!'} :
             //   err.sqlMessage == ErrTele ? {ErrMsg: 'Number Already Exist!'} : ''
               
+                let mena = 'HERE IS THE MAIN OUTPUT OF IT'
+                return mena
             }else{
               return({Successful: 'Registered Succefully!'})
             //   res.json({Successful: 'Registered Succefully!'})
             }
           })
+          console.log(Doall)
         }
       }else{
         res.json({ErrMsg: 'use characters [Aa-Zz & 0-9] only!'})
