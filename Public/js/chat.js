@@ -106,15 +106,8 @@ $.ajax({
                 },
                 success: (data) => {
                     $('.ChngPwd h5').html(data.validPwd || data.errPwd)
-                    $('.ChngPwd h5').html(data.errPwd)
-                    // setTimeout(() => {
-                    //     $('.ChngPwd h5').html('')
-                    // }, 3000)
-                        
-                    //     if(data.validPwd){
-                    // }else{
-
-                    // }
+                    setTimeout(() => { $('.ChngPwd h5').html('') ; const validate = data.validPwd ? window.location = '/' : ''}, 3000)
+                    
                 }
             })
         })

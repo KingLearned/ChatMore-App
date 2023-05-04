@@ -196,7 +196,7 @@ app.post('/', (req, res) => {
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
         console.log(newPWD, CnewPWD)
         const checkPWD = newPWD === CnewPWD ? res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) : 
-        res.json({errPwd:'<span style="color:green;">Password mismatched, try again!</span>'})
+        res.json({errPwd:'<span style="color:red;">Password mismatched, try again!</span>'})
 
           // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
           // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
