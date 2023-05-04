@@ -55,7 +55,7 @@ app.get('/Log-User-Out', (req, res) =>{
 
 app.get('/', (req, res) => {
 
-  const LOGIN = 'franky'
+  const LOGIN = 'Franky'
   // const {LOGIN} = req.session
   
   if(LOGIN){
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  const LOGIN = 'franky'
+  const LOGIN = 'Franky'
   // const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
