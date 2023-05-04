@@ -101,7 +101,8 @@ $.ajax({
             $.ajax({
                 method:"POST",
                 data:{
-                    UpdatePWD : $('.updatepwd').val()
+                    newPWD : $('.newPWD').val(),
+                    CnewPWD : $('.CnewPWD').val()
                 }
             })
         })
