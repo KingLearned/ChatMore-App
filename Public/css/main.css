@@ -206,9 +206,13 @@ close{
     z-index: 100;
     background-color: rgba(0, 0, 0, 0.338);
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
 }
 .preloader i{
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .app{
