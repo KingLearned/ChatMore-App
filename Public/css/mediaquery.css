@@ -42,7 +42,7 @@
     chatlog chat_top{
         /* position: sticky !important; */
         /* top: 100px !important; */
-        padding: 10px 0;
+        padding: 15px 0;
     }
     chatlog article{
         width: 50vw;
