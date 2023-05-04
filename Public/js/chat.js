@@ -105,7 +105,9 @@ $.ajax({
                     CnewPWD : $('.CnewPWD').val()
                 },
                 success: (data) => {
-                    $('.pwdFBack').html(data.validMsg)
+                    if(data.validPwd){
+                        $('.ChngPwd h5').html(data.validPwd)
+                    }
                 }
             })
         })
