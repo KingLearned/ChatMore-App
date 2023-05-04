@@ -105,7 +105,7 @@ $.ajax({
                     CnewPWD : $('.CnewPWD').val()
                 },
                 success: (data) => {
-                    $('.ChngPwd h5').html(data.validMsg)
+                    $('.pwdFBack').html(data.validMsg)
                 }
             })
         })
