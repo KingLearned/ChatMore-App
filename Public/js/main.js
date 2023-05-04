@@ -27,7 +27,7 @@ $('.tele').on('keyup', () => {
 })
 
 document.querySelector('.user_profile').style.display = 'flex'
-            document.querySelector('.user_profile').style.height = '100vh'
+            document.querySelector('.user_profile').style.height = 'auto'
             document.querySelector('.app').style.display = 'none'
 
 // ##########################   LOGIN    #############################
