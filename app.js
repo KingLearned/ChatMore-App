@@ -195,11 +195,13 @@ app.post('/', (req, res) => {
         }else if(newPWD, CnewPWD){
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
         console.log(newPWD, CnewPWD)
+        const checkPWD = newPWD === CnewPWD ? res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) : 
+        res.json({errPwd:'<span style="color:green;">Password mismatched, try again!</span>'})
+
           // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
           // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
             // })
-            res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'})
-            // res.json({errPwd:'<span style="color:green;">Password mismatched, try again!</span>'})
+            
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/

@@ -105,12 +105,16 @@ $.ajax({
                     CnewPWD : $('.CnewPWD').val()
                 },
                 success: (data) => {
-                    if(data.validPwd){
-                        $('.ChngPwd h5').html(data.validPwd)
-                        setTimeout(() => {
-                            $('.ChngPwd h5').html('')
-                        }, 2000)
-                    }
+                    $('.ChngPwd h5').html(data.validPwd || data.errPwd)
+                    $('.ChngPwd h5').html(data.errPwd)
+                    // setTimeout(() => {
+                    //     $('.ChngPwd h5').html('')
+                    // }, 3000)
+                        
+                    //     if(data.validPwd){
+                    // }else{
+
+                    // }
                 }
             })
         })
