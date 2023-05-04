@@ -40,9 +40,9 @@
         font-size: 30px;
     }
     chatlog chat_top{
-        /* position: sticky !important; */
-        /* top: 100px !important; */
-        padding: 15px 0;
+        position: sticky !important;
+        top: 0 !important;
+        padding: 15px 5px 15px 25px;
     }
     chatlog article{
         width: 50vw;
