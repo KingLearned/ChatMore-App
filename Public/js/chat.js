@@ -50,18 +50,15 @@ $.ajax({
                     }
                     let LastMsg = friendsChat[i].length > 0 ? friendsChat[i][friendsChat[i].length-1].Msg : ''
 
-                    setTimeout(() => {
-                        
-                        document.querySelector('friendlist').innerHTML +=`
-                        <div class="chat_${data.FRD[i]}">
-                            ${UserImg}
-                            <display>
-                                <chatname>${data.FRD[i]}</chatname><br>
-                                <talk class="last-log${Ele}">${LastMsg}</talk>
-                            </display>
-                        </div>
-                        `
-                    }, 2000);
+                    document.querySelector('friendlist').innerHTML +=`
+                    <div class="chat_${data.FRD[i]}">
+                        ${UserImg}
+                        <display>
+                            <chatname>${data.FRD[i]}</chatname><br>
+                            <talk class="last-log${Ele}">${LastMsg}</talk>
+                        </display>
+                    </div>
+                    `
                 }
             }   
         }
