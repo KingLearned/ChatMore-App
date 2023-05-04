@@ -194,6 +194,7 @@ app.post('/', (req, res) => {
           })
         }else if(UpdatePWD){
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
+        console.log(UpdatePWD)
           const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
           MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
             res.redirect('/')
