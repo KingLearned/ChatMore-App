@@ -26,10 +26,6 @@ $('.tele').on('keyup', () => {
     $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
 })
 
-document.querySelector('.user_profile').style.display = 'flex'
-            document.querySelector('.user_profile').style.height = 'auto'
-            document.querySelector('.app').style.display = 'none'
-
 // ##########################   LOGIN    #############################
 $('.LoginForm').on('submit', (e) => {
     e.preventDefault()

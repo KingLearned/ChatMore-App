@@ -55,8 +55,8 @@ app.get('/Log-User-Out', (req, res) =>{
 
 app.get('/', (req, res) => {
 
-  const LOGIN = 'franky'
-  // const {LOGIN} = req.session
+  // const LOGIN = 'franky'
+  const {LOGIN} = req.session
   
   if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
@@ -67,8 +67,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   
-  const LOGIN = 'franky'
-  // const {LOGIN} = req.session
+  // const LOGIN = 'franky'
+  const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
 
@@ -194,13 +194,12 @@ app.post('/', (req, res) => {
           })
         }else if(newPWD, CnewPWD){
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
-        console.log(newPWD, CnewPWD)
-        const checkPWD = newPWD === CnewPWD ? res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) : 
-        res.json({errPwd:'<span style="color:red;">Password mismatched, try again!</span>'})
+        const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
+        const checkPWD = newPWD === CnewPWD ? (
+          MYSQL.query(query, [newPWD,LOGIN], (err, SubResult) => {}),
+          res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) ): 
+          res.json({errPwd:'<span style="color:red;">Password mismatched, try again!</span>'})
 
-          // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
-          // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
-            // })
             
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
