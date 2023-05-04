@@ -304,10 +304,11 @@ $.ajax({
         if($('community div').length > 4){
             document.querySelector('community').style.height = 'auto'
         }
+        
+        if($('friendlist div').length > 0){
+            document.querySelector('.preloader').style.display = 'none'
+        }else{
+            document.querySelector('.preloader').style.display = 'flex'
+        }
     }
 })
-if($('friendlist div').length > 0){
-    document.querySelector('.preloader').style.display = 'none'
-}else{
-    document.querySelector('.preloader').style.display = 'flex'
-}
