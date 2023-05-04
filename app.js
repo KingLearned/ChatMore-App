@@ -80,7 +80,7 @@ app.post('/', (req, res) => {
   const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg, DelMsg } = req.body //destructuring of the variables coming from the req.body
 
   const UserAbout = req.body.about
-  const {UpdatePWD} = req.body
+  const { newPWD, CnewPWD } = req.body
 
    /************  GROUP COLLECTION   ***********/
   const { GrpMsg, GrpID } = req.body
@@ -192,13 +192,13 @@ app.post('/', (req, res) => {
           MYSQL.query(query, [UserAbout,LOGIN], (err, SubResult) => {
             res.redirect('/')
           })
-        }else if(UpdatePWD){
+        }else if(newPWD, CnewPWD){
         /********************************* UPDATING OF USERS PASSWORD  ********************************/
-        console.log(UpdatePWD)
-          const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
-          MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
-            res.redirect('/')
-          })
+        console.log(newPWD, CnewPWD)
+          // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
+          // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
+          //   res.redirect('/')
+          // })
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/
