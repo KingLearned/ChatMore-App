@@ -40,11 +40,16 @@
         font-size: 30px;
     }
     chatlog chat_top{
-        position: fixed !important;
-        top: 0 !important;
+        /* position: sticky !important; */
+        /* top: 100px !important; */
+        padding: 10px 0;
         /* top: 0 !important; */
         /* padding: 15px 0; */
     }
+    /* .chat_top img{
+        width: 1rem;
+        height: 1rem;
+    } */
     chatlog article{
         width: 50vw;
         margin: 5px 0;
