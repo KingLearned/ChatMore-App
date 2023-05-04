@@ -120,3 +120,9 @@ $('smile').on('click', () => {
         }) 
     }
 })
+
+if($('friendlist div').length > 0){
+    document.querySelector('.preloader').style.display = 'none'
+}else{
+    document.querySelector('.preloader').style.display = 'none'
+}
