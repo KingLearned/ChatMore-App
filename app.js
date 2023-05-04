@@ -198,7 +198,8 @@ app.post('/', (req, res) => {
           // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
           // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
             // })
-            res.json({validPwd:'<span style="color:green;">Hello</span>'})
+            res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'})
+            // res.json({errPwd:'<span style="color:green;">Password mismatched, try again!</span>'})
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/

@@ -107,6 +107,9 @@ $.ajax({
                 success: (data) => {
                     if(data.validPwd){
                         $('.ChngPwd h5').html(data.validPwd)
+                        setTimeout(() => {
+                            $('.ChngPwd h5').html('')
+                        }, 2000)
                     }
                 }
             })
