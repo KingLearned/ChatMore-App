@@ -103,6 +103,9 @@ $.ajax({
                 data:{
                     newPWD : $('.newPWD').val(),
                     CnewPWD : $('.CnewPWD').val()
+                },
+                success: (data) => {
+                    $('.ChngPwd h5').html(data.validMsg)
                 }
             })
         })

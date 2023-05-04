@@ -197,8 +197,8 @@ app.post('/', (req, res) => {
         console.log(newPWD, CnewPWD)
           // const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
           // MYSQL.query(query, [UpdatePWD,LOGIN], (err, SubResult) => {
-          //   res.redirect('/')
-          // })
+            // })
+            res.json({validMsg:'Hello'})
         }else if (GrpMsg){
         /********************************* GROUP MESSAGING HANDLER  ********************************/
         /********************************* GROUP MESSAGING HANDLER  ********************************/
