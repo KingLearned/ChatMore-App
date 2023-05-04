@@ -295,15 +295,15 @@ $.ajax({
         /************************************************************************************ */
 
         /********************** VIEW LENGTH HANDLE ***********************/
-        // if($('.friends div').length > 6){
-        //     document.querySelector('.friends').style.height = 'auto'
-        // }
-        // if($('groups div').length > 4){
-        //     document.querySelector('groups').style.height = 'auto'
-        // }
-        // if($('community div').length > 4){
-        //     document.querySelector('community').style.height = 'auto'
-        // }
+        if($('.friends div').length > 6){
+            document.querySelector('.friends').style.height = 'auto'
+        }
+        if($('groups div').length > 4){
+            document.querySelector('groups').style.height = 'auto'
+        }
+        if($('community div').length > 4){
+            document.querySelector('community').style.height = 'auto'
+        }
     }
 })
 if($('friendlist div').length > 0){
