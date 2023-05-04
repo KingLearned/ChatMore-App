@@ -433,6 +433,7 @@ talk{
     color: gray;
 }
 chatlog{
+    /* position: relative; */
     display: none;
     flex-direction: column;
     height: 100%;
