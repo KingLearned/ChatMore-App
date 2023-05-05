@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  
+
   // const LOGIN = 'franky'
   const {LOGIN} = req.session
 
