@@ -90,6 +90,7 @@ NavBar.forEach(eachNav => {
         }  
     })
 })
+document.querySelector('.friends').style.display = 'none'
 document.querySelector('groups').style.display = 'block'
 //CHANGING OF USER PROFILE IMAGE
 function Submit(){

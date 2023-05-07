@@ -138,7 +138,6 @@ $.ajax({
                 $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
                 $('chatlog h6').html(data.FRD[i])//Chat Header
                 
-                // const ChatLogs = []
                 for (let m = 0; m < MainChats.length; m++) {
                     if(MainChats[m].replyto == data.FRD[i] && MainChats[m].from == data.PN){
                         ChatLogs.push(MainChats[m]) //Sent To Guest
