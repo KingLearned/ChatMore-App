@@ -81,7 +81,8 @@ $.ajax({
             $('.EditId').val('')
             $('.locator').val('')
             $('.Msg').val('')
-            ChatLogs.length = 0
+
+            ChatLogs.length = 0 //For resetting of the chatbox to empty
         })
 
         //FOR CLOSING OF USER'S PROFILE
