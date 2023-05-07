@@ -90,7 +90,7 @@ NavBar.forEach(eachNav => {
         }  
     })
 })
-
+document.querySelector('groups').style.display = 'block'
 //CHANGING OF USER PROFILE IMAGE
 function Submit(){
     $('.CImg').html($('#userimage').val())
