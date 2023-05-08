@@ -42,45 +42,46 @@ $.ajax({
                         Log.style.flexDirection = 'column'
 
                         let Maincounter = 0
+                        const mainConvo = []
                         for (let n = 0; n < GroupChats.length; n++) {
                             if(GroupChats[n].sento == data.GRP[i].groupid){
                                 Maincounter ++
+                                mainConvo.push(GroupChats[n])
                             }
                         }
-                        console.log(Maincounter)
+                        // console.log(Maincounter)
+                        console.log(mainConvo)
                         let nth = 0
-                        for (let n = 0; n < GroupChats.length; n++) {
+                        for (let n = 0; n < mainConvo.length; n++) {
                             let active = ''
-                            let Person = GroupChats[n].from
-                            if(GroupChats[n].from == data.PN){
+                            let Person = mainConvo[n].from
+                            if(mainConvo[n].from == data.PN){
                                 active = 'activeme'
                                 Person = 'you'
                             }
+                            //     nth++
 
-                            if(GroupChats[n].sento == data.GRP[i].groupid){
-                                nth++
-                                Log.innerHTML +=`
-                                <article class="${active}" id="${GroupChats[n].Id}">
-                                    <logname>@${Person}</logname>
-                                    <log>${GroupChats[n].Msg}</log>
-                                    <time>${GroupChats[n].time}</time>
-                                </article>
-                                `
-                                // console.log(GroupChats[n].Id)
-                                const D = new Date(GroupChats[n].Id)
-                                const end = GroupChats.length-1
-                                // console.log(nth)
-                                if(nth < Maincounter){
-                                    console.log(GroupChats[n].Id)
-                                    console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) , Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
-                                    // if(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24)))){
-                                    //     const D = new Date(GroupChats[n+1].Id)
-                                    //     const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                                    //     const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
-                                    //     Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
-                                    // }
+                            // if(GroupChats[n].sento == data.GRP[i].groupid){
+                            //     Log.innerHTML +=`
+                            //     <article class="${active}" id="${GroupChats[n].Id}">
+                            //         <logname>@${Person}</logname>
+                            //         <log>${GroupChats[n].Msg}</log>
+                            //         <time>${GroupChats[n].time}</time>
+                            //     </article>
+                            //     `
+                            //     let D = new Date(GroupChats[n].Id)
+                                if(n < mainConvo.length-1){
+                                    // console.log(1)
+                                    console.log(Number(Math.ceil(mainConvo[n].Id/(1000*60*60*24))), Number(Math.ceil(mainConvo[n+1].Id/(1000*60*60*24))))
+                                    // console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) , Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
+                                    if(Number(Math.ceil(mainConvo[n].Id/(1000*60*60*24))) < Number(Math.ceil(mainConvo[n+1].Id/(1000*60*60*24)))){
+                                        const D = new Date(mainConvo[n+1].Id)
+                                        const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
+                                        const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
+                                        // Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
+                                    }
                                 }
-                            }
+                            // }
                         }
                         Hview()
             })
