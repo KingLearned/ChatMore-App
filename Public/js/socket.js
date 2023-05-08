@@ -102,7 +102,7 @@ socket.on('chat message', function(Msg,Exp) {
                 ${edit}
             </article>
             `
-                // Id = 'you'
+
             $(`.last-log${Msg.EleDiv}`).html(Msg.Msg.split('<').join('&lt;')) //Last Msg
 
             HeightSet()
@@ -124,6 +124,8 @@ socket.on('chat message', function(Msg,Exp) {
 
     }else if(Msg.Id == 'Grp'){
         let Home = Exp
+        GroupChats.push({Id:Msg.InId, Msg:Msg.Msg, from:Msg.from, sento:Msg.MsgTo, time:Msg.time})
+        
         const Log = document.querySelector(`${Msg.EleDiv}`)//Dynamic getElement
 
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)

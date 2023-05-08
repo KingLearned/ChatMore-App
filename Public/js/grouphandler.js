@@ -1,6 +1,9 @@
+GroupChats = [] //Groupstorage
 $.ajax({
     method:"POST",
     success: (data) => {
+        for (let n = 0; n < data.GRPLog.length; n++) { GroupChats.push(data.GRPLog[n]) } //The chat uploader
+
         const Dis = document.querySelector('grouplist')
         Dis.innerHTML = ''
         //Displaying Of Various Chat Groups
@@ -10,10 +13,10 @@ $.ajax({
                     <img src="../images/group.jpg" alt="">
                     <display>
                         <groupname>${data.GRP[i].groupname}</groupname><br>
-                        <chatname></chatname><talk>Last Msg...</talk>
                         </display>
                 </div>
                 `
+                // <chatname></chatname><talk>Last Msg...</talk>
         }
         const GrpHv = $('grouplist div').length > 6 ? 
         document.querySelector('groups').style.height = 'auto' : 
@@ -23,9 +26,6 @@ $.ajax({
         for (let i = 0; i < data.GRP.length; i++) {
             //Clicking of any Any Group To Get Served
             $(`.ChatIn${data.GRP[i].groupid}`).on('click', () => {
-                $.ajax({
-                method:"POST",
-                success: (data) => {
                         document.querySelector('groupchats').style.display = 'flex'
                         document.querySelector('grouplist').style.display = 'none'
                         $('.top_menu').hide()
@@ -41,36 +41,39 @@ $.ajax({
                         Log.style.display = 'flex'
                         Log.style.flexDirection = 'column'
 
-                        for (let n = 0; n < data.GRPLog.length; n++) {
-                            var active = ''
-                            let Person = data.GRPLog[n].from
-                            if(data.GRPLog[n].from == data.PN){
+                        for (let n = 0; n < GroupChats.length; n++) {
+                            let active = ''
+                            let Person = GroupChats[n].from
+                            if(GroupChats[n].from == data.PN){
                                 active = 'activeme'
                                 Person = 'you'
                             }
-                            if(data.GRPLog[n].sento == data.GRP[i].groupid){
+                            let Maincounter = 0
+                            if(GroupChats[n].sento == data.GRP[i].groupid){
+                                Maincounter ++
                                 Log.innerHTML +=`
-                                <article class="${active}" id="${data.GRPLog[n].Id}">
+                                <article class="${active}" id="${GroupChats[n].Id}">
                                     <logname>@${Person}</logname>
-                                    <log>${data.GRPLog[n].Msg}</log>
-                                    <time>${data.GRPLog[n].time}</time>
+                                    <log>${GroupChats[n].Msg}</log>
+                                    <time>${GroupChats[n].time}</time>
                                 </article>
                                 `
-                                const D = new Date(data.GRPLog[n].Id)
-                                if(n < data.GRPLog.length-1){
-                                    if(Number(Math.ceil(data.GRPLog[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(data.GRPLog[n].Id/(1000*60*60*24)))){
-                                    // if((new Date(data.GRPLog[n+1].Id)).getDate() > (new Date(data.GRPLog[n].Id)).getDate() && (new Date(data.GRPLog[n+1].Id)).getMonth() > (new Date(data.GRPLog[n].Id)).getMonth()){
-                                        const D = new Date(data.GRPLog[n+1].Id)
-                                        const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                                        const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
-                                        Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
-                                    }
+                                // console.log(GroupChats[n].Id)
+                                const D = new Date(GroupChats[n].Id)
+                                const end = GroupChats.length-1
+                                console.log(GroupChats[n+2].Id)
+                                if(n == n-1){
+                                    // console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) , Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
+                                    // if(Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))) < Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24)))){
+                                    //     const D = new Date(GroupChats[n+1].Id)
+                                    //     const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
+                                    //     const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
+                                    //     Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
+                                    // }
                                 }
                             }
                         }
                         Hview()
-                    }
-                }) 
             })
         }
 
