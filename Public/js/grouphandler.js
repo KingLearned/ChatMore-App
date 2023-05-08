@@ -48,7 +48,7 @@ $.ajax({
                             }
                         }
                         console.log(Maincounter)
-
+                        let nth = 0
                         for (let n = 0; n < GroupChats.length; n++) {
                             let active = ''
                             let Person = GroupChats[n].from
@@ -58,6 +58,7 @@ $.ajax({
                             }
 
                             if(GroupChats[n].sento == data.GRP[i].groupid){
+                                nth++
                                 Log.innerHTML +=`
                                 <article class="${active}" id="${GroupChats[n].Id}">
                                     <logname>@${Person}</logname>
@@ -68,9 +69,10 @@ $.ajax({
                                 // console.log(GroupChats[n].Id)
                                 const D = new Date(GroupChats[n].Id)
                                 const end = GroupChats.length-1
-                                // console.log(GroupChats[n+2].Id)
-                                if(n == n-1){
-                                    // console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) , Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
+                                // console.log(nth)
+                                if(nth < Maincounter){
+                                    console.log(nth)
+                                    console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
                                     // if(Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))) < Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24)))){
                                     //     const D = new Date(GroupChats[n+1].Id)
                                     //     const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
