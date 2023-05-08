@@ -43,9 +43,9 @@ $.ajax({
 
                         const mainConvo = []
                         for (let n = 0; n < GroupChats.length; n++) {
-                            mainConvo = GroupChats[n].sento == data.GRP[i].groupid ? mainConvo.push(GroupChats[n]) : ''
+                           const Add = GroupChats[n].sento == data.GRP[i].groupid ? mainConvo.push(GroupChats[n]) : ''
                         }
-                        
+
                         for (let n = 0; n < mainConvo.length; n++) {
                             let active = ''
                             // let Person = mainConvo[n].from
