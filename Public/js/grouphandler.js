@@ -42,20 +42,18 @@ $.ajax({
                         Log.style.flexDirection = 'column'
 
                         const mainConvo = []
-                        for (let n = 0; n < GroupChats.length; n++) {
-                           const Add = GroupChats[n].sento == data.GRP[i].groupid ? mainConvo.push(GroupChats[n]) : ''
-                        }
+                        for (let n = 0; n < GroupChats.length; n++) { const Add = GroupChats[n].sento == data.GRP[i].groupid ? mainConvo.push(GroupChats[n]) : '' }
 
                         for (let n = 0; n < mainConvo.length; n++) {
                             let active = ''
-                            // let Person = mainConvo[n].from
+                            let Person = mainConvo[n].from
                             if(mainConvo[n].from == data.PN){ active = 'activeme', Person = 'you' }
 
                             Log.innerHTML +=`
-                            <article class="${active}" id="${GroupChats[n].Id}">
-                                <logname>@${mainConvo[n].from}</logname>
-                                <log>${GroupChats[n].Msg}</log>
-                                <time>${GroupChats[n].time}</time>
+                            <article class="${active}" id="${mainConvo[n].Id}">
+                                <logname>@${Person}</logname>
+                                <log>${mainConvo[n].Msg}</log>
+                                <time>${mainConvo[n].time}</time>
                             </article>
                             `
 
