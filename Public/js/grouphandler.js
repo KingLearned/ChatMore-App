@@ -71,9 +71,9 @@ $.ajax({
                                 const end = GroupChats.length-1
                                 // console.log(nth)
                                 if(nth < Maincounter){
-                                    console.log(nth)
-                                    console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
-                                    // if(Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))) < Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24)))){
+                                    console.log(GroupChats[n].Id)
+                                    console.log(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) , Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24))))
+                                    // if(Number(Math.ceil(GroupChats[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(GroupChats[n].Id/(1000*60*60*24)))){
                                     //     const D = new Date(GroupChats[n+1].Id)
                                     //     const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                                     //     const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
