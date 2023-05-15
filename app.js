@@ -221,7 +221,7 @@ app.post('/', (req, res) => {
                   `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`
 
             const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
-            // MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
+            MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
             res.json({SndMsg:{Id:'Grp', InId:Id, MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`},Exp:LOGIN})
           })
 
