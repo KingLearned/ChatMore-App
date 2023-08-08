@@ -6,7 +6,7 @@ const bodyparser = require('body-parser')
 const session = require('express-session')
 const UUID = require('uuid')
 const MULTER = require('multer')
-const PORT = process.env.PORT || 2000
+const PORT = process.env.PORT || 1000
 const dotenv = require('dotenv')
 const socket = require('socket.io')
 const FS = require('fs')
@@ -20,6 +20,7 @@ dotenv.config()
 app.use(express.static(PATH.join(__dirname, './Public')))
 app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
+
 
 const MYSQL = require('./MODULES/Conn')
 const HomePage = require('./MODULES/Home')
