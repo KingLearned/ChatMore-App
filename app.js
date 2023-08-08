@@ -22,7 +22,6 @@ app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
 
 
-
 const MYSQL = require('./MODULES/Conn')
 const HomePage = require('./MODULES/Home')
 const ChatApp = require('./MODULES/ChatApp')
