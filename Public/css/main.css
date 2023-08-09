@@ -681,19 +681,20 @@ groupchats article logname{
 community{
     display: none;
     height: 53vh;
+    border-radius: 25px 25px 0 0;
+    background-color: white;
 }
 community display{
     margin: 0 0 0 10px;
     width: 365px;
 }
 community div{
-    box-shadow: 0 0 5px gray;
-    border-radius: 15px;
+    border-bottom: 1px solid gray;
     cursor: default;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 15px 0;
+    margin: 0 12px;
 }
 community div img{
     width: 50px;
