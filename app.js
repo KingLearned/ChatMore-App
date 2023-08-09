@@ -8,7 +8,6 @@ const UUID = require('uuid')
 const MULTER = require('multer')
 const PORT = process.env.PORT || 1000
 const dotenv = require('dotenv')
-const socket = require('socket.io')
 const FS = require('fs')
 const http = require('http');
 const server = http.createServer(app);
