@@ -45,17 +45,23 @@ body{
     width: 500px;
     border-radius: 10px;
     box-shadow: 1px 1px 10px gray;
+    height: 97vh;
+    overflow: hidden;
     /* background-image: url('../images/bg-home.jpeg'); */
 }
 .login_page, .signup{
     display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(2, 0, 0, 0.218);
 }
 close{
     color: purple;
     position: absolute;
     font-size: larger;
     top: 10px;
-    left: 10px;
+    right: 10px;
     padding: 5px 10px;
     border-radius: 10px 0 10px 0;
     background-color: white;
@@ -66,8 +72,8 @@ close{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
-    height: 80%;
+    width: 90%;
+    padding: 50px 0;
     display: flex; /*modify to flex*/
     flex-direction: column;
     justify-content: center;
@@ -84,7 +90,7 @@ close{
     color:rgb(207, 38, 207);
     outline: none;
     border: 1px solid rgb(207, 38, 207);
-    border-radius: 50px;
+    border-radius: 10px;
     margin: 5px 0;
     background-color: transparent;
 }
@@ -104,9 +110,9 @@ close{
     color: red;
 }
 .login_page form button, .signup form button{
-    font: 900 15px roboto;
+    font: 900 18px roboto;
     transition: 0.5s;
-    border-radius: 25px;
+    border-radius: 15px;
     background-color: rgb(207, 38, 207);
     color: white;
     width: 50%;
@@ -114,48 +120,43 @@ close{
     padding: 15px 20px;
     margin: 15px;
     border: transparent;
-    box-shadow: 0 0 10px rgba(207, 38, 207, 0.67);
 }
 .login_page form button:hover, .signup form button:hover{
     background-color: rgb(121, 13, 121)
 }
 .main-section{
-    height: 60vh;
-    max-height: 55vh;
+    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.signinarea{
-    display: flex;
-    flex-direction: column;
-    border-radius: 15px 15px 0 0;
-    box-shadow: 0 0 8px gray;
-}
-.signinarea .top{
-    height: 40vh;
-    padding-top: 25px;
-    /* background-color: pink; */
-    /* background-color: white; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* border-radius: 15px 15px 0 0;
-    box-shadow: 0 0 8px gray; */
-    text-align: center;
 }
 .main-section img{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 20px;
 }
 .main-section h1{
     color: rgb(192, 46, 192);
     font-size: 25px;
-    /* margin:  0 0 100px 0; */
 }
+
+.signinarea{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60%;
+    /* background: yellowgreen; */
+}
+.signinarea .top{
+    display: flex;
+    margin-top: 60px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .signinarea h6{
     margin: 10px 0;
     color: gray;
@@ -171,7 +172,7 @@ close{
     border-radius: 25px;
     border: 1px solid transparent;
     background-color: rgb(207, 38, 207);
-    box-shadow: 0 0 15px rgba(207, 38, 207);;
+    box-shadow: 0 0 8px rgba(207, 38, 207);
     color: white;
 }
 .signinarea button:nth-child(4){
@@ -184,17 +185,12 @@ close{
     color: rgb(207, 38, 207);
     cursor: pointer;
 }
-.signinarea button:nth-child(4):hover{
-    color: rgb(248, 49, 248);
-}
+
 .footer{
-    /* height: 5vh; */
-    margin-top: 20px;
-    padding: 20px 0;
     font-family: roboto;
     border-radius: 0 0 10px 10px ;
+    padding: 15px 0;
     text-align: center;
-    background-color: white;
 }
 
 /* #################### CHAT APP SECTION ########################## */

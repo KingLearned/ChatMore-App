@@ -6,6 +6,7 @@
     .container{
         width: 99.9%;
         margin: 0;
+        height: 99vh;
         /* overflow-x: hidden; */
     }
     .appcontainer{
@@ -32,9 +33,6 @@
     }
     .navbar .select a{
         margin: 0 5px;
-    }
-    .main-section{
-        height: 48vh;
     }
     .main-section h1{
         font-size: 30px;
@@ -77,10 +75,6 @@
         color: white;
         text-align: center;
         padding: 10px 0;
-    }
-    .login_page form, .signup form{
-        height: 60vh;
-        width: 90%;
     }
     
     .chats_head h1{
