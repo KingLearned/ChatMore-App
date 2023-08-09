@@ -227,12 +227,7 @@ close{
     width: 500px;
     border-radius: 10px;
     background-color: rgb(245, 111, 245);
-
-}
-.top_menu{
-    position: sticky;
-    top: 0;
-    z-index: 99;
+    
 }
 
 
@@ -368,8 +363,13 @@ userimage yourname{
 .chats_head{
     display: flex;
     justify-content: center;
-    background-color: transparent;
+    /* background-color: transparent; */
     padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    /* background-color: yellowgreen; */
+    border-radius: -50 px 0 0 0;
 }
 dp{
     cursor: pointer;
