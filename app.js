@@ -60,7 +60,8 @@ app.get('/', (req, res) => {
   if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
   }else{
-    res.send(HomePage)
+    // res.send(HomePage)
+    res.sendFile(PATH.join(__dirname, './Public/html/home.html'))
   }
 })
 

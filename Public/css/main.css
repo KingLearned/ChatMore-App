@@ -85,6 +85,7 @@ close{
 }
 .login_page form input, .signup form input{
     font-family: roboto;
+    font-size: 18px;
     padding: 15px;
     width: 80%;
     color:rgb(207, 38, 207);
@@ -214,8 +215,8 @@ close{
 
 .app{
     position: relative;
-    height: auto;
-    background-color: white;
+    height: 97vh;
+    box-shadow: 1px 1px 10px gainsboro;
     border-radius: 15px;
 }
 /* APP CONTAINER */
@@ -224,16 +225,14 @@ close{
     position: relative;
     margin: 10px auto;
     width: 500px;
-    height: auto;
     border-radius: 10px;
-    box-shadow: 1px 1px 10px gainsboro;
+    background-color: rgb(245, 111, 245);
+
 }
 .top_menu{
     position: sticky;
     top: 0;
     z-index: 99;
-    box-shadow: 0 0 5px black;
-    background-color: white;
 }
 
 
@@ -399,22 +398,24 @@ dp{
     padding: 10px 15px;
     margin: 5px;
     border-radius: 355px;
-    background-color: rgb(245, 111, 245);
+    /* background-color: rgb(245, 111, 245); */
 }
 .chats_head h1:hover{
     color: black;
 }
 .friends, groups{
     height: 88vh;
+    background-color: white;
+    padding-top: 1px;
+    border-radius: 25px 25px 0 0;
 }
 .friends div{
-    box-shadow: 0 0 5px gray;
-    border-radius: 15px;
+    border-bottom: 1px solid gainsboro;
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 10px;
-    margin: 12px 0;
+    padding: 10px 0;
+    margin: 0 12px;
 }
 .friends div img{
     width: 50px;
