@@ -360,17 +360,6 @@ userimage yourname{
     
 }
 
-.chats_head{
-    display: flex;
-    justify-content: center;
-    /* background-color: transparent; */
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 99;
-    /* background-color: yellowgreen; */
-    border-radius: -50 px 0 0 0;
-}
 dp{
     cursor: pointer;
 }
@@ -400,14 +389,42 @@ dp{
     border-radius: 355px;
     /* background-color: rgb(245, 111, 245); */
 }
+.chats_head{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    position: sticky;
+    background-color: rgb(245, 111, 245);
+    top: 0;
+    z-index: 99;
+}
+.curve{
+    position: fixed;
+    top: 67px;
+    background-color: rgb(245, 111, 245);
+    z-index: 1;
+    width: 100%;
+    height: 18px;
+}
+.curve div{
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    border-radius: 25px 25px 0 0;
+    width: 100%;
+    height: 100%;
+}
 .chats_head h1:hover{
     color: black;
 }
 .friends, groups{
     height: 88vh;
+    width: 100%;
+    position: absolute;
+    top: 8px;
     background-color: white;
-    padding-top: 1px;
-    border-radius: 25px 25px 0 0;
+    /* padding-top: 1px; */
+    /* border-radius: 25px 25px 0 0; */
 }
 .friends div{
     border-bottom: 1px solid gainsboro;
