@@ -498,8 +498,9 @@ logs article{
     padding: 10px;
     background-color: white;
     border-radius: 0 10px 10px 10px;
-    /* min-width: auto; */
+    width: minmax(30%, 80%);
     height: max-content;
+    align-self: flex-start;
     margin: 5px 0;
 }
 log{
