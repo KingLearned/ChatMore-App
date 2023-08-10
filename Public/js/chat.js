@@ -70,7 +70,7 @@ $.ajax({
             window.scrollTo(0, document.body.scrollTop)
             document.querySelector('chatlog').style.display = 'none'
             document.querySelector('friendlist').style.display = 'block'
-            $('.top_menu').show()
+            $('.chats_head').show()
 
             if($('.friends div').length >= 7){
                 document.querySelector('.friends').style.height = 'auto'
@@ -123,7 +123,7 @@ $.ajax({
 
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
-                $('.top_menu').hide()
+                $('.chats_head').hide()
 
                 let FriendImg = `../images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
