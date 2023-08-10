@@ -402,9 +402,9 @@ dp{
     margin: 5px;
     border-radius: 355px;
 
-    .chats_head h1:hover{
-        color: rgb(249, 44, 249);
-    }
+}
+.chats_head h1:hover{
+    color: rgb(249, 44, 249);
 }
 .friends, groups{
     height: 88vh;
