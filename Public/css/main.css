@@ -514,7 +514,7 @@ time{
     bottom: 2px;
     font: 300 10px roboto; 
     text-align: right;
-    color: navy;
+    color: gray;
 }
 .edit:hover make{
     height: 25px;
