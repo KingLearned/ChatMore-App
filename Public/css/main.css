@@ -490,13 +490,13 @@ logs{
     flex-direction: column;
     padding: 0 10px;
 }
-chatlog article{
+logs article{
     position: relative;
     display: flex;
-    cursor: default;
     flex-direction: column;
-    background-color: white;
+    cursor: default;
     padding: 10px;
+    background-color: white;
     border-radius: 0 10px 10px 10px;
     /* min-width: auto; */
     height: max-content;
