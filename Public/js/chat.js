@@ -97,8 +97,6 @@ $.ajax({
             document.querySelector('.user_profile').style.height = 'auto'
             document.querySelector('.app').style.display = 'none'
         })
-        document.querySelector('.user_profile').style.display = 'flex'
-        document.querySelector('.app').style.display = 'none'
 
         $('.ChngPwd').on('submit', (e) => {
             e.preventDefault()
