@@ -550,7 +550,7 @@ smile{
     position: absolute;
     left: 5px;
     bottom: 13px;
-    color: white;
+    color: rgb(245, 111, 245);
     font-size: 25px;
     cursor: pointer;
 }
