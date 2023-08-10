@@ -540,7 +540,7 @@ sending{
     background-color: rgb(228, 225, 225);
     border-radius: 5px;
     padding: 5px 0;
-    /* width: 100vw; */
+    width: 500px;
 }
 .GrpSend{
     position: absolute;  
