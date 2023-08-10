@@ -163,7 +163,7 @@ $.ajax({
                     var edit = ''
                     if(ChatLogs[n].replyto !== data.PN){
                         shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: rgb(245, 111, 245); color:white; border-radius:20px 20px 0 20px"`
-                        edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-window-close del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
+                        edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
                     }
                     
                     //Differentiating Between You and Other Users
