@@ -432,7 +432,9 @@ talk{
     color: gray;
 }
 chatlog{
-    /* position: relative; */
+    position: relative;
+    width: 100%;
+    box-sizing: content-box;
     display: none;
     flex-direction: column;
     height: 100%;
@@ -533,7 +535,7 @@ del{
     background-color: red;
 }
 sending{
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     background-color: rgb(228, 225, 225);
     border-radius: 5px;
