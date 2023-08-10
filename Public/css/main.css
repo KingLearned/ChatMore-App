@@ -493,7 +493,7 @@ chatlog article{
     display: flex;
     cursor: default;
     flex-direction: column;
-    background-color: rgb(207, 38, 207);
+    background-color: rgb(245, 111, 245);
     box-shadow: 0 0 5px gray;
     padding: 10px;
     border-radius: 0 20px 20px 20px;
