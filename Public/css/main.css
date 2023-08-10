@@ -507,7 +507,7 @@ log{
 time{
     font: 300 10px roboto; 
     text-align: right;
-    color: gainsboro;
+    color: gray;
 }
 .edit:hover make{
     height: 25px;
