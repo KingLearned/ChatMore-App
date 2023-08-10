@@ -42,10 +42,6 @@
         top: 0 !important;
         padding: 15px 5px 15px 25px;
     }
-    chatlog article{
-        width: 50vw;
-        margin: 5px 0;
-    }
     chatlog form input{
         width: 88%;
     }
