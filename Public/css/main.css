@@ -516,15 +516,16 @@ time{
 }
 make{
     font-size: 18px;
-    overflow: hidden;
+    /* overflow: hidden; */
     height: 0;
 }
 edit, del{
     background-color: lightgreen;
-    padding: 5px;
-    border-radius: 10px;
+    /* padding: 5px; */
+    border-radius: 5px;
+    font-size: 10px;
     cursor: pointer;
-    margin: 5px 2px;
+    margin: 0 2px;
 }
 del{
     background-color: red;
