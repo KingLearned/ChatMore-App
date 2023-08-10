@@ -511,7 +511,7 @@ time{
 }
 .edit:hover make{
     height: 25px;
-    /* transition: 1s; */
+    transition: 1s;
 }
 make{
     overflow: hidden;
