@@ -602,13 +602,12 @@ groups{
     display: none;
 }
 groups div{
-    box-shadow: 0 0 5px gray;
-    border-radius: 15px;
+    border-bottom: 1px solid gainsboro;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-    margin: 12px 0;
+    margin: 0 12px;
 }
 groups div img{
     width: 50px;
@@ -689,7 +688,7 @@ community display{
     width: 365px;
 }
 community div{
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid gainsboro;
     cursor: default;
     display: flex;
     align-items: center;
