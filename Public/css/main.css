@@ -507,7 +507,6 @@ log{
 time{
     font: 300 10px roboto; 
     text-align: right;
-    margin: 0 10px 0 0;
 }
 .edit:hover make{
     height: 25px;
