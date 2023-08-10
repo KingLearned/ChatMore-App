@@ -503,25 +503,24 @@ chatlog article{
     margin: 5px 0;
 }
 log{
-    font: 400 13px roboto;
+    font: 500 13px roboto;
 }
 time{
     font: 300 10px roboto; 
     text-align: right;
-    margin: 0 10px 0 0;
+    margin: -5px 10px 0 0;
 }
 .edit:hover make{
     height: 35px;
     transition: 1s;
 }
 make{
-    font-size: 18px;
-    /* overflow: hidden; */
+    overflow: hidden;
     height: 0;
 }
 edit, del{
     background-color: lightgreen;
-    /* padding: 5px; */
+    padding: 4px 5px;
     border-radius: 5px;
     font-size: 15px;
     cursor: pointer;
