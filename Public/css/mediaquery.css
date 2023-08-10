@@ -9,6 +9,9 @@
         height: 99vh;
         /* overflow-x: hidden; */
     }
+    .app{
+        height: 100vh;
+    }
     .appcontainer{
         width: 99.9%;
         /* padding: 0; */
