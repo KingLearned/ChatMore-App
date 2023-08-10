@@ -74,7 +74,7 @@ socket.on('chat message', function(Msg,Exp) {
         let edit = ''
         if(Msg.from !== $('chat_top h6').html()){
             // Id = 'you'
-            shift = `class="edit" style="align-self:flex-end; background-color: rgb(245, 111, 245); color:white; border-radius:10px 10px 0 10px"`
+            shift = `class="edit" style="align-self:flex-end; background-color: rgb(228, 225, 225); border-radius:20px 20px 0 20px"`
             edit = 
                 `
                 <make>
