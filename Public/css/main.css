@@ -513,7 +513,7 @@ time{
     bottom: 2px;
     font: 300 10px roboto; 
     text-align: right;
-    color: gray;
+    color: navy;
 }
 .edit:hover make{
     height: 25px;
@@ -550,7 +550,7 @@ smile{
     position: absolute;
     left: 5px;
     bottom: 13px;
-    color: rgb(245, 111, 245);
+    color: white;
     font-size: 25px;
     cursor: pointer;
 }
