@@ -530,10 +530,10 @@ del{
 }
 sending{
     position: absolute;
+    bottom: 0;
     background-color: rgb(228, 225, 225);
     border-radius: 5px;
     padding: 5px 0;
-    bottom: 0;
     width: 100%;
 }
 .GrpSend{
