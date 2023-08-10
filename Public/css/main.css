@@ -498,14 +498,13 @@ chatlog article{
     box-shadow: 0 0 5px gray;
     padding: 10px;
     border-radius: 0 20px 20px 20px;
-    width: 50%;
+    width: max-content;
     height: max-content;
     margin: 5px 0;
 }
 log{
     font: 700 13px roboto;
 }
-
 time{
     font: 600 10px roboto; 
     text-align: right;
