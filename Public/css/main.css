@@ -471,7 +471,6 @@ chatlog chat_top img{
 }
 chatlog h1{
     font-size: 15px;
-    /* margin: 0 0 10px 0; */
 }
 display{
     margin: 0 0 0 10px;
@@ -494,7 +493,7 @@ chatlog article{
     display: flex;
     cursor: default;
     flex-direction: column;
-    background-color: white;
+    background-color: rgb(207, 38, 207);
     box-shadow: 0 0 5px gray;
     padding: 10px;
     border-radius: 0 20px 20px 20px;
