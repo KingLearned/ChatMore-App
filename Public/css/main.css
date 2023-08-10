@@ -497,13 +497,13 @@ chatlog article{
     padding: 10px;
     border-radius: 0 20px 20px 20px;
     /* width: ; */
-    min-width: 20%;
+    min-width: 30%;
     max-width: max-content;
     height: max-content;
     margin: 5px 0;
 }
 log{
-    font: 700 13px roboto;
+    font: 400 13px roboto;
 }
 time{
     font: 300 10px roboto; 
