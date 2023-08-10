@@ -28,7 +28,7 @@ $.ajax({
             $(`.ChatIn${data.GRP[i].groupid}`).on('click', () => {
                         document.querySelector('groupchats').style.display = 'flex'
                         document.querySelector('grouplist').style.display = 'none'
-                        $('.top_menu').hide()
+                        $('.chats_head').hide()
 
                         $('groupchats h2').html(data.GRP[i].groupname) // Display Group Name
                         $('.GrpID').val(data.GRP[i].groupid) //Assign Input The Group ID
@@ -88,7 +88,7 @@ $.ajax({
                 window.scrollTo(0, document.body.scrollTop)
                 document.querySelector('grouplist').style.display = 'block'
                 document.querySelector('groupchats').style.display = 'none'
-                $('.top_menu').show()
+                $('.chats_head').show()
 
                 const GrpHv = $('grouplist div').length > 6 ? 
                 document.querySelector('groups').style.height = 'auto' : 
