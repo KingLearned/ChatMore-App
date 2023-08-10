@@ -189,7 +189,7 @@ $.ajax({
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
                 const  typeMsg = document.querySelector('sending')
-                window.scrollTo({bottom:0,left:0})
+                window.scrollTo({top:-1,left:0})
                 const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
                 (/*typeMsg.style.position = 'sticky' ,*/  document.querySelector('.friends').style.height = 'auto') :
                 (/*typeMsg.style.position = 'absolute',*/ document.querySelector('.friends').style.height = '100vh');
