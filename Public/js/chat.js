@@ -135,7 +135,7 @@ $.ajax({
                     }
                 }
                 document.querySelector('chatlog img').src = FriendImg
-                $('chatlog h1').html(`<span style='text-transform:capitalize;'>@${data.FRD[i]}</span>`)//Chat Header
+                $('chatlog h1').html(`<span style='text-transform:capitalize;'>${data.FRD[i]}</span>`)//Chat Header
                 $('chatlog h6').html(data.FRD[i])//Chat Header
                 
                 for (let m = 0; m < MainChats.length; m++) {
