@@ -236,7 +236,7 @@ close{
 .user_profile{
     display: none;
     flex-direction: column;
-    /* padding: 15px 0; */
+    background-color: white;
 }
 .user_profile button{
     border: transparent;
@@ -345,7 +345,6 @@ userimage yourname{
     width: max-content;
     padding: 5px 10px;
     margin: 10px ;
-    background-color: rgb(245, 111, 245, 0.3);
     border: 1px solid transparent;
     border-radius: 5px;
     font: 500 15px roboto;
