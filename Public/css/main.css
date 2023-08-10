@@ -510,7 +510,7 @@ time{
     margin: 0 10px 0 0;
 }
 .edit:hover make{
-    height: 100%;
+    height: 25px;
     transition: 1s;
 }
 make{
