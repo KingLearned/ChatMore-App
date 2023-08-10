@@ -189,10 +189,10 @@ $.ajax({
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
                 const  typeMsg = document.querySelector('sending')
-                window.scrollTo(0, document.body.scrollHeight)
                 const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
                 (/*typeMsg.style.position = 'sticky' ,*/  document.querySelector('.friends').style.height = 'auto') :
                 (/*typeMsg.style.position = 'absolute',*/ document.querySelector('.friends').style.height = '100vh');
+                window.scrollTo(0, document.body.scrollHeight)
                 
                 $('.Msg').focus() //Focusing of Type new Message
 
