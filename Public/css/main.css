@@ -498,7 +498,7 @@ chatlog article{
     background-color: white;
     padding: 10px;
     border-radius: 0 10px 10px 10px;
-    min-width: 30% !important;
+    min-width: 30%;
     max-width: 50%;
     height: max-content;
     margin: 5px 0;
