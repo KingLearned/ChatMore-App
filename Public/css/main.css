@@ -396,7 +396,8 @@ dp{
     transition: all;
     font: 600 20px restrict;
     cursor: pointer;
-    color: white;
+    background-color: white;
+    color: rgb(245, 111, 245);
     padding: 10px 15px;
     margin: 5px;
     border-radius: 355px;
