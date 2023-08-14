@@ -654,13 +654,17 @@ groupchats button{
     background-color: transparent;
 }
 groupchats article{
+    position: relative;
     display: flex;
-    cursor: default;
     flex-direction: column;
-    box-shadow: 0 0 5px gray;
+    cursor: default;
     padding: 10px;
-    border-radius: 15px;
-    width: 60%;
+    background-color: white;
+    border-radius: 0 10px 10px 10px;
+    min-width: 20%;
+    max-width: 85%;
+    height: max-content;
+    align-self: flex-start;
     margin: 5px 0;
 }
 groupchats article logname{
