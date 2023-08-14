@@ -293,12 +293,12 @@ app.post('/', upload.single('User_Img'), (req, res) => {
     }
 
   }else{ /********************************* LOGIN HANDLER  ********************************/
-    if(Log_Name.trim(),Log_Pwd) {
+    if(Log_Name,Log_Pwd) {
       const query = "SELECT * FROM `users` WHERE username=?"
       MYSQL.query(query, [Log_Name.toLocaleLowerCase()], (err, Result) => {
 
         const Auth = Result.length > 0 ? 
-        Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase(), res.json({Approved: 'Yes'})) : res.json({msg: 'Mismatched Password or Username!'}) : 
+        Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Mismatched Password or Username!'}) : 
         res.json({msg:'User Dose Not Exist!'})
 
       })
