@@ -140,7 +140,7 @@ socket.on('chat message', function(Msg,Exp) {
         }
 
 
-        let Id = Msg.from
+        let Id = `<logname>@${Msg.from}</logname>`
         let shift = ''
         if(Msg.from == $('yourname').html()){
             Id = ''
@@ -149,7 +149,7 @@ socket.on('chat message', function(Msg,Exp) {
         Log.innerHTML +=
         `
         <article class="${shift}" id="${Msg.InId}">
-            <logname>@${Id}</logname>
+            ${Id}
             <log>${Msg.Msg.split('<').join('&lt;')}</log>
             <time>${Msg.time}</time>
         </article>
