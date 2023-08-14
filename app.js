@@ -100,210 +100,202 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   let Revole = 'GrpID'
   
   if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
+    if(req.file){
+      const Img = Math.floor(new Date().getTime()/new Date().getFullYear())+req.file.originalname
+      const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
       
-      if(req.file){
-        const Img = Math.floor(new Date().getTime()/new Date().getFullYear())+req.file.originalname
-        const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
+      const query = "SELECT * FROM `users` WHERE `username`=?" //DELETING OF USER'S PREVIOUS IMAGE
+      MYSQL.query(query, [LOGIN], (err, Result) => { appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) })
 
-        // storage.deleteFile('cacheBucket', data.files[i].$id)
+      const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
+      
+      promise.then(function (response) {
+        const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+        MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
+
+      }, function (error) {
+        console.log(error)
+      })
+
+    }else{
+      if(AddFriend){
         const query = "SELECT * FROM `users` WHERE `username`=?"
-        MYSQL.query(query, [LOGIN], (err, Result) => { 
-          console.log(Result.user_img)
-        })
-
-        // const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
-        
-        // promise.then(function (response) {
-        //   console.log(response.$id)
-        //   const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-        //   MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
-
-        // }, function (error) {
-        //   console.log(error)
-        // })
-      }else{
-        if(AddFriend){
-          const query = "SELECT * FROM `users` WHERE `username`=?"
-          MYSQL.query(query, [LOGIN], (err, MainResult) => {
-            const query = "UPDATE `users` SET `friends`=? WHERE `username`=?"
-            MYSQL.query(query, [MainResult[0].friends+`,${AddFriend}`,LOGIN], (err, SubResult) => {
-              res.redirect('/')
-            })
-          })
-          const query1 = "SELECT * FROM `users` WHERE `username`=?"
-          MYSQL.query(query1, [AddFriend], (err, MainResult) => {
-            const query = "UPDATE `users` SET `friends`=? WHERE `username`=?"
-            const Add = MainResult[0].friends == '' ? `${LOGIN}` : MainResult[0].friends+`,${LOGIN}`
-            MYSQL.query(query, [Add,AddFriend], (err, SubResult) => {})
-          })
-
-        }else if(ChatMsg && MsgTo){
-        /*************** SENDING OT USERS CHAT *****************/
-          const ExpMsg = new SendMsgAPI(LOGIN,ChatMsg,MsgTo,ElementTag) 
-          res.json(ExpMsg.MainMsg())
-
-        }else if(EditId,EditMsg){
-        /*************** EDITING OT USERS CHAT *****************/
-          const query1 = "SELECT * FROM `users` WHERE `username`=?"
-          MYSQL.query(query1, [LOGIN],(err, result) => {
-            let ChatEdit = JSON.parse(`[${result[0].chats}]`)
-            for (let i = 0; i < ChatEdit.length; i++) {
-              if(ChatEdit[i].Id == EditId){ ChatEdit[i].Msg = EditMsg }
-            }
-            ChatEdit = JSON.stringify(ChatEdit)
-            ChatEdit = ChatEdit.split('[').join('')
-            ChatEdit = ChatEdit.split(']').join('')
-            for (let n = 0; n < Emoji.length; n++) {
-              ChatEdit = ChatEdit.split(Emoji[n]).join(EmojiId[n])
-            }
-            ChatEdit = ChatEdit.split('<').join('&lt;')
-            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
-          })
-          res.json({SndMsg:{Id:'Edit', MsgId:EditId, Msg:EditMsg, EleDiv:ElementTag}})
-
-        }else if(DelMsg){
-        /*************** DELETING OT USERS CHAT *****************/
-          res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag}, DelID:{DelMsg}})
-          const query1 = "SELECT * FROM `users` WHERE `username`=?"
-          MYSQL.query(query1, [LOGIN],(err, result) => {
-            let Del = JSON.parse(`[${result[0].chats}]`)
-            for (let n = 0; n < Del.length; n++) {
-              if((Del[n].Id == DelMsg)){
-                function Rem(comm,Add){
-                  var index = comm.indexOf(Add)
-                  if(index > -1){
-                    comm.splice(index,1)
-                  }
-                  return comm
-                }Rem(Del,Del[n])
-              }
-            }
-            Del = JSON.stringify(Del)
-            Del = Del.split('[').join('')
-            Del = Del.split(']').join('')
-            const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
-            MYSQL.query(query1, [Del,LOGIN],(err, result) => {})
-          })
-
-        }else if(UserAbout){
-        /********************************* UPDATING OF USERS ABOUT  ********************************/
-          const query = "UPDATE `users` SET `about`=? WHERE `username`=?"
-          MYSQL.query(query, [UserAbout,LOGIN], (err, SubResult) => {
+        MYSQL.query(query, [LOGIN], (err, MainResult) => {
+          const query = "UPDATE `users` SET `friends`=? WHERE `username`=?"
+          MYSQL.query(query, [MainResult[0].friends+`,${AddFriend}`,LOGIN], (err, SubResult) => {
             res.redirect('/')
           })
-        }else if(newPWD, CnewPWD){
-        /********************************* UPDATING OF USERS PASSWORD  ********************************/
-        const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
-        const checkPWD = newPWD === CnewPWD ? (
-          MYSQL.query(query, [newPWD,LOGIN], (err, SubResult) => {}),
-          res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) ): 
-          res.json({errPwd:'<span style="color:red;">Password mismatched, try again!</span>'})
+        })
+        const query1 = "SELECT * FROM `users` WHERE `username`=?"
+        MYSQL.query(query1, [AddFriend], (err, MainResult) => {
+          const query = "UPDATE `users` SET `friends`=? WHERE `username`=?"
+          const Add = MainResult[0].friends == '' ? `${LOGIN}` : MainResult[0].friends+`,${LOGIN}`
+          MYSQL.query(query, [Add,AddFriend], (err, SubResult) => {})
+        })
 
-            
-        }else if (GrpMsg){
-        /********************************* GROUP MESSAGING HANDLER  ********************************/
-        /********************************* GROUP MESSAGING HANDLER  ********************************/
+      }else if(ChatMsg && MsgTo){
+      /*************** SENDING OT USERS CHAT *****************/
+        const ExpMsg = new SendMsgAPI(LOGIN,ChatMsg,MsgTo,ElementTag) 
+        res.json(ExpMsg.MainMsg())
 
-          const Id = new Date().getTime()
-          const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
-          const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
+      }else if(EditId,EditMsg){
+      /*************** EDITING OT USERS CHAT *****************/
+        const query1 = "SELECT * FROM `users` WHERE `username`=?"
+        MYSQL.query(query1, [LOGIN],(err, result) => {
+          let ChatEdit = JSON.parse(`[${result[0].chats}]`)
+          for (let i = 0; i < ChatEdit.length; i++) {
+            if(ChatEdit[i].Id == EditId){ ChatEdit[i].Msg = EditMsg }
+          }
+          ChatEdit = JSON.stringify(ChatEdit)
+          ChatEdit = ChatEdit.split('[').join('')
+          ChatEdit = ChatEdit.split(']').join('')
+          for (let n = 0; n < Emoji.length; n++) {
+            ChatEdit = ChatEdit.split(Emoji[n]).join(EmojiId[n])
+          }
+          ChatEdit = ChatEdit.split('<').join('&lt;')
+          const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+          MYSQL.query(query1, [ChatEdit,LOGIN],(err, result) => {})
+        })
+        res.json({SndMsg:{Id:'Edit', MsgId:EditId, Msg:EditMsg, EleDiv:ElementTag}})
 
-          const query = "SELECT * FROM `chatmoregroups` WHERE `groupid`=?"
-          MYSQL.query(query, GrpID, (err, Main) => {
-            let GrpLog =  GrpMsg
-            for (let n = 0; n < Emoji.length; n++) {
-              GrpLog = GrpLog.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
+      }else if(DelMsg){
+      /*************** DELETING OT USERS CHAT *****************/
+        res.json({SndMsg:{Id:'Del', Msg:DelMsg, EleDiv:ElementTag}, DelID:{DelMsg}})
+        const query1 = "SELECT * FROM `users` WHERE `username`=?"
+        MYSQL.query(query1, [LOGIN],(err, result) => {
+          let Del = JSON.parse(`[${result[0].chats}]`)
+          for (let n = 0; n < Del.length; n++) {
+            if((Del[n].Id == DelMsg)){
+              function Rem(comm,Add){
+                var index = comm.indexOf(Add)
+                if(index > -1){
+                  comm.splice(index,1)
+                }
+                return comm
+              }Rem(Del,Del[n])
             }
-            GrpLog = GrpLog.split('<').join('&lt;')
+          }
+          Del = JSON.stringify(Del)
+          Del = Del.split('[').join('')
+          Del = Del.split(']').join('')
+          const query1 = "UPDATE `users` SET `chats`=? WHERE `username`=?"
+          MYSQL.query(query1, [Del,LOGIN],(err, result) => {})
+        })
 
-            const Chats = Main[0].chatlogs == '' ? `{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`:
-                  `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`
+      }else if(UserAbout){
+      /********************************* UPDATING OF USERS ABOUT  ********************************/
+        const query = "UPDATE `users` SET `about`=? WHERE `username`=?"
+        MYSQL.query(query, [UserAbout,LOGIN], (err, SubResult) => {
+          res.redirect('/')
+        })
+      }else if(newPWD, CnewPWD){
+      /********************************* UPDATING OF USERS PASSWORD  ********************************/
+      const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
+      const checkPWD = newPWD === CnewPWD ? (
+        MYSQL.query(query, [newPWD,LOGIN], (err, SubResult) => {}),
+        res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) ): 
+        res.json({errPwd:'<span style="color:red;">Password mismatched, try again!</span>'})
 
-            const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
-            MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
-            res.json({SndMsg:{Id:'Grp', InId:Id, MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`},Exp:LOGIN})
-          })
-
-        }else if(Revole){
           
-              /*************** UPDATING MODULE FOR CHAT FRIENDS *****************/
-              const query1 = "SELECT * FROM `users`"
-              MYSQL.query(query1, (err, RunUpdate) => {
-                  const add = []
-                  for (let i = 0; i < RunUpdate.length; i++) {
-                    add.push(RunUpdate[i].username)
-                  }
-                  const query1 = "SELECT * FROM `users` WHERE `username`=?"
-                  MYSQL.query(query1, [LOGIN],(err, friend) => {
-                    const Friends = friend[0].friends.split(',')
-                    const UpdateFrd = []
-                    for (let i = 0; i < add.length; i++) {
-                      for (let n = 0; n < Friends.length; n++) {
-                          if(Friends[n] == add[i]){
-                            UpdateFrd.push(Friends[n])
-                          }
-                      }
-                    }
-                    const query1 = "UPDATE `users` SET `friends`=? WHERE `username`=?"
-                    MYSQL.query(query1, [UpdateFrd.toLocaleString(),LOGIN],(err, result) => {})
-                  })
-              })
-              /*****************************************************************/
-              
-              setTimeout(() => {
-                const query = "SELECT * FROM `users` WHERE `username`=?"
-                MYSQL.query(query, [LOGIN], (err, ForFriends) => {
-                  const query = "SELECT * FROM `users`"
-                  MYSQL.query(query, (err, MainResult) => {
-                    var Friends = ''
-                    if(ForFriends[0].friends){
-                      Friends = ForFriends[0].friends.split(',')
-                    }
+      }else if (GrpMsg){
+      /********************************* GROUP MESSAGING HANDLER  ********************************/
+      /********************************* GROUP MESSAGING HANDLER  ********************************/
 
-                    let ChatLog = ''
-                    for (let i = 0; i < MainResult.length; i++) {
-                      ChatLog += MainResult[i].chats
-                    }
-                    ChatLog = (JSON.parse(`[${ChatLog.split('}{').join('},{')}]`)).sort((a, b) => a.Id - b.Id)
-                    for (let m = 0; m < ChatLog.length; m++) {
-                      for (let n = 0; n < Emoji.length; n++) {
-                        ChatLog[m].Msg = ChatLog[m].Msg.split(EmojiId[n]).join(Emoji[n])
-                      }
-                    }
-                    //GETTING CHATS OF SENT TO THE DIFFERENT GROUPS
-                    const query = "SELECT * FROM `chatmoregroups`"
-                    MYSQL.query(query, (err, Group) => {
-                      var Col = ''
-                      for (let i = 0; i < Group.length; i++) {
-                        Col += Group[i].chatlogs
-                      }
+        const Id = new Date().getTime()
+        const M = (new Date).getMinutes() < 10 ? '0'+(new Date).getMinutes() : (new Date).getMinutes()
+        const H = (new Date).getHours() < 10 ? '0'+(new Date).getHours() : (new Date).getHours()
 
-                      const GRPLogs = (JSON.parse(`[${Col.split('}{').join('},{')}]`))
-                      for (let m = 0; m < GRPLogs.length; m++) {
-                        for (let n = 0; n < Emoji.length; n++) {
-                          GRPLogs[m].Msg = GRPLogs[m].Msg.split(EmojiId[n]).join(Emoji[n])
+        const query = "SELECT * FROM `chatmoregroups` WHERE `groupid`=?"
+        MYSQL.query(query, GrpID, (err, Main) => {
+          let GrpLog =  GrpMsg
+          for (let n = 0; n < Emoji.length; n++) {
+            GrpLog = GrpLog.split(Emoji[n]).join(EmojiId[n]) // Reading The Message to encode the Emojis
+          }
+          GrpLog = GrpLog.split('<').join('&lt;')
+
+          const Chats = Main[0].chatlogs == '' ? `{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`:
+                `,{"sento":"${Main[0].groupid}", "Id":${Id}, "from":"${LOGIN}", "Msg":"${GrpLog}", "time":"${H}:${M}"}`
+
+          const query = "UPDATE `chatmoregroups` SET `chatlogs`=? WHERE `groupid`=?"// New Function
+          MYSQL.query(query, [Main[0].chatlogs+Chats,GrpID], (err, Result) => {})
+          res.json({SndMsg:{Id:'Grp', InId:Id, MsgTo:GrpID, Msg:GrpMsg, EleDiv:ElementTag,  from:LOGIN, time:`${H}:${M}`},Exp:LOGIN})
+        })
+
+      }else if(Revole){
+        
+            /*************** UPDATING MODULE FOR CHAT FRIENDS *****************/
+            const query1 = "SELECT * FROM `users`"
+            MYSQL.query(query1, (err, RunUpdate) => {
+                const add = []
+                for (let i = 0; i < RunUpdate.length; i++) {
+                  add.push(RunUpdate[i].username)
+                }
+                const query1 = "SELECT * FROM `users` WHERE `username`=?"
+                MYSQL.query(query1, [LOGIN],(err, friend) => {
+                  const Friends = friend[0].friends.split(',')
+                  const UpdateFrd = []
+                  for (let i = 0; i < add.length; i++) {
+                    for (let n = 0; n < Friends.length; n++) {
+                        if(Friends[n] == add[i]){
+                          UpdateFrd.push(Friends[n])
                         }
+                    }
+                  }
+                  const query1 = "UPDATE `users` SET `friends`=? WHERE `username`=?"
+                  MYSQL.query(query1, [UpdateFrd.toLocaleString(),LOGIN],(err, result) => {})
+                })
+            })
+            /*****************************************************************/
+            
+            setTimeout(() => {
+              const query = "SELECT * FROM `users` WHERE `username`=?"
+              MYSQL.query(query, [LOGIN], (err, ForFriends) => {
+                const query = "SELECT * FROM `users`"
+                MYSQL.query(query, (err, MainResult) => {
+                  var Friends = ''
+                  if(ForFriends[0].friends){
+                    Friends = ForFriends[0].friends.split(',')
+                  }
+
+                  let ChatLog = ''
+                  for (let i = 0; i < MainResult.length; i++) {
+                    ChatLog += MainResult[i].chats
+                  }
+                  ChatLog = (JSON.parse(`[${ChatLog.split('}{').join('},{')}]`)).sort((a, b) => a.Id - b.Id)
+                  for (let m = 0; m < ChatLog.length; m++) {
+                    for (let n = 0; n < Emoji.length; n++) {
+                      ChatLog[m].Msg = ChatLog[m].Msg.split(EmojiId[n]).join(Emoji[n])
+                    }
+                  }
+                  //GETTING CHATS OF SENT TO THE DIFFERENT GROUPS
+                  const query = "SELECT * FROM `chatmoregroups`"
+                  MYSQL.query(query, (err, Group) => {
+                    var Col = ''
+                    for (let i = 0; i < Group.length; i++) {
+                      Col += Group[i].chatlogs
+                    }
+
+                    const GRPLogs = (JSON.parse(`[${Col.split('}{').join('},{')}]`))
+                    for (let m = 0; m < GRPLogs.length; m++) {
+                      for (let n = 0; n < Emoji.length; n++) {
+                        GRPLogs[m].Msg = GRPLogs[m].Msg.split(EmojiId[n]).join(Emoji[n])
                       }
+                    }
 
-                      res.json({PN: LOGIN,
-                        USER:ForFriends, SORT:MainResult, CHATS:ChatLog, FRD:Friends,
-                        GRP:Group, GRPLog:GRPLogs
-                      })
+                    res.json({PN: LOGIN,
+                      USER:ForFriends, SORT:MainResult, CHATS:ChatLog, FRD:Friends,
+                      GRP:Group, GRPLog:GRPLogs
                     })
-                    /***********    Ended Here  *********/
                   })
-                })  
-              },500)
-        }
+                  /***********    Ended Here  *********/
+                })
+              })  
+            },500)
       }
+    }
 
-    // })
-
-  }else{
-/********************************* LOGIN HANDLER  ********************************/
-/********************************* LOGIN HANDLER  ********************************/
-    if(Log_Name,Log_Pwd){
+  }else{ /********************************* LOGIN HANDLER  ********************************/
+    if(Log_Name,Log_Pwd) {
       const query = "SELECT * FROM `users` WHERE username=?"
       MYSQL.query(query, [Log_Name.toLocaleLowerCase()], (err, Result) => {
 
@@ -312,9 +304,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
         res.json({msg:'User Dose Not Exist!'})
 
       })
-/********************************* SIGN UP HANDLER  ********************************/
-/********************************* SIGN UP HANDLER  ********************************/
-    }else if(Sig_Name,Sig_Tele,Sig_Pwd,Sig_CPwd){
+
+    }else if(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) {/********************************* SIGN UP HANDLER  ********************************/
       const valid = Sig_Name.replace(/[^a-zA-Z^0-9]/g, "")
       if(Sig_Name == valid){
 
