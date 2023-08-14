@@ -637,13 +637,13 @@ groupchats group_top{
     padding: 15px 0;
     background-color: white;
     border-radius: 0 0 15px 15px;
+    border-bottom: 1px solid gainsboro;
     width: 100%;
     z-index: 99;
 }
 groupchats group_top h2{
     border-radius: 15px;
     width:100%;
-
 }
 groupchats button{
     width: 30px;
