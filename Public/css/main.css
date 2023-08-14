@@ -620,6 +620,9 @@ groups div img{
     height: 50px;
     border-radius: 365px;
 }
+groupname{
+    font-family: roboto;
+}
 groupchats{
     display: none;
     flex-direction: column;
