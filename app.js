@@ -108,7 +108,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
         // storage.deleteFile('cacheBucket', data.files[i].$id)
         const query = "SELECT `users` WHERE `username`=?"
         MYSQL.query(query, [LOGIN], (err, data) => { 
-          console.log(data.user_img)
+          console.log(data)
         })
 
         // const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
