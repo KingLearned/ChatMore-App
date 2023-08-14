@@ -65,9 +65,6 @@ app.get('/Log-User-Out', (req, res) =>{
 const Storage = MULTER.memoryStorage()
 const upload = MULTER({ storage: Storage })
 
-const Nf = Math.floor(new Date().getTime()/new Date().getFullYear())+'obi.jpg'
-console.log(Nf)
-
 app.get('/', (req, res) => {
 
   const LOGIN = 'deguru'
@@ -106,8 +103,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
       
       if(req.file){
-        const Img = req.file
-        const ID = Img.originalname.replace(/[^a-z^A-Z]/g, '').length > 20 ? Img.originalname.replace(/[^a-z^A-Z]/g, '').slice(0,20) : Img.originalname.replace(/[^a-z^A-Z]/g, '')
+        const Img = Math.floor(new Date().getTime()/new Date().getFullYear())+req.file.originalname
+        const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
 
         // storage.deleteFile('cacheBucket', data.files[i].$id)
         const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(Img.buffer, Img.originalname))
