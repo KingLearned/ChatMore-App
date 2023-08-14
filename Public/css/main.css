@@ -639,6 +639,7 @@ groupchats group_top{
     background-color: white;
     border-radius: 0 0 15px 15px;
     width: 100%;
+    z-index: 99;
 }
 groupchats group_top h2{
     border-radius: 15px;
