@@ -67,8 +67,8 @@ const upload = MULTER({ storage: Storage })
 
 app.get('/', (req, res) => {
 
-  const LOGIN = 'eliz'
-  // const {LOGIN} = req.session
+  // const LOGIN = 'eliz'
+  const {LOGIN} = req.session
   
   if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
@@ -79,8 +79,8 @@ app.get('/', (req, res) => {
 
 app.post('/', upload.single('User_Img'), (req, res) => {
 
-  const LOGIN = 'eliz'
-  // const {LOGIN} = req.session
+  // const LOGIN = 'eliz'
+  const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
 
