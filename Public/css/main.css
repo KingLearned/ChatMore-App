@@ -621,7 +621,7 @@ groups div img{
     border-radius: 365px;
 }
 groupname{
-    font: bold 25px roboto;
+    font: bold 1.5rem roboto;
 }
 groupchats{
     display: none;
