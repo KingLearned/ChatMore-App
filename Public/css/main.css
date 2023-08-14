@@ -636,14 +636,14 @@ grouplogs{
     background-color: rgba(220, 220, 220, 0.281);
 }
 groupchats group_top{
-    position: sticky;
+    position: fixed;
     top: 0;
     display: flex;
     padding: 15px 0;
     background-color: white;
     border-radius: 0 0 15px 15px;
     border-bottom: 1px solid gainsboro;
-    width: 100%;
+    width: 500px;
     z-index: 99;
 }
 groupchats group_top h2{
