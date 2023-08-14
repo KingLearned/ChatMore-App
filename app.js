@@ -114,6 +114,17 @@ app.post('/', upload.single('User_Img'), (req, res) => {
           // MYSQL.query(query, [req.file.originalname,LOGIN], (err, SubResult) => {
           //     res.redirect('/')
           // })
+        const Img = req.file
+        const ID = Img.originalname.replace(/[^a-z^A-Z]/g, '').length > 20 ? Img.originalname.replace(/[^a-z^A-Z]/g, '').slice(0,20) : Img.originalname.replace(/[^a-z^A-Z]/g, '')
+
+        const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(Img.buffer, Img.originalname))
+        
+        promise.then(function (response) {
+          console.log(response)
+            // res.json(response.$id)
+        }, function (error) {
+            console.log(error)
+        })
       }else{
         if(AddFriend){
           const query = "SELECT * FROM `users` WHERE `username`=?"
