@@ -174,7 +174,7 @@ $.ajax({
 
                     Show.innerHTML += ` 
                         <article ${shift} id="ChatID${ChatLogs[n].Id}">
-                        <log>${ChatLogs[n].Msg}</log>
+                        <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
                         <time>${ChatLogs[n].time}</time>
                         ${edit}
                         </article>
