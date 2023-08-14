@@ -13,7 +13,7 @@ $.ajax({
                     <img src="../images/group.jpg" alt="">
                     <display>
                         <groupname>${data.GRP[i].groupname}</groupname><br>
-                        </display>
+                    </display>
                 </div>
                 `
                 // <chatname></chatname><talk>Last Msg...</talk>
