@@ -678,8 +678,10 @@ groupchats article logname{
     background-color: gray;
 }
 .activeme{
-    background-color: rgb(228, 225, 225) !important;
-    align-self: flex-end;
+    align-self: flex-end; 
+    background-color: rgb(245, 111, 245) !important; 
+    color:white; 
+    border-radius:10px 10px 0 10px
 }
 .activeme logname{
     color: white;
