@@ -67,20 +67,19 @@ const upload = MULTER({ storage: Storage })
 
 app.get('/', (req, res) => {
 
-  const LOGIN = 'deguru'
+  const LOGIN = 'reformer'
   // const {LOGIN} = req.session
   
   if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
   }else{
-    // res.send(HomePage)
     res.sendFile(PATH.join(__dirname, './Public/html/home.html'))
   }
 })
 
 app.post('/', upload.single('User_Img'), (req, res) => {
 
-  const LOGIN = 'deguru'
+  const LOGIN = 'reformer'
   // const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
@@ -107,16 +106,21 @@ app.post('/', upload.single('User_Img'), (req, res) => {
         const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
 
         // storage.deleteFile('cacheBucket', data.files[i].$id)
-        const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(Img.buffer, Img.originalname))
-        
-        promise.then(function (response) {
-          console.log(response.$id)
-          const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-          MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
-
-        }, function (error) {
-            console.log(error)
+        const query = "SELECT `users` WHERE `username`=?"
+        MYSQL.query(query, [LOGIN], (err, data) => { 
+          console.log(data.user_img)
         })
+
+        // const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
+        
+        // promise.then(function (response) {
+        //   console.log(response.$id)
+        //   const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+        //   MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
+
+        // }, function (error) {
+        //   console.log(error)
+        // })
       }else{
         if(AddFriend){
           const query = "SELECT * FROM `users` WHERE `username`=?"
