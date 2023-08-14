@@ -131,7 +131,7 @@ $.ajax({
                 let FriendImg = `../images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
                     if(data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== ''){
-                        FriendImg =  `../ChatMore/Users/${data.FRD[i]}/${data.SORT[p].user_img}`
+                        FriendImg =  `${showImg(data.SORT[p].user_img)}`
                     }
                     if(data.FRD[i] == data.SORT[p].username){
                         $('about').html(data.SORT[p].about) //For about the user friends
