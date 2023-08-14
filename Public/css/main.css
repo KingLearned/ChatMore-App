@@ -237,6 +237,7 @@ close{
     display: none;
     flex-direction: column;
     background-color: white;
+    border: 1px solid gray;
 }
 .user_profile button{
     border: transparent;
