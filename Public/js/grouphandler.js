@@ -52,7 +52,7 @@ $.ajax({
                             Log.innerHTML +=`
                             <article class="${active}" id="${mainConvo[n].Id}">
                                 ${Person}
-                                <log>${mainConvo[n].Msg}</log>
+                                <log>${mainConvo[n].Msg.split('<').join('&lt;')}</log>
                                 <time>${mainConvo[n].time}</time>
                             </article>
                             `
