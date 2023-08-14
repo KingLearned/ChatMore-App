@@ -270,7 +270,7 @@ $.ajax({
         for (let i = 0; i < Addthem.length; i++) {
             for (let n = 0; n < data.SORT.length; n++) {
                 if(data.SORT[n].username == Addthem[i]){
-                    var UserImg = `<img src="../ChatMore/Users/${Addthem[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
+                    var UserImg = `<img src="${showImg(data.SORT[n].user_img)}" alt="${data.SORT[n].user_img}">`
                     if(data.SORT[n].user_img == ''){
                         UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
                     }
