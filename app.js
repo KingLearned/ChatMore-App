@@ -110,7 +110,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
         const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(Img.buffer, Img.originalname))
         
         promise.then(function (response) {
-          
+          console.log(response.$id)
           const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
           MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
 
