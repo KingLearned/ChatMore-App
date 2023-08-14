@@ -18,7 +18,8 @@
         margin: 0;
     }
     .user_profile{
-     padding: 10px;   
+     padding: 10px; 
+     border: none;  
     }
     .pro-media{
         display: flex;
