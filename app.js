@@ -67,7 +67,7 @@ const upload = MULTER({ storage: Storage })
 
 app.get('/', (req, res) => {
 
-  const LOGIN = 'reformer'
+  const LOGIN = 'walkingdead'
   // const {LOGIN} = req.session
   
   if(LOGIN){
@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
 
 app.post('/', upload.single('User_Img'), (req, res) => {
 
-  const LOGIN = 'reformer'
+  const LOGIN = 'walkingdead'
   // const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
@@ -105,7 +105,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
       
       const query = "SELECT * FROM `users` WHERE `username`=?" //DELETING OF USER'S PREVIOUS IMAGE
-      MYSQL.query(query, [LOGIN], (err, Result) => { appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) })
+      // MYSQL.query(query, [LOGIN], (err, Result) => { if(Result[0].user_img !== ''){ appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) } })
 
       const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
       
