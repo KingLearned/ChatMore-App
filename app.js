@@ -65,6 +65,9 @@ app.get('/Log-User-Out', (req, res) =>{
 const Storage = MULTER.memoryStorage()
 const upload = MULTER({ storage: Storage })
 
+const Nf = Math.floor(new Date().getTime()/new Date().getFullYear())+'obi.jpg'
+console.log(Nf)
+
 app.get('/', (req, res) => {
 
   const LOGIN = 'deguru'
@@ -77,11 +80,6 @@ app.get('/', (req, res) => {
     res.sendFile(PATH.join(__dirname, './Public/html/home.html'))
   }
 })
-
-// app.post('/', upload.single('User_Img'), (req, res) => {
-//   console
-
-// })
 
 app.post('/', upload.single('User_Img'), (req, res) => {
 
