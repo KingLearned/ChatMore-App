@@ -13,8 +13,16 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server); 
+const appwriteSDK = require('node-appwrite')
 
 dotenv.config()
+
+const apiKey = '0074d8a2662e7782495369b57eb4de049c4fee6eb6bcf5197b5a276a7123540252e293c317724b370785f9056d0faef3580d0048a5616d9c9cf7bcc29127f6ace652aa45f14cd340213c072a0150cd41039d4680282ad31a6b5b6f7a6fb40deb653f9c976b3df6f4d77906f442ced14564dbef114e9358a3ca0eff7ac11658d6'
+
+const client = new appwriteSDK.Client()
+const appwriteStorage = new appwriteSDK.Storage(client)
+client.setEndpoint('https://cloud.appwrite.io/v1').setProject('64c7e9ee17c84cabe3cd').setKey(apiKey)
+
 // // ###################### Serving Static Files ###########################
 app.use(express.static(PATH.join(__dirname, './Public')))
 app.use(bodyparser.urlencoded({extended: true}))
@@ -52,6 +60,11 @@ app.get('/Log-User-Out', (req, res) =>{
   })
 })
 
+
+
+const Storage = MULTER.memoryStorage()
+const upload = MULTER({ storage: Storage })
+
 app.get('/', (req, res) => {
 
   const LOGIN = 'ahmed'
@@ -63,17 +76,6 @@ app.get('/', (req, res) => {
     // res.send(HomePage)
     res.sendFile(PATH.join(__dirname, './Public/html/home.html'))
   }
-})
-
-const Storage = MULTER.diskStorage({
-  destination: `./Public/ChatMore/Users/franky`,
-  filename(req, file, cb){
-    cb(null, file.originalname)
-  }
-})
-
-const upload = MULTER({
-  storage: Storage
 })
 
 // app.post('/', upload.single('User_Img'), (req, res) => {
@@ -104,32 +106,6 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   let Revole = 'GrpID'
   
   if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
-
-    // const Storage = MULTER.diskStorage({
-    //   destination: `./Public/ChatMore/Users/${LOGIN}`,
-    //   filename(req, file, cb){
-    //     cb(null, file.originalname)
-    //   }
-    // })
-
-    // setTimeout(() => {
-    //   const query = "SELECT * FROM `users` WHERE `username`=?"
-    //   MYSQL.query(query, [LOGIN], (err, Delete) => {
-    //     FS.readdir(`./Public/ChatMore/Users/${LOGIN}`, 'utf8',(err, content) =>{
-    //       for (let i = 0; i < content.length; i++) {
-    //         if(content[i] !== Delete[0].user_img){
-    //           FS.unlink(`./Public/ChatMore/Users/${LOGIN}/${content[i]}`, (err) => {})
-    //         }
-    //       }
-    //     })
-    //   })
-    // }, 3000);
-
-    // const upload = MULTER({
-    //     storage: Storage
-    // }).single('User_Img')
-
-    // upload(req,res, (err) => {
       
       if(req.file){
           // console.log(req.file.originalname)
