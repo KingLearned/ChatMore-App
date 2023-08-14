@@ -46,12 +46,12 @@ $.ajax({
 
                         for (let n = 0; n < mainConvo.length; n++) {
                             let active = ''
-                            let Person = mainConvo[n].from
-                            if(mainConvo[n].from == data.PN){ active = 'activeme', Person = 'you' }
+                            let Person = `<logname>@${mainConvo[n].from}</logname>`
+                            if(mainConvo[n].from == data.PN){ active = 'activeme', Person = '' }
 
                             Log.innerHTML +=`
                             <article class="${active}" id="${mainConvo[n].Id}">
-                                <logname>@${Person}</logname>
+                                ${Person}
                                 <log>${mainConvo[n].Msg}</log>
                                 <time>${mainConvo[n].time}</time>
                             </article>
