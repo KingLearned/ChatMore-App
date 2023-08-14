@@ -116,7 +116,7 @@ close{
     border-radius: 15px;
     background-color: rgb(207, 38, 207);
     color: white;
-    width: 80%;
+    width: 50%;
     cursor: pointer;
     padding: 15px 20px;
     margin: 15px;
@@ -169,7 +169,7 @@ close{
     font: 900 18px restrict;
     letter-spacing: 2px;
     padding: 10px 0;
-    width: 200px;
+    width: 70%;
     margin: 5px;
     border-radius: 25px;
     border: 1px solid transparent;
