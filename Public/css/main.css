@@ -637,7 +637,7 @@ grouplogs{
 }
 groupchats group_top{
     position: fixed;
-    /* top: 0; */
+    top: 0;
     display: flex;
     padding: 15px 0;
     background-color: white;
