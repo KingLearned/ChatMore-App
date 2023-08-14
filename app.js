@@ -108,20 +108,17 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
       
       if(req.file){
-          // console.log(req.file.originalname)
-          console.log(req.file)
-          // const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-          // MYSQL.query(query, [req.file.originalname,LOGIN], (err, SubResult) => {
-          //     res.redirect('/')
-          // })
         const Img = req.file
         const ID = Img.originalname.replace(/[^a-z^A-Z]/g, '').length > 20 ? Img.originalname.replace(/[^a-z^A-Z]/g, '').slice(0,20) : Img.originalname.replace(/[^a-z^A-Z]/g, '')
 
+        // storage.deleteFile('cacheBucket', data.files[i].$id)
         const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(Img.buffer, Img.originalname))
         
         promise.then(function (response) {
-          console.log(response)
-            // res.json(response.$id)
+          
+          const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+          MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
+
         }, function (error) {
             console.log(error)
         })
