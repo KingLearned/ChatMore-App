@@ -143,7 +143,7 @@ socket.on('chat message', function(Msg,Exp) {
         let Id = Msg.from
         let shift = ''
         if(Msg.from == $('yourname').html()){
-            Id = 'you'
+            Id = ''
             shift = 'activeme'
         }
         Log.innerHTML +=
