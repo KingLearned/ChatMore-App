@@ -74,9 +74,15 @@ const Storage = MULTER.diskStorage({
 
 const upload = MULTER({
   storage: Storage
-}).single('User_Img')
+})
 
-app.post('/', (req, res) => {
+app.post('/', upload.single('User_Img'), (req, res) => {
+  console
+
+})
+
+app.post('/', upload.single('User_Img'), (req, res) => {
+  console.log(req.file)
 
   const LOGIN = 'ahmed'
   // const {LOGIN} = req.session
