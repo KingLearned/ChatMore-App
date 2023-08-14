@@ -65,6 +65,17 @@ app.get('/', (req, res) => {
   }
 })
 
+const Storage = MULTER.diskStorage({
+  destination: `./Public/ChatMore/Users/franky`,
+  filename(req, file, cb){
+    cb(null, file.originalname)
+  }
+})
+
+const upload = MULTER({
+  storage: Storage
+}).single('User_Img')
+
 app.post('/', (req, res) => {
 
   const LOGIN = 'ahmed'
@@ -89,25 +100,25 @@ app.post('/', (req, res) => {
   
   if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
 
-    const Storage = MULTER.diskStorage({
-      destination: `./Public/ChatMore/Users/${LOGIN}`,
-      filename(req, file, cb){
-        cb(null, file.originalname)
-      }
-    })
+    // const Storage = MULTER.diskStorage({
+    //   destination: `./Public/ChatMore/Users/${LOGIN}`,
+    //   filename(req, file, cb){
+    //     cb(null, file.originalname)
+    //   }
+    // })
 
-    setTimeout(() => {
-      const query = "SELECT * FROM `users` WHERE `username`=?"
-      MYSQL.query(query, [LOGIN], (err, Delete) => {
-        FS.readdir(`./Public/ChatMore/Users/${LOGIN}`, 'utf8',(err, content) =>{
-          for (let i = 0; i < content.length; i++) {
-            if(content[i] !== Delete[0].user_img){
-              FS.unlink(`./Public/ChatMore/Users/${LOGIN}/${content[i]}`, (err) => {})
-            }
-          }
-        })
-      })
-    }, 3000);
+    // setTimeout(() => {
+    //   const query = "SELECT * FROM `users` WHERE `username`=?"
+    //   MYSQL.query(query, [LOGIN], (err, Delete) => {
+    //     FS.readdir(`./Public/ChatMore/Users/${LOGIN}`, 'utf8',(err, content) =>{
+    //       for (let i = 0; i < content.length; i++) {
+    //         if(content[i] !== Delete[0].user_img){
+    //           FS.unlink(`./Public/ChatMore/Users/${LOGIN}/${content[i]}`, (err) => {})
+    //         }
+    //       }
+    //     })
+    //   })
+    // }, 3000);
 
     const upload = MULTER({
         storage: Storage
