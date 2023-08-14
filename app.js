@@ -293,7 +293,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
     }
 
   }else{ /********************************* LOGIN HANDLER  ********************************/
-    if(Log_Name,Log_Pwd) {
+    if(Log_Name.trim(),Log_Pwd) {
       const query = "SELECT * FROM `users` WHERE username=?"
       MYSQL.query(query, [Log_Name.toLocaleLowerCase()], (err, Result) => {
 
