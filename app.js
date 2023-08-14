@@ -76,13 +76,12 @@ const upload = MULTER({
   storage: Storage
 })
 
-app.post('/', upload.single('User_Img'), (req, res) => {
-  console
+// app.post('/', upload.single('User_Img'), (req, res) => {
+//   console
 
-})
+// })
 
 app.post('/', upload.single('User_Img'), (req, res) => {
-  console.log(req.file)
 
   const LOGIN = 'ahmed'
   // const {LOGIN} = req.session
@@ -132,13 +131,14 @@ app.post('/', upload.single('User_Img'), (req, res) => {
 
     // upload(req,res, (err) => {
       
-    //   if(req.file){
-    //       console.log(req.file.originalname)
-    //       const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-    //       MYSQL.query(query, [req.file.originalname,LOGIN], (err, SubResult) => {
-    //           res.redirect('/')
-    //       })
-    //   }else{
+      if(req.file){
+          // console.log(req.file.originalname)
+          console.log(req.file)
+          // const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+          // MYSQL.query(query, [req.file.originalname,LOGIN], (err, SubResult) => {
+          //     res.redirect('/')
+          // })
+      }else{
         if(AddFriend){
           const query = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query, [LOGIN], (err, MainResult) => {
@@ -313,7 +313,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
                 })  
               },500)
         }
-      // }
+      }
 
     // })
 
