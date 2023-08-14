@@ -10,7 +10,7 @@ $.ajax({
         document.querySelector('friendlist').innerHTML = ''
 
         const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
-        const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="../ChatMore/Users/${data.PN}/${data.USER[0].user_img}" alt="${data.USER[0].user_img}">`)
+        const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="${showImg(data.USER[0].user_img)}" alt="${data.USER[0].user_img}">`)
         $('tel').html(data.USER[0].telephone)
 
         // WHEN FRIENDS LIST IS EMPTY
@@ -47,7 +47,7 @@ $.ajax({
             for (let n = 0; n < data.SORT.length; n++) {
                 if(data.SORT[n].username == data.FRD[i]){
                     
-                    let UserImg = `<img src="../ChatMore/Users/${data.FRD[i]}/${data.SORT[n].user_img}" alt="${data.SORT[n].user_img}">`
+                    let UserImg = `<img src="${showImg(data.SORT[n].user_img)}" alt="${data.SORT[n].user_img}">`
                     if(data.SORT[n].user_img == ''){
                         UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
                     }
