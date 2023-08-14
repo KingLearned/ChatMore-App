@@ -79,7 +79,7 @@ socket.on('chat message', function(Msg,Exp) {
                 `
                 <make>
                     <edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit>
-                    <del class="fa fa-close del${Msg.Id}" title="Delete Message"></del>
+                    <del class="fa fa-times del${Msg.Id}" title="Delete Message"></del>
                 </make>`
         }
 
