@@ -120,19 +120,19 @@ app.post('/', (req, res) => {
     //   })
     // }, 3000);
 
-    const upload = MULTER({
-        storage: Storage
-    }).single('User_Img')
+    // const upload = MULTER({
+    //     storage: Storage
+    // }).single('User_Img')
 
-    upload(req,res, (err) => {
+    // upload(req,res, (err) => {
       
-      if(req.file){
-          console.log(req.file.originalname)
-          const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-          MYSQL.query(query, [req.file.originalname,LOGIN], (err, SubResult) => {
-              res.redirect('/')
-          })
-      }else{
+    //   if(req.file){
+    //       console.log(req.file.originalname)
+    //       const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+    //       MYSQL.query(query, [req.file.originalname,LOGIN], (err, SubResult) => {
+    //           res.redirect('/')
+    //       })
+    //   }else{
         if(AddFriend){
           const query = "SELECT * FROM `users` WHERE `username`=?"
           MYSQL.query(query, [LOGIN], (err, MainResult) => {
@@ -307,9 +307,9 @@ app.post('/', (req, res) => {
                 })  
               },500)
         }
-      }
+      // }
 
-    })
+    // })
 
   }else{
 /********************************* LOGIN HANDLER  ********************************/
