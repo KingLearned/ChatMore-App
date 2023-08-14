@@ -60,8 +60,6 @@ app.get('/Log-User-Out', (req, res) =>{
   })
 })
 
-
-
 const Storage = MULTER.memoryStorage()
 const upload = MULTER({ storage: Storage })
 
