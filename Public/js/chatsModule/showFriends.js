@@ -11,19 +11,15 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
         for (let n = 0; n < sortData.length; n++) {
             if(sortData[n].username == frdList[i]){
                 
-                const UserImg = sortData[n].user_img == '' ? `<img src="../images/avatar.png" alt="avatar.png">` : `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
-                // if(sortData[n].user_img == ''){
-                //     UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
-                // }
-
-                const LastMsg = frdChats[i].length > 0 ? frdChats[i][frdChats[i].length-1].Msg : '' //last Message generator
+                const userImg = sortData[n].user_img == '' ? `<img src="../images/avatar.png" alt="avatar.png">` : `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
+                const lastMsg = frdChats[i].length > 0 ? frdChats[i][frdChats[i].length-1].Msg : '' //last Message generator
 
                 document.querySelector('friendlist').innerHTML +=`
                 <div class="chat_${frdList[i]}">
-                    ${UserImg}
+                    ${userImg}
                     <display>
                         <chatname>${frdList[i]}</chatname><br>
-                        <talk class="last-log${Ele}">${LastMsg}</talk>
+                        <talk class="last-log${Ele}">${lastMsg}</talk>
                     </display>
                 </div>
                 `
