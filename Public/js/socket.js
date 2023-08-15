@@ -64,7 +64,7 @@ $(`.GrpChatForm`).on('submit', (e) => {
     })
 })
 
-let currentUser = '' 
+let currentUser = ''
 socket.on('chat message', function(Msg,Exp) {
     
     if(Msg.Id !== 'Login'){
@@ -163,7 +163,10 @@ socket.on('chat message', function(Msg,Exp) {
         HeightSet()
     }else{
         localStorage.setItem(Msg.User, 'online')
-        currentUser = Msg.User !== currentUser ? Msg.User : currentUser
+        currentUser = !currentUser ? Msg.User : currentUser 
+        localStorage.setItem(currentUser, 'online')
+        
+        document.querySelector(`user_${currentUser}`).style.backgroundColor = 'lime'
         document.querySelector(`user_${Msg.User}`).style.backgroundColor = 'lime'
     }
     
