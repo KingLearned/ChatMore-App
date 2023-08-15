@@ -315,6 +315,6 @@ $.ajax({
     }
 })
 //Preloader function caller
-// setInterval(() => {
-//     const preLoader = $('friendlist div').length > 0 ? document.querySelector('.preloader').style.display = 'none' : document.querySelector('.preloader').style.display = 'flex' 
-// }, 500);
+setInterval(() => {
+    const preLoader = $('friendlist div').length > 0 ? document.querySelector('.preloader').style.display = 'none' : document.querySelector('.preloader').style.display = 'flex' 
+}, 500);
