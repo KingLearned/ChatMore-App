@@ -39,7 +39,7 @@ $.ajax({
                 }
             }
         }
-        console.log(friendsChat)
+        // console.log(friendsChat)
 
         //FOR SHOWING OF USER'S FRIENDS
         showFriends(data.FRD, data.PN, data.SORT, friendsChat)
