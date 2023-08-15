@@ -162,7 +162,7 @@ socket.on('chat message', function(Msg,Exp) {
         HeightSet()
     }else{
         console.log(Msg)
-        document.querySelector(`user_${data.PN}`).background = 'lime'
+        document.querySelector(`user_${Msg.User}`).background = 'lime'
     }
     
     function reRrun() {
