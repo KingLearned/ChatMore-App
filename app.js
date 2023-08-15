@@ -115,6 +115,10 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       })
 
     }else{
+      
+      const query1 = "UPDATE `users` SET `status`=? WHERE `username`=?"
+      MYSQL.query(query1, [1, LOGIN],(err, result) => {})
+
       if(AddFriend){
         const query = "SELECT * FROM `users` WHERE `username`=?"
         MYSQL.query(query, [LOGIN], (err, MainResult) => {
@@ -298,12 +302,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
 
         const Auth = Result.length > 0 ? 
         Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Mismatched Password or Username!'}) : 
-        (res.json({msg:'User Dose Not Exist!'}), MYSQL.query("UPDATE `users` SET `status`=? WHERE `username`=?", [1,Log_Name.toLocaleLowerCase()],(err, result) => {}))
-
-        // const query1 = "UPDATE `users` SET `status`=? WHERE `username`=?"
-        // MYSQL.query(query1, [UpdateFrd.toLocaleString(),LOGIN],(err, result) => {})
+        res.json({msg:'User Dose Not Exist!'})
         
-
       })
 
     }else if(Sig_Name, Sig_Tele, Sig_Pwd, Sig_CPwd) {/********************************* SIGN UP HANDLER  ********************************/
