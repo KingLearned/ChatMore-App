@@ -5,8 +5,8 @@ const showImg = (imgName) => {
 export const showFriends = (frdList, userName, sortData, frdChats) => {
     for (let i = 0; i < frdList.length; i++) {
          
-        let GenEle = (((`${frdList[i]+userName}`).toLocaleLowerCase()).split('')).sort()
-        let Ele = ''; for (let l = 0; l < GenEle.length; l++) {Ele += GenEle[l]} //Generate Unique DOM for displaying last log Dynamically
+        const genEle = (((`${frdList[i]+userName}`).toLocaleLowerCase()).split('')).sort()
+        let Ele = ''; for (let l = 0; l < genEle.length; l++) {Ele += genEle[l]} //Generate Unique DOM for displaying last log Dynamically
 
         for (let n = 0; n < sortData.length; n++) {
             if(sortData[n].username == frdList[i]){
