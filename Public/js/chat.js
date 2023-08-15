@@ -1,4 +1,5 @@
 import { showFriends } from "./chatsModule/showFriends.js"
+import { DeleteMsg } from "./socket.js"
 const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
 
 export const MainChats = []    //for storing user => user chats

@@ -3,7 +3,7 @@ import { MainChats } from "./chat.js"
 const socket = io()
 
 //Deleting Of Message Function
-function DeleteMsg(DelID){
+export function DeleteMsg(DelID){
     $.ajax({
         method:"POST",
         data:{
