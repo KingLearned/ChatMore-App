@@ -11,10 +11,10 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
         for (let n = 0; n < sortData.length; n++) {
             if(sortData[n].username == frdList[i]){
                 
-                let UserImg = `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
-                if(sortData[n].user_img == ''){
-                    UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
-                }
+                const UserImg = sortData[n].user_img == '' ? `<img src="../images/avatar.png" alt="avatar.png">` : `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
+                // if(sortData[n].user_img == ''){
+                //     UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
+                // }
 
                 const LastMsg = frdChats[i].length > 0 ? frdChats[i][frdChats[i].length-1].Msg : '' //last Message generator
 
