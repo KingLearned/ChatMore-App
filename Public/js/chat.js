@@ -1,4 +1,4 @@
-import showFriends from "./chatsModule/showFriends.js"
+import showFriends from "./chatsModule/showFriends"
 
 const showImg = (imgName) => {
     return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin`
@@ -42,7 +42,7 @@ $.ajax({
         }
 
         //FOR SHOWING OF USER'S FRIENDS
-        showFriends
+        // showFriends
         for (let i = 0; i < data.FRD.length; i++) {
             let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
             let Ele = ''; for (let l = 0; l < GenEle.length; l++) {Ele += GenEle[l]} //Generate Unique DOM for displaying last log Dynamically
