@@ -78,7 +78,7 @@ $.ajax({
                 document.querySelector('.GrpSend').style.position = 'absolute'
 
                 const Hig = $('grouplogs article').length >= 6 ? 
-                (document.querySelector('groups').style.height = '100%',document.querySelector('.app').style.height = '100%') : 
+                (document.querySelector('groups').style.height = '100%',document.querySelector('grouplogs').style.height = '100%',document.querySelector('.app').style.height = '100%') : 
                 document.querySelector('groups').style.height = '100vh'
                 window.scrollTo(0, document.body.scrollHeight)
             }
