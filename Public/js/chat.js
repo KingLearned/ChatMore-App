@@ -105,7 +105,8 @@ $.ajax({
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
 
-                localStorage.setItem(data.FRD[i], 'offline')
+                const setStatus = localStorage.getItem(data.FRD[i])
+                // console.log(setStatus)
 
                 document.querySelector('.imgHead span').innerHTML = 
                 `<user_${data.FRD[i]} style='position: absolute;
@@ -113,7 +114,7 @@ $.ajax({
                 right: 0;
                 width: 13px;
                 height: 13px;
-                background-color: red;
+                background-color: ${setStatus ? 'lime' : 'red'};
                 border-radius: 100px;'></user_${data.FRD[i]}>`
 
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
