@@ -1,3 +1,3 @@
-export function showFriends () {
+export const showFriends = () => {
     return console.log('Hello')
 }
