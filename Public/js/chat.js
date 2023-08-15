@@ -8,13 +8,19 @@ export const MainChats = []    //for storing user => user chats
 $.ajax({
     method: "POST",
     success: (data) => {
-        // socket.emit('chat message', {Id:'Login',User:data.PN})
+        socket.emit('chat message', {Id:'Login',User:data.PN})
 
         $('yourname').html(data.PN)
         for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
         document.querySelector('friendlist').innerHTML = ''
         document.querySelector('.imgHead').innerHTML += 
-        `<user_${data.PN} ></user_${data.PN}>`
+        `<user_${data.PN} style='position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 13px;
+        height: 13px;
+        background-color: lime;
+        border-radius: 100px;'></user_${data.PN}>`
 
         const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
         const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="${showImg(data.USER[0].user_img)}" alt="${data.USER[0].user_img}">`)
