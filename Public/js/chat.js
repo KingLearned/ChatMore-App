@@ -1,6 +1,6 @@
-// import { showFriends } from "./chatsModule/showFriends"
-// showFriends()
-console.log('Hello World')
+import { showFriends } from "./chatsModule/showFriends.js"
+showFriends()
+
 const showImg = (imgName) => {
     return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin`
 }
