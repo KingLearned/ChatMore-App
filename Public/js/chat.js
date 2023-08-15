@@ -42,9 +42,8 @@ $.ajax({
         }
 
         //FOR SHOWING OF USER'S FRIENDS
-        // showFriends
+        // showFriends(data.FRD, data.PN, data.SORT, friendsChat)
         for (let i = 0; i < data.FRD.length; i++) {
-            // frdList, userName, sortData, frdChats 
             let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
             let Ele = ''; for (let l = 0; l < GenEle.length; l++) {Ele += GenEle[l]} //Generate Unique DOM for displaying last log Dynamically
 
