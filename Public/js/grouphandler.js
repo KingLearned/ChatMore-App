@@ -36,7 +36,7 @@ $.ajax({
 
                         //Displaying Of The Group Chats Logs 
                         const Ele = (data.GRP[i].groupname).split(' ').join('')
-                        GrpLog.html(`<${Ele} style="margin-top:50px"></${Ele}>`)
+                        GrpLog.html(`<${Ele} style="margin-top:60px"></${Ele}>`)
                         const Log  = document.querySelector(`${Ele}`)
                         Log.style.display = 'flex'
                         Log.style.flexDirection = 'column'
