@@ -3,9 +3,11 @@ const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buck
 
 let c = 0
 const redo = () => {
-    console.log(c)
-    c++
-    console.log(c)
+    if(c < 25){
+        console.log(c)
+        c++
+        redo()
+    }
 } 
 redo()
 
