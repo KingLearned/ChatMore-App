@@ -72,11 +72,10 @@ socket.on('chat message', function(Msg,Exp) {
     
     if(Msg.chat == 'Frd'){
         MainChats.push(Exp)
-        // let Id = Msg.from
+
         let shift = ''
         let edit = ''
         if(Msg.from !== $('chat_top h6').html()){
-            // Id = 'you'
             shift = `class="edit" style="align-self:flex-end; background-color: rgb(245, 111, 245); color:white; border-radius:10px 10px 0 10px"`
             edit = 
                 `
@@ -217,14 +216,14 @@ socket.on('chat message', function(Msg,Exp) {
     }
             
     function HeightSet(){
-        const Height = $('.friends article').length + $('.friends chatdate').length > 10 ? 
-        document.querySelector('.friends').style.height = '100%' : 
-        document.querySelector('.friends').style.height = '100vh';
+        // const Height = $('.friends article').length + $('.friends chatdate').length > 10 ? 
+        // document.querySelector('.friends').style.height = '100%' : 
+        // document.querySelector('.friends').style.height = '100vh';
 
         window.scrollTo(0, document.body.scrollHeight);
 
-        const Hig = $('grouplogs article').length >= 10 ? 
-        document.querySelector('groups').style.height = 'auto' : 
-        document.querySelector('groups').style.height = '100vh';
+        // const Hig = $('grouplogs article').length >= 10 ? 
+        // document.querySelector('groups').style.height = 'auto' : 
+        // document.querySelector('groups').style.height = '100vh';
     }
 })
