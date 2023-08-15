@@ -15,7 +15,7 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
                 const lastMsg = frdChats[i].length !== 0 ? frdChats[i].Msg : '' //last Message generator
 
                 document.querySelector('friendlist').innerHTML +=`
-                <div class="chat_${frdList[i]}>
+                <div class="chat_${frdList[i]}">
                     ${userImg}
                     <display>
                         <chatname>${frdList[i]}</chatname><br>
