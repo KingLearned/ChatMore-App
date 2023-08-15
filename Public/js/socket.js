@@ -66,11 +66,11 @@ $(`.GrpChatForm`).on('submit', (e) => {
 
 socket.on('chat message', function(Msg,Exp) {
     
-    if(Msg.Id !== 'Status'){
+    // if(Msg.Id !== 'Status'){
         const Show = document.querySelector(`${Msg.EleDiv}`)
-        Show.style.display = 'flex';
-        Show.style.flexDirection = 'column'
-    }
+        Show ? Show.style.display = 'flex' : '';
+        Show ? Show.style.flexDirection = 'column' : ''
+    // }
     
     if(Msg.chat == 'Frd'){
         MainChats.push(Exp)
@@ -165,7 +165,7 @@ socket.on('chat message', function(Msg,Exp) {
         const setStatus = document.querySelector(`user_${Msg.User}`)
         localStorage.setItem(Msg.User, Msg.Status)
 
-        localStorage.getItem(Msg.User) == 'online' ? setStatus.style.backgroundColor = 'lime' : setStatus.style.backgroundColor = 'red'
+        localStorage.getItem(Msg.User) == 'online' ? setStatus ? setStatus.style.backgroundColor = 'lime' : '' : setStatus ? setStatus.style.backgroundColor = 'red' : ''
 
     }
     
