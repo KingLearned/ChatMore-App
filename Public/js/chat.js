@@ -19,7 +19,7 @@ $.ajax({
             `
                 <div style="display:block;">
                     <h3 style="text-align: center;">NO FRIENDS YET!</h3>
-                    <h5 style="text-align: center;">Add friends from the community</h5>
+                    <h5 style="text-align: center;">Add friends from users</h5>
                 </div>
             `
         }
