@@ -65,7 +65,7 @@ const upload = MULTER({ storage: Storage })
 
 app.get('/', (req, res) => {
 
-  const LOGIN = 'franky'
+  const LOGIN = 'ambrose'
   // const {LOGIN} = req.session
   
   if(LOGIN){
@@ -77,7 +77,7 @@ app.get('/', (req, res) => {
 
 app.post('/', upload.single('User_Img'), (req, res) => {
 
-  const LOGIN = 'franky'
+  const LOGIN = 'ambrose'
   // const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
