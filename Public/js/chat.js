@@ -56,12 +56,6 @@ $.ajax({
             document.querySelector('friendlist').style.display = 'block'
             $('.chats_head').show()
 
-            if($('.friends div').length >= 9){
-                document.querySelector('.friends').style.height = '100%'
-            }else{
-                document.querySelector('.friends').style.height = '90vh'
-            }
-
             $('.EditId').val('')
             $('.locator').val('')
             $('.Msg').val('')
@@ -306,19 +300,6 @@ $.ajax({
                 })
             })
         }
-
-        /********************** VIEW LENGTH HANDLE ***********************/
-        if($('.friends div').length > 8){
-            // document.querySelector('.friends').style.height = 'auto'
-        }
-
-        if($('groups div').length > 4){
-            document.querySelector('groups').style.height = 'auto'
-        }
-        if($('community div').length > 4){
-            document.querySelector('community').style.height = 'auto'
-        }
-        
     }
 })
 //Preloader function caller

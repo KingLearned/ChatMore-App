@@ -637,7 +637,8 @@ grouplogs{
     display: flex;
     flex-direction: column;
     padding:0 10px;
-    height: 95vh;
+    min-height: 98vh;
+    max-height: auto;
     background-color: rgba(220, 220, 220, 0.281);
 }
 groupchats group_top{
@@ -701,7 +702,8 @@ groupchats article logname{
 /******************************* COMMUNITY SECTIONS HANDLERS ************************/
 community{
     display: none;
-    height: 53vh;
+    min-height: 90vh;
+    max-height: auto;
     border-radius: 25px 25px 0 0;
     background-color: white;
 }
