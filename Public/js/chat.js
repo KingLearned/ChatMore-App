@@ -1,8 +1,6 @@
 import { showFriends } from "./chatsModule/showFriends.js"
+const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
 
-const showImg = (imgName) => {
-    return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin`
-}
 const MainChats = []    //for storing user => user chats
 $.ajax({
     method: "POST",
@@ -43,33 +41,6 @@ $.ajax({
 
         //FOR SHOWING OF USER'S FRIENDS
         showFriends(data.FRD, data.PN, data.SORT, friendsChat)
-        // for (let i = 0; i < data.FRD.length; i++) {
-        //     let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
-        //     let Ele = ''; for (let l = 0; l < GenEle.length; l++) {Ele += GenEle[l]} //Generate Unique DOM for displaying last log Dynamically
-
-        //     for (let n = 0; n < data.SORT.length; n++) {
-        //         if(data.SORT[n].username == data.FRD[i]){
-                    
-        //             let UserImg = `<img src="${showImg(data.SORT[n].user_img)}" alt="${data.SORT[n].user_img}">`
-        //             if(data.SORT[n].user_img == ''){
-        //                 UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
-        //             }
-
-        //             const LastMsg = friendsChat[i].length > 0 ? friendsChat[i][friendsChat[i].length-1].Msg : '' //last Message generator
-
-        //             document.querySelector('friendlist').innerHTML +=`
-        //             <div class="chat_${data.FRD[i]}">
-        //                 ${UserImg}
-        //                 <display>
-        //                     <chatname>${data.FRD[i]}</chatname><br>
-        //                     <talk class="last-log${Ele}">${LastMsg}</talk>
-        //                 </display>
-        //             </div>
-        //             `
-        //         }
-        //     }   
-        // }
-
 
         /*************** FOR REMOVING OF CHAT LOG ******************/
         /*************** FOR REMOVING OF CHAT LOG ******************/
