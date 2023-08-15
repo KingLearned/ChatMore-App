@@ -18,10 +18,10 @@ $.ajax({
         right: 0;
         width: 13px;
         height: 13px;
-        background-color: red;
+        
         border-radius: 100px;'></user_${data.PN}>`
 
-        socket.emit('chat message', {Id:'Login',User:data.PN})
+
 
         const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
         const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="${showImg(data.USER[0].user_img)}" alt="${data.USER[0].user_img}">`)
@@ -110,6 +110,7 @@ $.ajax({
         
         /************************* FOR SERVING OF THE CHAT LOG *************************/
         /************************* FOR SERVING OF THE CHAT LOG *************************/
+        socket.emit('chat message', {Id:'Login',User:data.PN})
         const ChatLogs = []
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
