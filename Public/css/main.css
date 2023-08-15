@@ -633,7 +633,7 @@ grouplogs{
     display: flex;
     flex-direction: column;
     padding:0 10px;
-    height: 90vh;
+    height: 95vh;
     background-color: rgba(220, 220, 220, 0.281);
 }
 groupchats group_top{

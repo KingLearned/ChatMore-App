@@ -88,6 +88,7 @@ $.ajax({
                 window.scrollTo(0, document.body.scrollTop)
                 document.querySelector('grouplist').style.display = 'block'
                 document.querySelector('groupchats').style.display = 'none'
+                document.querySelector('grouplogs').style.height = '95vh'
                 $('.chats_head').show()
 
                 const GrpHv = $('grouplist div').length > 6 ? 
