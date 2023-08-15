@@ -18,8 +18,9 @@ $.ajax({
         right: 0;
         width: 13px;
         height: 13px;
-        
+        background:red;
         border-radius: 100px;'></user_${data.PN}>`
+        socket.emit('chat message', {Id:'Login',User:data.PN})
 
 
 
@@ -110,7 +111,7 @@ $.ajax({
         
         /************************* FOR SERVING OF THE CHAT LOG *************************/
         /************************* FOR SERVING OF THE CHAT LOG *************************/
-        socket.emit('chat message', {Id:'Login',User:data.PN})
+        
         const ChatLogs = []
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
