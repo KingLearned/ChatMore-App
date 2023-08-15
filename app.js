@@ -96,7 +96,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
 
   let Revole = 'GrpID'
   
-  if(LOGIN){ // IMPLEMENT THIS, IF THE USER LOGS IN
+  if(LOGIN) { // IMPLEMENT THIS, IF THE USER LOGS IN
     if(req.file){
       const Img = Math.floor(new Date().getTime()/new Date().getFullYear())+req.file.originalname
       const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
@@ -298,7 +298,11 @@ app.post('/', upload.single('User_Img'), (req, res) => {
 
         const Auth = Result.length > 0 ? 
         Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Mismatched Password or Username!'}) : 
-        res.json({msg:'User Dose Not Exist!'})
+        (res.json({msg:'User Dose Not Exist!'}), MYSQL.query("UPDATE `users` SET `status`=? WHERE `username`=?", [1,Log_Name.toLocaleLowerCase()],(err, result) => {}))
+
+        // const query1 = "UPDATE `users` SET `status`=? WHERE `username`=?"
+        // MYSQL.query(query1, [UpdateFrd.toLocaleString(),LOGIN],(err, result) => {})
+        
 
       })
 

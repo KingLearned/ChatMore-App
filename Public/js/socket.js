@@ -162,22 +162,16 @@ socket.on('chat message', function(Msg,Exp) {
         `
         HeightSet()
     }else{
-        // localStorage.setItem(currentUser, 'online')
-        if(currentUser){
-            console.log(currentUser)
-        }
+        
         currentUser = !currentUser ? Msg.User : currentUser 
         
-        localStorage.setItem(Msg.User, 'online')
-        localStorage.setItem(currentUser, 'online')
-        // setTimeout(() => {
-        // },2000)
+        // localStorage.setItem(Msg.User, 'online')
+        // localStorage.setItem(currentUser, 'online')
 
-        console.log(currentUser, Msg.User)
-        // socket.emit('chat message', {Id:'Login',User:data.PN})
+        // console.log(currentUser, Msg.User)
         
-        document.querySelector(`user_${currentUser}`).style.backgroundColor = 'lime'
-        document.querySelector(`user_${Msg.User}`).style.backgroundColor = 'lime'
+        // document.querySelector(`user_${currentUser}`).style.backgroundColor = 'lime'
+        // document.querySelector(`user_${Msg.User}`).style.backgroundColor = 'lime'
     }
     
     function reRrun() {
