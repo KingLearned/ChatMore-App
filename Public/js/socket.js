@@ -65,9 +65,12 @@ $(`.GrpChatForm`).on('submit', (e) => {
 })
 
 socket.on('chat message', function(Msg,Exp) {
-    const Show = document.querySelector(`${Msg.EleDiv}`)
-    Show.style.display = 'flex';
-    Show.style.flexDirection = 'column'
+    
+    if(Msg.Id !== 'Login'){
+        const Show = document.querySelector(`${Msg.EleDiv}`)
+        Show.style.display = 'flex';
+        Show.style.flexDirection = 'column'
+    }
     
     if(Msg.chat == 'Frd'){
         MainChats.push(Exp)
@@ -157,56 +160,59 @@ socket.on('chat message', function(Msg,Exp) {
         </article>
         `
         HeightSet()
+    }else{
+        console.log(Msg)
+        // document.querySelector('.imgHead').innerHTML += ``
     }
     
-        function reRrun() {
-            const ArtLng = document.querySelectorAll(`${Msg.EleDiv} article make del`)
-            const EdLng = document.querySelectorAll(`${Msg.EleDiv} article make edit`)
-            const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
-        
-                /****************    FOR EDITING || DELETING CHATS IN FRIENDS PART ***************/
-            for (let i = 0; i < ArtLng.length; i++) {
-                let DelBtn = document.querySelector(`.${ArtLng[i].classList[2]}`)
-                let EdBtn = document.querySelector(`.${EdLng[i].classList[2]}`)
-                let DoID = Number(ArtLng[i].classList[2].replace(/[^0-9]/g, ""))
-                let Edmsg = document.querySelector(`${Msg.EleDiv} #ChatID${DoID} log`)
+    function reRrun() {
+        const ArtLng = document.querySelectorAll(`${Msg.EleDiv} article make del`)
+        const EdLng = document.querySelectorAll(`${Msg.EleDiv} article make edit`)
+        const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
+    
+            /****************    FOR EDITING || DELETING CHATS IN FRIENDS PART ***************/
+        for (let i = 0; i < ArtLng.length; i++) {
+            let DelBtn = document.querySelector(`.${ArtLng[i].classList[2]}`)
+            let EdBtn = document.querySelector(`.${EdLng[i].classList[2]}`)
+            let DoID = Number(ArtLng[i].classList[2].replace(/[^0-9]/g, ""))
+            let Edmsg = document.querySelector(`${Msg.EleDiv} #ChatID${DoID} log`)
 
-                //Editing Of Message
-                EdBtn.addEventListener('click', () => {
-                    $('.EditId').val(DoID); 
-                    $('.EleDiv').val(Msg.EleDiv); 
-                    $('.EdMsg').val(Edmsg.innerHTML.split('&lt;').join('<'))
+            //Editing Of Message
+            EdBtn.addEventListener('click', () => {
+                $('.EditId').val(DoID); 
+                $('.EleDiv').val(Msg.EleDiv); 
+                $('.EdMsg').val(Edmsg.innerHTML.split('&lt;').join('<'))
 
-                    $('.SendForm').hide()
-                    $('.EdForm').show()
-                    $('.EdMsg').focus()
+                $('.SendForm').hide()
+                $('.EdForm').show()
+                $('.EdMsg').focus()
 
-                    $(`.EdForm`).on('submit', (e) => {
-                        e.preventDefault()
-                        $.ajax({
-                            method:"POST",
-                            data:{
-                                ElementTag: $('.EleDiv').val(),
-                                EditId: $('.EditId').val(),
-                                EditMsg:$('.EdMsg').val()
-                            },
-                            success:(data) => {
-                                socket.emit('chat message', data.SndMsg)
-                                $('.EdForm').hide()
-                                $('.SendForm').show()
-                                $('.GrpMsg').val(''),$('.Msg').val('')
-                            }
-                        })
-                        $('.Msg').val('')
+                $(`.EdForm`).on('submit', (e) => {
+                    e.preventDefault()
+                    $.ajax({
+                        method:"POST",
+                        data:{
+                            ElementTag: $('.EleDiv').val(),
+                            EditId: $('.EditId').val(),
+                            EditMsg:$('.EdMsg').val()
+                        },
+                        success:(data) => {
+                            socket.emit('chat message', data.SndMsg)
+                            $('.EdForm').hide()
+                            $('.SendForm').show()
+                            $('.GrpMsg').val(''),$('.Msg').val('')
+                        }
                     })
+                    $('.Msg').val('')
                 })
+            })
 
-                //Deleting Of Msg
-                DelBtn.addEventListener('click', () => {
-                    DeleteMsg(DoID)
-                })
-            }
+            //Deleting Of Msg
+            DelBtn.addEventListener('click', () => {
+                DeleteMsg(DoID)
+            })
         }
+    }
             
     function HeightSet(){
         const Height = $('.friends article').length + $('.friends chatdate').length > 10 ? 
