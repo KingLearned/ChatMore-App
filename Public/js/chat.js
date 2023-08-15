@@ -51,6 +51,9 @@ $.ajax({
                     if(data.SORT[n].user_img == ''){
                         UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
                     }
+
+                    const LastMsg = friendsChat[i].length > 0 ? friendsChat[i][friendsChat[i].length-1].Msg : '' //last Message generator
+
                     document.querySelector('friendlist').innerHTML +=`
                     <div class="chat_${data.FRD[i]}">
                         ${UserImg}
@@ -64,7 +67,6 @@ $.ajax({
             }   
         }
 
-        // let LastMsg = friendsChat[i].length > 0 ? friendsChat[i][friendsChat[i].length-1].Msg : '' //last Message generator
 
         /*************** FOR REMOVING OF CHAT LOG ******************/
         /*************** FOR REMOVING OF CHAT LOG ******************/
