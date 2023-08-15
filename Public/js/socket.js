@@ -66,7 +66,7 @@ $(`.GrpChatForm`).on('submit', (e) => {
 
 socket.on('chat message', function(Msg,Exp) {
     
-    if(Msg.Id !== 'Login'){
+    if(Msg.Id !== 'Status'){
         const Show = document.querySelector(`${Msg.EleDiv}`)
         Show.style.display = 'flex';
         Show.style.flexDirection = 'column'
@@ -163,6 +163,7 @@ socket.on('chat message', function(Msg,Exp) {
     }else{
         
         const setStatus = document.querySelector(`user_${Msg.User}`)
+        localStorage.setItem(Msg.User, Msg.Status)
         setStatus ? setStatus.style.backgroundColor = 'lime' : ''
 
     }

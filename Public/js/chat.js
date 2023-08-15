@@ -237,10 +237,13 @@ $.ajax({
         }
 
         $('.logOutBtn').on('click', () => {
+            socket.emit('chat message', {Id:'Status',User:data.PN, Status:'offline'})
+
             localStorage.setItem(data.PN, 'offline')
             window.location = '/Log-User-Out'
         })
-        socket.emit('chat message', {Id:'Login',User:data.PN})
+
+        socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
 
         /************************* COMMUNITY SECTION HANDLER ***************************/
         /************************* COMMUNITY SECTION HANDLER ***************************/
