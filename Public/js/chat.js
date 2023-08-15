@@ -70,6 +70,7 @@ $.ajax({
         })
 
         $('.logOutBtn').on('click', () => {
+            localStorage.setItem(data.PN, 'offline')
             window.location = '/Log-User-Out'
         })
 
