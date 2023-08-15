@@ -76,7 +76,7 @@ $.ajax({
             $('.chats_head').show()
 
             if($('.friends div').length >= 7){
-                document.querySelector('.friends').style.height = 'auto'
+                document.querySelector('.friends').style.height = '100%'
             }else{
                 document.querySelector('.friends').style.height = '90vh'
             }
