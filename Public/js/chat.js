@@ -1,4 +1,4 @@
-import { Socket } from "/socket.io/socket.io.js"
+import { socket } from "socket.io"
 // /socket.io/socket.io.js
 import { showFriends } from "./chatsModule/showFriends.js"
 import { DeleteMsg } from "./socket.js"
@@ -198,7 +198,7 @@ $.ajax({
                                     EditMsg:$('.EdMsg').val()
                                 },
                                 success:(data) => {
-                                    Socket.emit('chat message', data.SndMsg)
+                                    socket.emit('chat message', data.SndMsg)
                                     $('.EdForm').hide()
                                     $('.SendForm').show()
                                     $('.Msg').val(''),$('.GrpMsg').val('')
