@@ -472,7 +472,7 @@ chatlog chat_top{
     width: 50px;
     height: 50px;
     margin: 0 10px;
-    border: transparent;
+
 }
 .imgHead .userStatus{
     position: absolute;
@@ -484,6 +484,7 @@ chatlog chat_top{
 }
 chatlog chat_top img{
     border-radius: 100px;
+    border: 1px solid transparent;
     
 }
 chatlog h1{
