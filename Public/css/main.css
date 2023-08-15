@@ -472,6 +472,7 @@ chatlog chat_top{
     width: 50px;
     height: 50px;
     margin: 0 10px;
+    border-radius: 100px;
 
 }
 .imgHead .userStatus{
@@ -482,11 +483,7 @@ chatlog chat_top{
     height: 15px;
     background-color: aqua;
 }
-chatlog chat_top img{
-    border-radius: 100px;
-    border: 1px solid transparent;
-    
-}
+
 chatlog h1{
     font-size: 15px;
 }
