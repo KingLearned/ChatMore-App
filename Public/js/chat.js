@@ -75,6 +75,7 @@ $.ajax({
             document.querySelector('friendlist').style.display = 'block'
             $('.chats_head').show()
 
+            console.log($('.friends div').length)
             if($('.friends div').length >= 9){
                 document.querySelector('.friends').style.height = '100%'
             }else{
