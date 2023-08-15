@@ -64,7 +64,6 @@ const Storage = MULTER.memoryStorage()
 const upload = MULTER({ storage: Storage })
 
 app.get('/', (req, res) => {
-
   // const LOGIN = 'ambrose'
   const {LOGIN} = req.session
   
