@@ -216,9 +216,9 @@ socket.on('chat message', function(Msg,Exp) {
     }
             
     function HeightSet(){
-        // const Height = $('.friends article').length + $('.friends chatdate').length > 10 ? 
-        // document.querySelector('.friends').style.height = '100%' : 
-        // document.querySelector('.friends').style.height = '100vh';
+        const Height = $('.friends article').length + $('.friends chatdate').length > 10 ? 
+        document.querySelector('.friends').style.height = '100%' : 
+        document.querySelector('.friends').style.height = '100vh';
 
         window.scrollTo(0, document.body.scrollHeight);
 
