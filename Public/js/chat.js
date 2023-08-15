@@ -105,17 +105,7 @@ $.ajax({
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
 
-                const setStatus = localStorage.getItem(data.FRD[i])
-                // console.log(setStatus)
 
-                document.querySelector('.imgHead span').innerHTML = 
-                `<user_${data.FRD[i]} style='position: absolute;
-                bottom: 0;
-                right: 0;
-                width: 13px;
-                height: 13px;
-                background-color: ${setStatus ? 'lime' : 'red'};
-                border-radius: 100px;'></user_${data.FRD[i]}>`
 
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
@@ -128,8 +118,21 @@ $.ajax({
                     }
                     if(data.FRD[i] == data.SORT[p].username){
                         $('about').html(data.SORT[p].about) //For about the user friends
+                        data.SORT[p].status == 1 ? localStorage.setItem(data.FRD[i], 'online') : localStorage.setItem(data.FRD[i], 'offline')
+                                 
                     }
                 }
+
+                const setStatus = localStorage.getItem(data.FRD[i])
+                
+                document.querySelector('.imgHead span').innerHTML = 
+                `<user_${data.FRD[i]} style='position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 13px;
+                height: 13px;
+                background-color: ${setStatus ? 'lime' : 'red'};
+                border-radius: 100px;'></user_${data.FRD[i]}>`
 
                 document.querySelector('chatlog img').src = FriendImg
                 $('chatlog h1').html(`<span style='text-transform:capitalize;'>${data.FRD[i]}</span>`)//Chat Header

@@ -50,11 +50,15 @@ app.use(session({
 
 app.get('/Log-User-Out', (req, res) =>{
   // destroy session && Clear cookies
+  const {LOGIN} = req.session
+
   req.session.destroy((err) => {
       if(err){
           return res.redirect('/')
       }else{
           res.clearCookie("ChatMore-Session-App")
+          const query1 = "UPDATE `users` SET `status`=? WHERE `username`=?"
+          MYSQL.query(query1, [0, LOGIN],(err, result) => {})
           return res.redirect('/')
       }
   })
