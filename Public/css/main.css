@@ -475,15 +475,6 @@ chatlog chat_top{
     border-radius: 100px;
 
 }
-.imgHead .userStatus{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 13px;
-    height: 13px;
-    background-color: lime;
-    border-radius: 100px;
-}
 
 chatlog h1{
     font-size: 15px;
