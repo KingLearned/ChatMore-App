@@ -33,7 +33,8 @@ $.ajax({
                 for (let n = 0; n < data.CHATS.length; n++) {
     
                     if(userFriends[i].some(Ele => Ele == data.CHATS[n].replyto) && userFriends[i].some(Ele => Ele == data.CHATS[n].from)){
-                        friendsChat[userFriends.indexOf(userFriends[i])].push(data.CHATS[n])
+                        friendsChat[userFriends.indexOf(userFriends[i])] = data.CHATS[n]
+                        // friendsChat[userFriends.indexOf(userFriends[i])].push(data.CHATS[n])
                     }
                 }
             }
