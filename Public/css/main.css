@@ -408,7 +408,7 @@ dp{
     color: rgb(157, 2, 157);
 }
 .friends, groups{
-    height: 90vh;
+    height: minmax(40vh, auto);
     width: 100%;
     border-radius: 25px 25px 0 0;
     background-color: white;

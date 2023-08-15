@@ -309,8 +309,9 @@ $.ajax({
 
         /********************** VIEW LENGTH HANDLE ***********************/
         if($('.friends div').length > 8){
-            document.querySelector('.friends').style.height = 'auto'
+            // document.querySelector('.friends').style.height = 'auto'
         }
+
         if($('groups div').length > 4){
             document.querySelector('groups').style.height = 'auto'
         }
