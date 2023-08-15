@@ -10,6 +10,7 @@ $.ajax({
     success: (data) => {
 
         $('yourname').html(data.PN)
+        
         for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
         document.querySelector('friendlist').innerHTML = ''
 
@@ -66,6 +67,10 @@ $.ajax({
             $('.Msg').val('')
 
             ChatLogs.length = 0 //For resetting of the chatbox to empty
+        })
+
+        $('.logOutBtn').on('click', () => {
+            window.location = '/Log-User-Out'
         })
 
         //FOR CLOSING OF USER'S PROFILE
@@ -131,7 +136,7 @@ $.ajax({
                 right: 0;
                 width: 13px;
                 height: 13px;
-                background-color: ${setStatus ? 'lime' : 'red'};
+                background-color: ${setStatus == 'online' ? 'lime' : 'red'};
                 border-radius: 100px;'></user_${data.FRD[i]}>`
 
                 document.querySelector('chatlog img').src = FriendImg
