@@ -78,7 +78,7 @@ $.ajax({
             if($('.friends div').length >= 7){
                 document.querySelector('.friends').style.height = 'auto'
             }else{
-                document.querySelector('.friends').style.height = '88vh'
+                document.querySelector('.friends').style.height = '90vh'
             }
 
             $('.EditId').val('')
