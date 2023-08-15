@@ -164,7 +164,7 @@ socket.on('chat message', function(Msg,Exp) {
     }else{
         // localStorage.setItem(currentUser, 'online')
         if(currentUser){
-            localStorage.setItem(currentUser, 'online')
+            console.log(currentUser)
         }
         currentUser = !currentUser ? Msg.User : currentUser 
         
