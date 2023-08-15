@@ -13,10 +13,6 @@ $.ajax({
         for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
         document.querySelector('friendlist').innerHTML = ''
 
-        socket.emit('chat message', {Id:'Login',User:data.PN})
-
-
-
         const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
         const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="${showImg(data.USER[0].user_img)}" alt="${data.USER[0].user_img}">`)
         $('tel').html(data.USER[0].telephone)
@@ -109,7 +105,7 @@ $.ajax({
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
 
-                document.querySelector('.imgHead').innerHTML += 
+                document.querySelector('.imgHead span').innerHTML = 
                 `<user_${data.FRD[i]} style='position: absolute;
                 bottom: 0;
                 right: 0;
@@ -232,6 +228,8 @@ $.ajax({
                 
             })
         }
+
+        socket.emit('chat message', {Id:'Login',User:data.PN})
 
         /************************* COMMUNITY SECTION HANDLER ***************************/
         /************************* COMMUNITY SECTION HANDLER ***************************/
