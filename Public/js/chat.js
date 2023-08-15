@@ -69,13 +69,9 @@ $.ajax({
             ChatLogs.length = 0 //For resetting of the chatbox to empty
         })
 
-        $('.logOutBtn').on('click', () => {
-            localStorage.setItem(data.PN, 'offline')
-            window.location = '/Log-User-Out'
-        })
-
         //FOR CLOSING OF USER'S PROFILE
         $('.user_profile .ClxPrf').on('click', () => {
+
             document.querySelector('.user_profile').style.display = 'none'
             document.querySelector('.app').style.display = 'block'
         })
@@ -123,9 +119,7 @@ $.ajax({
                         FriendImg =  `${showImg(data.SORT[p].user_img)}`
                     }
                     if(data.FRD[i] == data.SORT[p].username){
-                        $('about').html(data.SORT[p].about) //For about the user friends
-                        data.SORT[p].status == 1 ? localStorage.setItem(data.FRD[i], 'online') : localStorage.setItem(data.FRD[i], 'offline')
-                                 
+                        $('about').html(data.SORT[p].about) //For about the user friend
                     }
                 }
 
@@ -242,6 +236,10 @@ $.ajax({
             })
         }
 
+        $('.logOutBtn').on('click', () => {
+            localStorage.setItem(data.PN, 'offline')
+            window.location = '/Log-User-Out'
+        })
         socket.emit('chat message', {Id:'Login',User:data.PN})
 
         /************************* COMMUNITY SECTION HANDLER ***************************/

@@ -10,6 +10,8 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
 
         for (let n = 0; n < sortData.length; n++) {
             if(sortData[n].username == frdList[i]){
+
+                sortData[n].status == 1 ? localStorage.setItem(frdList[i], 'online') : localStorage.setItem(frdList[i], 'offline')
                 
                 const userImg = sortData[n].user_img == '' ? `<img src="../images/avatar.png" alt="avatar.png">` : `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
                 const lastMsg = frdChats[i].length !== 0 ? frdChats[i].Msg : '' //last Message generator
