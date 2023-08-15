@@ -192,9 +192,9 @@ $.ajax({
 
                 /********************* HEIGHT VIEW FUNCTION    ************************/
                 
-                // const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
-                // (document.querySelector('.friends').style.height = 'auto',document.querySelector('.app').style.height = 'auto') :
-                // document.querySelector('.friends').style.height = '90vh'
+                const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
+                (document.querySelector('.friends').style.height = 'auto',document.querySelector('.app').style.height = 'auto') :
+                document.querySelector('.friends').style.height = '90vh'
                 window.scrollTo(0, document.body.scrollHeight)
                 
                 $('.Msg').focus() //Focusing of Type new Message
