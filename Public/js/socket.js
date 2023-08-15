@@ -164,7 +164,8 @@ socket.on('chat message', function(Msg,Exp) {
         
         const setStatus = document.querySelector(`user_${Msg.User}`)
         localStorage.setItem(Msg.User, Msg.Status)
-        setStatus ? setStatus.style.backgroundColor = 'lime' : ''
+
+        localStorage.getItem(Msg.User) == 'online' ? setStatus.style.backgroundColor = 'lime' : setStatus.style.backgroundColor = 'red'
 
     }
     
