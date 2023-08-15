@@ -162,9 +162,19 @@ socket.on('chat message', function(Msg,Exp) {
         `
         HeightSet()
     }else{
-        localStorage.setItem(Msg.User, 'online')
+        // localStorage.setItem(currentUser, 'online')
+        if(currentUser !== Msg.User){
+            localStorage.setItem(currentUser, 'online')
+        }
         currentUser = !currentUser ? Msg.User : currentUser 
+        
+        localStorage.setItem(Msg.User, 'online')
         localStorage.setItem(currentUser, 'online')
+        // setTimeout(() => {
+        // },2000)
+
+        console.log(currentUser, Msg.User)
+        // socket.emit('chat message', {Id:'Login',User:data.PN})
         
         document.querySelector(`user_${currentUser}`).style.backgroundColor = 'lime'
         document.querySelector(`user_${Msg.User}`).style.backgroundColor = 'lime'
