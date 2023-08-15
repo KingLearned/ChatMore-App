@@ -161,6 +161,7 @@ socket.on('chat message', function(Msg,Exp) {
         `
         HeightSet()
     }else{
+        localStorage.setItem(Msg.User, 'online')
         // document.querySelector(`user_${Msg.User}`).style.backgroundColor = 'lime'
     }
     

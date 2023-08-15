@@ -105,6 +105,8 @@ $.ajax({
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
 
+                localStorage.setItem(data.FRD[i], 'offline')
+
                 document.querySelector('.imgHead span').innerHTML = 
                 `<user_${data.FRD[i]} style='position: absolute;
                 bottom: 0;
@@ -127,6 +129,7 @@ $.ajax({
                         $('about').html(data.SORT[p].about) //For about the user friends
                     }
                 }
+
                 document.querySelector('chatlog img').src = FriendImg
                 $('chatlog h1').html(`<span style='text-transform:capitalize;'>${data.FRD[i]}</span>`)//Chat Header
                 $('chatlog h6').html(data.FRD[i])//Chat Header
