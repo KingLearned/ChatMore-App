@@ -12,14 +12,7 @@ $.ajax({
         $('yourname').html(data.PN)
         for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
         document.querySelector('friendlist').innerHTML = ''
-        document.querySelector('.imgHead').innerHTML += 
-        `<user_${data.PN} style='position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 13px;
-        height: 13px;
-        background:red;
-        border-radius: 100px;'></user_${data.PN}>`
+
         socket.emit('chat message', {Id:'Login',User:data.PN})
 
 
@@ -115,6 +108,15 @@ $.ajax({
         const ChatLogs = []
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
+
+                document.querySelector('.imgHead').innerHTML += 
+                `<user_${data.FRD[i]} style='position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 13px;
+                height: 13px;
+                background:red;
+                border-radius: 100px;'></user_${data.FRD[i]}>`
 
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
