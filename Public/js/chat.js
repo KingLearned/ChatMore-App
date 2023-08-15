@@ -34,7 +34,6 @@ $.ajax({
     
                     if(userFriends[i].some(Ele => Ele == data.CHATS[n].replyto) && userFriends[i].some(Ele => Ele == data.CHATS[n].from)){
                         friendsChat[userFriends.indexOf(userFriends[i])] = data.CHATS[n]
-                        // friendsChat[userFriends.indexOf(userFriends[i])].push(data.CHATS[n])
                     }
                 }
             }

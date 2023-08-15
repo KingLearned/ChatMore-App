@@ -12,9 +12,7 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
             if(sortData[n].username == frdList[i]){
                 
                 const userImg = sortData[n].user_img == '' ? `<img src="../images/avatar.png" alt="avatar.png">` : `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
-                const lastMsg = frdChats[i] !== '' ? frdChats[i].Msg : '' //last Message generator
-                console.log(frdChats[0].length)
-                // const lastMsg = frdChats[i].length > 0 ? frdChats[i][frdChats[i].length-1].Msg : '' //last Message generator
+                const lastMsg = frdChats[i].length !== 0 ? frdChats[i].Msg : '' //last Message generator
 
                 document.querySelector('friendlist').innerHTML +=`
                 <div class="chat_${frdList[i]}">
