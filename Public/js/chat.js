@@ -78,7 +78,7 @@ $.ajax({
             if($('.friends div').length >= 9){
                 document.querySelector('.friends').style.height = '100%'
             }else{
-                document.querySelector('.friends').style.height = '90vh'
+                document.querySelector('.friends').style.height = '95vh'
             }
 
             $('.EditId').val('')
