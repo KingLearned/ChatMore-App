@@ -287,6 +287,7 @@ $.ajax({
                 }
             }    
         }
+
         for (let i = 0; i < data.SORT.length; i++) {
             $(`.${data.SORT[i].username}`).on('click', () => {
                 $.ajax({
@@ -300,10 +301,9 @@ $.ajax({
                 })
             })
         }
-        /************************************************************************************ */
 
         /********************** VIEW LENGTH HANDLE ***********************/
-        if($('.friends div').length > 6){
+        if($('.friends div').length > 8){
             document.querySelector('.friends').style.height = 'auto'
         }
         if($('groups div').length > 4){
