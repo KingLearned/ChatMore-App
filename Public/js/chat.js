@@ -1,3 +1,5 @@
+import { Socket } from "/socket.io/socket.io.js"
+// /socket.io/socket.io.js
 import { showFriends } from "./chatsModule/showFriends.js"
 import { DeleteMsg } from "./socket.js"
 const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
@@ -196,7 +198,7 @@ $.ajax({
                                     EditMsg:$('.EdMsg').val()
                                 },
                                 success:(data) => {
-                                    socket.emit('chat message', data.SndMsg)
+                                    Socket.emit('chat message', data.SndMsg)
                                     $('.EdForm').hide()
                                     $('.SendForm').show()
                                     $('.Msg').val(''),$('.GrpMsg').val('')
