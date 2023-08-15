@@ -215,7 +215,8 @@ close{
 
 .app{
     position: relative;
-    height: 97vh;
+    min-height: 97vh;
+    max-height: auto;
     box-shadow: 1px 1px 10px gainsboro;
     border-radius: 15px;
     /* overflow: hidden; */
