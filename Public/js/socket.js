@@ -72,9 +72,8 @@ socket.on('chat message', function(Msg,Exp) {
     Show ? (Show.style.display = 'flex', Show.style.flexDirection = 'column') : ''
     
     if(Msg.chat == 'Frd'){
+        MainChats.push(Exp) //PUSH NEW MESSAGE OBJ TO MAINCHAT
         document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
-
-        MainChats.push(Exp)
 
         const shiftClass = Msg.from !== $('chat_top h6').html() ? `class="edit alignUserlog"` : ''
         const editDiv = Msg.from !== $('chat_top h6').html() ? `<make><edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit><del class="fa fa-times del${Msg.Id}" title="Delete Message"></del></make>` : ''
