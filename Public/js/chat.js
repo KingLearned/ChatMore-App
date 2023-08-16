@@ -63,7 +63,7 @@ $.ajax({
                     data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== '' ? FriendImg =  `${showImg(data.SORT[p].user_img)}` : ''
 
                     //Display Friends About
-                    data.FRD[i] == data.SORT[p].username && $('about').html(data.SORT[p].about)
+                    // data.FRD[i] == data.SORT[p].username && $('about').html(data.SORT[p].about)
                 }
 
                 const setStatus = localStorage.getItem(data.FRD[i])
