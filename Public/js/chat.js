@@ -95,16 +95,16 @@ $.ajax({
                 for (let n = 0; n < ChatLogs.length; n++) {
 
                     //Shift user log to right
-                    const shift  = ChatLogs[n].replyto !== data.PN ? `class="alignUserlog edit ChatID${ChatLogs[n].Id}"` : ''
+                    const shiftClass  = ChatLogs[n].replyto !== data.PN ? `class="alignUserlog edit ChatID${ChatLogs[n].Id}"` : ''
                     
                     //Add edit permission dynamically
-                    const edit = ChatLogs[n].replyto !== data.PN ? `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>` : ''
+                    const editDiv = ChatLogs[n].replyto !== data.PN ? `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>` : ''
 
                     Show.innerHTML += ` 
-                        <article ${shift} id="ChatID${ChatLogs[n].Id}">
+                        <article ${shiftClass} id="ChatID${ChatLogs[n].Id}">
                             <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
                             <time>${ChatLogs[n].time}</time>
-                            ${edit}
+                            ${editDiv}
                         </article>
                         `
                     if(n < ChatLogs.length-1){

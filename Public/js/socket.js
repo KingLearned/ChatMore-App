@@ -73,19 +73,11 @@ socket.on('chat message', function(Msg,Exp) {
     if(Msg.chat == 'Frd'){
         MainChats.push(Exp)
 
-        let shift = ''
-        let edit = ''
-        if(Msg.from !== $('chat_top h6').html()){
-            shift = `class="edit" style="align-self:flex-end; background-color: rgb(245, 111, 245); color:white; border-radius:10px 10px 0 10px"`
-            edit = 
-                `
-                <make>
-                    <edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit>
-                    <del class="fa fa-times del${Msg.Id}" title="Delete Message"></del>
-                </make>`
-        }
-
+        const shiftClass = Msg.from !== $('chat_top h6').html() ? `class="edit alignUserlog"` : ''
+        const editDiv = Msg.from !== $('chat_top h6').html() ? `<make><edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit><del class="fa fa-times del${Msg.Id}" title="Delete Message"></del></make>` : ''
+        
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
+
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id.replace(/[^0-9]/g, ""))
             if(Number(Math.ceil(Msg.Id/(1000*60*60*24))) > Number(Math.ceil(LastArt/(1000*60*60*24)))){
@@ -96,12 +88,11 @@ socket.on('chat message', function(Msg,Exp) {
             }
         }
 
-        // <logname>@${Id}</logname>
         Show.innerHTML += ` 
-            <article ${shift} id="ChatID${Msg.Id}">
+            <article ${shiftClass} id="ChatID${Msg.Id}">
                 <log>${Msg.Msg.split('<').join('&lt;')}</log>
                 <time>${Msg.time}</time>
-                ${edit}
+                ${editDiv}
             </article>
             `
 
