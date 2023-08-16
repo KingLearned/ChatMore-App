@@ -104,9 +104,7 @@ socket.on('chat message', function(Msg,Exp) {
 
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         const logs = document.querySelectorAll(`${Msg.EleDiv} article log`)
-
         //Modify The Last Msg
-        console.log((whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg) && (whole.length > 1))
         for(let i=0; i<whole.length; i++) {
             ((whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg) && (whole.length > 1)) ? 
             $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : 
@@ -123,14 +121,13 @@ socket.on('chat message', function(Msg,Exp) {
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         //Last Msg Function
         for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.MsgId ? $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced(Msg.Msg)) : '')
-
+        //Tracking of Html Comment Sign<!--
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.MsgId) MainChats[n].Msg = Msg.Msg.split('<').join('&lt;')
     }else if(Msg.Id == 'Grp'){
         GroupChats.push({Id:Msg.InId, Msg:Msg.Msg, from:Msg.from, sento:Msg.MsgTo, time:Msg.time})
         document.querySelector('groups').style.minHeight = '100vh'; document.querySelector('groups').style.maxHeight = 'auto'
         
         const Log = document.querySelector(`${Msg.EleDiv}`)//Dynamic getElement
-
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
         if(Art.length !== 0){
             const LastArt = Number(Art[Art.length-1].id)
@@ -148,15 +145,15 @@ socket.on('chat message', function(Msg,Exp) {
             Id = ''
             shift = 'activeme'
         }
-        Log.innerHTML +=
+        Log ? Log.innerHTML +=
         `
         <article class="${shift}" id="${Msg.InId}">
             ${Id}
             <log>${Msg.Msg.split('<').join('&lt;')}</log>
             <time>${Msg.time}</time>
         </article>
-        `
-        window.scrollTo(0, document.body.scrollHeight)
+        `:""
+        Log && window.scrollTo(0, Log.scrollHeight)
     }else{
         //SET USER STATUS TO ONLINE
         const setStatus = document.querySelector(`user_${Msg.User}`)
