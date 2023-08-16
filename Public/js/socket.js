@@ -104,7 +104,7 @@ socket.on('chat message', function(Msg,Exp) {
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         const logs = document.querySelectorAll(`${Msg.EleDiv} article log`)
         //Modify The Last Msg
-        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg && whole.length > 1 ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced) : $(`.last-log${Msg.EleDiv}`).html(''))
+        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg && whole.length > 1 ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : $(`.last-log${Msg.EleDiv}`).html(''))
 
         document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.Msg) DelMsgWithID(MainChats,MainChats[n])
@@ -113,7 +113,7 @@ socket.on('chat message', function(Msg,Exp) {
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg.split('<').join('&lt;'))
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         //Last Msg Function
-        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.MsgId ? $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced) : '')
+        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.MsgId ? $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced(Msg.Msg)) : '')
 
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.MsgId) MainChats[n].Msg = Msg.Msg.split('<').join('&lt;')
     }else if(Msg.Id == 'Grp'){
