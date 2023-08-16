@@ -18,9 +18,9 @@ $.ajax({
         $('tel').html(data.USER[0].telephone)
         
         
-        // WHEN FRIENDS LIST IS EMPTY
         document.querySelector('friendlist').innerHTML = ''
-
+        
+        // WHEN FRIENDS LIST IS EMPTY
         if(data.FRD.length < 1){
             document.querySelector('friendlist').innerHTML =
             `
