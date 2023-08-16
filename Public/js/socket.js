@@ -103,14 +103,11 @@ socket.on('chat message', function(Msg,Exp) {
 
     }else if(Msg.Id == 'Del'){
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
-        for(let i=0; i<whole.length; i++) (console.log(whole[i]))
-        console.log(Msg.Msg)
-        
+        const logs = document.querySelectorAll(`${Msg.EleDiv} article log`)
+        //Modify The Last Msg
+        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced) : '')
+
         document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
-
-        //Last Msg Function
-        // for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.MsgId ? $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced) : '')
-
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.Msg) DelMsgWithID(MainChats,MainChats[n])
         document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
     }else if(Msg.Id == 'Edit'){
