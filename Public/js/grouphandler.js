@@ -11,13 +11,12 @@ $.ajax({
         for (let i = 0; i < data.GRP.length; i++) {
             Dis.innerHTML +=`
                 <div class="ChatIn${data.GRP[i].groupid}">
-                    <img src="../images/group.jpg" alt="">
+                    <img src="${groupImg[i]}" alt="">
                     <display>
                         <groupname>${data.GRP[i].groupname}</groupname><br>
                     </display>
                 </div>
                 `
-                // <chatname></chatname><talk>Last Msg...</talk>
         }
         const GrpHv = $('grouplist div').length > 6 ? 
         document.querySelector('groups').style.height = 'auto' : 

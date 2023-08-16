@@ -63,20 +63,6 @@ $.ajax({
             ChatLogs.length = 0 //For resetting of the chatbox to empty
         })
 
-        //FOR CLOSING OF USER'S PROFILE
-        $('.user_profile .ClxPrf').on('click', () => {
-
-            document.querySelector('.user_profile').style.display = 'none'
-            document.querySelector('.app').style.display = 'block'
-        })
-
-        //FOR VIEWING OF USER'S PROFILE
-        $('.viewProfile').on('click', () => {
-            document.querySelector('.user_profile').style.display = 'flex'
-            document.querySelector('.user_profile').style.height = 'auto'
-            document.querySelector('.app').style.display = 'none'
-        })
-
         $('.ChngPwd').on('submit', (e) => {
             e.preventDefault()
             $.ajax({
@@ -95,8 +81,6 @@ $.ajax({
         /**************************************************************************** */
         
         /************************* FOR SERVING OF THE CHAT LOG *************************/
-        /************************* FOR SERVING OF THE CHAT LOG *************************/
-        
         const ChatLogs = []
         for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
