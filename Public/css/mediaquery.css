@@ -6,8 +6,8 @@
     .container{
         width: 99.9%;
         margin: 0;
-        height: 99vh;
         /* overflow-x: hidden; */
+        height: 100vh;
     }
     .app{
         height: 100vh;

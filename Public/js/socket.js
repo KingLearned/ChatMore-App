@@ -67,7 +67,7 @@ $(`.GrpChatForm`).on('submit', (e) => {
 
 socket.on('chat message', function(Msg,Exp) {
     
-    const wordExced = wordCount(Msg.Msg?Msg.Msg.split('<').join('&lt;'):'')[1] > 10 ? '...':''
+    const wordExced = (word) => { return wordCount(word.split('<').join('&lt;'))[1] > 10 ? '...':'' }
     const Show = document.querySelector(`${Msg.EleDiv}`)
     Show ? (Show.style.display = 'flex', Show.style.flexDirection = 'column') : ''
     
@@ -97,7 +97,7 @@ socket.on('chat message', function(Msg,Exp) {
                 ${editDiv}
             </article>
             `    
-        $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced) //Last Msg
+        $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced(Msg.Msg)) //Last Msg
         window.scrollTo(0, document.body.scrollHeight)
         reRrun()
 
