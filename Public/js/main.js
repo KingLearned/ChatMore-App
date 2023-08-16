@@ -28,13 +28,29 @@ $('.user_profile .ClxPrf').on('click', () => {
     document.querySelector('.app').style.display = 'block'
 })
 
-
 //CHANGING OF USER PROFILE IMAGE
 function Submit(){
     $('.CImg').html($('#userimage').val())
     document.querySelector('.fa-upload').style.display = 'block'
     document.querySelector('.fa-pen').style.display = 'none'
 }
+
+//CHANGE OF PASSWORD
+$('.ChngPwd').on('submit', (e) => {
+    e.preventDefault()
+    $.ajax({
+        method:"POST",
+        data:{
+            newPWD : $('.newPWD').val(),
+            CnewPWD : $('.CnewPWD').val()
+        },
+        success: (data) => {
+            $('.ChngPwd h5').html(data.validPwd || data.errPwd)
+            setTimeout(() => { $('.ChngPwd h5').html('') ; const validate = data.validPwd ? window.location = '/' : ''}, 3000)
+            
+        }
+    })
+})
 
 //APP EMOJIS FUNCTIONALITIES
 const Smiles = ['😎', '😡', '😊','😍', '😅', '😁', '💓','💔', '😒', '😜','☕', '🏃',]

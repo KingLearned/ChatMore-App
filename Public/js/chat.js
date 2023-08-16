@@ -47,29 +47,10 @@ $.ajax({
         //FOR SHOWING OF USER'S FRIENDS
         showFriends(data.FRD, data.PN, data.SORT, friendsChat)
 
-        $('.ChngPwd').on('submit', (e) => {
-            e.preventDefault()
-            $.ajax({
-                method:"POST",
-                data:{
-                    newPWD : $('.newPWD').val(),
-                    CnewPWD : $('.CnewPWD').val()
-                },
-                success: (data) => {
-                    $('.ChngPwd h5').html(data.validPwd || data.errPwd)
-                    setTimeout(() => { $('.ChngPwd h5').html('') ; const validate = data.validPwd ? window.location = '/' : ''}, 3000)
-                    
-                }
-            })
-        })
-        
-        /************************* FOR SERVING OF THE CHAT LOG *************************/
+        //FOR SERVING OF THE CHAT LOGs
         const ChatLogs = []
-        for (let i = 0; i < data.FRD.length; i++) {
+        for (let i = 0; i < data.FRD.length; i++) {s
             $(`.chat_${data.FRD[i]}`).on('click', () => {
-
-
-
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
                 $('.chats_head').hide()
@@ -212,8 +193,7 @@ $.ajax({
         })
 
         $('.logOutBtn').on('click', () => {
-            socket.emit('chat message', {Id:'Status',User:data.PN, Status:'offline'})
-
+            socket.emit('chat message', {Id:'Status', User:data.PN, Status:'offline'})
             localStorage.setItem(data.PN, 'offline')
             window.location = '/Log-User-Out'
         })
