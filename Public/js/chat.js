@@ -49,11 +49,15 @@ $.ajax({
 
         //FOR SERVING OF THE CHAT LOGs
         const ChatLogs = []
-        for (let i = 0; i < data.FRD.length; i++) {s
+        for (let i = 0; i < data.FRD.length; i++) {
             $(`.chat_${data.FRD[i]}`).on('click', () => {
                 document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
                 $('.chats_head').hide()
+
+                $('.EditId').val('')
+                $('.locator').val('')
+                $('.Msg').val('')
 
                 let FriendImg = `../images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
@@ -178,17 +182,12 @@ $.ajax({
             })
         }
 
-        /*************** FOR REMOVING OF CHAT LOG ******************/
+        //FOR REMOVING OF CHAT LOG
         $('chatlog button').on('click', () => {
             window.scrollTo(0, document.body.scrollTop)
             document.querySelector('chatlog').style.display = 'none'
             document.querySelector('friendlist').style.display = 'block'
             $('.chats_head').show()
-
-            $('.EditId').val('')
-            $('.locator').val('')
-            $('.Msg').val('')
-
             ChatLogs.length = 0 //For resetting of the chatbox to empty
         })
 
