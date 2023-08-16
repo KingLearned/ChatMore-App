@@ -10,17 +10,17 @@ export const MainChats = []    //for storing user => user chats
 $.ajax({
     method: "POST",
     success: (data) => {
+        for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
 
         $('yourname').html(data.PN)
+        data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
+        data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="${showImg(data.USER[0].user_img)}" alt="${data.USER[0].user_img}">`)
+        $('tel').html(data.USER[0].telephone)
         
-        for (let m = 0; m < data.CHATS.length; m++) { MainChats.push(data.CHATS[m]) }
+        
+        // WHEN FRIENDS LIST IS EMPTY
         document.querySelector('friendlist').innerHTML = ''
 
-        const userAbout = data.USER[0].about !== '' ? $('.aboutme').val(data.USER[0].about) : $('.aboutme').val(`Hello, I'm using ChatMore App`) //user about display
-        const userPicture = data.USER[0].user_img == '' ? $('dpx').html(`<img src="../images/avatar.png" alt="avatar.png">`) : $('dpx').html(`<img src="${showImg(data.USER[0].user_img)}" alt="${data.USER[0].user_img}">`)
-        $('tel').html(data.USER[0].telephone)
-
-        // WHEN FRIENDS LIST IS EMPTY
         if(data.FRD.length < 1){
             document.querySelector('friendlist').innerHTML =
             `
@@ -208,39 +208,13 @@ $.ajax({
 
         socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
 
-        /************************* COMMUNITY SECTION HANDLER ***************************/
+        //ADD OTHER USERS FUNCTIONS
         const Disp = document.querySelector('community')
         Disp.innerHTML = ''
         const Addthem = []
 
-        // data.SORT
-        // Addthem
-        // data.PN
-        // data.FRD
-
-        // mainDB, addFrnds, userName, frndsDB
+        //SORT FRIENDS LIST
         sortFriends(data.SORT, Addthem, data.PN, data.FRD)
-
-        // for (let i = 0; i < data.SORT.length; i++) {
-        //     if((data.SORT[i].username).toUpperCase() !== (data.PN).toUpperCase()){
-        //         Addthem.push(data.SORT[i].username)
-        //     }
-        // }
-        // const Friends = data.FRD
-        // for (let i = 0; i < Addthem.length; i++) {
-        //     for (let n = 0; n < Friends.length; n++) {
-        //         if((Friends[n] == Addthem[i])){
-        //         function Rem(comm,Add){
-        //             var index = comm.indexOf(Add)
-        //             if(index > -1){
-        //             comm.splice(index,1)
-        //             }
-        //             return comm
-        //         }Rem(Addthem,Addthem[i])
-        //         }
-                
-        //     }
-        // }
 
         //ADDING OF FRIENDS & DISPLAY FUNCTION
         addFriends(data.SORT, Addthem, Disp)
