@@ -106,7 +106,8 @@ socket.on('chat message', function(Msg,Exp) {
         //Modify The Last Msg
         for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg && whole.length > 1 ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : $(`.last-log${Msg.EleDiv}`).html(''))
 
-        document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
+        const removeMsg = document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`)
+        removeMsg ? removeMsg.remove() : ''
 
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.Msg) DelMsgWithID(MainChats,MainChats[n])
         document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
