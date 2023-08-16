@@ -31,7 +31,7 @@ export const showChats = (ChatLogs, FRD, SORT, userName, MainChats) => {
             
             $('.repto').val(FRD[i]) //Reply To User Friend
             $('.EleDiv').val(Ele)//User Display Element Div
-            document.querySelector('logs').innerHTML = `<${Ele} style="display:flex; flex-direction:column;"></${Ele}>`
+            document.querySelector('logs').innerHTML = `<${Ele} style="display:flex; flex-direction:column; padding-bottom:15px"></${Ele}>`
             const Show = document.querySelector(`logs ${Ele}`)
 
             for (let n = 0; n < ChatLogs.length; n++) {

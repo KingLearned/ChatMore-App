@@ -108,7 +108,6 @@ socket.on('chat message', function(Msg,Exp) {
     }else if(Msg.Id == 'Edit'){
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg.split('<').join('&lt;'))
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.MsgId) MainChats[n].Msg = Msg.Msg.split('<').join('&lt;')
-
     }else if(Msg.Id == 'Grp'){
         GroupChats.push({Id:Msg.InId, Msg:Msg.Msg, from:Msg.from, sento:Msg.MsgTo, time:Msg.time})
         document.querySelector('groups').style.minHeight = '100vh'; document.querySelector('groups').style.maxHeight = 'auto'
@@ -125,7 +124,6 @@ socket.on('chat message', function(Msg,Exp) {
                 Log.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
             }
         }
-
 
         let Id = `<logname>@${Msg.from}</logname>`
         let shift = ''
