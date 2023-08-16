@@ -120,6 +120,35 @@ $.ajax({
                 //Focusing of Type new Message
                 $('.Msg').focus()
 
+                /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
+                for (let e = 0; e < ChatLogs.length; e++) {
+                    $(`.edit${ChatLogs[e].Id}`).on('click', () => {
+                        $('.EditId').val(ChatLogs[e].Id)
+                        $('.EdMsg').val(ChatLogs[e].Msg.split('&lt;').join('<'))
+                        $('.SendForm').hide()
+                        $('.EdForm').show()
+                        $('.EdMsg').focus()
+                        
+                        $(`.EdForm`).on('submit', (e) => {
+                            e.preventDefault()
+                            $.ajax({
+                                method:"POST",
+                                data:{
+                                    ElementTag: $('.EleDiv').val(),
+                                    EditId: $('.EditId').val(),
+                                    EditMsg:$('.EdMsg').val()
+                                },
+                                success:(data) => {
+                                    socket.emit('chat message', data.SndMsg)
+                                    $('.EdForm').hide()
+                                    $('.SendForm').show()
+                                    $('.Msg').val(''),$('.GrpMsg').val('')
+                                }
+                            })
+                        })
+                    })
+                }
+
                 /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
                 ChatLogs.forEach(eachMsg => {
                     $(`.del${eachMsg.Id}`).on('click', () => {
@@ -128,34 +157,6 @@ $.ajax({
                 })
 
                 
-            })
-        }
-        /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
-        for (let e = 0; e < ChatLogs.length; e++) {
-            $(`.edit${ChatLogs[e].Id}`).on('click', () => {
-                $('.EditId').val(ChatLogs[e].Id)
-                $('.EdMsg').val(ChatLogs[e].Msg.split('&lt;').join('<'))
-                $('.SendForm').hide()
-                $('.EdForm').show()
-                $('.EdMsg').focus()
-                
-                $(`.EdForm`).on('submit', (e) => {
-                    e.preventDefault()
-                    $.ajax({
-                        method:"POST",
-                        data:{
-                            ElementTag: $('.EleDiv').val(),
-                            EditId: $('.EditId').val(),
-                            EditMsg:$('.EdMsg').val()
-                        },
-                        success:(data) => {
-                            socket.emit('chat message', data.SndMsg)
-                            $('.EdForm').hide()
-                            $('.SendForm').show()
-                            $('.Msg').val(''),$('.GrpMsg').val('')
-                        }
-                    })
-                })
             })
         }
 
