@@ -25,7 +25,7 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
                     ${userImg}
                     <display>
                         <chatname>${frdList[i]}</chatname><br>
-                        <talk class="last-log${Ele}">${wordCount(lastMsg)+'...'}</talk>
+                        <talk class="last-log${Ele}">${wordCount(lastMsg).trim()+'...'}</talk>
                     </display>
                 </div>
                 `
