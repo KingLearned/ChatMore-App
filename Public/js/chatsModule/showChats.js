@@ -64,13 +64,8 @@ export const showChats = (ChatLogs, FRD, SORT, userName, MainChats) => {
 
             // FOR EDITING OF THE USERS MESSAGES
             editMessage(ChatLogs)
-
             // FOR DELETING OF THE USERS MESSAGE
-            ChatLogs.forEach(eachMsg => {
-                $(`.del${eachMsg.Id}`).on('click', () => {
-                    DeleteMsg(eachMsg.Id)
-                })
-            })
+            ChatLogs.forEach(eachMsg => { $(`.del${eachMsg.Id}`).on('click', () => { DeleteMsg(eachMsg.Id) }) })
         })
     }
 }
