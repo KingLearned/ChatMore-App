@@ -97,10 +97,7 @@ socket.on('chat message', function(Msg,Exp) {
             </article>
             ` : ''  
         $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced(Msg.Msg)) //Last Msg
-        // window.scrollTo(0, document.body.scrollHeight)
-        const toBottom = document.querySelector(`logs`)
-        // Show.scrollTop = Show.scrollHeight 
-        console.log(toBottom)
+        window.scrollTo(0, Show.scrollHeight)
         reRrun()
 
     }else if(Msg.Id == 'Del'){
