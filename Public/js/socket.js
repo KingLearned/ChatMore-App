@@ -74,7 +74,6 @@ socket.on('chat message', function(Msg,Exp) {
 
         const shiftClass = Msg.from !== $('chat_top h6').html() ? `class="edit alignUserlog"` : ''
         const editDiv = Msg.from !== $('chat_top h6').html() ? `<make><edit class="fa fa-pen edit${Msg.Id}" title="Edit Message"></edit><del class="fa fa-times del${Msg.Id}" title="Delete Message"></del></make>` : ''
-        
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
 
         if(Art.length !== 0){
@@ -96,7 +95,6 @@ socket.on('chat message', function(Msg,Exp) {
             `
 
         $(`.last-log${Msg.EleDiv}`).html(Msg.Msg.split('<').join('&lt;')) //Last Msg
-
         HeightSet()
         reRrun()
 
