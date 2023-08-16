@@ -43,25 +43,9 @@ $.ajax({
                 }
             }
         }
-        // console.log(friendsChat)
 
         //FOR SHOWING OF USER'S FRIENDS
         showFriends(data.FRD, data.PN, data.SORT, friendsChat)
-
-        /*************** FOR REMOVING OF CHAT LOG ******************/
-        /*************** FOR REMOVING OF CHAT LOG ******************/
-        $('chatlog button').on('click', () => {
-            window.scrollTo(0, document.body.scrollTop)
-            document.querySelector('chatlog').style.display = 'none'
-            document.querySelector('friendlist').style.display = 'block'
-            $('.chats_head').show()
-
-            $('.EditId').val('')
-            $('.locator').val('')
-            $('.Msg').val('')
-
-            ChatLogs.length = 0 //For resetting of the chatbox to empty
-        })
 
         $('.ChngPwd').on('submit', (e) => {
             e.preventDefault()
@@ -78,7 +62,6 @@ $.ajax({
                 }
             })
         })
-        /**************************************************************************** */
         
         /************************* FOR SERVING OF THE CHAT LOG *************************/
         const ChatLogs = []
@@ -213,6 +196,20 @@ $.ajax({
                 
             })
         }
+
+        /*************** FOR REMOVING OF CHAT LOG ******************/
+        $('chatlog button').on('click', () => {
+            window.scrollTo(0, document.body.scrollTop)
+            document.querySelector('chatlog').style.display = 'none'
+            document.querySelector('friendlist').style.display = 'block'
+            $('.chats_head').show()
+
+            $('.EditId').val('')
+            $('.locator').val('')
+            $('.Msg').val('')
+
+            ChatLogs.length = 0 //For resetting of the chatbox to empty
+        })
 
         $('.logOutBtn').on('click', () => {
             socket.emit('chat message', {Id:'Status',User:data.PN, Status:'offline'})
