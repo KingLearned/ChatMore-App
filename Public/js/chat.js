@@ -93,20 +93,18 @@ $.ajax({
                 const Show = document.querySelector(`logs ${Ele}`)
 
                 for (let n = 0; n < ChatLogs.length; n++) {
-                    let shift , edit = ''
+
+                    //Shift user log to right
+                    const shift  = ChatLogs[n].replyto !== data.PN ? `class="alignUserlog edit ChatID${ChatLogs[n].Id}"` : ''
                     
-                    if(ChatLogs[n].replyto !== data.PN){
-                        //Shift user log to right
-                        shift = `class="alignUserlog edit ChatID${ChatLogs[n].Id}"`
-                        //Add edit permission dynamically
-                        edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
-                    }
+                    //Add edit permission dynamically
+                    const edit = ChatLogs[n].replyto !== data.PN ? `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>` : ''
 
                     Show.innerHTML += ` 
                         <article ${shift} id="ChatID${ChatLogs[n].Id}">
-                        <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
-                        <time>${ChatLogs[n].time}</time>
-                        ${edit}
+                            <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
+                            <time>${ChatLogs[n].time}</time>
+                            ${edit}
                         </article>
                         `
                     if(n < ChatLogs.length-1){
