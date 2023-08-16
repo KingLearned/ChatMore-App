@@ -67,8 +67,7 @@ $(`.GrpChatForm`).on('submit', (e) => {
 socket.on('chat message', function(Msg,Exp) {
     
     const Show = document.querySelector(`${Msg.EleDiv}`)
-    Show ? Show.style.display = 'flex' : '';
-    Show ? Show.style.flexDirection = 'column' : ''
+    Show ? (Show.style.display = 'flex', Show.style.flexDirection = 'column') : ''
     
     if(Msg.chat == 'Frd'){
         MainChats.push(Exp)
