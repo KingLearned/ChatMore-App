@@ -1,6 +1,7 @@
 const socket = io()
 import { addFriends } from "./chatsModule/addFriends.js"
 import { showFriends } from "./chatsModule/showFriends.js"
+import { sortFriends } from "./chatsModule/sortFriends.js"
 import { DeleteMsg } from "./socket.js"
 const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
 
@@ -211,43 +212,38 @@ $.ajax({
         const Disp = document.querySelector('community')
         Disp.innerHTML = ''
         const Addthem = []
-        for (let i = 0; i < data.SORT.length; i++) {
-            if((data.SORT[i].username).toUpperCase() !== (data.PN).toUpperCase()){
-                Addthem.push(data.SORT[i].username)
-            }
-        }
-        const Friends = data.FRD
-        for (let i = 0; i < Addthem.length; i++) {
-            for (let n = 0; n < Friends.length; n++) {
-                if((Friends[n] == Addthem[i])){
-                function Rem(comm,Add){
-                    var index = comm.indexOf(Add)
-                    if(index > -1){
-                    comm.splice(index,1)
-                    }
-                    return comm
-                }Rem(Addthem,Addthem[i])
-                }
+
+        // data.SORT
+        // Addthem
+        // data.PN
+        // data.FRD
+
+        // mainDB, addFrnds, userName, frndsDB
+        sortFriends(data.SORT, Addthem, data.PN, data.FRD)
+
+        // for (let i = 0; i < data.SORT.length; i++) {
+        //     if((data.SORT[i].username).toUpperCase() !== (data.PN).toUpperCase()){
+        //         Addthem.push(data.SORT[i].username)
+        //     }
+        // }
+        // const Friends = data.FRD
+        // for (let i = 0; i < Addthem.length; i++) {
+        //     for (let n = 0; n < Friends.length; n++) {
+        //         if((Friends[n] == Addthem[i])){
+        //         function Rem(comm,Add){
+        //             var index = comm.indexOf(Add)
+        //             if(index > -1){
+        //             comm.splice(index,1)
+        //             }
+        //             return comm
+        //         }Rem(Addthem,Addthem[i])
+        //         }
                 
-            }
-        }
+        //     }
+        // }
 
-        //ADDING OF FRIENDS DISPLAY FUNCTION
+        //ADDING OF FRIENDS & DISPLAY FUNCTION
         addFriends(data.SORT, Addthem, Disp)
-
-        for (let i = 0; i < data.SORT.length; i++) {
-            $(`.${data.SORT[i].username}`).on('click', () => {
-                $.ajax({
-                    method:"POST",
-                    data : {
-                        AddFriend : data.SORT[i].username
-                    },
-                    success : (data) => {
-                        window.location = '/'
-                    }
-                })
-            })
-        }
     }
 })
 //Preloader function caller
