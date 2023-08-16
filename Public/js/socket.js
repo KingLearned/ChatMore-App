@@ -67,7 +67,7 @@ $(`.GrpChatForm`).on('submit', (e) => {
 
 socket.on('chat message', function(Msg,Exp) {
     
-    const wordExced = wordCount(Msg.Msg.split('<').join('&lt;'))[1] > 10 ? '...':''
+    const wordExced = wordCount(Msg.Msg?Msg.Msg.split('<').join('&lt;'):'')[1] > 10 ? '...':''
     const Show = document.querySelector(`${Msg.EleDiv}`)
     Show ? (Show.style.display = 'flex', Show.style.flexDirection = 'column') : ''
     
@@ -107,6 +107,11 @@ socket.on('chat message', function(Msg,Exp) {
         document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
     }else if(Msg.Id == 'Edit'){
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg.split('<').join('&lt;'))
+        const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
+
+        //Last Msg Function
+        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.MsgId ? $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced) : '')
+
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.MsgId) MainChats[n].Msg = Msg.Msg.split('<').join('&lt;')
     }else if(Msg.Id == 'Grp'){
         GroupChats.push({Id:Msg.InId, Msg:Msg.Msg, from:Msg.from, sento:Msg.MsgTo, time:Msg.time})
@@ -153,23 +158,21 @@ socket.on('chat message', function(Msg,Exp) {
         const ArtLng = document.querySelectorAll(`${Msg.EleDiv} article make del`)
         const EdLng = document.querySelectorAll(`${Msg.EleDiv} article make edit`)
         const Art = document.querySelectorAll(`${Msg.EleDiv} article`)
-    
-            /****************    FOR EDITING || DELETING CHATS IN FRIENDS PART ***************/
+
+        /****************    FOR EDITING || DELETING CHATS IN FRIENDS PART ***************/
         for (let i = 0; i < ArtLng.length; i++) {
             let DelBtn = document.querySelector(`.${ArtLng[i].classList[2]}`)
             let EdBtn = document.querySelector(`.${EdLng[i].classList[2]}`)
             let DoID = Number(ArtLng[i].classList[2].replace(/[^0-9]/g, ""))
             let Edmsg = document.querySelector(`${Msg.EleDiv} #ChatID${DoID} log`)
-
+            
             //Editing Of Message
             EdBtn.addEventListener('click', () => {
                 $('.EditId').val(DoID); 
-                $('.EleDiv').val(Msg.EleDiv); 
                 $('.EdMsg').val(Edmsg.innerHTML.split('&lt;').join('<'))
+                $('.EleDiv').val(Msg.EleDiv); 
 
-                $('.SendForm').hide()
-                $('.EdForm').show()
-                $('.EdMsg').focus()
+                $('.SendForm').hide(); $('.EdForm').show(); $('.EdMsg').focus()
 
                 $(`.EdForm`).on('submit', (e) => {
                     e.preventDefault()
@@ -196,14 +199,5 @@ socket.on('chat message', function(Msg,Exp) {
                 DeleteMsg(DoID)
             })
         }
-    }
-            
-    function HeightSet(){
-        //Moderate Div Height
-        // document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
-        window.scrollTo(0, document.body.scrollHeight)
-
-
-        // document.querySelector('groups').style.minheight = '100vh'; document.querySelector('groups').style.maxheight = 'auto'
     }
 })

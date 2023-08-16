@@ -4,6 +4,7 @@ export const editMessage = (Messages) => {
         $(`.edit${Messages[e].Id}`).on('click', () => {
             $('.EditId').val(Messages[e].Id)
             $('.EdMsg').val(Messages[e].Msg.split('&lt;').join('<'))
+
             $('.SendForm').hide()
             $('.EdForm').show()
             $('.EdMsg').focus()
