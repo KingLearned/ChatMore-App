@@ -102,10 +102,12 @@ socket.on('chat message', function(Msg,Exp) {
         reRrun()
 
     }else if(Msg.Id == 'Del'){
-        document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
-
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         for(let i=0; i<whole.length; i++) (console.log(whole[i]))
+        console.log(Msg.Msg)
+        
+        document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
+
         //Last Msg Function
         // for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.MsgId ? $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced) : '')
 
