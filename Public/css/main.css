@@ -677,7 +677,7 @@ groupchats button{
     width: 30px;
     height: 30px;
     border: transparent;
-    margin-right: 10px;
+    margin: 0 10px;
     font-size: large;
     cursor: pointer;
     background-color: transparent;
