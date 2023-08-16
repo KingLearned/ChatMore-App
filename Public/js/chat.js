@@ -93,13 +93,11 @@ $.ajax({
                 const Show = document.querySelector(`logs ${Ele}`)
 
                 for (let n = 0; n < ChatLogs.length; n++) {
-
                     //Shift user log to right
                     const shiftClass  = ChatLogs[n].replyto !== data.PN ? `class="alignUserlog edit ChatID${ChatLogs[n].Id}"` : ''
-                    
                     //Add edit permission dynamically
                     const editDiv = ChatLogs[n].replyto !== data.PN ? `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>` : ''
-
+                    //Dispay chat logs
                     Show.innerHTML += ` 
                         <article ${shiftClass} id="ChatID${ChatLogs[n].Id}">
                             <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
@@ -107,9 +105,9 @@ $.ajax({
                             ${editDiv}
                         </article>
                         `
+                    //Generate Time
                     if(n < ChatLogs.length-1){
                         if(Number(Math.ceil(ChatLogs[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(ChatLogs[n].Id/(1000*60*60*24)))){
-                        // if((new Date(ChatLogs[n+1].Id)).getDate() > (new Date(ChatLogs[n].Id)).getDate()){
                             const D = new Date(ChatLogs[n+1].Id)
                             const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
                             const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
@@ -117,7 +115,6 @@ $.ajax({
                         }
                     }
                 }
-
                 // HEIGHT VIEW FUNCTION
                 window.scrollTo(0, document.body.scrollHeight)
                 //Focusing of Type new Message
