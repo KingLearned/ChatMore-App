@@ -13,19 +13,18 @@ export const showFriends = (frdList, userName, sortData, frdChats) => {
             if(sortData[n].username == frdList[i]){
 
                 sortData[n].status == 1 ? localStorage.setItem(frdList[i], 'online') : localStorage.setItem(frdList[i], 'offline')
-                
                 //friendImg
                 const userImg = sortData[n].user_img == '' ? `<img src="../images/avatar.png" alt="avatar.png">` : `<img src="${showImg(sortData[n].user_img)}" alt="${sortData[n].user_img}">`
                 //Last Msg
                 const lastMsg = frdChats[i].length !== 0 ? frdChats[i].Msg : '' //last Message generator
-                // console.log(lastMsg.length)
+                const wordExced = wordCount(lastMsg)[1] > 10 ? '...':''
 
                 document.querySelector('friendlist').innerHTML +=`
                 <div class="chat_${frdList[i]}">
                     ${userImg}
                     <display>
                         <chatname>${frdList[i]}</chatname><br>
-                        <talk class="last-log${Ele}">${wordCount(lastMsg).trim()+'...'}</talk>
+                        <talk class="last-log${Ele}">${wordCount(lastMsg)[0].trim()+wordExced}</talk>
                     </display>
                 </div>
                 `
