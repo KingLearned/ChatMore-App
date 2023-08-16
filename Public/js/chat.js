@@ -118,14 +118,10 @@ $.ajax({
                     }
                 }
 
-                /********************* HEIGHT VIEW FUNCTION    ************************/
-                
-                const stickyTop = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
-                (document.querySelector('.friends').style.height = 'auto',document.querySelector('.app').style.height = 'auto') :
-                document.querySelector('.friends').style.height = '95vh'
+                // HEIGHT VIEW FUNCTION
                 window.scrollTo(0, document.body.scrollHeight)
-                
-                $('.Msg').focus() //Focusing of Type new Message
+                //Focusing of Type new Message
+                $('.Msg').focus()
 
                 /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
                 for (let e = 0; e < ChatLogs.length; e++) {
