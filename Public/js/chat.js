@@ -215,45 +215,25 @@ $.ajax({
             if((data.SORT[i].username).toUpperCase() !== (data.PN).toUpperCase()){
                 Addthem.push(data.SORT[i].username)
             }
-
-            const Friends = data.FRD
-            for (let i = 0; i < Addthem.length; i++) {
-                for (let n = 0; n < Friends.length; n++) {
-                    if((Friends[n] == Addthem[i])){
-                    function Rem(comm,Add){
-                        var index = comm.indexOf(Add)
-                        if(index > -1){
-                        comm.splice(index,1)
-                        }
-                        return comm
-                    }Rem(Addthem,Addthem[i])
+        }
+        const Friends = data.FRD
+        for (let i = 0; i < Addthem.length; i++) {
+            for (let n = 0; n < Friends.length; n++) {
+                if((Friends[n] == Addthem[i])){
+                function Rem(comm,Add){
+                    var index = comm.indexOf(Add)
+                    if(index > -1){
+                    comm.splice(index,1)
                     }
-                    
+                    return comm
+                }Rem(Addthem,Addthem[i])
                 }
+                
             }
         }
 
-        /******************************* ADDING OF FRIENDS DISPLAY FUNCTION ************************/
-        addFriends(data.SORT, Addthem)
-        // for (let i = 0; i < Addthem.length; i++) {
-        //     for (let n = 0; n < data.SORT.length; n++) {
-        //         if(data.SORT[n].username == Addthem[i]){
-        //             var UserImg = `<img src="${showImg(data.SORT[n].user_img)}" alt="${data.SORT[n].user_img}">`
-        //             if(data.SORT[n].user_img == ''){
-        //                 UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
-        //             }
-        //             Disp.innerHTML +=`
-        //             <div>
-        //                 ${UserImg}
-        //                 <display>
-        //                     <chatname>${Addthem[i]}</chatname><br>
-        //                     <userabout>${data.SORT[n].about}</userabout>
-        //                 </display>
-        //                 <add class='fa fa-user-plus ${Addthem[i]}' title="add ${Addthem[i]} to your chats"></add>
-        //             </div>`
-        //         }
-        //     }    
-        // }
+        //ADDING OF FRIENDS DISPLAY FUNCTION
+        addFriends(data.SORT, Addthem, Disp)
 
         for (let i = 0; i < data.SORT.length; i++) {
             $(`.${data.SORT[i].username}`).on('click', () => {
