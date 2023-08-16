@@ -222,8 +222,8 @@ socket.on('chat message', function(Msg,Exp) {
 
         window.scrollTo(0, document.body.scrollHeight);
 
-        // const Hig = $('grouplogs article').length >= 10 ? 
-        // document.querySelector('groups').style.height = 'auto' : 
-        // document.querySelector('groups').style.height = '100vh';
+        const Hig = $('grouplogs article').length >= 10 ? 
+        document.querySelector('groups').style.height = 'auto' : 
+        document.querySelector('groups').style.height = '100vh';
     }
 })
