@@ -97,14 +97,21 @@ socket.on('chat message', function(Msg,Exp) {
             </article>
             ` : ''  
         $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced(Msg.Msg)) //Last Msg
-        window.scrollTo(0, Show.scrollHeight)
+        Show && window.scrollTo(0, Show.scrollHeight)
         reRrun()
 
     }else if(Msg.Id == 'Del'){
+
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         const logs = document.querySelectorAll(`${Msg.EleDiv} article log`)
+
         //Modify The Last Msg
-        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg && whole.length > 1 ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : whole[whole.length-1].id.replace(/[^0-9]/g, "") !== Msg.Msg && whole.length > 1 ? "" : $(`.last-log${Msg.EleDiv}`).html(''))
+        console.log((whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg) && (whole.length > 1))
+        for(let i=0; i<whole.length; i++) {
+            ((whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg) && (whole.length > 1)) ? 
+            $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : 
+            (whole[whole.length-1].id.replace(/[^0-9]/g, "") !== Msg.Msg) && (whole.length > 1) ? "" : $(`.last-log${Msg.EleDiv}`).html('')
+        }
 
         const removeMsg = document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`)
         removeMsg ? removeMsg.remove() : ''
@@ -171,10 +178,10 @@ socket.on('chat message', function(Msg,Exp) {
             
             //Editing Of Message
             EdBtn.addEventListener('click', () => {
-                $('.EditId').val(DoID); 
-                $('.EdMsg').val(Edmsg.innerHTML.split('&lt;').join('<'))
-                $('.EleDiv').val(Msg.EleDiv); 
 
+                $('.EditId').val(DoID); 
+                $('.EdMsg').val(Edmsg.innerHTML.split('&lt;').join('<'));
+                $('.EleDiv').val(Msg.EleDiv); 
                 $('.SendForm').hide(); $('.EdForm').show(); $('.EdMsg').focus()
 
                 $(`.EdForm`).on('submit', (e) => {
