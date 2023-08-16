@@ -1,4 +1,5 @@
 import { MainChats } from "./chat.js"
+import { wordCount } from "./chatsModule/wordCount.js"
 
 const socket = io()
 
@@ -94,7 +95,7 @@ socket.on('chat message', function(Msg,Exp) {
             </article>
             `
 
-        $(`.last-log${Msg.EleDiv}`).html(Msg.Msg.split('<').join('&lt;')) //Last Msg
+        $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))+'...') //Last Msg
         HeightSet()
         reRrun()
 
