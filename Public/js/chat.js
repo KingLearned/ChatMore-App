@@ -89,11 +89,11 @@ $.ajax({
                 
                 $('.repto').val(data.FRD[i]) //Reply To User Friend
                 $('.EleDiv').val(Ele)//User Display Element Div
-                document.querySelector('logs').innerHTML = `<${Ele}></${Ele}>`
+                document.querySelector('logs').innerHTML = `<${Ele} style="display:flex; flex-direction:column;"></${Ele}>`
                 const Show = document.querySelector(`logs ${Ele}`)
                 // style="display:flex; flex-direction:column;"
-                Show.style.display = 'flex';
-                Show.style.flexDirection = 'column'
+                // Show.style.display = 'flex';
+                // Show.style.flexDirection = 'column'
 
                 for (let n = 0; n < ChatLogs.length; n++) {
                     var shift = ''
