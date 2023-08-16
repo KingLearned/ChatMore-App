@@ -1,3 +1,5 @@
+import { convertTime } from "./chatsModule/convertTime.js"
+
 GroupChats = [] //Groupstorage
 const groupImg = [ '../images/sports.jpeg', '../images/tech.jpeg', '../images/religion.jpeg', '../images/science.jpeg', '../images/gossip.jpeg', '../images/education.jpeg', '../images/music.jpeg', '../images/web.jpeg', '../images/programming.jpeg']
 $.ajax({
@@ -53,7 +55,7 @@ $.ajax({
                             <article class="${active}" id="${mainConvo[n].Id}">
                                 ${Person}
                                 <log>${mainConvo[n].Msg.split('<').join('&lt;')}</log>
-                                <time>${mainConvo[n].time}</time>
+                                <time>${convertTime(mainConvo[n].time)}</time>
                             </article>
                             `
 
