@@ -50,7 +50,8 @@ $.ajax({
         showFriends(data.FRD, data.PN, data.SORT, friendsChat)
 
         //FOR SERVING OF THE CHAT LOGs
-        showChats(data.FRD, data.SORT, data.PN, MainChats)
+        const ChatLogs = []
+        showChats(ChatLogs, data.FRD, data.SORT, data.PN, MainChats)
 
         //FOR REMOVING OF CHAT LOG
         $('chatlog button').on('click', () => {
@@ -59,23 +60,13 @@ $.ajax({
             document.querySelector('friendlist').style.display = 'block'
             $('.chats_head').show()
             
-            $('.EditId').val('')
-            $('.locator').val('')
-            $('.Msg').val('')
-            $('.EdMsg').val('')
-
-            $('.SendForm').show()
-            $('.EdForm').hide()
-
+            $('.EditId').val('');$('.locator').val('');$('.Msg').val('');$('.EdMsg').val('');$('.SendForm').show();$('.EdForm').hide()
             ChatLogs.length = 0 //For resetting of the chatbox to empty
         })
-
-        $('.logOutBtn').on('click', () => {
-            socket.emit('chat message', {Id:'Status', User:data.PN, Status:'offline'})
-            localStorage.setItem(data.PN, 'offline')
-            window.location = '/Log-User-Out'
-        })
-
+        
+        //Log Out Function & Emit That a user went offline
+        $('.logOutBtn').on('click', () => { socket.emit('chat message', {Id:'Status', User:data.PN, Status:'offline'});localStorage.setItem(data.PN, 'offline');window.location = '/Log-User-Out' })
+        //Emit That a user is online
         socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
 
         //ADD OTHER USERS FUNCTIONS
