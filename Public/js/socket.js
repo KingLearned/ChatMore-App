@@ -1,4 +1,5 @@
 import { MainChats } from "./chat.js"
+import { convertTime } from "./chatsModule/convertTime.js"
 import { wordCount } from "./chatsModule/wordCount.js"
 
 const socket = io()
@@ -92,7 +93,7 @@ socket.on('chat message', function(Msg,Exp) {
         Show ? Show.innerHTML += ` 
             <article ${shiftClass} id="ChatID${Msg.Id}">
                 <log>${Msg.Msg.split('<').join('&lt;')}</log>
-                <time>${Msg.time}</time>
+                <time>${convertTime(Msg.time)}</time>
                 ${editDiv}
             </article>
             ` : ''  
@@ -150,7 +151,7 @@ socket.on('chat message', function(Msg,Exp) {
         <article class="${shift}" id="${Msg.InId}">
             ${Id}
             <log>${Msg.Msg.split('<').join('&lt;')}</log>
-            <time>${Msg.time}</time>
+            <time>${convertTime(Msg.time)}</time>
         </article>
         `:""
         Log && window.scrollTo(0, Log.scrollHeight)

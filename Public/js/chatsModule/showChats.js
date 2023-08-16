@@ -1,4 +1,5 @@
 import { DeleteMsg } from "../socket.js"
+import { convertTime } from "./convertTime.js"
 import { editMessage } from "./editMsg.js"
 
 const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
@@ -43,7 +44,7 @@ export const showChats = (ChatLogs, FRD, SORT, userName, MainChats) => {
                 Show.innerHTML += ` 
                     <article ${shiftClass} id="ChatID${ChatLogs[n].Id}">
                         <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
-                        <time>${ChatLogs[n].time}</time>
+                        <time>${convertTime(ChatLogs[n].time)}</time>
                         ${editDiv}
                     </article>
                     `
