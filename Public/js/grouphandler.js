@@ -1,6 +1,6 @@
 import { convertTime } from "./chatsModule/convertTime.js"
 
-GroupChats = [] //Groupstorage
+export const GroupChats = [] //Groupstorage
 const groupImg = [ '../images/sports.jpeg', '../images/tech.jpeg', '../images/religion.jpeg', '../images/science.jpeg', '../images/gossip.jpeg', '../images/education.jpeg', '../images/music.jpeg', '../images/web.jpeg', '../images/programming.jpeg']
 $.ajax({
     method:"POST",
