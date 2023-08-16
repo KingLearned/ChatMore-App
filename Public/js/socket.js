@@ -97,14 +97,17 @@ socket.on('chat message', function(Msg,Exp) {
             </article>
             ` : ''  
         $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))[0].trim()+wordExced(Msg.Msg)) //Last Msg
-        window.scrollTo(0, document.body.scrollHeight)
+        // window.scrollTo(0, document.body.scrollHeight)
+        const toBottom = document.querySelector(`logs`)
+        // Show.scrollTop = Show.scrollHeight 
+        console.log(toBottom)
         reRrun()
 
     }else if(Msg.Id == 'Del'){
         const whole = document.querySelectorAll(`${Msg.EleDiv} article`)
         const logs = document.querySelectorAll(`${Msg.EleDiv} article log`)
         //Modify The Last Msg
-        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg && whole.length > 1 ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : $(`.last-log${Msg.EleDiv}`).html(''))
+        for(let i=0; i<whole.length; i++) (whole[whole.length-1].id.replace(/[^0-9]/g, "") == Msg.Msg && whole.length > 1 ? $(`.last-log${Msg.EleDiv}`).html(wordCount(logs[logs.length-2].innerText.split('<').join('&lt;'))[0].trim()+wordExced(logs[logs.length-2].innerText)) : whole[whole.length-1].id.replace(/[^0-9]/g, "") !== Msg.Msg && whole.length > 1 ? "" : $(`.last-log${Msg.EleDiv}`).html(''))
 
         const removeMsg = document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`)
         removeMsg ? removeMsg.remove() : ''
@@ -151,10 +154,9 @@ socket.on('chat message', function(Msg,Exp) {
         `
         window.scrollTo(0, document.body.scrollHeight)
     }else{
-        
+        //SET USER STATUS TO ONLINE
         const setStatus = document.querySelector(`user_${Msg.User}`)
         localStorage.setItem(Msg.User, Msg.Status)
-
         localStorage.getItem(Msg.User) == 'online' ? setStatus ? setStatus.style.backgroundColor = 'lime' : '' : setStatus ? setStatus.style.backgroundColor = 'red' : ''
     }
     
