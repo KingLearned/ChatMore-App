@@ -95,10 +95,10 @@ socket.on('chat message', function(Msg,Exp) {
             </article>
             `
 
-            $(`.last-log${Msg.EleDiv}`).html(Msg.Msg.split('<').join('&lt;')) //Last Msg
+        $(`.last-log${Msg.EleDiv}`).html(Msg.Msg.split('<').join('&lt;')) //Last Msg
 
-            HeightSet()
-            reRrun()
+        HeightSet()
+        reRrun()
 
     }else if(Msg.Id == 'Del'){
         document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
