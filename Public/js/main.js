@@ -16,18 +16,18 @@ NavBar.forEach(eachNav => {
     })
 })
 
+//FOR VIEWING OF USER'S PROFILE
+$('.viewProfile').on('click', () => {
+    document.querySelector('.user_profile').style.display = 'flex'
+    document.querySelector('.app').style.display = 'none'
+})
+
 //FOR CLOSING OF USER'S PROFILE
 $('.user_profile .ClxPrf').on('click', () => {
     document.querySelector('.user_profile').style.display = 'none'
     document.querySelector('.app').style.display = 'block'
 })
 
-//FOR VIEWING OF USER'S PROFILE
-$('.viewProfile').on('click', () => {
-    document.querySelector('.user_profile').style.display = 'flex'
-    // document.querySelector('.user_profile').style.height = 'auto'
-    document.querySelector('.app').style.display = 'none'
-})
 
 //CHANGING OF USER PROFILE IMAGE
 function Submit(){
