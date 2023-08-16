@@ -93,15 +93,14 @@ $.ajax({
                 const Show = document.querySelector(`logs ${Ele}`)
 
                 for (let n = 0; n < ChatLogs.length; n++) {
-                    var shift = ''
-                    var edit = ''
+                    let shift , edit = ''
+                    
                     if(ChatLogs[n].replyto !== data.PN){
-                        shift = `class="edit ChatID${ChatLogs[n].Id}" style=""`
+                        //Shift user log to right
+                        shift = `class="alignUserlog edit ChatID${ChatLogs[n].Id}"`
+                        //Add edit permission dynamically
                         edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
                     }
-                    
-                    //Differentiating Between You and Other Users
-                    const id = ChatLogs[n].from == data.PN ? 'you' : ChatLogs[n].from
 
                     Show.innerHTML += ` 
                         <article ${shift} id="ChatID${ChatLogs[n].Id}">
