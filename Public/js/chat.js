@@ -91,15 +91,12 @@ $.ajax({
                 $('.EleDiv').val(Ele)//User Display Element Div
                 document.querySelector('logs').innerHTML = `<${Ele} style="display:flex; flex-direction:column;"></${Ele}>`
                 const Show = document.querySelector(`logs ${Ele}`)
-                // style="display:flex; flex-direction:column;"
-                // Show.style.display = 'flex';
-                // Show.style.flexDirection = 'column'
 
                 for (let n = 0; n < ChatLogs.length; n++) {
                     var shift = ''
                     var edit = ''
                     if(ChatLogs[n].replyto !== data.PN){
-                        shift = `class="edit ChatID${ChatLogs[n].Id}" style="align-self:flex-end; background-color: rgb(245, 111, 245); color:white; border-radius:10px 10px 0 10px"`
+                        shift = `class="edit ChatID${ChatLogs[n].Id}" style=""`
                         edit = `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>`
                     }
                     
