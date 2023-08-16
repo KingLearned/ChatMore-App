@@ -71,6 +71,8 @@ socket.on('chat message', function(Msg,Exp) {
     Show ? (Show.style.display = 'flex', Show.style.flexDirection = 'column') : ''
     
     if(Msg.chat == 'Frd'){
+        document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
+
         MainChats.push(Exp)
 
         const shiftClass = Msg.from !== $('chat_top h6').html() ? `class="edit alignUserlog"` : ''
@@ -96,26 +98,20 @@ socket.on('chat message', function(Msg,Exp) {
             `
 
         $(`.last-log${Msg.EleDiv}`).html(wordCount(Msg.Msg.split('<').join('&lt;'))+'...') //Last Msg
-        HeightSet()
+        window.scrollTo(0, document.body.scrollHeight)
         reRrun()
 
     }else if(Msg.Id == 'Del'){
         document.querySelector(`${Msg.EleDiv} #ChatID${Msg.Msg}`).remove()
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.Msg) DelMsgWithID(MainChats,MainChats[n])
-        
-        
-        const Height = ($('.friends article').length + $('.friends chatdate').length) > 10 ? 
-        (document.querySelector('.friends').style.height = 'auto', document.querySelector('sending').style.position = 'sticky') : 
-        (document.querySelector('.friends').style.height = '88vh', document.querySelector('sending').style.position = 'absolute')
-        HeightSet()
-
+        document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
     }else if(Msg.Id == 'Edit'){
         $(`${Msg.EleDiv} #ChatID${Msg.MsgId} log`).html(Msg.Msg.split('<').join('&lt;'))
         for (let n = 0; n < MainChats.length; n++) if(MainChats[n].Id == Msg.MsgId) MainChats[n].Msg = Msg.Msg.split('<').join('&lt;')
 
     }else if(Msg.Id == 'Grp'){
-        let Home = Exp
         GroupChats.push({Id:Msg.InId, Msg:Msg.Msg, from:Msg.from, sento:Msg.MsgTo, time:Msg.time})
+        document.querySelector('groups').style.minHeight = '100vh'; document.querySelector('groups').style.maxHeight = 'auto'
         
         const Log = document.querySelector(`${Msg.EleDiv}`)//Dynamic getElement
 
@@ -145,7 +141,7 @@ socket.on('chat message', function(Msg,Exp) {
             <time>${Msg.time}</time>
         </article>
         `
-        HeightSet()
+        window.scrollTo(0, document.body.scrollHeight)
     }else{
         
         const setStatus = document.querySelector(`user_${Msg.User}`)
@@ -205,14 +201,11 @@ socket.on('chat message', function(Msg,Exp) {
     }
             
     function HeightSet(){
-        const Height = $('.friends article').length + $('.friends chatdate').length > 10 ? 
-        document.querySelector('.friends').style.height = '100%' : 
-        document.querySelector('.friends').style.height = '100vh';
+        //Moderate Div Height
+        // document.querySelector('.friends').style.minHeight = '100vh'; document.querySelector('.friends').style.maxHeight = 'auto'
+        window.scrollTo(0, document.body.scrollHeight)
 
-        window.scrollTo(0, document.body.scrollHeight);
 
-        const Hig = $('grouplogs article').length >= 10 ? 
-        document.querySelector('groups').style.height = 'auto' : 
-        document.querySelector('groups').style.height = '100vh';
+        // document.querySelector('groups').style.minheight = '100vh'; document.querySelector('groups').style.maxheight = 'auto'
     }
 })

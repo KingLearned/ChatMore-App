@@ -61,7 +61,6 @@ export const showChats = (ChatLogs, FRD, SORT, userName, MainChats) => {
             window.scrollTo(0, document.body.scrollHeight)
             //Focusing of Type new Message
             $('.Msg').focus()
-
             // FOR EDITING OF THE USERS MESSAGES
             editMessage(ChatLogs)
             // FOR DELETING OF THE USERS MESSAGE
