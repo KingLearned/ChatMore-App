@@ -1,8 +1,8 @@
 const socket = io()
 import { addFriends } from "./chatsModule/addFriends.js"
+import { showChats } from "./chatsModule/showChats.js"
 import { showFriends } from "./chatsModule/showFriends.js"
 import { sortFriends } from "./chatsModule/sortFriends.js"
-import { DeleteMsg } from "./socket.js"
 const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
 
 export const MainChats = []    //for storing user => user chats
@@ -50,115 +50,7 @@ $.ajax({
         showFriends(data.FRD, data.PN, data.SORT, friendsChat)
 
         //FOR SERVING OF THE CHAT LOGs
-        const ChatLogs = []
-        for (let i = 0; i < data.FRD.length; i++) {
-            $(`.chat_${data.FRD[i]}`).on('click', () => {
-                document.querySelector('chatlog').style.display = 'flex' //Display Chat With a Friend
-                document.querySelector('friendlist').style.display = 'none'//Hide Friends List
-                $('.chats_head').hide()
-
-                let FriendImg = `../images/avatar.png`
-                for (let p = 0; p < data.SORT.length; p++) {
-                    // Change FriendImg 
-                    data.FRD[i] == data.SORT[p].username && data.SORT[p].user_img !== '' ? FriendImg =  `${showImg(data.SORT[p].user_img)}` : ''
-                    //Display Friends About
-                    data.FRD[i] == data.SORT[p].username && $('about').html(data.SORT[p].about)
-                }
-
-                const setStatus = localStorage.getItem(data.FRD[i])
-                //Status Indicator
-                document.querySelector('.imgHead span').innerHTML = 
-                `<user_${data.FRD[i]} style='position: absolute; bottom: 0; right: 0; width: 13px; height: 13px; background-color: ${setStatus == 'online' ? 'lime' : 'red'}; border-radius: 100px;'></user_${data.FRD[i]}>`
-
-                document.querySelector('chatlog img').src = FriendImg
-                $('chatlog h1').html(`<span style='text-transform:capitalize;'>${data.FRD[i]}</span>`)//Chat Header
-                $('chatlog h6').html(data.FRD[i])//Chat Header
-                
-                for (let m = 0; m < MainChats.length; m++) {
-                    if(MainChats[m].replyto == data.FRD[i] && MainChats[m].from == data.PN){
-                        ChatLogs.push(MainChats[m]) //Sent To Guest
-                    }
-                    if(MainChats[m].from == data.FRD[i] && MainChats[m].replyto == data.PN){
-                        ChatLogs.push(MainChats[m]) //Sent From Guest
-                    }
-                }
-                
-                let GenEle = (((`${data.FRD[i]+data.PN}`).toLocaleLowerCase()).split('')).sort()
-                let Ele = ''
-                for (let i = 0; i < GenEle.length; i++) {Ele += GenEle[i]}
-                
-                $('.repto').val(data.FRD[i]) //Reply To User Friend
-                $('.EleDiv').val(Ele)//User Display Element Div
-                document.querySelector('logs').innerHTML = `<${Ele} style="display:flex; flex-direction:column;"></${Ele}>`
-                const Show = document.querySelector(`logs ${Ele}`)
-
-                for (let n = 0; n < ChatLogs.length; n++) {
-                    //Shift user log to right
-                    const shiftClass  = ChatLogs[n].replyto !== data.PN ? `class="alignUserlog edit ChatID${ChatLogs[n].Id}"` : ''
-                    //Add edit permission dynamically
-                    const editDiv = ChatLogs[n].replyto !== data.PN ? `<make><edit class="fa fa-pen edit${ChatLogs[n].Id}" title="Edit Message"></edit><del class="fa fa-times del${ChatLogs[n].Id}" title="Delete Message"></del></make>` : ''
-                    //Dispay chat logs
-                    Show.innerHTML += ` 
-                        <article ${shiftClass} id="ChatID${ChatLogs[n].Id}">
-                            <log>${ChatLogs[n].Msg.split('<').join('&lt;')}</log>
-                            <time>${ChatLogs[n].time}</time>
-                            ${editDiv}
-                        </article>
-                        `
-                    //Generate Time
-                    if(n < ChatLogs.length-1){
-                        if(Number(Math.ceil(ChatLogs[n+1].Id/(1000*60*60*24))) > Number(Math.ceil(ChatLogs[n].Id/(1000*60*60*24)))){
-                            const D = new Date(ChatLogs[n+1].Id)
-                            const Mon = D.getMonth()+1 < 10 ? '0'+(D.getMonth()+1) : D.getMonth()+1
-                            const Day = D.getDate() < 10 ? '0'+(D.getDate()) : D.getDate()
-                            Show.innerHTML += `<chatdate>${Mon}/${Day}/${D.getFullYear()}</chatdate>`
-                        }
-                    }
-                }
-                // HEIGHT VIEW FUNCTION
-                window.scrollTo(0, document.body.scrollHeight)
-                //Focusing of Type new Message
-                $('.Msg').focus()
-
-                /********************* FOR EDITING OF THE USERS MESSAGES    ************************/
-                for (let e = 0; e < ChatLogs.length; e++) {
-                    $(`.edit${ChatLogs[e].Id}`).on('click', () => {
-                        $('.EditId').val(ChatLogs[e].Id)
-                        $('.EdMsg').val(ChatLogs[e].Msg.split('&lt;').join('<'))
-                        $('.SendForm').hide()
-                        $('.EdForm').show()
-                        $('.EdMsg').focus()
-                        
-                        $(`.EdForm`).on('submit', (e) => {
-                            e.preventDefault()
-                            $.ajax({
-                                method:"POST",
-                                data:{
-                                    ElementTag: $('.EleDiv').val(),
-                                    EditId: $('.EditId').val(),
-                                    EditMsg:$('.EdMsg').val()
-                                },
-                                success:(data) => {
-                                    socket.emit('chat message', data.SndMsg)
-                                    $('.EdForm').hide()
-                                    $('.SendForm').show()
-                                    $('.Msg').val(''),$('.GrpMsg').val('')
-                                }
-                            })
-                        })
-                    })
-                }
-
-                /********************* FOR DELETING OF THE USERS MESSAGE    ************************/
-                ChatLogs.forEach(eachMsg => {
-                    $(`.del${eachMsg.Id}`).on('click', () => {
-                        DeleteMsg(eachMsg.Id)
-                    })
-                })
-
-                
-            })
-        }
+        showChats(data.FRD, data.SORT, data.PN, MainChats)
 
         //FOR REMOVING OF CHAT LOG
         $('chatlog button').on('click', () => {
