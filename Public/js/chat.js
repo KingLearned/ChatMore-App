@@ -1,4 +1,5 @@
 const socket = io()
+import { addFriends } from "./chatsModule/addFriends.js"
 import { showFriends } from "./chatsModule/showFriends.js"
 import { DeleteMsg } from "./socket.js"
 const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
@@ -207,7 +208,6 @@ $.ajax({
         socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
 
         /************************* COMMUNITY SECTION HANDLER ***************************/
-        /************************* COMMUNITY SECTION HANDLER ***************************/
         const Disp = document.querySelector('community')
         Disp.innerHTML = ''
         const Addthem = []
@@ -234,25 +234,26 @@ $.ajax({
         }
 
         /******************************* ADDING OF FRIENDS DISPLAY FUNCTION ************************/
-        for (let i = 0; i < Addthem.length; i++) {
-            for (let n = 0; n < data.SORT.length; n++) {
-                if(data.SORT[n].username == Addthem[i]){
-                    var UserImg = `<img src="${showImg(data.SORT[n].user_img)}" alt="${data.SORT[n].user_img}">`
-                    if(data.SORT[n].user_img == ''){
-                        UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
-                    }
-                    Disp.innerHTML +=`
-                    <div>
-                        ${UserImg}
-                        <display>
-                            <chatname>${Addthem[i]}</chatname><br>
-                            <userabout>${data.SORT[n].about}</userabout>
-                        </display>
-                        <add class='fa fa-user-plus ${Addthem[i]}' title="add ${Addthem[i]} to your chats"></add>
-                    </div>`
-                }
-            }    
-        }
+        addFriends(data.SORT, Addthem)
+        // for (let i = 0; i < Addthem.length; i++) {
+        //     for (let n = 0; n < data.SORT.length; n++) {
+        //         if(data.SORT[n].username == Addthem[i]){
+        //             var UserImg = `<img src="${showImg(data.SORT[n].user_img)}" alt="${data.SORT[n].user_img}">`
+        //             if(data.SORT[n].user_img == ''){
+        //                 UserImg = `<img src="../images/avatar.png" alt="avatar.png">`
+        //             }
+        //             Disp.innerHTML +=`
+        //             <div>
+        //                 ${UserImg}
+        //                 <display>
+        //                     <chatname>${Addthem[i]}</chatname><br>
+        //                     <userabout>${data.SORT[n].about}</userabout>
+        //                 </display>
+        //                 <add class='fa fa-user-plus ${Addthem[i]}' title="add ${Addthem[i]} to your chats"></add>
+        //             </div>`
+        //         }
+        //     }    
+        // }
 
         for (let i = 0; i < data.SORT.length; i++) {
             $(`.${data.SORT[i].username}`).on('click', () => {
