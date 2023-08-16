@@ -61,7 +61,7 @@ $.ajax({
             $('.chats_head').show()
             
             $('.EditId').val('');$('.locator').val('');$('.Msg').val('');$('.EdMsg').val('');$('.SendForm').show();$('.EdForm').hide()
-            ChatLogs.length = 0 //For resetting of the chatbox to empty
+            ChatLogs.length = 0 //For resetting of the Chatlogs to empty
         })
         
         //Log Out Function & Emit That a user went offline
@@ -70,18 +70,15 @@ $.ajax({
         socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
 
         //ADD OTHER USERS FUNCTIONS
-        const Disp = document.querySelector('community')
-        Disp.innerHTML = ''
+        const Disp = document.querySelector('community');Disp.innerHTML = ''
         const Addthem = []
-
         //SORT FRIENDS LIST
         sortFriends(data.SORT, Addthem, data.PN, data.FRD)
-
         //ADDING OF FRIENDS & DISPLAY FUNCTION
         addFriends(data.SORT, Addthem, Disp)
     }
 })
 //Preloader function caller
 setInterval(() => {
-    const preLoader = $('friendlist div').length > 0 ? document.querySelector('.preloader').style.display = 'none' : document.querySelector('.preloader').style.display = 'flex' 
+    $('friendlist div').length > 0 ? document.querySelector('.preloader').style.display = 'none' : document.querySelector('.preloader').style.display = 'flex' 
 }, 500);
