@@ -91,6 +91,7 @@ $.ajax({
                 $('.EleDiv').val(Ele)//User Display Element Div
                 document.querySelector('logs').innerHTML = `<${Ele}></${Ele}>`
                 const Show = document.querySelector(`logs ${Ele}`)
+                // style="display:flex; flex-direction:column;"
                 Show.style.display = 'flex';
                 Show.style.flexDirection = 'column'
 
