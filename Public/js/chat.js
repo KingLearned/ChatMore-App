@@ -55,9 +55,7 @@ $.ajax({
                 document.querySelector('friendlist').style.display = 'none'//Hide Friends List
                 $('.chats_head').hide()
 
-                $('.EditId').val('')
-                $('.locator').val('')
-                $('.Msg').val('')
+                
 
                 let FriendImg = `../images/avatar.png`
                 for (let p = 0; p < data.SORT.length; p++) {
@@ -188,6 +186,15 @@ $.ajax({
             document.querySelector('chatlog').style.display = 'none'
             document.querySelector('friendlist').style.display = 'block'
             $('.chats_head').show()
+            
+            $('.EditId').val('')
+            $('.locator').val('')
+            $('.Msg').val('')
+            $('.EdMsg').val('')
+
+            $('.SendForm').show()
+            $('.EdForm').hide()
+
             ChatLogs.length = 0 //For resetting of the chatbox to empty
         })
 
