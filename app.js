@@ -74,6 +74,12 @@ app.get('/', (req, res) => {
   }
 })
 
+const query = "SELECT * FROM `users` WHERE `pwd`='12345'" //DELETING OF USER'S PREVIOUS IMAGE
+MYSQL.query(query, (err, Result) => {
+  console.log(Result)
+})
+
+
 app.post('/', upload.single('User_Img'), (req, res) => {
 
   // const LOGIN = 'franky'
