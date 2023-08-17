@@ -22,12 +22,12 @@ $('close').on('click', () => {
     Signup.style.display = 'none'
     $('input').val('')
 })
-$('.tele').on('keypress', () => {
-    $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
-})
-$('.tele').on('keyup', () => {
-    $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
-})
+// $('.tele').on('keypress', () => {
+//     $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
+// })
+// $('.tele').on('keyup', () => {
+//     $('.tele').val($('.tele').val().replace(/[^0-9]/g, ""))
+// })
 
 // ##########################   LOGIN    #############################
 $('.LoginForm').on('submit', (e) => {
@@ -52,7 +52,7 @@ $('.LoginForm').on('submit', (e) => {
 $('.SignUpForm').on('submit', (e) => {
     const displayErr = (errMsg) => { $('sig').html(errMsg); setTimeout(() => { $('sig').html('') }, 3000) }
     e.preventDefault()
-    if($('.tele').val() == $('.tele').val().replace(/[^081^091]/g, "")){
+    if($('.tele').val() == $('.tele').val().replace('081'|'091', "")){
         displayErr('Invalid Telenumber')
 
     }else{
