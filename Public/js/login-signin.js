@@ -13,6 +13,9 @@ $('.signup_btn').on('click', () => {
     Signup.style.display = 'flex'
     $('.sigusername').focus()
 })
+    Login.style.display = 'none'
+    Signup.style.display = 'flex'
+    $('.sigusername').focus()
 
 $('close').on('click', () => {
     Login.style.display = 'none'
@@ -47,7 +50,14 @@ $('.LoginForm').on('submit', (e) => {
 
 // ##########################   SIGN UP   #############################
 $('.SignUpForm').on('submit', (e) => {
+    const displayErr = (errMsg) => { $('sig').html(errMsg); setTimeout(() => { $('sig').html('') }, 3000) }
     e.preventDefault()
+    if($('.tele').val() == $('.tele').val().replace(/[^081^091]/g, "")){
+        displayErr('Invalid Telenumber')
+
+    }else{
+
+    
         $.ajax({
             method: "POST",
             data: {
@@ -61,14 +71,12 @@ $('.SignUpForm').on('submit', (e) => {
                     window.location.href = '/'
                 }
                 if(data.ErrMsg){
-                    $('sig').html(data.ErrMsg)
-                    setTimeout(() => {
-                        $('sig').html('')
-                    }, 3000)
+                    displayErr(data.ErrMsg)
                 }
             },
             error: (err) => {
                 console.log(err)
             }
         })
+    }
 })
