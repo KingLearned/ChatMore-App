@@ -37,11 +37,10 @@ function Submit(){
 
 //CHANGE OF PASSWORD
 $('.ChngPwd').on('submit', (e) => {
-    const displayErr = (errMsg) => { $('.ChngPwd h5').html(errMsg); setTimeout(() => { $('.ChngPwd h5').html('') }, 3000); return errMsg }
+    const displayErr = (errMsg) => { $('.ChngPwd h5').html(`<span style="color:red;">${errMsg}</span>`); setTimeout(() => { $('.ChngPwd h5').html('') }, 3000); return errMsg }
     e.preventDefault()
     
-    const validate = $('.newPWD').val().length < 7 ? 
-    displayErr('<span style="color:red;">Password must be greater then 6 characters!</span>') : $('.newPWD').val() !== $('.CnewPWD').val() ? displayErr('<span style="color:red;">Mismatched Password</span>') : ''
+    const validate = $('.newPWD').val().length < 7 ? displayErr('Password must be greater then 6 characters!') : $('.newPWD').val() !== $('.CnewPWD').val() ? displayErr('Mismatched Password') : ''
 
     if(!validate){
         $.ajax({

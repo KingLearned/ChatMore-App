@@ -292,7 +292,7 @@ userimage form label{
     color: white;
     padding: 10px;
     height: 40px;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 userimage form .fa-pen, userimage form .fa-upload{
     position: absolute;
