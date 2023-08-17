@@ -64,8 +64,8 @@ const Storage = MULTER.memoryStorage()
 const upload = MULTER({ storage: Storage })
 
 app.get('/', (req, res) => {
-  const LOGIN = 'franky'
-  // const {LOGIN} = req.session
+  // const LOGIN = 'franky'
+  const {LOGIN} = req.session
   
   if(LOGIN){
     res.sendFile(PATH.join(__dirname, './Public/html/app.html'))
@@ -77,8 +77,8 @@ app.get('/', (req, res) => {
 
 app.post('/', upload.single('User_Img'), (req, res) => {
 
-  const LOGIN = 'franky'
-  // const {LOGIN} = req.session
+  // const LOGIN = 'franky'
+  const {LOGIN} = req.session
 
   const {Log_Name, Log_Pwd } = req.body //Login inputs
 
@@ -317,21 +317,22 @@ app.post('/', upload.single('User_Img'), (req, res) => {
           res.json({ErrMsg: 'Invalid Phone Number!'})
         }else if(Sig_Pwd == Sig_CPwd){
           
-          const About = `Hello, I'm using ChatMore App`
-          const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`, `user_img`, `friends`, `chats`) VALUES(?,?,?,?,?,?,?)'
-          MYSQL.query(query, [Sig_Name,Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
-            if(err){
+          res.json({ErrMsg: 'Registered Succefully!'})
+          // const About = `Hello, I'm using ChatMore App`
+          // const query = 'INSERT INTO `users` (`username`, `telephone`, `pwd`,`about`, `user_img`, `friends`, `chats`) VALUES(?,?,?,?,?,?,?)'
+          // MYSQL.query(query, [Sig_Name,Sig_Tele,Sig_Pwd,About,'','',''], (err, result) => {
+          //   if(err){
               
-              const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` ? `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` : `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
-              const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
+          //     const ErrName = err.sqlMessage == `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` ? `Duplicate entry '${Sig_Name}' for key 'users.PRIMARY'` : `Duplicate entry '${Sig_Name}' for key 'PRIMARY'`
+          //     const ErrTele = err.sqlMessage == `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` ? `Duplicate entry '${Sig_Tele}' for key 'users.telephone'` : `Duplicate entry '${Sig_Tele}' for key 'telephone'`
 
-              const Error = err.sqlMessage == ErrName ? res.json({ErrMsg: 'Username Already Exist!'}) :
-              err.sqlMessage == ErrTele ? res.json({ErrMsg: 'Number Already Exist!'}) : ''
+          //     const Error = err.sqlMessage == ErrName ? res.json({ErrMsg: 'Username Already Exist!'}) :
+          //     err.sqlMessage == ErrTele ? res.json({ErrMsg: 'Number Already Exist!'}) : ''
               
-            }else{
-              res.json({Successful: 'Registered Succefully!'})
-            }
-          })
+          //   }else{
+          //     res.json({Successful: 'Registered Succefully!'})
+          //   }
+          // })
         }
       }else{
         res.json({ErrMsg: 'use characters [Aa-Zz & 0-9] only!'})
