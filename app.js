@@ -192,13 +192,9 @@ app.post('/', upload.single('User_Img'), (req, res) => {
         })
       }else if(newPWD, CnewPWD){
       /********************************* UPDATING OF USERS PASSWORD  ********************************/
-      const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
-      const checkPWD = newPWD === CnewPWD ? (
-        MYSQL.query(query, [newPWD,LOGIN], (err, SubResult) => {}),
-        res.json({validPwd:'<span style="color:green;">Password was changed successfully</span>'}) ): 
-        res.json({errPwd:'<span style="color:red;">Password mismatched, try again!</span>'})
+        const query = "UPDATE `users` SET `pwd`=? WHERE `username`=?"
+        MYSQL.query(query, [newPWD,LOGIN], (err, SubResult) => { res.json({validPwd:'<span style="color:green;">Password changed successfully</span>'}) })
 
-          
       }else if (GrpMsg){
       /********************************* GROUP MESSAGING HANDLER  ********************************/
       /********************************* GROUP MESSAGING HANDLER  ********************************/
