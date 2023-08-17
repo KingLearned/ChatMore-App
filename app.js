@@ -103,14 +103,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
       
       const query = "SELECT * FROM `users` WHERE `username`=?" //DELETING OF USER'S PREVIOUS IMAGE
-      MYSQL.query(query, [LOGIN], (err, Result) => { if(Result[0].user_img !== ''){ 
-        const deleteImg = appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) 
-        deleteImg.then(function (response) {
-
-        }, function (error) {
-          console.log(error)
-        })
-      } })
+      MYSQL.query(query, [LOGIN], (err, Result) => { if(Result[0].user_img !== ''){ appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) } })
 
       const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
       

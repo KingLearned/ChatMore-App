@@ -20,9 +20,9 @@
             <button class="logOutBtn"><i class="fa fa-sign-out-alt"></i> Logout</button>
         </div>
         <userimage>
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data" onsubmit="(e) => {e.preventDefault()}">
                     <dpx><img src="../images/avatar.png" alt="avatar.png"></dpx>
-                    <input type="file" name="User_Img" id="userimage" hidden accept="image/*">
+                    <input type="file" name="User_Img" id="userimage" onchange="Submit()" hidden accept="image/*">
                     <input type="submit" id="upload" hidden>
                     <label for="userimage" class="fa fa-pen" title="Change Image"></label>
                     <label for="upload" class="fa fa-upload" title="Submit Picture"></label>
