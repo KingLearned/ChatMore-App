@@ -37,19 +37,24 @@ function Submit(){
 
 //CHANGE OF PASSWORD
 $('.ChngPwd').on('submit', (e) => {
+    const displayErr = (errMsg) => { $('.ChngPwd h5').html(errMsg); setTimeout(() => { $('.ChngPwd h5').html('') }, 3000); return errMsg }
     e.preventDefault()
-    $.ajax({
-        method:"POST",
-        data:{
-            newPWD : $('.newPWD').val(),
-            CnewPWD : $('.CnewPWD').val()
-        },
-        success: (data) => {
-            $('.ChngPwd h5').html(data.validPwd || data.errPwd)
-            setTimeout(() => { $('.ChngPwd h5').html('') ; const validate = data.validPwd ? window.location = '/' : ''}, 3000)
-            
-        }
-    })
+    
+    const validate = $('.newPWD').val().length < 7 ? 
+    displayErr('<span style="color:red;">Password must be greater then 6 characters!</span>') : $('.newPWD').val() !== $('.CnewPWD').val() ? displayErr('<span style="color:red;">Mismatched Password</span>') : ''
+
+    if(!validate){
+        $.ajax({
+            method:"POST",
+            data:{
+                newPWD : $('.newPWD').val(),
+                CnewPWD : $('.CnewPWD').val()
+            },
+            success: (data) => {
+                $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               
+            }
+        })
+    }
 })
 
 //APP EMOJIS FUNCTIONALITIES
