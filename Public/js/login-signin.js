@@ -13,9 +13,6 @@ $('.signup_btn').on('click', () => {
     Signup.style.display = 'flex'
     $('.sigusername').focus()
 })
-    Login.style.display = 'none'
-    Signup.style.display = 'flex'
-    $('.sigusername').focus()
 
 $('close').on('click', () => {
     Login.style.display = 'none'
@@ -49,7 +46,7 @@ $('.LoginForm').on('submit', (e) => {
 $('.SignUpForm').on('submit', (e) => {
     const displayErr = (errMsg) => { $('sig').html(errMsg); setTimeout(() => { $('sig').html('') }, 3000); return errMsg }
     e.preventDefault()
-    
+
     const validateUsername = $('.sigusername').val().length < 2 ? 
     displayErr('Username must be more than one character') : $('.sigusername').val().replace(/[^a-z^A-Z^0-9]/g, '') !== $('.sigusername').val() ? displayErr('Username must contain only alphabets & numbers!') : 
     !/^0(91|90|70|80|81)[0-9]{8}$/.test($('.tele').val()) ? displayErr('Invalid Phone Number!') : 
