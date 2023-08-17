@@ -107,6 +107,10 @@ close{
 .signup form input:focus, .login_page form input:focus{
     box-shadow: 0 0 10px rgba(207, 38, 207, 0.8);
 }
+.tele::-webkit-outer-spin-button, .tele::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
 .login_page form h5{
     text-align: center;
     cursor: pointer;
