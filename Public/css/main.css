@@ -294,7 +294,7 @@ userimage form label{
     height: 40px;
     border-radius: 5px;
 }
-userimage form .fa-pen, userimage form .fa-upload{
+userimage form .fa-camera, userimage form .fa-upload{
     position: absolute;
     left: 25px;
     bottom: 10px;
