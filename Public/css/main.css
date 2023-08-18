@@ -326,6 +326,7 @@ userimage yourname{
 }
 .uploadlog{
     height: 60px;
+    padding: 5px 10px !important;
 }
 .uploadlog h6{
     margin: 3px 0;

@@ -74,7 +74,6 @@ app.get('/', (req, res) => {
   }
 })
 
-
 app.post('/', upload.single('User_Img'), (req, res) => {
 
   const LOGIN = 'franky'
@@ -104,17 +103,28 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       
       const query = "SELECT * FROM `users` WHERE `username`=?" //DELETING OF USER'S PREVIOUS IMAGE
       MYSQL.query(query, [LOGIN], (err, Result) => { 
-        if(Result[0].user_img !== ''){ appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) } })
+        if(Result[0].user_img !== ''){ 
+          const deleteAndUpload = async () => {
+            try {
+              await appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) 
+              
+              const updateImage = await appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
+              
+              const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+              MYSQL.query(query, [updateImage.$id, LOGIN], (err, SubResult) => { 
+                // res.redirect('/') 
+                res.json({uploaded: 'Image Update Successful!'})
+                console.log(updateImage)
+              })
 
-      const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
-      
-      promise.then(function (response) {
-        const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-        MYSQL.query(query, [response.$id, LOGIN], (err, SubResult) => { res.redirect('/') })
-
-      }, function (error) {
-        console.log(error)
+            } catch (error) {
+              res.json({errMsg: 'Network Error!'})
+            }
+          }
+          deleteAndUpload()
+        } 
       })
+
 
     }else{
       
