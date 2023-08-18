@@ -36,20 +36,23 @@ const submitImg = () => {
     document.querySelector('.fa-upload').style.display = 'block'
     document.querySelector('.fa-camera').style.display = 'none'
 }
+
 $('.uploadImg').on('submit', (e) => {
-    const img = document.querySelector('#userimage').files[0]
     e.preventDefault()
-    console.log(img)
+    let formData = new FormData()
+    formData.append('User_Img', $('#userimage')[0].files[0])
+
     $.ajax({
-        method:"POST",
-        data:{
-            Img : img
-        },
+        url: "/",
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
         success: (data) => {
             // $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               
         }
     })
-    // $('.uploadImg').submit()
+    
 })
 
 //CHANGE OF PASSWORD
