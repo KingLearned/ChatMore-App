@@ -21,8 +21,6 @@ $('.viewProfile').on('click', () => {
     document.querySelector('.user_profile').style.display = 'flex'
     document.querySelector('.app').style.display = 'none'
 })
-document.querySelector('.user_profile').style.display = 'flex'
-document.querySelector('.app').style.display = 'none'
 
 //FOR CLOSING OF USER'S PROFILE
 $('.user_profile .ClxPrf').on('click', () => {
@@ -34,7 +32,6 @@ $('.user_profile .ClxPrf').on('click', () => {
 const submitImg = () => {
     $('.CImg').html($('#userimage').val())
     document.querySelector('.fa-upload').style.display = 'block'
-    // document.querySelector('.fa-camera').style.display = 'none'
 }
 
 $('.uploadImg').on('submit', (e) => {
