@@ -50,9 +50,12 @@ $('.uploadImg').on('submit', (e) => {
         contentType: false,
         success: (data) => {
             // $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               
+        },
+        error: (error) => {
+            console.log(error)
         }
     })
-    
+
 })
 
 //CHANGE OF PASSWORD
