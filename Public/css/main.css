@@ -286,7 +286,7 @@ userimage form img{
     margin-right: 10px;
 }
 
-userimage form label{
+.uploadbtn label{
     cursor: pointer;
     background-color: rgba(255, 255, 0, 0.674);
     color: white;
@@ -294,12 +294,12 @@ userimage form label{
     height: 40px;
     border-radius: 5px;
 }
-userimage form .fa-camera, userimage form .fa-upload{
+.uploadbtn .fa-camera, .uploadbtn .fa-upload{
     position: absolute;
     left: 25px;
     bottom: 10px;
 }
-userimage form .fa-upload {
+.uploadbtn .fa-upload {
     display: none;
     background-color: rgba(53, 244, 53, 0.69);
 }
@@ -309,7 +309,7 @@ userimage .CImg{
     bottom: 0;
     margin-top: 10px;
 }
-userimage form label:hover{
+.uploadbtn label:hover{
     opacity: 0.8; 
 }
 
