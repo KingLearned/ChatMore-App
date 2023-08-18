@@ -8,6 +8,7 @@ const MULTER = require('multer')
 const PORT = process.env.PORT || 1000
 const dotenv = require('dotenv')
 const http = require('http');
+const CORS  = require('cors')
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server); 
@@ -25,6 +26,7 @@ client.setEndpoint('https://cloud.appwrite.io/v1').setProject('64c7e9ee17c84cabe
 app.use(express.static(PATH.join(__dirname, './Public')))
 app.use(bodyparser.urlencoded({extended: true}))
 app.use(bodyparser.json())
+app.use(CORS())
 
 const MYSQL = require('./MODULES/Conn')
 const { SendMsgAPI } = require('./AppModules/sendmsg')
