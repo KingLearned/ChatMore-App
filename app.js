@@ -90,15 +90,12 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg, DelMsg } = req.body //destructuring of the variables coming from the req.body
 
   const UserAbout = req.body.about
-  const { newPWD, CnewPWD, Img } = req.body
+  const { newPWD, CnewPWD } = req.body
 
    /************  GROUP COLLECTION   ***********/
   const { GrpMsg, GrpID } = req.body
 
   let Revole = 'GrpID'
-  if(Img){
-    console.log(Img)
-  }
   
   if(LOGIN) { // IMPLEMENT THIS, IF THE USER LOGS IN
     if(req.file){
@@ -106,7 +103,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       const ID = Img.replace(/[^a-z^A-Z^0-9]/g, '').slice(0,20)
       
       const query = "SELECT * FROM `users` WHERE `username`=?" //DELETING OF USER'S PREVIOUS IMAGE
-      MYSQL.query(query, [LOGIN], (err, Result) => { if(Result[0].user_img !== ''){ appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) } })
+      MYSQL.query(query, [LOGIN], (err, Result) => { 
+        if(Result[0].user_img !== ''){ appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) } })
 
       const promise = appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
       
