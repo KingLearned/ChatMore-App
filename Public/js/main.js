@@ -37,12 +37,13 @@ const submitImg = () => {
     document.querySelector('.fa-camera').style.display = 'none'
 }
 $('.uploadImg').on('submit', (e) => {
+    const img = document.querySelector('#userimage').files[0]
     e.preventDefault()
-    // $('.uploadImg').submit()
+    console.log(img)
     $.ajax({
         method:"POST",
         data:{
-            User_Img : document.querySelector('#userimage').files[0]
+            User_Img : img
         },
         success: (data) => {
             // $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               
