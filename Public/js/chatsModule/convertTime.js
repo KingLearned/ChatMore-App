@@ -1,5 +1,6 @@
 const convertTime = (Time) => {
-    const [Hrs, Mins] = Time.split(':')
+    const [Hr, Mins] = Time.split(':')
+    const Hrs = Number(Hr)+1
     
-    return Number(Hrs) >= 12 ? Hrs > 12 ? `${Hrs-12}:${Mins} PM` : `${Number(Hrs)}:${Mins} PM` : `${Number(Hrs)}:${Mins} AM`
+    return Hrs >= 12 ? Hrs > 12 ? `${Hrs-12}:${Mins} PM` : `${Hrs}:${Mins} PM` : `${Hrs}:${Mins} AM`
 }
