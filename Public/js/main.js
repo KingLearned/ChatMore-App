@@ -34,7 +34,7 @@ $('.user_profile .ClxPrf').on('click', () => {
 const submitImg = () => {
     $('.CImg').html($('#userimage').val())
     document.querySelector('.fa-upload').style.display = 'block'
-    document.querySelector('.fa-camera').style.display = 'none'
+    // document.querySelector('.fa-camera').style.display = 'none'
 }
 
 $('.uploadImg').on('submit', (e) => {

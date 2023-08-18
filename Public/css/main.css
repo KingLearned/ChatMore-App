@@ -295,9 +295,9 @@ userimage form img{
     border-radius: 5px;
 }
 .uploadbtn .fa-camera, .uploadbtn .fa-upload{
-    position: absolute;
+    /* position: absolute;
     left: 25px;
-    bottom: 10px;
+    bottom: 10px; */
 }
 .uploadbtn .fa-upload {
     display: none;
