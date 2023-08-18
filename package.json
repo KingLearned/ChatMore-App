@@ -2,10 +2,10 @@
   "name": "nodeclass",
   "version": "1.0.0",
   "description": "tutorial",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon app",
-    "dev": "nodemon app"
+    "start": "nodemon index",
+    "dev": "nodemon index"
   },
   "keywords": [],
   "author": "Learneds",
