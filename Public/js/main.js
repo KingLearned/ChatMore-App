@@ -38,7 +38,7 @@ const submitImg = () => {
 }
 
 $('.uploadImg').on('submit', (e) => {
-    const logStatus = (logMsg) => { $('.uploadStatus').html(logMsg); setTimeout(() => { $('.uploadStatus').html(''); return logMsg }, 3000) }
+    const logStatus = (logMsg) => { $('.uploadStatus').html(logMsg); setTimeout(() => { $('.uploadStatus').html('') }, 3000) }
     e.preventDefault()
     let formData = new FormData()
     formData.append('User_Img', $('#userimage')[0].files[0])
@@ -51,8 +51,9 @@ $('.uploadImg').on('submit', (e) => {
         contentType: false,
         success: (data) => {
             const status = data.errMsg ? logStatus(`<span style='color:red'>${data.errMsg}</span>`) : logStatus(`<span style='color:green'>${data.uploaded}</span>`)       
-            if(data.uploaded && status){
-                window.location = '/'
+            
+            if(data.uploaded){
+                setTimeout(() => { window.location = '/' }, 3000)
             }
         },
         error: (error) => {
