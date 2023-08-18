@@ -1,5 +1,5 @@
-const socket = io()
-export const editMessage = (Messages) => {
+// const socket = io()
+const editMessage = (Messages) => {
     for (let e = 0; e < Messages.length; e++) {
         $(`.edit${Messages[e].Id}`).on('click', () => {
             $('.EditId').val(Messages[e].Id)

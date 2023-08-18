@@ -1,11 +1,13 @@
-const socket = io()
-import { addFriends } from "./chatsModule/addFriends.js"
-import { showChats } from "./chatsModule/showChats.js"
-import { showFriends } from "./chatsModule/showFriends.js"
-import { sortFriends } from "./chatsModule/sortFriends.js"
-const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
+// const socket = io()
+// import io from "/socket.io/socket.io.js";
+// const socket = io
+// import { addFriends } from "./chatsModule/addFriends.js"
+// import { showChats } from "./chatsModule/showChats.js"
+// import { showFriends } from "./chatsModule/showFriends.js"
+// import { sortFriends } from "./chatsModule/sortFriends.js"
+// const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
 
-export const MainChats = []    //for storing user => user chats
+const MainChats = []    //for storing user => user chats
 
 $.ajax({
     method: "POST",

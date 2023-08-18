@@ -1,4 +1,4 @@
-export const sortFriends = (mainDB, addFrnds, userName, frndsDB) => {
+const sortFriends = (mainDB, addFrnds, userName, frndsDB) => {
     for (let i = 0; i < mainDB.length; i++) {
         if((mainDB[i].username).toUpperCase() !== (userName).toUpperCase()){
             addFrnds.push(mainDB[i].username)

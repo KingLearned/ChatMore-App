@@ -2,7 +2,7 @@ const showImg = (imgName) => {
     return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin`
 }
 
-export const addFriends = (frndsDB, newFrnds, Disp) => {
+const addFriends = (frndsDB, newFrnds, Disp) => {
     for (let i = 0; i < newFrnds.length; i++) {
         for (let n = 0; n < frndsDB.length; n++) {
             if(frndsDB[n].username == newFrnds[i]){
