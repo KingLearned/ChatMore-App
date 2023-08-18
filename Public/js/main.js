@@ -43,7 +43,7 @@ $('.uploadImg').on('submit', (e) => {
     $.ajax({
         method:"POST",
         data:{
-            User_Img : img
+            Img : img
         },
         success: (data) => {
             // $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               
