@@ -38,8 +38,17 @@ const submitImg = () => {
 }
 $('.uploadImg').on('submit', (e) => {
     e.preventDefault()
-    $('.uploadImg').submit()
     console.log('submitted!')
+    $.ajax({
+        method:"POST",
+        data:{
+            User_Img : $('#userimage').val()
+        },
+        success: (data) => {
+            // $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               
+        }
+    })
+    // $('.uploadImg').submit()
 })
 
 //CHANGE OF PASSWORD
