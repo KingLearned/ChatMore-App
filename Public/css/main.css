@@ -288,17 +288,14 @@ userimage form img{
 
 .uploadbtn label{
     cursor: pointer;
-    background-color: rgba(255, 255, 0, 0.674);
+    background-color: rgba(0, 0, 255, 0.528);
     color: white;
     padding: 10px;
+    margin: 0 5px 0 0;
     height: 40px;
     border-radius: 5px;
 }
-.uploadbtn .fa-camera, .uploadbtn .fa-upload{
-    /* position: absolute;
-    left: 25px;
-    bottom: 10px; */
-}
+
 .uploadbtn .fa-upload {
     display: none;
     background-color: rgba(53, 244, 53, 0.69);
