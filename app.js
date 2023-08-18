@@ -298,8 +298,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       MYSQL.query(query, [Log_Name.toLocaleLowerCase()], (err, Result) => {
 
         const Auth = Result.length > 0 ? 
-        Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Mismatched Password or Username!'}) : 
-        res.json({msg:'User Dose Not Exist!'})
+        Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Incorrect username or password!'}) : 
+        res.json({msg:'Incorrect username or password!'})
         
       })
 
