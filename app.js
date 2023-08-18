@@ -112,9 +112,7 @@ app.post('/', upload.single('User_Img'), (req, res) => {
               
               const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
               MYSQL.query(query, [updateImage.$id, LOGIN], (err, SubResult) => { 
-                // res.redirect('/') 
-                res.json({uploaded: 'Image Update Successful!'})
-                console.log(updateImage)
+                res.json({uploaded: 'Updated Successfully!'})
               })
 
             } catch (error) {
