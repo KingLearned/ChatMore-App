@@ -21,6 +21,8 @@ $('.viewProfile').on('click', () => {
     document.querySelector('.user_profile').style.display = 'flex'
     document.querySelector('.app').style.display = 'none'
 })
+document.querySelector('.user_profile').style.display = 'flex'
+document.querySelector('.app').style.display = 'none'
 
 //FOR CLOSING OF USER'S PROFILE
 $('.user_profile .ClxPrf').on('click', () => {
