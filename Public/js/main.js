@@ -31,10 +31,10 @@ $('.user_profile .ClxPrf').on('click', () => {
 })
 
 //CHANGING OF USER PROFILE IMAGE
-function Submit(){
+const submitImg = () => {
     $('.CImg').html($('#userimage').val())
     document.querySelector('.fa-upload').style.display = 'block'
-    document.querySelector('.fa-pen').style.display = 'none'
+    document.querySelector('.fa-camera').style.display = 'none'
 }
 
 //CHANGE OF PASSWORD
