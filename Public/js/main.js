@@ -38,11 +38,11 @@ const submitImg = () => {
 }
 $('.uploadImg').on('submit', (e) => {
     e.preventDefault()
-    console.log('submitted!')
+    // $('.uploadImg').submit()
     $.ajax({
         method:"POST",
         data:{
-            User_Img : $('#userimage').val()
+            User_Img : document.querySelector('#userimage').files[0]
         },
         success: (data) => {
             // $('.ChngPwd h5').html(data.validPwd); setTimeout(() => { window.location = '/' }, 3000);               

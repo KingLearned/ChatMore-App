@@ -90,12 +90,15 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   const { MsgTo, ChatMsg, ElementTag, EditId, EditMsg, DelMsg } = req.body //destructuring of the variables coming from the req.body
 
   const UserAbout = req.body.about
-  const { newPWD, CnewPWD } = req.body
+  const { newPWD, CnewPWD, User_Img } = req.body
 
    /************  GROUP COLLECTION   ***********/
   const { GrpMsg, GrpID } = req.body
 
   let Revole = 'GrpID'
+  if(User_Img){
+    console.log(User_Img)
+  }
   
   if(LOGIN) { // IMPLEMENT THIS, IF THE USER LOGS IN
     if(req.file){
