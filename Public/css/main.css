@@ -288,7 +288,7 @@ userimage form img{
 
 userimage form label{
     cursor: pointer;
-    background-color: rgba(128, 128, 128, 0.589);
+    background-color: rgba(255, 255, 0, 0.674);
     color: white;
     padding: 10px;
     height: 40px;
@@ -301,6 +301,7 @@ userimage form .fa-camera, userimage form .fa-upload{
 }
 userimage form .fa-upload {
     display: none;
+    background-color: rgba(53, 244, 53, 0.69);
 }
 userimage .CImg{
     position: absolute;
@@ -309,7 +310,7 @@ userimage .CImg{
     margin-top: 10px;
 }
 userimage form label:hover{
-    background-color: gray; 
+    opacity: 0.8; 
 }
 
 userimage yourname{

@@ -36,6 +36,11 @@ const submitImg = () => {
     document.querySelector('.fa-upload').style.display = 'block'
     document.querySelector('.fa-camera').style.display = 'none'
 }
+$('.uploadImg').on('submit', (e) => {
+    e.preventDefault()
+    $('.uploadImg').submit()
+    console.log('submitted!')
+})
 
 //CHANGE OF PASSWORD
 $('.ChngPwd').on('submit', (e) => {
