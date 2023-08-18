@@ -324,7 +324,12 @@ userimage yourname{
     border-radius: 10px;
     box-shadow: 0 0 5px gainsboro;
 }
-
+.uploadlog{
+    height: 60px;
+}
+.uploadlog h6{
+    margin: 3px 0;
+}
 .user_profile h3{
     cursor: default;
 }
