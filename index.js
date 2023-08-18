@@ -344,6 +344,7 @@ io.on('connection', (socket) => {
   })
 
 })
+console.log((new Date).getHours())
 
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

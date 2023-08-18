@@ -1,6 +1,7 @@
 const MYSQL = require("../MODULES/Conn");
 const { Emoji, EmojiId } = require("./Emojis");
 
+console.log((new Date).getHours())
 class SendMsgAPI {
     constructor(LOGIN, ChatMsg, MsgTo, ElementTag){ this.LOGIN = LOGIN, this.ChatMsg = ChatMsg, this.MsgTo = MsgTo, this.ElementTag = ElementTag }
 
