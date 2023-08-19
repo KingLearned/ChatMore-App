@@ -103,20 +103,3 @@ $('smile').on('click', () => {
         }) 
     }
 })
-
-// Make a request every 5 minutes (300,000 milliseconds)
-const interval = 3000; // 5 minutes in milliseconds
-
-function keepAlive() {
-    fetch('/keep-alive-endpoint') // Replace with the actual endpoint
-        .then(response => response.json())
-        .then(data => {
-        console.log('Keep-alive ==>', data);
-        })
-        .catch(error => {
-        console.error('Error in keep-alive request', error);
-        }
-    )
-}
-
-setInterval(keepAlive, interval);

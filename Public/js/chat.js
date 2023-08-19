@@ -60,7 +60,7 @@ $.ajax({
         //Log Out Function & Emit That a user went offline
         $('.logOutBtn').on('click', () => { socket.emit('chat message', {Id:'Status', User:data.PN, Status:'offline'});localStorage.setItem(data.PN, 'offline');window.location = '/Log-User-Out' })
         //Emit That a user is online
-        socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
+        // socket.emit('chat message', {Id:'Status', User:data.PN, Status:'online'})
 
         //ADD OTHER USERS FUNCTIONS
         const Disp = document.querySelector('community');Disp.innerHTML = ''
