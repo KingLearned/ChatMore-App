@@ -341,6 +341,10 @@ io.on('connection', (socket) => {
 
 })
 
+app.get('/keep-alive-endpoint', (req, res) =>{
+  res.json("Server up and running")
+})
+
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 })
