@@ -1,9 +1,4 @@
 const socket = io()
-// import { MainChats } from "./chat.js"
-// import { convertTime } from "./chatsModule/convertTime.js"
-// import { wordCount } from "./chatsModule/wordCount.js"
-// import { GroupChats } from "./grouphandler.js"
-
 
 //Deleting Of Message Function
 function DeleteMsg(DelID){
