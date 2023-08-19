@@ -333,6 +333,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
 
 })
 
+setInterval(() => {console.log(`server runnig on ${PORT}`)},5000)
+
 io.on('connection', (socket) => {
   
   socket.on('chat message', (Msg,Exp) => {
