@@ -105,27 +105,23 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       
       const query = "SELECT * FROM `users` WHERE `username`=?" //DELETING OF USER'S PREVIOUS IMAGE
       MYSQL.query(query, [LOGIN], (err, Result) => { 
-        if(Result[0].user_img !== ''){ 
-          const deleteAndUpload = async () => {
-            try {
-              await appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) 
-              
-              const updateImage = await appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
-              
-              const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
-              MYSQL.query(query, [updateImage.$id, LOGIN], (err, SubResult) => { 
-                res.json({uploaded: 'Updated Successfully!'})
-              })
+        const deleteAndUpload = async () => {
+          try {
+            Result[0].user_img !== '' ? await appwriteStorage.deleteFile('Chatmoreupload', Result[0].user_img) : ''
+            
+            const updateImage = await appwriteStorage.createFile('Chatmoreupload', ID, appwriteSDK.InputFile.fromBuffer(req.file.buffer, req.file.originalname))
+            
+            const query = "UPDATE `users` SET `user_img`=? WHERE `username`=?"
+            MYSQL.query(query, [updateImage.$id, LOGIN], (err, SubResult) => { 
+              res.json({uploaded: 'Updated Successfully!'})
+            })
 
-            } catch (error) {
-              res.json({errMsg: 'Network Error!'})
-            }
+          } catch (error) {
+            res.json({errMsg: 'Network Error!'})
           }
-          deleteAndUpload()
         } 
+        deleteAndUpload()
       })
-
-
     }else{
       
       const query1 = "UPDATE `users` SET `status`=? WHERE `username`=?"
@@ -308,9 +304,9 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       const query = "SELECT * FROM `users` WHERE username=?"
       MYSQL.query(query, [Log_Name.toLocaleLowerCase()], (err, Result) => {
 
-        const Auth = Result.length > 0 ? 
+        const Auth = Result ? Result.length > 0 ? 
         Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Incorrect username or password!'}) : 
-        res.json({msg:'Incorrect username or password!'})
+        res.json({msg:'Incorrect username or password!'}) : ''
         
       })
 
