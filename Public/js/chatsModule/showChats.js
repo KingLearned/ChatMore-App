@@ -1,12 +1,3 @@
-// import { DeleteMsg } from "../socket.js"
-// import { convertTime } from "./convertTime.js"
-// import { editMessage } from "./editMsg.js"
-// require('../socket')
-// require('./convertTime')
-// require('./editMsg')
-
-// const showImg = (imgName) => { return `https://cloud.appwrite.io/v1/storage/buckets/Chatmoreupload/files/${imgName}/view?project=64c7e9ee17c84cabe3cd&mode=admin` }
-
 const showChats = (ChatLogs, FRD, SORT, userName, MainChats) => {
     for (let i = 0; i < FRD.length; i++) {
         $(`.chat_${FRD[i]}`).on('click', () => {
