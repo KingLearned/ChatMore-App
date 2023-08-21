@@ -15,7 +15,7 @@ const showChats = (ChatLogs, FRD, SORT, userName, MainChats) => {
             const setStatus = localStorage.getItem(FRD[i])
             //Status Indicator
             document.querySelector('.imgHead span').innerHTML = 
-            `<user_${FRD[i]} style='background-color: ${setStatus == 'online' ? 'lime' : 'red'}; border-radius: 100px;'></user_${FRD[i]}>`
+            `<user_${FRD[i]} style='background-color: ${setStatus == 'online' ? 'lime' : 'red'}'></user_${FRD[i]}>`
 
             //Populate The ChatLogs[]
             for (let m = 0; m < MainChats.length; m++) { MainChats[m].replyto == FRD[i] && MainChats[m].from == userName ?  ChatLogs.push(MainChats[m]) : ''; MainChats[m].from == FRD[i] && MainChats[m].replyto == userName ?  ChatLogs.push(MainChats[m]) : '' }

@@ -497,7 +497,13 @@ chatlog chat_top{
     height: 50px;
     margin: 0 10px;
     border-radius: 100px;
-
+}
+.imgHead span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 13px;
+    height: 13px; 
 }
 
 chatlog h1{
