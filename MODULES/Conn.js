@@ -10,8 +10,8 @@ const SQL = require('mysql')
 const MYSQL = SQL.createConnection({
     host: "db4free.net",
     user: "learnedsconcept",
-    password: 'm94jC6bS3Xp!2LR',
-    database: 'lxpurchase'
+    password: "m94jC6bS3Xp!2LR",
+    database: "lxpurchase"
 })
 
 MYSQL.connect((err, result) => {
