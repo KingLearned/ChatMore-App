@@ -330,7 +330,6 @@ app.post('/', upload.single('User_Img'), (req, res) => {
     }
 
   } 
-
 })
 
 io.on('connection', (socket) => {
