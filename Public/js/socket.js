@@ -158,7 +158,6 @@ socket.on('chat message', function(Msg,Exp) {
         localStorage.getItem(Msg.User) == 'online' ? setStatus ? setStatus.style.backgroundColor = 'lime' : '' : setStatus ? setStatus.style.backgroundColor = 'red' : ''
     }
 
-    
     function reRrun() {
         const ArtLng = document.querySelectorAll(`${Msg.EleDiv} article make del`)
         const EdLng = document.querySelectorAll(`${Msg.EleDiv} article make edit`)
