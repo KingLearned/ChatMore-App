@@ -142,14 +142,12 @@ socket.on('chat message', function(Msg,Exp) {
             Id = ''
             shift = 'activeme'
         }
-        Log ? Log.innerHTML +=
-        `
+        Log ? Log.innerHTML +=`
         <article class="${shift}" id="${Msg.InId}">
             ${Id}
             <log>${Msg.Msg.split('<').join('&lt;')}</log>
             <time>${convertTime(Msg.time)}</time>
-        </article>
-        `:""
+        </article>`:""
         Log && window.scrollTo(0, Log.scrollHeight)
     }else{
         //SET USER STATUS TO ONLINE
