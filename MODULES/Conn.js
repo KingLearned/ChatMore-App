@@ -15,6 +15,7 @@ const MYSQL = SQL.createConnection({
     database: 'lxpurchase'
 })
 
+
 MYSQL.connect((err, result) => {
     if(err, result){
         console.log('Data Base Initiated!')
