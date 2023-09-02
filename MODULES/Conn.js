@@ -7,6 +7,8 @@ const SQL = require('mysql')
 //     database: 'chatmoreapp'
 // })
 
+
+
 const MYSQL = SQL.createConnection({
     host: "db4free.net",
     user: "learnedsconcept",
