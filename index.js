@@ -332,7 +332,6 @@ app.post('/', upload.single('User_Img'), (req, res) => {
   } 
 })
 
-
 io.on('connection', (socket) => {
   socket.on('chat message', (Msg,Exp) => {
     io.emit('chat message', Msg,Exp)
