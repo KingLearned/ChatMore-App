@@ -10,7 +10,6 @@ const SQL = require('mysql')
 
 
 
-
 const MYSQL = SQL.createConnection({
     host: "db4free.net",
     user: "learnedsconcept",
