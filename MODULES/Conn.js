@@ -18,6 +18,7 @@ const MYSQL = SQL.createConnection({
 
 
 
+
 MYSQL.connect((err, result) => {
     if(err, result){
         console.log('Data Base Initiated!')
