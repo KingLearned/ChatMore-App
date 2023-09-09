@@ -263,10 +263,9 @@ app.post('/', upload.single('User_Img'), (req, res) => {
                   }
 
                   let ChatLog = ''
-                  for (let i = 0; i < MainResult.length; i++) {
-                    ChatLog += MainResult[i].chats
-                  }
+                  for (let i = 0; i < MainResult.length; i++) { ChatLog += MainResult[i].chats }
                   ChatLog = (JSON.parse(`[${ChatLog.split('}{').join('},{')}]`)).sort((a, b) => a.Id - b.Id)
+
                   for (let m = 0; m < ChatLog.length; m++) {
                     for (let n = 0; n < Emoji.length; n++) {
                       ChatLog[m].Msg = ChatLog[m].Msg.split(EmojiId[n]).join(Emoji[n])
@@ -305,8 +304,8 @@ app.post('/', upload.single('User_Img'), (req, res) => {
       MYSQL.query(query, [Log_Name.toLocaleLowerCase()], (err, Result) => {
 
         const Auth = Result ? Result.length > 0 ? 
-        Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({Approved: 'Yes'})) : res.json({msg: 'Incorrect username or password!'}) : 
-        res.json({msg:'Incorrect username or password!'}) : ''
+        Result[0].pwd == Log_Pwd ? (req.session.LOGIN = Log_Name.toLocaleLowerCase().trim(), res.json({success:true, Approved: 'Yes'})) : res.json({success:false, msg: 'Incorrect username or password!'}) : 
+        res.json({success:false, msg:'Incorrect username or password!'}) : ''
         
       })
 
